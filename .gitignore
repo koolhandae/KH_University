@@ -10,7 +10,6 @@ tmp/
 *.swp
 *~.nib
 local.properties
-<<<<<<< HEAD
 .settings/
 .loadpath
 .recommenders
@@ -151,6 +150,3 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/git,java,maven,windows,eclipse
-=======
-.loadpath
->>>>>>> ds
