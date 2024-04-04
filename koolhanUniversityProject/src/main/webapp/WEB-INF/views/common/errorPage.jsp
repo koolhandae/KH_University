@@ -14,7 +14,7 @@
 </head>
 <body>
 	
-    <jsp:include page="header.jsp" />
+<%--     <jsp:include page="header.jsp" /> --%>
 
     <br>
     <div align="center">
@@ -24,7 +24,7 @@
     </div>
     <br>
 
-    <jsp:include page="footer.jsp" />
+<%--     <jsp:include page="footer.jsp" /> --%>
     
 </body>
 </html>
