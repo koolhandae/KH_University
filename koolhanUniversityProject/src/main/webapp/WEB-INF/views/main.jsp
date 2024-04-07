@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	hihi
+
+	<jsp:include page="common/header_with_sidebar.jsp"/>
+	<jsp:include page="common/test.jsp"/>
+
+
 </body>
 </html>
