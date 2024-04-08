@@ -8,14 +8,40 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- 푸터가 들어가는 곳 -->
-       <div class="footer">
-       푸터를 여기에 써주세용
-       </div>
-    <!-- 푸터 끝나는 곳 -->
+
 	
 <!-- 헤더 + 콘텐츠 디브 종료 -->		
 </div>
+
+	<!-- 푸터가 들어가는 곳 -->
+       <footer class="sticky-footer bg-white">
+       		
+	          	<div class="copyright text-left my-auto" style="margin-left: 50px;display:flex;">
+	       			<a href="/khu"><img alt="로고 이미지" src="resources/images/logo.png" style="width:100px; margin-left: 50px; margin-bottom: 20px"></a>
+			          	<div>
+				          	<div class="copyright text-left my-auto" style="margin-left: 50px; display: flex; align-items: flex-end;">
+				          		<h4 style="font-weight: 600;color: rgb(75,75,75)">쿨한대학교</h4>
+				          	</div>
+				          	<div class="copyright text-left my-auto" style="margin-left: 50px; display: flex; align-items: flex-end;">
+				          		<b style="color: rgb(75,75,75)">컴퓨터 공학과</b>
+				          	</div>
+			
+				          	<div class="copyright text-left my-auto" style="margin-left: 50px; display: flex; align-items: flex-end; color: rgb(75,75,75);">
+				          		<b style="margin-top: 10px" >KoolHan University</b>
+				          	</div>
+				          	<div class="copyright text-left my-auto" style="margin-top: 20px; margin-left: 50px; display: flex; align-items: flex-end; color: rgb(75,75,75);">
+				          		<b style="margin-top: 10px;" >Department of Computer Science and Engineering</b>
+				          	</div>
+			          	</div>
+	          	</div>
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright &copy; KoolHan University since 2024</span>
+            </div>
+          </div>
+        </footer>
+    <!-- 푸터 끝나는 곳 -->
+
 <!-- 총 페이지 디브 종료 -->
 </div>+
 </body>

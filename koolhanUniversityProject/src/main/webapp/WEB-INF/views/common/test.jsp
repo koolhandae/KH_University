@@ -8,16 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-				<div>
-                                        
-                    나어모리ㅏㅁ너ㅗㅇ리ㅏㅓㅁㄴ오리ㅏㅓㅁ농라ㅣㅁ노라ㅣ몬아
-                    미리;만어리;ㅏㅁㄴㄹ
-                    머ㅏㅣㄴ뢰ㅏㅓㅁ노라ㅓㅣ
-                    ㅁ너ㅏ리ㅘㅓㅁ노아ㅓ리
+				<div class="content">
+                    <div class="copyright text-left my-auto">	
+                   		hello
+	                </div>
                 </div>
 
-                <div style="margin-left: 20px;">
-                    ㅁㄴㅇㅁㄴㅇㅁㄴㅇ
-                </div>
 </body>
 </html>
