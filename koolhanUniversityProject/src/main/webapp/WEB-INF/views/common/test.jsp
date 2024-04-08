@@ -19,20 +19,5 @@
                 <div style="margin-left: 20px;">
                     ㅁㄴㅇㅁㄴㅇㅁㄴㅇ
                 </div>
-
-
-                    
-
-
-            <!-- Footer -->
-            
-            <!-- End of Footer -->
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
 </body>
 </html>
