@@ -26,10 +26,16 @@
 
     <!-- Custom scripts for all pages-->
     <script src="resources/js/sb-admin-2.min.js"></script>
+    
+    <!-- icon -->
+    <script src="https://kit.fontawesome.com/12b80a3a82.js" crossorigin="anonymous"></script>
 <style>
 	.container{
-        padding-top: 10%;
+        padding-top: 8%;
     }
+	.custom-control{
+		padding-left: 4rem;
+	}
     .bg-gradient-primary {
         background-image: linear-gradient(180deg, #1c4587 10%, #1c4587 100%);
         background-size: cover;
@@ -38,19 +44,20 @@
         font-weight: 1000;
         font-size:medium
     }
-    .h5_logo{
-        background-image: url("resources/images/logo.png");
+    .find-area{
+    	padding-left: 35px;
     }
-    .find_login{
+    .find-area .find_login{
+		text-decoration: none;
         font-weight: 500;
         font-size: small;
         color: gray;
+		text-align: right;
     }
 </style>
 </head>
 <body class="bg-gradient-primary">
-		<div class="container">
-	
+		<div class="container" style="min-width: 912px;">
 			<!-- Outer Row -->
 			<div class="row justify-content-center">
 				<div class="col-xl-10 col-lg-12 col-md-9">
@@ -58,31 +65,37 @@
 						<div class="card-body p-0">
 							<!-- Nested Row within Card Body -->
 							<div class="row">
-								<div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+								<div class="col-lg-6">
+									<img src="resources/images/login.png">
+								</div>
 								<div class="col-lg-6">
 									<div class="p-5">
 										<div class="text-center">
-											<div class="h5_logo"></div>
-											<h5 class="h5 text-gray-800 mb-6">쿨한대학교</h5>
-											<h5 class="h5 text-gray-800 mb-4">컴퓨터공학과 학사정보시스템</h5>
+											<div class="h5_logo">
+												<img src="resources/images/logo.png" style="width:100px;">
+											</div>
+											<br>
+											<h5 class="h5 text-gray-800 mb-2">쿨한대학교</h5>
+											<h5 class="h5 text-gray-800 mb-3">컴퓨터공학과 학사정보시스템</h5>
 										</div>
 										<form class="user">
 											<div class="form-group">
 												<input type="email" class="form-control form-control-user"
 													id="exampleInputEmail" aria-describedby="emailHelp"
-													placeholder="Enter Email Address...">
+													placeholder="학번을 입력해주세요">
 											</div>
 											<div class="form-group">
 												<input type="password" class="form-control form-control-user"
-													id="exampleInputPassword" placeholder="Password">
+													id="exampleInputPassword" placeholder="비밀번호를 입력해주세요">
 											</div>
 											<div class="form-group" style="display: flex;">
 												<div class="custom-control custom-checkbox small">
 													<input type="checkbox" class="custom-control-input" id="customCheck">
 													<label class="custom-control-label" for="customCheck">Remember Me</label>
 												</div>
-												<div>
-													<a class="find_login" href="forgot-password.html" style="text-align: right;">학번/비밀번호 찾기</a>
+												<div class="find-area">
+													<i class="fa-solid fa-key"></i>
+													<a class="find_login" href="forgot-password.html">학번/비밀번호 찾기</a>
 												</div>
 											</div>
 											<a href="index.html" class="btn btn-facebook btn-user btn-block">
