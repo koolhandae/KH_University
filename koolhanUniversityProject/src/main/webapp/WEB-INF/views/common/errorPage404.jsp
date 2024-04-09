@@ -16,7 +16,7 @@ pageEncoding="UTF-8"%>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <%-- <jsp:include page="header.jsp" /> --%>
+    <jsp:include page="header_with_sidebar.jsp" />
 
     <br />
     <div align="center">
@@ -35,6 +35,6 @@ pageEncoding="UTF-8"%>
 
     <br />
 
-    <%-- <jsp:include page="footer.jsp" /> --%>
+    <jsp:include page="footer.jsp" /> 
   </body>
 </html>
