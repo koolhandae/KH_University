@@ -146,9 +146,5 @@ pageEncoding="UTF-8"%>
         </div>
       </div>
     </div>
-    <jsp:forward page="student/certificateIssuingPage.jsp" />
-    <jsp:include page="common/header_with_sidebar.jsp" />
-    <jsp:include page="common/test.jsp" />
-    <jsp:include page="common/footer.jsp" />
   </body>
 </html>

@@ -6,22 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-.content * {
-color: rgb(100,100,100);
-}
-</style>
 </head>
 <body>
    <jsp:include page="../common/header_with_sidebar.jsp"/>
    <div class="content">
       <br><br>
         <div class="innerOuter">
-            <h2>교직원 / 교수 등록</h2>
+            <h2>학생 등록</h2>
             <br>
 
             <form action="insert.me" method="post" id="enrollForm">
                 <div class="form-group">
+                    
                     <label for="userName">* Name :</label>
                     <input type="text" class="form-control" id="userName" name="userName" placeholder="Please Enter Name" required><br>
                     
@@ -29,19 +25,13 @@ color: rgb(100,100,100);
                     <input type="email" class="form-control" id="email" name="email" placeholder="Please Enter Email"><br>
                     
                     <label for="age"> &nbsp; 주민등록번호 :</label>
-                    <input type="number" class="form-control" id="memberSsn" name="memberSsn" placeholder="Please Enter Age"><br>
+                    <input type="number" class="form-control" id="memberSsn" name="studentSsn" placeholder="Please Enter Age"><br>
                     
                     <label for="phone"> &nbsp; Phone :</label>
                     <input type="tel" class="form-control" id="phone" name="phone" placeholder="Please Enter Phone (-없이)"><br>
                     
                     <label for="address"> &nbsp; Address :</label>
                     <input type="text" class="form-control" id="address" name="address" placeholder="Please Enter Address"><br>
-                    
-                    <label for=""> &nbsp; 교수 / 교직원 : </label> &nbsp;&nbsp;
-                    <input type="radio" name="gender" id="Professor" value="P">
-                    <label for="Professor">교수</label> &nbsp;&nbsp;
-                    <input type="radio" name="gender" id="Administrator" value="A">
-                    <label for="Administrator">교직원</label><br>
                     
                 </div>
                 <br>
