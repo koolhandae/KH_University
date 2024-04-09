@@ -31,6 +31,23 @@
     
 
 <style>
+    /* 폰트 */
+    @font-face {
+        font-family: 'KIMM_Bold';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KIMM_Bold.woff2') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+	}
+	
+	@font-face {
+        font-family: 'Pretendard-Regular';
+        src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+	}
+.body{
+    font-family: 'Pretendard-Regular';
+}
 
 .bg-gradient-primary {
     /* background-color:#4e73df; */
@@ -41,8 +58,6 @@
 </head>
 <body id="page-top">
 
-
-    
     <!-- Page Wrapper -->
     <div id="wrapper">
 

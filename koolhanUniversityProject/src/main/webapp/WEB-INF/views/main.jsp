@@ -29,9 +29,24 @@
     
     <!-- icon -->
     <script src="https://kit.fontawesome.com/12b80a3a82.js" crossorigin="anonymous"></script>
+	
 <style>
+	@font-face {
+    font-family: 'KIMM_Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KIMM_Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+	}
+	
+	@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+	}
 	.container{
         padding-top: 8%;
+		font-family: 'Pretendard-Regular';
     }
 	.custom-control{
 		padding-left: 4rem;
@@ -41,8 +56,8 @@
         background-size: cover;
     }   
     .p-5 .h5{
-        font-weight: 1000;
-        font-size:medium
+        font-weight: 500;
+        font-size:large;
     }
     .find-area{
     	padding-left: 35px;
@@ -54,6 +69,7 @@
         color: gray;
 		text-align: right;
     }
+	
 </style>
 </head>
 <body class="bg-gradient-primary">
@@ -70,13 +86,13 @@
 								</div>
 								<div class="col-lg-6">
 									<div class="p-5">
-										<div class="text-center">
+										<div class="text-center" style="font-family: 'KIMM_Bold'";>
 											<div class="h5_logo">
 												<img src="resources/images/logo.png" style="width:100px;">
 											</div>
 											<br>
 											<h5 class="h5 text-gray-800 mb-2">쿨한대학교</h5>
-											<h5 class="h5 text-gray-800 mb-3">컴퓨터공학과 학사정보시스템</h5>
+											<h5 class="h5 text-gray-800 mb-4">컴퓨터공학과 학사정보시스템</h5>
 										</div>
 										<form class="user">
 											<div class="form-group">
