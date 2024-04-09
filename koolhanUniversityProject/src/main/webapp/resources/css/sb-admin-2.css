@@ -11279,3 +11279,10 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+.innerOuter {
+  border: 1px solid lightgray;
+  width: 80%;
+  margin: auto;
+  padding: 5% 10%;
+  background-color: white;
+}
