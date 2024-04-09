@@ -28,6 +28,9 @@ pageEncoding="UTF-8"%>
         죄송합니다. 해당 페이지를 찾을 수 없습니다. <br />
         요청하신 페이지가 사라졌거나 잘못된 경로를 이용하셨습니다. <br />
       </p>
+      <br /><br /><br />
+
+      <button class="btn btn-primary" onclick="#">홈으로 돌아가기</button>
     </div>
 
     <br />
