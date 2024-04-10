@@ -14,10 +14,9 @@
 </div>
 
 	<!-- 푸터가 들어가는 곳 -->
-       <footer class="sticky-footer bg-white">
+       <footer class="sticky-footer">
        		
 	          	<div class="copyright text-left my-auto" style="margin-left: 50px;display:flex;">
-	       			<a href="/khu"><img alt="로고 이미지" src="resources/images/logo.png" style="width:100px; margin-left: 50px; margin-bottom: 20px"></a>
 			          	<div>
 				          	<div class="copyright text-left my-auto" style="margin-left: 50px; display: flex; align-items: flex-end;">
 				          		<h4 style="font-weight: 600;color: rgb(75,75,75)">쿨한대학교</h4>

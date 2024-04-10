@@ -31,18 +31,33 @@
     
 
 <style>
+    /* 폰트 */
+    @font-face {
+        font-family: 'KIMM_Bold';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KIMM_Bold.woff2') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+	}
+	
+	@font-face {
+        font-family: 'Pretendard-Regular';
+        src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+	}
+	body{
+   	 	font-family: 'Pretendard-Regular';
+	}
 
-.bg-gradient-primary {
-    /* background-color:#4e73df; */
-    background-image: linear-gradient(180deg,#1c4587 10%,#1c4587 100%);
-    background-size: cover;
-}
+	.bg-gradient-primary {
+	    /* background-color:#4e73df; */
+	    background-image: linear-gradient(180deg,#1c4587 10%,#1c4587 100%);
+	    background-size: cover;
+	}
 </style>
 </head>
 <body id="page-top">
 
-
-    
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -70,13 +85,14 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
+                    <i class="fa-solid fa-book-open-reader"></i>
                     <span>나의 강의실</span>
                 </a>
                 <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="#">나의 시간표</a>
+                        <a class="collapse-item" href="#">나의 수강 조회</a>
                         <a class="collapse-item" href="#">이전 수강 내역 조회</a>
-                        <a class="collapse-item" href="#">성적 조회</a>
                     </div>
                 </div>
             </li>
@@ -85,17 +101,17 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fa-solid fa-id-card"></i>
                     <span>마이페이지</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">나의 켈린더</a>
-                        <a class="collapse-item" href="#">나의 시간표</a>
+                        <a class="collapse-item" href="#">개인 정보 수정</a>
+                        <a class="collapse-item" href="#">나의 캘린더</a>
                         <a class="collapse-item" href="#">등록금 납부 조회</a>
                         <a class="collapse-item" href="#">학점 / 성적 조회</a>
-                        <a class="collapse-item" href="#">휴학 및 복학</a>
+                        <a class="collapse-item" href="#">휴 · 복학 신청</a>
                         <a class="collapse-item" href="#">증명서 발급</a>
                     </div>
                 </div>
@@ -107,14 +123,14 @@
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fa-solid fa-address-book"></i>
                     <span>교직원 / 학생 등록</span></a>
             </li>
             
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fa-solid fa-bullhorn"></i>
                     <span>공지사항 등록</span></a>
             </li>
 
@@ -122,7 +138,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
                     aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
+                    <i class="fa-solid fa-chart-line"></i>
                     <span>통계</span>
                 </a>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -140,8 +156,8 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>나의 강의</span>
+                    <i class="fa-solid fa-book-open-reader"></i>
+                    <span>나의 강의실</span>
                 </a>
                 <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -155,14 +171,14 @@
 			<!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fa-solid fa-check-to-slot"></i>
                     <span>과제</span></a>
             </li>
             
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fa-solid fa-file-pen"></i>
                     <span>성적 등록</span></a>
             </li>
             
@@ -177,14 +193,14 @@
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fa-solid fa-users"></i>
                     <span>커뮤니티 게시판</span></a>
             </li>
             
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fa-solid fa-book-bookmark"></i>
                     <span>중앙 도서관</span></a>
             </li>
             
@@ -192,12 +208,11 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
+                    <i class="fa-solid fa-paper-plane"></i>
                     <span>쪽지함</span>
                 </a>
                 <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">나의 수강조회</a>
                         <a class="collapse-item" href="#">쪽지 보내기</a>
                         <a class="collapse-item" href="#">받은 쪽지함</a>
                     </div>
@@ -208,15 +223,15 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
+                    <i class="fa-solid fa-dove"></i>
                     <span>소식</span>
                 </a>
                 <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="#">공지사항</a>
-                        <a class="collapse-item" href="#">셔틀버스 안내</a>
-                        <a class="collapse-item" href="#">구인구직</a>
                         <a class="collapse-item" href="#">학사일정</a>
+                        <a class="collapse-item" href="#">셔틀버스 안내</a>
+                        <a class="collapse-item" href="#">관련 취업 정보</a>
                     </div>
                 </div>
             </li>
