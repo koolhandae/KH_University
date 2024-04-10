@@ -7,7 +7,9 @@ pageEncoding="UTF-8"%>
     <title>Insert title here</title>
   </head>
   <body>
-    <jsp:forward page="WEB-INF/views/student/studentEnrollForm.jsp" />
+    <jsp:forward page="WEB-INF/views/admin/boardDetailView.jsp" />
+<%--     <jsp:forward page="WEB-INF/views/admin/boardEnrollForm.jsp" /> --%>
+<%--     <jsp:forward page="WEB-INF/views/student/studentEnrollForm.jsp" /> --%>
     <%-- <jsp:forward page="WEB-INF/views/admin/adminEnrollForm.jsp" /> --%>
     <%--
     <jsp:forward page="WEB-INF/views/student/certificateIssuingPage.jsp" /> --%>
