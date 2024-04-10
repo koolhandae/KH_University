@@ -18,8 +18,9 @@ pageEncoding="UTF-8"%>
 
     <!-- 김도현 -->
     <%-- <jsp:forward page="WEB-INF/views/main.jsp" /> --%>
-    <jsp:forward page="WEB-INF/views/student/studentClassPage.jsp"/>
-
+    <%-- <jsp:forward page="WEB-INF/views/student/studentClassPage.jsp"/> --%>
+	<%-- <jsp:forward page="WEB-INF/views/student/studentBeforeClassPage.jsp"/> --%>
+	<jsp:forward page="WEB-INF/views/student/studentScorePage.jsp"/> 
 
 
 
