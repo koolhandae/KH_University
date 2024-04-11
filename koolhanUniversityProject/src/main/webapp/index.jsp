@@ -8,10 +8,9 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <!-- 정동석 -->
-    <!-- <jsp:forward page="WEB-INF/views/admin/boardDetailView.jsp" /> -->
-    <!-- <jsp:forward page="WEB-INF/views/admin/boardEnrollForm.jsp" /> -->
+    <!-- <jsp:forward page="WEB-INF/views/admin/noticeDetailView.jsp" /> -->
+    <!-- <jsp:forward page="WEB-INF/views/admin/noticeEnrollForm.jsp" /> -->
     <!-- <jsp:forward page="WEB-INF/views/student/studentEnrollForm.jsp" /> -->
-    <!-- <jsp:forward page="WEB-INF/views/student/studentEnrollForm.jsp" />  -->
     <!-- <jsp:forward page="WEB-INF/views/admin/adminEnrollForm.jsp" /> -->
     <!-- <jsp:forward page="WEB-INF/views/student/certificateIssuingPage.jsp" /> -->
 
