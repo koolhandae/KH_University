@@ -105,7 +105,7 @@
       </div>
       <div class="lList-area">
          <div class="list-content">
-            <div class="list-title" style="margin-bottom: 15px;">수강내역</div>
+            <div class="list-title" style="margin-bottom: 15px;">성적정보</div>
             <table id="boardList" class="table table-hover" align="center">
                <thead style="height: 40px;  color: #858796;">
                   <tr>
