@@ -481,6 +481,7 @@
                 </div>
             </div>
         </div>
+        
 	<!-- Bootstrap core JavaScript-->
     <script src="resources/js/jquery.js"></script>
     <script src="resources/js/bootstrap.bundle.js"></script>

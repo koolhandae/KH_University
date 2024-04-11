@@ -33,7 +33,9 @@ pageEncoding="UTF-8"%>
 
 
     <!-- 조연정 -->
-	<jsp:forward page="WEB-INF/views/professor/professorClassEnrollForm.jsp"/>
+	<%-- <jsp:forward page="WEB-INF/views/professor/professorClassEnrollForm.jsp"/> --%>
+	<jsp:forward page="WEB-INF/views/professor/professorClassListView.jsp"/>
+	
 
 
 
