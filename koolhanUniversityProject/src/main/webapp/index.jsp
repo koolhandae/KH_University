@@ -26,9 +26,11 @@ pageEncoding="UTF-8"%>
 
 
     <!-- 어수지 -->
-
-
-
+<%--     <jsp:forward page="WEB-INF/views/student/studentUpdateForm.jsp" /> --%> 
+<%--     <jsp:forward page="WEB-INF/views/admin/adminUpdateForm.jsp" /> --%>
+<%--     <jsp:forward page="WEB-INF/views/student/studentTuition.jsp" /> --%>
+<%-- 		 <jsp:forward page="WEB-INF/views/student/studentTakeOff.jsp" /> --%>
+<%-- 		<jsp:forward page="WEB-INF/views/student/studentTuitionbill.jsp" /> --%>
 
 
 
@@ -39,9 +41,8 @@ pageEncoding="UTF-8"%>
 
 
 
-
     <!-- 공통 -->
-    <%-- <jsp:forward page="WEB-INF/views/common/errorPage404.jsp" /> --%> 
-    <%-- <jsp:include page="WEB-INF/views/common/errorPage500.jsp" /> --%>
+    <%-- <jsp:forward page="WEB-INF/views/common/errorPage404.jsp" /> --%> <%--
+    <jsp:include page="WEB-INF/views/common/errorPage500.jsp" /> --%>
   </body>
 </html>

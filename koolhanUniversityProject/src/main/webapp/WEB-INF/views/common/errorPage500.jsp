@@ -34,6 +34,6 @@ pageEncoding="UTF-8"%>
     </div>
 
     <br />
-	<jsp:include page="footer.jsp" />
+    <jsp:include page="footer.jsp" />
   </body>
 </html>
