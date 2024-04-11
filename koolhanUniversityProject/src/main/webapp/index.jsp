@@ -10,7 +10,7 @@ pageEncoding="UTF-8"%>
     <!-- 정동석 -->
 <%--     <jsp:forward page="WEB-INF/views/student/studentEnrollForm.jsp" /> --%>
     <%-- <jsp:forward page="WEB-INF/views/admin/adminEnrollForm.jsp" /> --%>
-    <%-- <jsp:forward page="WEB-INF/views/student/certificateIssuingPage.jsp" /> --%>
+<%--     <jsp:forward page="WEB-INF/views/student/certificateIssuingPage.jsp" /> --%>
 
 
 
@@ -26,8 +26,9 @@ pageEncoding="UTF-8"%>
     <!-- 어수지 -->
 <%--     <jsp:forward page="WEB-INF/views/student/studentUpdateForm.jsp" /> --%> 
 <%--     <jsp:forward page="WEB-INF/views/admin/adminUpdateForm.jsp" /> --%>
-    <jsp:forward page="WEB-INF/views/student/studentTuition.jsp" />
+<%--     <jsp:forward page="WEB-INF/views/student/studentTuition.jsp" /> --%>
 <%-- 		 <jsp:forward page="WEB-INF/views/student/studentTakeOff.jsp" /> --%>
+<%-- 		<jsp:forward page="WEB-INF/views/student/studentTuitionbill.jsp" /> --%>
 
 
 
