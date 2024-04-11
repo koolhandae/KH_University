@@ -13,10 +13,11 @@
 /* 		text-align: center; */
 /* 	} */
 	
-/* 	.topMenu{ */
-/* 		background-color: rgb(48, 76, 121); */
-/*       color : whitesmoke; */
-/*    } */
+
+   .topMenu{ 
+ 		background-color: rgb(48, 76, 121); 
+       color : whitesmoke; 
+      } 
 
 /*    .innerOuter{ */
 /*       height: 700px; */
@@ -24,29 +25,46 @@
    
     .selectTuitionbtn{ 
    		height:70px; 
-   		width:300px; 
+   		width:250px; 
    		margin-right: 100px; 
     }
    
     .paymentTuition{ 
     		height:70px; 
-    		width:300px; 
+    		width:250px; 
     } 
+    
+    #semester{
+    	width: 150px;
+    	height:40px;
+    	margin-right:5px;
+    }
 
      .tuitionBtn>button{ 
        display: flexbox; 
        font-size: 20px; 
-       border-radius: 13px; 
+	   border-radius: 13px;
        border: 2px solid rgb(48, 76, 121); 
        color: rgb(48, 76, 121);
 
        /* background-color: rgb(48, 76, 121);  */ 
     }  
+    
+    #btn {
+    	border: 2px solid rgb(48, 76, 121); 
+    	color: rgb(48, 76, 121);
+    	border-radius: 5px;
+    }
    
     .tuitionBtn>button:hover{ 
  	  background-color: rgb(18, 46, 81); 
     	  color : white; 
     } 
+    
+    #btn:hover{ 
+ 	  background-color: rgb(18, 46, 81); 
+      color : white; 
+    }     
    
     .tuitionBtn>button.text{
     	  opacity: 0.5; 
@@ -55,8 +73,12 @@
     #boardList *{ 
  		text-align: center; 
  		vertical-align: middle;
+      pointer-events: none;
      } 
-
+	
+	.semesterArea{
+		display: flex;
+	}
 
 </style>
 </head>
@@ -70,10 +92,12 @@
          <button class="paymentTuition btn" id="">등록금 납부 고지서</button>
       </div>
       <br><br><br>
-      <h2>등록금 납부 내역 조회</h2>
-      <br><br>
-      
-         <select name="semester" id="semester">
+      <h2 style="margin-left: 40px; font-weight:900; color: rgb(75,75,75);">등록금 납부 내역 조회</h2>
+      <hr>
+      <br>
+      	
+      	<div class="semesterArea">
+         <select class="form-control" name="semester" id="semester">
             <option value="">1학년 1학기</option>
             <option value="">1학년 2학기</option>
             <option value="">2학년 1학기</option>
@@ -83,33 +107,34 @@
             <option value="">4학년 1학기</option>
             <option value="">4학년 2학기</option>
          </select>
-         <button class="btn">조회</button>
-      	<br><br>
+         <button class="btn btn-xs" id="btn">조회</button>
+      	</div>
+      	<br>
       	
-      	<table id="boardList" class="selectTuition table table-hover" align="center">
+      	<table id="boardList" class="selectTuition table table-hover" style="width: 800px;" align="center">
             <tr class="topMenu">
-               <td>등록연도</td>
-               <td>등록학기</td>
-               <td>장학금 유형</td>
-               <td>등록금</td>
-               <td>장학금</td>
-               <td>납입금</td>
+               <th>등록연도</th>
+               <th>등록학기</th>
+               <th>장학금 유형</th>
+               <th>등록금</th>
+               <th>장학금</th>
+               <th>납입금</th>
             </tr>
             <tr>
                <td>2024</td>
                <td>1학기</td>
                <td>2유형</td>
                <td>4,000,000</td>
-               <td>2,000,000</td>
-               <td>2,000,000</td>
+               <td>1,500,000</td>
+               <td>2,500,000</td>
             </tr>
             <tr>
                <td>2024</td>
                <td>1학기</td>
                <td>2유형</td>
                <td>4,000,000</td>
-               <td>2,000,000</td>
-               <td>2,000,000</td>
+               <td>1,500,000</td>
+               <td>2,500,000</td>
             </tr>
          </table>
       
