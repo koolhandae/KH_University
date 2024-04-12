@@ -7,13 +7,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- 구글 제이쿼리 스니펫 -->
-<script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.78/Build/Cesium/Cesium.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <!-- 부트스트랩 JS CSS -->
 	<!-- Popper JS -->
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	
 	<!-- Latest compiled JavaScript -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script> -->
 	
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -32,6 +32,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet">
     
+
 
 <style>
     /* 폰트 */
@@ -60,6 +61,20 @@
 </style>
 </head>
 <body id="page-top">
+	
+	<c:if test="${not empty alertMsg}">
+		<script>
+			$(function(){
+		    	Swal.fire({
+		    		icon: '${alertMsg.icon}',
+		    		title: '${alertMsg.title}',
+		    		text: '${alertMsg.text}',
+		    	});
+			});
+	    </script>
+	    <c:remove var="alertMsg" scope="session" />
+	</c:if>
+
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -87,11 +102,11 @@
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
-                    aria-expanded="true" aria-controls="collapseTwo">
+                    aria-expanded="true" aria-controls="collapseOne">
                     <i class="fa-solid fa-book-open-reader"></i>
                     <span>나의 강의실</span>
                 </a>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="#">나의 시간표</a>
                         <a class="collapse-item" href="#">나의 수강 조회</a>
@@ -103,11 +118,11 @@
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseUtilities">
+                    aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fa-solid fa-id-card"></i>
                     <span>마이페이지</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingUtilities"
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="#">개인 정보 수정</a>
@@ -123,11 +138,19 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
             
-            <!-- Nav Item - Tables -->
+            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse2"
+                    aria-expanded="true" aria-controls="collapse2">
                     <i class="fa-solid fa-address-book"></i>
-                    <span>교직원 / 학생 등록</span></a>
+                    <span>교직원 / 학생 등록</span>
+                </a>
+                <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="insert.stu">학생 등록</a>
+                        <a class="collapse-item" href="insert.me">교직원 등록</a>
+                    </div>
+                </div>
             </li>
             
             <!-- Nav Item - Charts -->
@@ -139,12 +162,12 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fa-solid fa-chart-line"></i>
                     <span>통계</span>
                 </a>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="#">학생 통계</a>
                         <a class="collapse-item" href="#">교직원 통계</a>
@@ -158,11 +181,11 @@
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
-                    aria-expanded="true" aria-controls="collapseTwo">
+                    aria-expanded="true" aria-controls="collapseFour">
                     <i class="fa-solid fa-book-open-reader"></i>
                     <span>나의 강의실</span>
                 </a>
-                <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="WEB-INF/views/student/certificateIssuingPage.jsp">나의 수강조회</a>
                         <a class="collapse-item" href="cards.html">강의 등록</a>
@@ -484,17 +507,19 @@
                 </div>
             </div>
         </div>
-        
+
+                
 	<!-- Bootstrap core JavaScript-->
     <script src="resources/js/jquery.js"></script>
     <script src="resources/js/bootstrap.bundle.js"></script>
 
+    
 
     <!-- Custom scripts for all pages-->
     <script src="resources/js/sb-admin-2.js"></script>
 
-
-    
+    <!-- Core plugin JavaScript-->
+    <script src="resources/vendor/jquery-easing/jquery.easing.min.js"></script>
     
     
     

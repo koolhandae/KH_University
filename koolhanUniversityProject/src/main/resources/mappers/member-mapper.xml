@@ -31,4 +31,32 @@
 		   and member_id = #{memberId}
 		   and member_pwd = #{memberPwd}  
 	</select>
+	
+	<insert id="insertMember">
+		insert
+		  into member
+		     (
+		       member_no
+		     , member_id
+		     , member_pwd
+		     , member_name
+		     , member_ssn
+		     , m_phone
+		     , m_email
+		     , m_address
+		     , m_type  
+		     )
+		values
+		     (
+		       seq_mno.nextval
+		     , to_char(sysdate, 'yyMMdd') || floor(dbms_random.value(10000,99999))
+		     , #{memberPwd}
+		     , #{memberName}
+		     , #{memberSsn}
+		     , #{mPhone}
+		     , #{mEmail}
+		     , #{mAddress}
+		     , #{mType}
+		     );
+	</insert>
 </mapper>

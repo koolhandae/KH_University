@@ -8,15 +8,21 @@ import com.kh.khu.member.model.dao.MemberDao;
 import com.kh.khu.member.model.vo.Member;
 
 @Service
-public class MemberServiceImpl {
+public class MemberServiceImpl implements MemberService{
 	
 	@Autowired
 	private MemberDao mDao;
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
+
+	@Override
 	public Member loginMember(Member m) {
 		return mDao.loginMember(sqlSession, m);
+	}
+
+	@Override
+	public int insertMember(Member m) {
+		return mDao.insertMember(sqlSession, m);
 	}
 
 }

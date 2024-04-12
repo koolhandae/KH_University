@@ -33,6 +33,7 @@
 				          	</div>
 			          	</div>
 	          	</div>
+	          	<br>
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
               <span>Copyright &copy; KoolHan University since 2024</span>
@@ -42,6 +43,6 @@
     <!-- 푸터 끝나는 곳 -->
 
 <!-- 총 페이지 디브 종료 -->
-</div>+
+</div>
 </body>
 </html>

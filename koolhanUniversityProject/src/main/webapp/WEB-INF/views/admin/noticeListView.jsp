@@ -63,7 +63,7 @@
                 <tbody>
                 	<c:forEach var="n" items="${list}">
 	                    <tr>
-	                        <td class="bno">${n.noticeNo}</td>
+	                        <td class="nno">${n.noticeNo}</td>
 	                        <td>${n.noticeTitle}</td>
 	                        <td>${n.noticeWriter}</td>
 	                        <td>${n.createDate}</td>

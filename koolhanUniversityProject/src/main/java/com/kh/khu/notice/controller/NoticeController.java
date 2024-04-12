@@ -1,6 +1,9 @@
 package com.kh.khu.notice.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,11 +42,14 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("insert.no")
-	public ModelAndView insertNotice(Notice n, ModelAndView mv) {
-		System.out.println(n);
+	public ModelAndView insertNotice(Notice n, ModelAndView mv, HttpSession session) {
 		int result = nService.insertNotice(n);
 		if(result > 0) { //성공
-			mv.addObject("alertMsg", "성공적으로 추가되었습니다.");
+			HashMap<String, Object> alertMsg = new HashMap<>();
+			alertMsg.put("icon", "success");
+			alertMsg.put("title", "공지사항 작성 완료.");
+			alertMsg.put("text", "성공적으로 공지사항이 작성되었습니다.");
+			session.setAttribute("alertMsg", alertMsg);
 			mv.setViewName("redirect:list.no");
 		}else {
 			mv.addObject("errorMsg", "공지사항 등록 실패");
@@ -52,7 +58,10 @@ public class NoticeController {
 		return mv;
 	}
 	
-//	@RequestMapping("detail.no")
-//	public ModelAndView 
+	@RequestMapping("detail.no")
+	public ModelAndView selectNotice(int nno, ModelAndView mv) {
+		mv.addObject("n",nService.selectNotice(nno)).setViewName("admin/noticeDetailView");
+		return mv;
+	}
 	
 }

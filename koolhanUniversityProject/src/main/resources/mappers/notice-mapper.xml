@@ -47,5 +47,18 @@
 		     , #{noticeContent}
 		     )
 	</insert>
+
+	<select id="selectNotice" resultMap="noticeResult">
+		select
+		       notice_no
+		     , notice_title
+		     , member_name
+		     , notice_content
+		     , to_char(create_date, 'yyyy-mm-dd') create_date
+		  from notice
+          join member on (member_no = notice_writer)
+		 where n_status = 'Y'
+		   and notice_no = #{noticeNo}
+	</select>
 	
 </mapper>

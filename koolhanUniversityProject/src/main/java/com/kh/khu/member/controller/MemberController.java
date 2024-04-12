@@ -25,7 +25,16 @@ public class MemberController {
 		
 		session.setAttribute("loginUser", loginUser);
 		
-		return "admin/noticeEnrollForm";
+		return "admin/noticeListView";
+	}
+	
+	@RequestMapping("insert.me")
+	public String insertMember(Member m, HttpSession session) {
+		m.setMemberPwd((m.getMemberSsn().substring(0, 6)) + "1!");
+		int result = mService.insertMember(m);
+		if(result > 0) {
+			
+		}
 	}
 	
 }

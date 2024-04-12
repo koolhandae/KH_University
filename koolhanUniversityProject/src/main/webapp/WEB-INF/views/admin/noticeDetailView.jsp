@@ -24,40 +24,25 @@
             <h2>공지사항 상세보기</h2>
             <br>
             
-            <a class="btn btn-secondary" style="float:right" href="list.bo">목록으로</a>
+            <a class="btn btn-secondary" style="float:right" href="list.no">목록으로</a>
             <br><br>
             <table id="contentArea" align="center" class="table">
                 <tr>
                     <th width="100">제목</th>
-                    <td colspan="3">${b.boardTitle }</td>
+                    <td colspan="3">${n.noticeTitle }</td>
                 </tr>
                 <tr>
                     <th>작성자</th>
-                    <td>${b.boardWriter}</td>
+                    <td>${n.noticeWriter}</td>
                     <th>작성일</th>
-                    <td>${b.createDate}</td>
-                </tr>
-                <tr>
-                    <th>첨부파일</th>
-                    <td colspan="3">
-                    <c:choose>
-                    	<c:when test="${empty b.originName }">
-                    	<!-- 첨부파일이 없는 경우 -->
-                    			첨부파일이 없습니다.
-                    	</c:when>
-                    	<c:otherwise>
-                        <!-- 첨부파일이 있는 경우-->
-                        <a href="${b.changeName}" download="${b.originName}">${b.originName}</a>
-                    	</c:otherwise>
-                    </c:choose>
-                    </td>
+                    <td>${n.createDate}</td>
                 </tr>
                 <tr>
                     <th>내용</th>
                     <td colspan="3"></td>
                 </tr>
                 <tr>
-                    <td colspan="4"><p style="height:150px">${b.boardContent }</p></td>
+                    <td colspan="4"><p style="height:150px">${n.noticeContent }</p></td>
                 </tr>
             </table>
             <br>
@@ -72,32 +57,9 @@
 				<br>
 				
 				<form id="postForm" method="post">
-					<input type="hidden" name="bno" value="${b.boardNo}">
-					<input type="hidden" name="filePath" value="${b.changeName}">
+					<input type="hidden" name="nno" value="${n.noticeNo}">
 				</form>
-				
 
-			<!-- 댓글 기능은 나중에 ajax 배우고 접목시킬예정! 우선은 화면구현만 해놓음 -->
-            <table id="replyArea" class="table" align="center">
-                <thead>
-                    <tr>
-		                        <th colspan="2">
-		                            <textarea class="form-control" cols="55" rows="2" style="resize:none; width:100%" readonly>로그인한 사용자만 이용가능한 서비스입니다.</textarea>
-		                        </th>
-		                        <th style="vertical-align: middle"><button class="btn btn-secondary" disabled>등록하기</button></th>
-		                        <th colspan="2">
-		                            <textarea class="form-control" name="replyContent" id="content" cols="55" rows="2" style="resize:none; width:100%"></textarea>
-		                        </th>
-		                        <th style="vertical-align: middle"><button class="btn btn-secondary" onclick="addReply();">등록하기</button></th>
-                    </tr>
-                    <tr>
-                       <td colspan="3">댓글 (<span id="rcount"></span>) </td> 
-                    </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
         </div>
         <br><br>
    </div>
