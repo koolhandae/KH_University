@@ -1,5 +1,7 @@
 package com.kh.khu.common.template;
 
+import org.apache.ibatis.session.RowBounds;
+
 import com.kh.khu.common.model.vo.PageInfo;
 
 public class Pagination {
@@ -15,6 +17,15 @@ public class Pagination {
 		}
 		
 		return new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+	}
+	
+	public static RowBounds getRowBounds(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rb = new RowBounds(offset, limit);
+		
+		return rb;	
 	}
 	
 }

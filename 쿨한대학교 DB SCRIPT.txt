@@ -37,7 +37,7 @@ CREATE
      , MEMBER_ID VARCHAR2(30) UNIQUE NOT NULL
      , MEMBER_PWD VARCHAR2(100) NOT NULL
      , MEMBER_NAME VARCHAR2(15) NOT NULL
-     , MEMBER_SSN VARCHAR2(13) NOT NULL
+     , MEMBER_SSN VARCHAR2(14) NOT NULL
      , M_PHONE VARCHAR2(14) NOT NULL
      , M_EMAIL VARCHAR2(50) NOT NULL
      , M_ADDRESS VARCHAR2(200) NOT NULL
@@ -280,6 +280,92 @@ COMMENT ON COLUMN NOTICE.NOTICE_CONTENT IS '공지사항 내용';
 COMMENT ON COLUMN NOTICE.CREATE_DATE IS '작성일자';
      
 CREATE SEQUENCE SEQ_NNO NOCACHE;
+
+ALTER TABLE notice ADD N_STATUS VARCHAR2(1) DEFAULT 'Y' CONSTRAINT CK_NOTICE CHECK (N_STATUS IN ('Y', 'N'));
+COMMENT ON COLUMN NOTICE.N_STATUS IS '공지사항 상태';
+
+insert into member values
+(seq_mno.nextval, 'knottiez' , '1234', 'Daniel Jung', '930524-1234567', '010-3254-8319', 'danieljung.danny@gmail.com','서울시 송파구', 'A', 'Y');
+
+insert
+  into notice
+     (
+       notice_no
+     , notice_writer
+     , notice_title
+     , notice_content
+     )
+values
+     (
+       SEQ_NNO.nextval
+     , 1
+     , '테스트할거야'
+     , '시험할거야'
+     );
+insert
+  into notice
+     (
+       notice_no
+     , notice_writer
+     , notice_title
+     , notice_content
+     )
+values
+     (
+       SEQ_NNO.nextval
+     , 1
+     , '테스트할거야2'
+     , '시험할거야2'
+     );
+     
+insert
+  into notice
+     (
+       notice_no
+     , notice_writer
+     , notice_title
+     , notice_content
+     )
+values
+     (
+       SEQ_NNO.nextval
+     , 1
+     , '이게 되려나'
+     , '하하하'
+     );
+     
+insert
+  into notice
+     (
+       notice_no
+     , notice_writer
+     , notice_title
+     , notice_content
+     )
+values
+     (
+       SEQ_NNO.nextval
+     , 1
+     , '다섯개는 있어야지 할만한디'
+     , '다섯개는 있어야제'
+     );
+     insert
+  into notice
+     (
+       notice_no
+     , notice_writer
+     , notice_title
+     , notice_content
+     )
+values
+     (
+       SEQ_NNO.nextval
+     , 1
+     , '더 넘어가는게 있어야하나'
+     , '공지사항 헬로'
+     );
+     
+
 
 
 COMMIT;
