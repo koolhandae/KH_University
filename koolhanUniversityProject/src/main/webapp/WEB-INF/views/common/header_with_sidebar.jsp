@@ -28,6 +28,9 @@
     <script src="https://kit.fontawesome.com/12b80a3a82.js" crossorigin="anonymous"></script>
     <!-- Custom styles for this template-->
     <link href="resources/css/sb-admin-2.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet">
     
 
 <style>

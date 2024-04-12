@@ -50,17 +50,18 @@
     .form-group{
         padding-top: 50px;
         padding-right: 100px;
-        padding-bottom: 100px;
+        padding-bottom: 30px;
         padding-left: 100px
     }
     th,td {
         text-align: center !important;
-        width: 214px;
+        width: 275px;
     }
     thead *{
         background-color: #1c4587;
         color: white;
     }
+
     
 </style>
 </head>
@@ -148,7 +149,7 @@
                     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"> <!-- 대형모달 설정 -->
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">강의 수정</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -158,10 +159,10 @@
                                 <div class="form-group">
                                     
                                     <label for="lectureNo">강의번호 :</label>
-                                    <input type="text" class="form-control" id="lectureNo" name="lectureNo" placeholder="Please Enter Number" required><br>
+                                    <input type="text" class="form-control" id="lectureNo" name="lectureNo" placeholder="숫자만 입력해주세요" required><br>
                                     
                                     <label for="lectureNm"> &nbsp;강의이름 :</label>
-                                    <input type="text" class="form-control" id="lectureNm" name="lectureNm" placeholder="강의명을 입력해주세요"><br>
+                                    <input type="text" class="form-control" id="lectureNm" name="lectureNm" placeholder="강의명을 입력해주세요" required><br>
                                     
                 
                                     <table>
@@ -188,12 +189,12 @@
                                         <tr>
                                             <td>
                                                 <label for="lectureRoom"> &nbsp;강의실 :</label>
-                                                <input type="text" class="form-control" id="lectureRoom" name="lectureRoom" placeholder="예) 000관 000호"><br>
+                                                <input type="text" class="form-control" id="lectureRoom" name="lectureRoom" placeholder="예) 000관 000호" required><br>
                                             </td>
                 
                                             <td>
                                                 <label for="lectureTime"> &nbsp;강의시간 :</label>
-                                                <input type="text" class="form-control" id="lectureTime" name="lectureTime" placeholder="예) 수 1,2,3"><br>
+                                                <input type="text" class="form-control" id="lectureTime" name="lectureTime" placeholder="예) 수 1,2,3" required><br>
                                             </td>
                                         </tr> 
                                     </table>
@@ -211,10 +212,10 @@
                                     </select><br>
                 
                                     <label for="headCount"> &nbsp;수강정원 :</label>
-                                    <input type="text" class="form-control" id="headCount" name="headCount" placeholder="숫자만 입력해주세요" maxlength="3" onchange="onlyNumber2();"><br>
+                                    <input type="text" class="form-control" id="headCount" name="headCount" placeholder="숫자만 입력해주세요" maxlength="3" onchange="onlyNumber2();" required><br>
                                    
                                     <label for="etc"> &nbsp;기타사항 :</label>
-                                    <input type="text" class="form-control" id="etc" name="etc" placeholder="기타사항을 입력해주세요"><br>
+                                    <input type="text" class="form-control" id="etc" name="etc" placeholder="기타사항을 입력해주세요" required><br>
                 
                                     <label for="fileUpload"> &nbsp;강의계획서 업로드 : </label>
                                     <input type="file" id="fileUpload" name="fileUpload" accept=".pdf, .hwp, .docx, .doc"><br>
@@ -224,23 +225,42 @@
                 
                 
                                 </div>
-                                <br>
-                                <div class="btns" align="center">
-                                    <button id="enrollBtn" type="submit" class="btn btn-primary">등록</button>
-                                    <button type="reset" class="btn btn-danger">취소</button>
-                                    <button type="button" class="btn btn-secondary">목록</button>
-                                </div>
+
                             </form>
                         </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Understood</button>
+                        <div class="modal-footer" style=" display: flex; flex-wrap: wrap; align-items: center; justify-content: center;">
+                            <div class="btns" >
+                                <button id="enrollBtn" type="submit" class="btn btn-primary">수정</button>
+                                <button type="reset" class="btn btn-danger">취소</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                            </div>
                         </div>
                     </div>
                     </div>
                 </div>
 
 
+            <script>
+
+                    function onlyNumber(){ //학점에 숫자만 입력되게 하는 거..!
+                        let lectureGradeVal = $("#lectureGrade").val();
+                        console.log(lectureGradeVal);
+                        if(!/^[0-9]+$/.test(lectureGradeVal)){
+                           let newVal = lectureGradeVal.replace(/\D/g, '');
+                           $("#lectureGrade").val(newVal);
+                        }
+                    }
+    
+                    function onlyNumber2(){ //수강인원에 숫자만 입력되게
+                        let headCount = $("#headCount").val();
+                        if(!/^[0-9]+$/.test(headCount)){
+                           let newVal = headCount.replace(/\D/g, '');
+                           $("#headCount").val(newVal);
+                        }
+                    }
+            
+    
+            </script>
 
 
 
