@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="noticeMapper">
+
+	<resultMap type="Notice" id="noticeResult">
+		<result column="notice_no" property="noticeNo"/>	
+		<result column="member_name" property="noticeWriter"/>	
+		<result column="notice_title" property="noticeTitle"/>	
+		<result column="notice_content" property="noticeContent"/>	
+		<result column="create_date" property="createDate"/>	
+	</resultMap>
+
+	<select id="selectListCount" resultType="_int">
+		select
+		       count(*)
+		  from notice
+		 where n_status = 'Y'
+	</select>
+	
+	<select id="selectList" resultMap="noticeResult">
+		select
+		       notice_no
+		     , notice_title
+		     , member_name
+		     , to_char(create_date, 'yyyy-mm-dd') create_date
+		  from notice
+          join member on (member_no = notice_writer)
+		 where n_status = 'Y'  
+		 order
+		    by notice_no desc
+	</select>
+	
+	<insert id="insertNotice">
+		insert
+		  into notice
+		     (
+		       notice_no
+		     , notice_writer
+		     , notice_title
+		     , notice_content
+		     )
+		values
+		     (
+		       SEQ_NNO.nextval
+		     , #{noticeWriter}
+		     , #{noticeTitle}
+		     , #{noticeContent}
+		     )
+	</insert>
+
+	<select id="selectNotice" resultMap="noticeResult">
+		select
+		       notice_no
+		     , notice_title
+		     , member_name
+		     , notice_content
+		     , to_char(create_date, 'yyyy-mm-dd') create_date
+		  from notice
+          join member on (member_no = notice_writer)
+		 where n_status = 'Y'
+		   and notice_no = #{noticeNo}
+	</select>
+	
+</mapper>

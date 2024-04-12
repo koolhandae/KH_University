@@ -214,6 +214,18 @@
 		    <artifactId>gson</artifactId>
 		    <version>2.8.5</version>
 		</dependency>
+		<!-- google docs document creater -->
+	    <dependency>
+	        <groupId>com.google.api-client</groupId>
+	        <artifactId>google-api-client</artifactId>
+	        <version>1.30.10</version>
+	    </dependency>
+	    
+	    <dependency>
+	        <groupId>com.google.auth</groupId>
+	        <artifactId>google-auth-library-oauth2-http</artifactId>
+	        <version>0.22.0</version>
+	    </dependency>
 		
 	</dependencies>
     <build>

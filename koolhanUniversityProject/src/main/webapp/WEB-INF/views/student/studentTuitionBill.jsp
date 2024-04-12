@@ -8,11 +8,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-				<div class="content">
-                    <div class="copyright text-left my-auto">	
-                   		hello
-	                </div>
-                </div>
-
+   <jsp:include page="../common/header_with_sidebar.jsp"/>
+   <div class="content">
+   	 <div class="innerOuter">
+  
+   	 
+   	 마 되나
+   	 
+   	 
+   	 </div>  
+   </div>
+   <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
