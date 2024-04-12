@@ -6,27 +6,48 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://kit.fontawesome.com/12b80a3a82.js" crossorigin="anonymous"></script>
 <style>
  .content{
-      padding: 30px;
+      padding: 50px;
    }
    .title-area{
+      /*
       width: 100%;
       height: 50px;
       background-color: white;      
       display: flex;
       line-height: 50px;
       justify-content: space-between;
+      */
+      width: 100%;
+      height: 50px;
+      background-color: white;
+      display: flex;
+      line-height: 50px;
+      justify-content: flex-start;
+   }
+   .title-area .home{
+      font-size: 0;
+      width: 37px;
+      height: 54px;
+      display: inline-block;
+      position: relative;
    }
    #title{
-      font-size: large;
+      font-size: x-large;
       font-weight: 600;
       color: #1c4587;
       padding-left: 20px;
+      margin-right: 1200px;
    }
    #mid-title{
       font-size:small;
       padding-right: 20px;
+   }
+   #fin-title{
+      padding-left: 20px;
+      font-size:small;
    }
    .lecture-area{
       width: 100%;
@@ -80,6 +101,9 @@
 		text-align: center;
 		vertical-align: middle;
 	}
+   #boardList{
+      margin-block-end: auto;
+   }
    #notice-area{
       padding: 30px;
       padding-top: 20px;
@@ -96,10 +120,10 @@
       display: flex;
    }
    .project-area div{
-      border: 1px solid rgb(207, 207, 207);
+      border: 2px solid rgb(231, 231, 231);
       border-radius: 10px;
       width: 100%;
-      height: 150px;
+      height: 200px;
       margin: 10px;
       text-align: center;
       font-size: x-large;
@@ -119,25 +143,57 @@
       padding-top: 8px;
       cursor: pointer;
    }
+   .fa-solid{
+      font-size: small;
+      margin-right: 18px;
+   } 
+   .input-file-button{
+      padding: 5px;
+      border-color:rgb(61, 61, 61);
+      border: 2px dashed;
+      border-radius: 4px;
+      cursor: pointer;
+      width:300px;
+    margin-top: -5px;
+   }
+   #img-notice{
+      color: rgb(233, 0, 0);
+      font-size: small;
+      padding: 10px;
+      text-align: right;
+   }
+   .list-main-title{
+      display: flex;
+      justify-content: space-between;
+   }
+
 
 
 </style>
+
 </head>
 <body>
    <jsp:include page="../common/header_with_sidebar.jsp"/>
    <div class="content">
         <div class="title-area">
-         <div id="title">나의 수강 조회</div>
-         <div id="mid-title">강의관리 > 나의수강조회 </div>
+           <div id="title">나의 수강 조회</div>
+           
+           <a>
+              <!--<i class="fa-solid fa-house"></i>-->
+           </a>
+           
+         <div id="mid-title">나의강의실</div>
+         <div>></div>
+         <div id="fin-title">나의수강조회</div>
       </div>
       <div class="lecture-area">
          <div id="lecture-title">자바기초 강의실</div>
       </div>
       <div class="lecture-navigator">
-         <div id="notice">공지사항</div>
-         <div id="classPlan">강의계획서</div>
-         <div id="board">자유게시판</div>
-         <div id="project">과제게시판</div>
+         <div id="notice" class="lec-nav-item">공지사항</div>
+         <div id="classPlan" class="lec-nav-item">강의계획서</div>
+         <div id="board" class="lec-nav-item">자유게시판</div>
+         <div id="project" class="lec-nav-item">과제게시판</div>
       </div>
       
       <div class="lList-area">
@@ -186,6 +242,48 @@
          </div>
       </div>
       -->
+      <!-- 공지사항 세부사항 클릭시 -->
+	  <!-- 
+      <div class="list-title" style="margin-bottom: 20px;">공지사항</div>
+            <table id="boardList" class="table table-hover" align="center">
+               <thead>
+                  <tr>
+                     <th>글번호</th>
+                     <th>제목</th>
+                     <th>작성일</th>
+                     <th>조회수</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>4</td>
+                     <td>중간과제 제출 관련공지입니다</td>
+                     <td>2024.04.12</td>
+                     <td>5</td>
+                  </tr>
+                   <tr>
+                     <td>3</td>
+                     <td>3주차 강의자료입니다</td>
+                     <td>2024.03.19</td>
+                     <td>10</td>
+                  </tr>
+                   <tr>
+                     <td>2</td>
+                     <td>2주차 강의자료입니다</td>
+                     <td>2024.03.12</td>
+                     <td>2</td>
+                  </tr>
+                   <tr>
+                     <td>1</td>
+                     <td>1주차 강의자료입니다</td>
+                     <td>2024.03.05</td>
+                     <td>1</td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+       -->
 
       <!-- 강의계획서 클릭시 화면 -->
       <!--
@@ -219,8 +317,13 @@
       -->
 
       <!-- 자유게시판 클릭시 화면 -->
-      <!--
-      <div class="list-title" style="margin-bottom: 20px;">자유게시판</div>
+      
+      <div class="list-main-title">
+	      <div class="list-title" style="margin-bottom: 20px;">자유게시판</div>
+	      <div>
+	      	<button type="button" class="btn btn-outline-secondary btn-sm">글쓰기</button>
+	      </div>
+      </div>
             <table id="boardList" class="table table-hover" align="center">
                <thead>
                   <tr>
@@ -264,9 +367,37 @@
             </table>
          </div>
       </div>
-      -->
+      <!--
+      <div id="pagingArea">
+                <ul class="pagination">
+               		<c:choose>
+               			<c:when test="${ pi.currentPage eq 1 }">
+                    		<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<li class="page-item"><a class="page-link" href="list.bo?cpage=${ pi.currentPage - 1 }">Previous</a></li>	                    		
+                    	</c:otherwise>
+                    </c:choose>
+	                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                    		<li class="page-item"><a class="page-link" href="list.bo?cpage=${ p }">${ p }</a></li>
+                    	</c:forEach>
+                    	
+                    <c:choose>	
+                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+	                   		<li class="page-item disabled"><a class="page-link" href="">Next</a></li>
+	                    </c:when>
+	                    <c:otherwise>
+	                   		<li class="page-item"><a class="page-link" href="list.bo?cpage=${ pi.currentPage + 1 }">Next</a></li>
+	                    </c:otherwise>
+                	</c:choose>
+                </ul>
+            </div>
+       -->    
+      
 
-      <!-- 과제게시판 클릭시 화면 -->     
+
+      <!-- 과제게시판 클릭시 화면 -->   
+      <!--
          <div class="project-area">
             <div id="ing-project">
                <img width="80" height="80" src="https://img.icons8.com/material-outlined/96/FCA819/no-entry.png" alt="no-entry"/>
@@ -281,7 +412,6 @@
                <span>제출완료 0건</span>
             </div>
          </div>
-
             <table id="boardList" class="table" align="center">
                <thead>
                   <tr>
@@ -293,25 +423,54 @@
                      <th>마감일</th>
                   </tr>
                </thead>
-               <tbody>
-                  <tr>
-                     <td>1</td>
-                     <td>중간과제:자바산술연산</td>
-                     <td>
-                        <input type="file">
-                     </td>
-                     <td>진행중</td>
-                     <td id="project-btn">
-                        <img width="30" height="30" src="https://img.icons8.com/fluency-systems-regular/30/1C4587/nui2.png" alt="nui2"/>
-                     </td>
-                     <td>2024.04.05 오후 11:59</td>
-                  </tr>
-               </tbody>
+               <form action="">
+                  <tbody>
+                     <tr>
+                        <td>1</td>
+                        <td>중간과제:자바산술연산</td>
+                        <td>
+                           <label class="input-file-button" for="input-file">
+                              upload-file
+                           </label>
+                           <input type="file" id="input-file" style="display:none">
+                        </td>
+                        <td>진행중</td>
+                        <td id="project-btn">
+                           <img width="30" height="30" src="https://img.icons8.com/fluency-systems-regular/30/1C4587/nui2.png" alt="nui2"/>
+                        </td>
+                        <td>2024.04.05 오후 11:59</td>
+                     </tr>
+                  </tbody>
+               </form>
             </table>
+            <div id="img-notice">
+               <span>* 첨부파일 제출시 제목은 "학번_과제 제목" 형식 으로 제출바랍니다</span>
+            </div>
          </div>
       </div>
-
    </div>
+   -->  
+
+   <script>
+      $("#input-file").change(function(){
+         var fileName = $("#input-file").val();
+         $(".input-file-button").text(fileName);
+      })
+   </script>
+
+   <script>
+      $(".lec-nav-item").click(function(){
+         $(".lec-nav-item").not(this).css({
+            "background-color": "white",
+            "color": "gray"
+         });
+         $(this).css({
+            "background-color": "#1c4587",
+            "color": "white"
+         })
+      })
+
+   </script>
    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

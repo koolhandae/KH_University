@@ -19,10 +19,11 @@
       justify-content: space-between;
    }
    #title{
-      font-size: large;
+      font-size: x-large;
       font-weight: 600;
       color: #1c4587;
       padding-left: 20px;
+      margin-right: 1200px;
    }
    #mid-title{
       font-size:small;
