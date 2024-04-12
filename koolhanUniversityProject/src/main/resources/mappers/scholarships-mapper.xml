@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="scholarshipsMapper">
+
+	<resultMap type="Scholarship" id="scholarshipResult">
+		<result column="sch_no" property="schNo"/>
+		<result column="sch_name" property="schName"/>
+		<result column="sch_amount" property="schAmount"/>
+		<result column="sch_req" property="schReq"/>
+	</resultMap>
+	
+	<resultMap type="ScholarshipStu" id="scholarshipStuResult">
+		<result column="sch_stu_no" property="schStuNo"/>
+		<result column="sch_no" property="schNo"/>
+		<result column="student_no" property="studentNo"/>
+		<result column="sch_stu_date" property="schStuDate"/>
+		<result column="sch_stu_state" property="schStuStatus"/>
+		<result column="sch_stu_semester" property="schStuSemester"/>
+	</resultMap>
+
+</mapper>

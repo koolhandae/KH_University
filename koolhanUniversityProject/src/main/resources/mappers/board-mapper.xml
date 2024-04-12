@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="boardMapper">
+
+	<resultMap type="Board" id="boardResult">
+		<result column="board_no" property="boardNo" />
+		<result column="board_writer" property="boardWriter" />
+		<result column="board_title" property="boardTitle" />
+		<result column="board_content" property="boardContent" />
+		<result column="count" property="count" />
+		<result column="create_date" property="createDate" />
+		<result column="b_status" property="bStatus" />
+		<result column="origin_name" property="originName" />
+		<result column="change_name" property="changeName" />
+	</resultMap>
+	
+	<resultMap type="Reply" id="replyResult">
+		<result column="reply_no" property="replyNo"/>	
+		<result column="ref_bno" property="refBoardNo"/>	
+		<result column="reply_writer" property="replyWriter"/>	
+		<result column="reply_content" property="replyContent"/>	
+		<result column="create_date" property="createDate"/>	
+		<result column="r_status" property="rStatus"/>	
+	</resultMap>
+</mapper>

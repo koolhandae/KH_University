@@ -132,7 +132,7 @@
             
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="insertForm.no">
                     <i class="fa-solid fa-bullhorn"></i>
                     <span>공지사항 등록</span></a>
             </li>
@@ -231,7 +231,7 @@
                 </a>
                 <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">공지사항</a>
+                        <a class="collapse-item" href="list.no">공지사항</a>
                         <a class="collapse-item" href="#">학사일정</a>
                         <a class="collapse-item" href="#">셔틀버스 안내</a>
                         <a class="collapse-item" href="#">관련 취업 정보</a>
