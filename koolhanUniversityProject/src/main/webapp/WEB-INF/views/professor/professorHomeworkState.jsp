@@ -90,6 +90,18 @@
     .btns{
         padding-bottom: 50px;
     }
+    /* table{
+        width: 100%;
+    }
+    thead{
+        height: 50px;
+    } */
+    .table th,
+    .table td {
+        padding: 0px;
+        vertical-align: baseline;
+        /* line-height: 10px; */
+    }
 
 </style>
 </head>
@@ -117,28 +129,28 @@
                 <ul>
                     <li>과제 </li>
                     <li><i class="fa-solid fa-chevron-right"></i></li>
-                    <li style="font-weight: bold;"> 과제 등록</li>
+                    <li style="font-weight: bold;"> 과제 현황</li>
                 </ul>
             </div>
 
         </div>
         <div style="padding: 15px;" id="HomeworkLiDiv">
             <ul style="height: 66px; margin: 0;" >
-                <li class="homework_li_class" style="background-color: #1c4587; color: white; margin-right: 0.5px;">과제 등록</li>
-                <li class="homework_li_class" style="background-color: white;">과제 현황</li>
+                <li class="homework_li_class" style="background-color: white;">과제 등록</li>
+                <li class="homework_li_class" style="background-color: #1c4587; color: white; margin-right: 0.5px;">과제 현황</li>
             </ul>
             
         </div>
 
         <div id="contentDiv" class="bg-white">
             <div>
-                <h3>과제 등록</h3>
+                <h3>과제 현황</h3>
     
-                <form action="insert.me" method="post" id="enrollForm">
                     <div class="form-group">
                         
                         <label for="lectureSelect">강의 선택 </label>
                         <select name="lectureSelect" id="lectureSelect" class="form-control ">
+                            <option>강의 선택하기</option>
                             <option>자바기초</option>
                             <option>컴퓨터프로그래밍</option>
                             <option>이산수학</option>
@@ -146,10 +158,6 @@
                         </select>
 
                         <br>
-
-                        <label for="lectureTitle">제목 </label>
-                        <input type="text" class="form-control" id="lectureTitle" name="lectureTitle" required><br>
-                    
                         
                         <label for="lectureNm"> &nbsp;마감기한 :</label>
                         <table>
@@ -167,57 +175,83 @@
                         </table>
 
                         <br>
-    
+                        <br>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 24%;">강의명</th>
+                                    <th style="width: 24%;">과제제목</th>
+                                    <th style="width: 24%;">제출기한</th>
+                                    <th style="width: 16%;">상세보기</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>자바의 기초</td>
+                                    <td>ㅇㅇㅇㅇㅇ과제</td>
+                                    <td>2024-05-02</td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-primary ">상세보기</button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>이산수학</td>
+                                    <td>ㅇㅇㅇㅇㅇ과제</td>
+                                    <td>2024-05-05</td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-primary ">상세보기</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                         
-                        <label for="content"> &nbsp;내용 </label>
-                        <textarea id="summernote" name="editordata" cols="30" rows="10" class="form-control summernote" style="resize:none;"> </textarea>
+                        <!-- <label for="content"> &nbsp;내용 </label>
+                        <div id="summernote" name="editordata" class="form-control summernote" style="resize:none; height: auto;">
+                            <p>
+                                <h1>ㅇㅇ</h1> <br>
+                                ㅇ<br>
+                                ㅇ<br>
+                                ㅇ<br>
+                                ㅇ<br>
+                                ㅇ<br>
+                                ㅇ<br>
+                                ㅇ<br>
+                                ㅇ<br>
+                                ㅇ<br>
+                                ㅇ<br>
+                                ㅇ<br>
+                                ㅇ<br>
+                                ㅇ<br>
+                                ㅇ<br>
+                                ㅇ<br>
+                                ㅇ<br>
+                                ㅇ<br>
+                                ㅇ<br>
+                                ㅇ<br>
+                                ㅇ<br>
+                            </p>
+                        </div> -->
+                        <!-- <textarea id="summernote" name="editordata" cols="30" rows="10" class="form-control summernote" style="resize:none;" readonly> </textarea> -->
                        
     
     
                     </div>
                     <br>
-                    <div class="btns" align="center">
-                        <button id="enrollBtn" type="submit" class="btn btn-primary">등록</button>
-                        <button type="reset" class="btn btn-danger">취소</button>
-                    </div>
-                </form>
             </div>
             
-   	
-      
-   </div>
+        </div>
+        
+        
+        <!-- <div style="padding: 15px;"></div>
 
-
+        <div class="bg-white">ㅇㅅㅇ</div> -->
 
 
 <script>
-       $(function() {
-        //여기 아래 부분
-            $('#summernote').summernote({
-                height: 300,                 // 에디터 높이
-                minHeight: null,             // 최소 높이
-                maxHeight: null,             // 최대 높이
-                focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-                lang: "ko-KR",					// 한글 설정
-                placeholder: '한글한글~~',	//placeholder 설정
-                toolbar: [
-                                        // [groupName, [list of button]]
-                                        ['fontname', ['fontname']],
-                                        ['fontsize', ['fontsize']],
-                                        ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-                                        ['color', ['forecolor','color']],
-                                        ['table', ['table']],
-                                        ['para', ['ul', 'ol', 'paragraph']],
-                                        ['height', ['height']],
-                                        ['insert',['picture','link','video']],
-                                        ['view', ['help']]
-                                    ],
-                                    fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-                                    fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
 
-                });
-        });
-   </script>
+</script>
 
 
 
