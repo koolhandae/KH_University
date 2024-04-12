@@ -8,11 +8,21 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <!-- 정동석 -->
+<<<<<<< HEAD
     <%-- <jsp:forward page="WEB-INF/views/admin/noticeDetailView.jsp" /> --%>
     <%-- <jsp:forward page="WEB-INF/views/admin/noticeEnrollForm.jsp" /> --%>
     <%-- <jsp:forward page="WEB-INF/views/student/studentEnrollForm.jsp" /> --%>
     <%-- <jsp:forward page="WEB-INF/views/admin/adminEnrollForm.jsp" /> --%>
     <jsp:forward page="WEB-INF/views/student/certificateIssuingPage.jsp" />
+=======
+    <%-- <jsp:forward page="WEB-INF/views/student/studentEnrollForm.jsp" /> 
+    <%-- <jsp:forward page="WEB-INF/views/admin/adminEnrollForm.jsp" /> --%>
+    <%-- <jsp:forward page="WEB-INF/views/student/certificateIssuingPage.jsp" />  --%>
+
+
+
+
+>>>>>>> cyj2
 
     <!-- 김도현 -->
     <%-- <jsp:forward page="WEB-INF/views/main.jsp" /> --%> <%--
@@ -32,7 +42,10 @@ pageEncoding="UTF-8"%>
 
 
     <!-- 조연정 -->
-
+	<%-- <jsp:forward page="WEB-INF/views/professor/professorClassEnrollForm.jsp"/> --%>
+	<%-- <jsp:forward page="WEB-INF/views/professor/professorClassListView.jsp"/> --%>
+		 <jsp:forward page="WEB-INF/views/professor/professorHomeworkEnrollForm.jsp"/>
+	
 
 
 
