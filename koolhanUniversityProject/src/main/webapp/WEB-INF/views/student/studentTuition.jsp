@@ -73,11 +73,12 @@
     #boardList *{ 
  		text-align: center; 
  		vertical-align: middle;
-      pointer-events: none;
+      	pointer-events: none;
      } 
 	
 	.semesterArea{
 		display: flex;
+		padding-left: 50px;
 	}
 
 </style>
@@ -98,6 +99,7 @@
       	
       	<div class="semesterArea">
          <select class="form-control" name="semester" id="semester">
+         	<option value="">전체</option>
             <option value="">1학년 1학기</option>
             <option value="">1학년 2학기</option>
             <option value="">2학년 1학기</option>
@@ -111,14 +113,16 @@
       	</div>
       	<br>
       	
-      	<table id="boardList" class="selectTuition table table-hover" style="width: 800px;" align="center">
+      	<table id="boardList" class="selectTuition table table-hover" style="width: 900px;" align="center">
             <tr class="topMenu">
                <th>등록연도</th>
                <th>등록학기</th>
                <th>장학금 유형</th>
                <th>등록금</th>
                <th>장학금</th>
-               <th>납입금</th>
+               <th>납부금</th>
+               <th>납부구분</th>
+               <th>납부일자</th>
             </tr>
             <tr>
                <td>2024</td>
@@ -127,6 +131,8 @@
                <td>4,000,000</td>
                <td>1,500,000</td>
                <td>2,500,000</td>
+               <td>납부</td>
+               <td>24.04.12</td>
             </tr>
             <tr>
                <td>2024</td>
@@ -135,6 +141,8 @@
                <td>4,000,000</td>
                <td>1,500,000</td>
                <td>2,500,000</td>
+               <td>미납부</td>
+               <td>-</td>
             </tr>
          </table>
       

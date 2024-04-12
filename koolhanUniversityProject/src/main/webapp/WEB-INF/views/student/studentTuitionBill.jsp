@@ -60,9 +60,14 @@
     }
 
     #boardList{
-        width: 800px;
+        width: 900px;
         pointer-events: none;
     }
+
+	#borderList>tr{
+		border-bottom: 1px;
+		border-color: rgb(75,75,75);
+	}
 
 
 </style>
@@ -81,7 +86,7 @@
             <hr>
 			<br>
 			<br>
-			<table id="boardList" class="table table-hover" align="center" border="1" black>
+			<table id="boardList" class="table table-hover" align="center">
 				<tr>
 					<th>학부(과)</th>
 					<td colspan="3">컴퓨터공학과</td>
