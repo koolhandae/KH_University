@@ -35,7 +35,7 @@
                 </div>
                 <br>
                 <div class="btns" align="center">
-                    <button id="enrollBtn" type="submit" class="btn btn-primary" disabled>회원가입</button>
+                    <button id="enrollBtn" type="submit" class="btn btn-primary" disabled>수정완료</button>
                     <button type="reset" class="btn btn-danger"> 초기화</button>
                 </div>
             </form>

@@ -26,10 +26,10 @@ color: rgb(100,100,100);
                     <input type="text" class="form-control" id="userName" name="userName" placeholder="Please Enter Name" readonly><br>
                     
                     <label for="email"> &nbsp; Email :</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Please Enter Email"><br>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Please Enter Email"><br>    
                     
                     <label for="age"> &nbsp; 주민등록번호 :</label>
-                    <input type="number" class="form-control" id="memberSsn" name="memberSsn" placeholder="Please Enter Age"><br>
+                    <input type="number" class="form-control" id="memberSsn" name="memberSsn" placeholder="Please Enter Age" readonly><br>
                     
                     <label for="phone"> &nbsp; Phone :</label>
                     <input type="tel" class="form-control" id="phone" name="phone" placeholder="Please Enter Phone (-없이)"><br>
@@ -46,7 +46,7 @@ color: rgb(100,100,100);
                 </div>
                 <br>
                 <div class="btns" align="center">
-                    <button id="enrollBtn" type="submit" class="btn btn-primary" disabled>회원가입</button>
+                    <button id="enrollBtn" type="submit" class="btn btn-primary" disabled>개인정보수정</button>
                     <button type="reset" class="btn btn-danger"> 초기화</button>
                 </div>
             </form>
