@@ -133,7 +133,7 @@ pageEncoding="UTF-8"%>
 												</div>
 											</div>
 											<button type="button" id="login-btn" onclick="loginProcess();" class="btn btn-facebook btn-user btn-block" >
-												Login
+												로그인
 											</button>
 										</form>
 										<hr>
