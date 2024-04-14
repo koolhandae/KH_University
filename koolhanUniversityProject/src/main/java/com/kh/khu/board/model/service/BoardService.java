@@ -30,5 +30,11 @@ public interface BoardService {
 	
 	// 7. 댓글 작성용 서비스 (ajax)
 	int insertReply(Reply r);
+	
+	// 댓글 수정
+	int updateReply(Reply r);
+	
+	// 댓글 삭제
+	int deleteReply(Reply r);
 		
 }

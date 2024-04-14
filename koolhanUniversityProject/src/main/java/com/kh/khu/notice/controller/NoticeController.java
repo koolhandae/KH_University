@@ -45,7 +45,7 @@ public class NoticeController {
 	public ModelAndView insertNotice(Notice n, ModelAndView mv, HttpSession session) {
 		int result = nService.insertNotice(n);
 		if(result > 0) { //성공
-			HashMap<String, Object> alertMsg = new HashMap<>();
+			HashMap<String, Object> alertMsg = new HashMap<String, Object>();
 			alertMsg.put("icon", "success");
 			alertMsg.put("title", "공지사항 작성 완료.");
 			alertMsg.put("text", "성공적으로 공지사항이 작성되었습니다.");
