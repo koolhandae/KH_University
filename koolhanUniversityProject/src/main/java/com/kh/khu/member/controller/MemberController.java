@@ -86,6 +86,21 @@ public class MemberController {
 		
 	}
 	
+	@RequestMapping("logout.me")
+	public String logoutMember(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	@RequestMapping("forgot.me")
+	public String forgotMember() {
+		return "common/forgotPassword";
+	}
+	
+	
+	
+	
+	
 	/*
 	@RequestMapping("insert.me")
 	public String insertMember(Member m, HttpSession session) {

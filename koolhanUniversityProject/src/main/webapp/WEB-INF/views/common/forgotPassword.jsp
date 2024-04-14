@@ -130,8 +130,9 @@
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="이메일을 입력해주세요">
                                         </div>
+                                      
                                         <div id="g-recaptcha" class="g-recaptcha" data-sitekey="6LcIX7opAAAAAMfUU33mcaDP-7AbkuQPTYu_ES15" data-callback="callBackRecaptcha"></div>
-                                       
+                                        <br>
                                         <a href="login.html" class="btn btn-primary btn-user btn-block">
                                             인증번호 전송
                                         </a>
