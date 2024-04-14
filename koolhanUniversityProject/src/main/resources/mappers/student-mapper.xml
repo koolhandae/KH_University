@@ -17,4 +17,23 @@
 		<result column="grad_date" property="gradDate"/>
 	</resultMap>
 
+<select id="loginStudent" resultMap="studentResult">
+	select 
+       student_no
+     , student_id
+     , student_pwd
+     , student_name
+     , student_ssn
+     , s_phone
+     , s_email
+     , s_address
+     , enroll_date
+     , absence_date
+     , grad_date
+  from student
+ where student_id = #{studentId}
+   and s_status = 'Y'
+</select>
+
+
 </mapper>

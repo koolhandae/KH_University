@@ -25,8 +25,7 @@ pageEncoding="UTF-8"%>
       <br /><br />
 
       <p style="font-size: 25px">
-        죄송합니다. 해당 페이지를 찾을 수 없습니다. <br />
-        요청하신 페이지가 사라졌거나 잘못된 경로를 이용하셨습니다. <br />
+        죄송합니다. ${ errorMsg } <br />
       </p>
       <br /><br /><br />
 

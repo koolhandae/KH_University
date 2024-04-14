@@ -62,6 +62,13 @@
 </head>
 <body id="page-top">
 	
+	<c:if test="${ not empty alertMsg }"> 
+		<script>
+			alert("${ alertMsg }");
+		</script>
+		<c:remove var="alertMsg" scope="session"/>
+	</c:if>
+	<!-- 
 	<c:if test="${not empty alertMsg}">
 		<script>
 			$(function(){
@@ -74,7 +81,7 @@
 	    </script>
 	    <c:remove var="alertMsg" scope="session" />
 	</c:if>
-
+	 -->
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -446,11 +453,23 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
+						<c:if test="${not empty loginUser or not empty loginStudent}">
+						
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">여기에 로그인유저의 이름이 들어가야한다.</span>
+                                <c:choose>
+                                	<c:when test="${ not empty loginUser and loginUser.memberId ne 'admin'}">
+                                		<span class="mr-2 d-none d-lg-inline text-gray-600 small">${ loginUser.memberName } 교수</span>
+                                	</c:when>
+                                	<c:when test="${ not empty loginUser and loginUser.memberName eq 'admin'}">
+                                		<span class="mr-2 d-none d-lg-inline text-gray-600 small">${ loginUser.memberName }님</span>
+                                	</c:when>
+                                	<c:when test="${ not empty loginStudent and empty loginUser }">
+                                		<span class="mr-2 d-none d-lg-inline text-gray-600 small">${ loginStudent.studentName }님</span>
+                                	</c:when>
+                                </c:choose>
                                 <img class="img-profile rounded-circle"
                                     src="resources/images/undraw_profile.svg">
                             </a>
@@ -476,6 +495,7 @@
                                 </a>
                             </div>
                         </li>
+                        </c:if>
 
                     </ul>
 

@@ -29,6 +29,9 @@
 
     <!-- Custom scripts for all pages-->
     <script src="resources/js/sb-admin-2.min.js"></script>
+    
+    <!-- google rechapcha-->
+	<script src="https://www.google.com/recaptcha/api.js"></script>
 
 <title>Insert title here</title>
 <style>
@@ -95,6 +98,10 @@
         background-position: center;
         background-size: cover;
     }
+    #g-recaptcha{
+        margin: auto;
+        display: table;
+    }
 	
 </style>
 </head>
@@ -123,6 +130,8 @@
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="이메일을 입력해주세요">
                                         </div>
+                                        <div id="g-recaptcha" class="g-recaptcha" data-sitekey="6LcIX7opAAAAAMfUU33mcaDP-7AbkuQPTYu_ES15" data-callback="callBackRecaptcha"></div>
+                                       
                                         <a href="login.html" class="btn btn-primary btn-user btn-block">
                                             인증번호 전송
                                         </a>
@@ -152,5 +161,42 @@
         </div>
     </div>
 
+	<script>
+		function callBackRecaptcha(){
+		    reCAPTCHA();
+		}
+	</script>	
+		
+		
+	<script>
+	$(function() {
+		function reCAPTCHA() {
+				$.ajax({
+		            url: "rechapcha.do",
+		            type: 'post',
+		            data: {
+		                recaptcha: $("#g-recaptcha-response").val()
+		            },
+		            success: function(data) {
+		                switch (data) {
+		                    case 0:
+		                        console.log("자동 가입 방지 봇 통과");
+		                        captcha = 0;
+		                		break;
+		                    case 1:
+		                        alert("자동 가입 방지 봇을 확인 한뒤 진행 해 주세요.");
+		                        break;
+		                    default:
+		                        alert("자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다. [Error bot Code : " + Number(data) + "]");
+		                   		break;
+		                }
+		            }
+		        });
+				if(captcha != 0) {
+					return false;
+				} 
+		});
+		});
+	</script>
 </body>
 </html>

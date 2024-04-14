@@ -16,7 +16,7 @@ pageEncoding="UTF-8"%>
     <%-- <jsp:forward page="WEB-INF/views/student/certificateIssuingPage.jsp" /> --%>
 
     <!-- 김도현 -->
-    <%--<jsp:forward page="WEB-INF/views/main.jsp" /> --%>
+    <jsp:forward page="WEB-INF/views/main.jsp" />  
     <%--<jsp:forward page="WEB-INF/views/student/studentClassPage.jsp"/>--%>
 	  <%-- <jsp:forward page="WEB-INF/views/student/studentBeforeClassPage.jsp"/> --%>
 	  <%-- <jsp:forward page="WEB-INF/views/student/studentScorePage.jsp"/> --%>
@@ -30,7 +30,7 @@ pageEncoding="UTF-8"%>
 
     <!-- 어수지 -->
 
-    <%-- <jsp:forward page="WEB-INF/views/student/studentUpdateForm.jsp" /> --%>
+    <%--<jsp:forward page="WEB-INF/views/student/studentUpdateForm.jsp" />  --%>
     <%-- <jsp:forward page="WEB-INF/views/admin/adminUpdateForm.jsp" /> --%>
     <%-- <jsp:forward page="WEB-INF/views/student/studentTuition.jsp" /> --%>
     <%-- <jsp:forward page="WEB-INF/views/student/studentTakeOff.jsp" /> --%>
@@ -38,8 +38,8 @@ pageEncoding="UTF-8"%>
 
     <!-- 조연정 -->
 	<%-- <jsp:forward page="WEB-INF/views/professor/professorClassEnrollForm.jsp"/> --%>
-	<%-- <jsp:forward page="WEB-INF/views/professor/professorClassListView.jsp"/> --%>
-		 <jsp:forward page="WEB-INF/views/professor/professorHomeworkEnrollForm.jsp"/>
+	<%--<jsp:forward page="WEB-INF/views/professor/professorClassListView.jsp"/> --%>
+	<%--  <jsp:forward page="WEB-INF/views/professor/professorHomeworkEnrollForm.jsp"/> --%>
 	
     <!-- 공통 -->
     <%-- <jsp:forward page="WEB-INF/views/common/errorPage404.jsp" /> --%>
