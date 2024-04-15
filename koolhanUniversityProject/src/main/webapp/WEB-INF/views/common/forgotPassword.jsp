@@ -118,6 +118,7 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">                    
                             <div class="col-lg-6">
+                                <!--
                                 <div class="p-5">
                                     <br><br>
                                     <div class="text-center">
@@ -127,6 +128,9 @@
                                     </div>
                                     <form class="user">
                                         <div class="form-group">
+                                            <input type="email" class="form-control form-control-user"
+                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="아이디(학번)을 입력해주세요">
                                             <input type="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="이메일을 입력해주세요">
@@ -144,15 +148,20 @@
                                     </form>
                                     <br><br>
                                 </div>
-                                <!--
+                                -->
+                               
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-2">이메일을 성공적으로 보냈습니다!!</h1>
-                                        <p class="mb-4">메일함을 확인해주세요</p>
+                                        <p class="mb-4">khuniversity@gmail.com</p>
+                                        <p class="mb-4">메일을 확인해주세요</p>
                                         <img width="26" height="26" src="https://img.icons8.com/ios-filled/50/737373/secured-letter--v1.png" style="margin-top:-30px"/>
-                                    </div>                                  
+                                        <div id="back-btn">
+                                            <a href="login.me">로그인페이지</a>
+                                        </div> 
+                                    </div>                              
                                 </div>
-                                -->
+                                
 
                             </div>
                             <div class="col-lg-6 d-none d-lg-block bg-password-image"></div>
@@ -197,8 +206,8 @@
 				if(captcha != 0) {
 					return false;
 				} 
-		});
-		});
+		}
+	});
 	</script>
 </body>
 </html>
