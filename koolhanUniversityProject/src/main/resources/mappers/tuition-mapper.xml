@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="tuitionMapper">
+
+	<resultMap type="Tuition" id="tuitionResult">
+		<result column="tt_no" property="ttNo"/>
+		<result column="student_no" property="studentNo"/>
+		<result column="stu_grade" property="stuGrade"/>
+		<result column="term_no" property="termNo"/>
+		<result column="tuition" property="tuition"/>
+		<result column="scholarship" property="scholarship"/>
+	</resultMap>
+	
+	<resultMap type="TuitionPayment" id="tuitionPaymentResult">
+		<result column="tp_no" property="tpNo"/>
+		<result column="tt_no" property="refTuitionNo"/>
+		<result column="tp_date" property="tpDate"/>
+		<result column="tp_total_price" property="totalPrice"/>
+	</resultMap>
+</mapper>

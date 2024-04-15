@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content="" />
     <meta name="author" content="" />
+    
     <title>Insert title here</title>
     <!-- Custom fonts for this template-->
+    
     <link
       href="resources/vendor/fontawesome-free/css/all.min.css"
       rel="stylesheet"
@@ -102,14 +102,14 @@ pageEncoding="UTF-8"%>
 											<h5 class="h5 text-gray-800 mb-2">쿨한대학교</h5>
 											<h5 class="h5 text-gray-800 mb-4">컴퓨터공학과 학사정보시스템</h5>
 										</div>
-										<form class="user">
+										<form class="user" action="login.me" method="post">
 											<div class="form-group">
-												<input type="email" class="form-control form-control-user"
+												<input type="text" name="userId" class="form-control form-control-user"
 													id="exampleInputEmail" aria-describedby="emailHelp"
 													placeholder="학번을 입력해주세요">
 											</div>
 											<div class="form-group">
-												<input type="password" class="form-control form-control-user"
+												<input type="password" name="userPwd" class="form-control form-control-user"
 													id="exampleInputPassword" placeholder="비밀번호를 입력해주세요">
 											</div>
 											<div class="form-group" style="display: flex;">
@@ -122,9 +122,9 @@ pageEncoding="UTF-8"%>
 													<a class="find_login" href="forgot-password.html">학번/비밀번호 찾기</a>
 												</div>
 											</div>
-											<a href="index.html" class="btn btn-facebook btn-user btn-block">
+											<button type="submit" class="btn btn-facebook btn-user btn-block">
 												Login
-											</a>
+											</button>
 										</form>
 										<hr>
 									</div>

@@ -24,18 +24,25 @@
              <h2>공지사항 작성하기</h2>
              <br>
  
-             <form id="enrollForm" method="post" action="insert.bo" enctype="multipart/form-data">
+             <form id="enrollForm" method="post" action="insert.no">
                  <table align="center">
                      <tr>
                          <th><label for="title">제목</label></th>
-                         <td><input type="text" id="title" class="form-control" name="boardTitle" required></td>
+                         <td><input type="text" id="title" class="form-control" name="noticeTitle" required></td>
+                     </tr>
+                     <tr>
+                         <th><label for="writer">작성자</label></th>
+                         <td>
+                         <input type="text" id="writer" class="form-control" value="${loginUser.memberName}" readonly>
+                         <input type="hidden" id="writerNo" value="${loginUser.memberNo}" name="noticeWriter">
+                         </td>
                      </tr>
                      <tr>
                          <th colspan="2"><label for="content">내용</label></th>
                      </tr>
                      <tr>
                          <th colspan="2">
-                             <textarea class="form-control" required name="boardContent" id="content" rows="10" style="resize:none;"></textarea>
+                             <textarea class="form-control" required name="noticeContent" id="content" rows="10" style="resize:none;"></textarea>
                          </th>
                      </tr>
                  </table>
