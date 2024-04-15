@@ -9,7 +9,7 @@
 	<typeAliases>
 		<typeAlias type="com.kh.khu.board.model.vo.Board" alias="Board"/>
 		<typeAlias type="com.kh.khu.board.model.vo.Reply" alias="Reply"/>
-		<typeAlias type="com.kh.khu.classroom.model.vo.Class" alias="Class"/>
+		<typeAlias type="com.kh.khu.classroom.model.vo.Classroom" alias="Class"/>
 		<typeAlias type="com.kh.khu.classroom.model.vo.ClassDetail" alias="ClassDetail"/>
 		<typeAlias type="com.kh.khu.classroom.model.vo.ClassNotice" alias="ClassNotice"/>
 		<typeAlias type="com.kh.khu.grade.model.vo.Grade" alias="Grade"/>

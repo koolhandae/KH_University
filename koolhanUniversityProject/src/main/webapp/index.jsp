@@ -29,27 +29,32 @@ pageEncoding="UTF-8"%>
     
 
     <!-- 어수지 -->
-<<<<<<< HEAD
 <%--    <jsp:forward page="WEB-INF/views/student/studentUpdateForm.jsp" />  --%>
 		<%-- 학생 개인정보 수정 --%>
-   <jsp:forward page="WEB-INF/views/student/studentTuition.jsp" />
+<%--    <jsp:forward page="WEB-INF/views/student/studentTuition.jsp" /> --%>
 		<%-- 학생 등록금 납부 내역 조회 --%>
 <%-- 	<jsp:forward page="WEB-INF/views/student/studentTuitionBill.jsp" /> --%>
 		<%-- 학생 등록금 고지서 --%>
 <%-- 	<jsp:forward page="WEB-INF/views/student/studentTuitionPay.jsp" /> --%>
 		<%-- 학생 등록금 결제 --%>
 <%-- 	<jsp:forward page="WEB-INF/views/student/studentTakeOff.jsp" /> --%>
-		<%-- 학생 휴복학 신청 --%>
+		<%-- 학생 휴학 신청 --%>
+<%-- 	<jsp:forward page="WEB-INF/views/student/studentReturnSchool.jsp" /> --%>
+		<%-- 학생 복학 신청 --%>
+		
 		
 <%--    <jsp:forward page="WEB-INF/views/admin/adminUpdateForm.jsp" /> --%>
 		<%-- 교수 개인정보 수정 --%>
 <%--    <jsp:forward page="WEB-INF/views/admin/adminTuitionManage.jsp" /> --%>
    		<%-- 관리자 등록금 조회 --%>
+   		
+<%--   <jsp:forward page="WEB-INF/views/common/busMapApi.jsp" /> --%>
+   		<%-- 지도 api --%>
+<%--    <jsp:forward page="WEB-INF/views/common/realTimeBus.jsp" /> --%>
+   		<%-- 실시간 버스 공공데이터 --%>
 		
 
 
-=======
->>>>>>> 965287e9bd2a8a7b4717aeb46afc93ed54bae59c
 
     <%-- <jsp:forward page="WEB-INF/views/student/studentUpdateForm.jsp" /> --%>
     <%-- <jsp:forward page="WEB-INF/views/admin/adminUpdateForm.jsp" /> --%>
@@ -66,15 +71,8 @@ pageEncoding="UTF-8"%>
 	<%--  <jsp:forward page="WEB-INF/views/professor/professorPointList.jsp" /> --%>
 	<%-- <jsp:forward page="WEB-INF/views/professor/professorPointStudentList.jsp" /> --%>
   <%--<jsp:forward page="WEB-INF/views/common/academic_calendar.jsp"/>--%>
-  <jsp:forward page="WEB-INF/views/common/mmain.jsp"/>
+<%--   <jsp:forward page="WEB-INF/views/common/mmain.jsp"/> --%>
 	
-<<<<<<< HEAD
-
-
-
-
-=======
->>>>>>> 965287e9bd2a8a7b4717aeb46afc93ed54bae59c
     <!-- 공통 -->
     <%-- <jsp:forward page="WEB-INF/views/common/errorPage404.jsp" /> --%>
     <%-- <jsp:include page="WEB-INF/views/common/errorPage500.jsp" /> --%>

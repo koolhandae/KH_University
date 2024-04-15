@@ -96,58 +96,30 @@
         
         <tr>
           <th>기간</th>
-          <td id="takeOffDay" colspan="3">2024년도 1학기부터
-            <select name="" id="">
-              <option value="">2024</option>
-              <option value="">2025</option>
-              <option value="">2026</option>
-            </select>년도 
+          <td id="takeOffDay" colspan="4">2024년도
             <select name="" id="">
               <option value="">1</option>
               <option value="">2</option>
-            </select>학기까지
+            </select>학기부터
           </td>
         </tr>
 
         <tr>
-          <th>휴학구분</th>
-          <td colspan="3">
-              <input type="radio" name="takeOffSort" id="normalRadio"> 
-              <label for="normalRadio">일반</label>
-              
-              <input type="radio" name="takeOffSort" id="illnessRadio"> 
-              <label for="illnessRadio">질병</label>
-              
-              <input type="radio" name="takeOffSort" id="childbirthRadio"> 
-              <label for="childbirthRadio">출산 및 육아</label>
-              
-              <input type="radio" name="takeOffSort" id="militaryRadio"> 
-              <label for="militaryRadio">군입대</label>
-          </td>
-        </tr>
-      
-        <tr>
           <td colspan="4">
               <div style="text-align: right;">
-                <span>위와 같이 휴학하고자 하오니 허가하여 주시길 바랍니다.</span>
+                <span>위와 같이 복학하고자 하오니 허가하여 주시길 바랍니다.</span>
               </div>
               <div style="margin-top: 10px; text-align: right;">
                 2024년 4월 15일
               </div>
           </td>
         </tr>
-
       </table>
       
     
       <div class="btnbtn" align="center">
 				<button class="btn btn-m" id="btn">조회</button>
 	  </div>
-      
-   	
-   	
-   	
-   	
    	
    	</div>  
    </div>
