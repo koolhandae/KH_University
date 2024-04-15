@@ -16,6 +16,7 @@ public class ClassServiceImpl implements ClassService{
 
 	@Autowired
 	private ClassDao cDao;
+	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
@@ -42,6 +43,10 @@ public class ClassServiceImpl implements ClassService{
 	@Override
 	public ArrayList<Class> selectCourseHistory(int studentNo) {
 		return null;
+	}
+	@Override
+	public int insertClass(Classroom c) {
+		return cDao.insertClass(sqlSession, c);
 	}
 	
 }

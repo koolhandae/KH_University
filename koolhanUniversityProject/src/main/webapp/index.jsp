@@ -9,28 +9,33 @@
 
 	<body>
 		<!-- 정동석 -->
-		<%-- <jsp:forward page="WEB-INF/views/admin/noticeDetailView.jsp" /> --%>
+<%-- 		<jsp:forward page="WEB-INF/views/admin/noticeDetailView.jsp" /> --%>
+		<jsp:forward page="WEB-INF/views/admin/noticeUpdateForm.jsp" />
 		<%-- <jsp:forward page="WEB-INF/views/admin/noticeEnrollForm.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/student/studentEnrollForm.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/admin/adminEnrollForm.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/admin/noticeListView.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/student/certificateIssuingPage.jsp" /> --%>
+    <%-- 		<jsp:forward page="WEB-INF/views/board/boardDetailView.jsp" /> --%>
+    <%-- 		<jsp:forward page="WEB-INF/views/board/boardEnrollForm.jsp" /> --%>
+    <%-- 		<jsp:forward page="WEB-INF/views/board/boardListView.jsp" /> --%>
+    <%-- 		<jsp:forward page="WEB-INF/views/board/boardUpdateForm.jsp" /> --%>
 
 
 
 
     
 		<!-- 김도현 -->
-		<%--<jsp:forward page="WEB-INF/views/main.jsp" /> --%>
-		<%--<jsp:forward page="WEB-INF/views/student/studentClassPage.jsp" />--%>
-		<%-- <jsp:forward page="WEB-INF/views/student/studentBeforeClassPage.jsp" /> --%>
-		<%-- <jsp:forward page="WEB-INF/views/student/studentScorePage.jsp" /> --%>
-		<%--<jsp:forward page="WEB-INF/views/student/studentClassDetail.jsp" /> --%>
-		<%--<jsp:forward page="WEB-INF/views/student/studentClassNoticeDetail.jsp" /> --%>
-		<%--<jsp:forward page="WEB-INF/views/student/studentClassBoardDetail.jsp" /> --%>
-		<%-- <jsp:forward page="WEB-INF/views/student/studentBoardInsertForm.jsp" /> --%>
-		<%--<jsp:forward page="WEB-INF/views/common/forgotPassword.jsp" />--%>
-		<%--<jsp:forward page="WEB-INF/views/student/studentBoardInsertForm.jsp" /> --%>
+<%-- 		<jsp:forward page="WEB-INF/views/main.jsp" /> --%>
+<%-- 		<jsp:forward page="WEB-INF/views/student/studentClassPage.jsp" /> --%>
+<%-- 		<jsp:forward page="WEB-INF/views/student/studentBeforeClassPage.jsp" /> --%>
+<%-- 		<jsp:forward page="WEB-INF/views/student/studentScorePage.jsp" /> --%>
+<%-- 		<jsp:forward page="WEB-INF/views/student/studentClassDetail.jsp" /> --%>
+<%-- 		<jsp:forward page="WEB-INF/views/student/studentClassNoticeDetail.jsp" /> --%>
+<%-- 		<jsp:forward page="WEB-INF/views/student/studentClassBoardDetail.jsp" /> --%>
+<%-- 		<jsp:forward page="WEB-INF/views/student/studentBoardInsertForm.jsp" /> --%>
+<%-- 		<jsp:forward page="WEB-INF/views/common/forgotPassword.jsp" /> --%>
+<%-- 		<jsp:forward page="WEB-INF/views/student/studentBoardInsertForm.jsp" /> --%>
 
 
 
@@ -62,6 +67,9 @@
    		<%-- 실시간 버스 공공데이터 --%>
 		
 
+
+
+      
 
     <!-- 조연정 -->
 	<%--<jsp:forward page="WEB-INF/views/professor/professorClassEnrollForm.jsp"/> --%>
