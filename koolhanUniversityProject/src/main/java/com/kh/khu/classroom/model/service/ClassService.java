@@ -21,4 +21,7 @@ public interface ClassService {
 	
 	// 이전 수강내역 조회
 	ArrayList<Class> selectCourseHistory(int studentNo);
+	
+	// 강의 등록
+	int insertClass(Classroom c);
 }

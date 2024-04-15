@@ -2,12 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="classMapper">
 	
-	<resultMap type="Class" id="classResult">
-		<result column="class_no" property="classNo"/>
+	<resultMap id="classResult" type="Class">
+		<result column="class_num" property="classNum"/>
 		<result column="prof_no" property="profNo"/>
 		<result column="class_name" property="className"/>
 		<result column="class_type" property="classType"/>
 		<result column="class_score" property="classScore"/>
+		<result column="class_semester" property="classSemester"/>
+		<result column="class_grade" property="classGrade"/>
+		<result column="class_room" property="classRoom"/>
+		<result column="class_time" property="classTime"/>
+		<result column="class_people" property="classPeople"/>
+		<result column="class_etc" property="classEtc"/>
+		<result column="origin_name" property="originName"/>
+		<result column="change_name" property="changeName"/>
 	</resultMap>
 	
 	<resultMap type="ClassDetail" id="classDetailResult">
@@ -15,5 +23,43 @@
 		<result column="class_day" property="classDay"/>
 		<result column="class_time" property="classTime"/>
 	</resultMap>
+	
+	
+	<insert id="insertClass">
+		insert
+		  into class
+		     (
+		      class_no
+		    , class_num
+		    , prof_no
+		    , class_name
+		    , class_type
+		    , class_score
+		    , class_semester
+		    , class_grade
+		    , class_room
+		    , class_time
+		    , class_people
+		    , class_etc
+		    , origin_name
+		    , change_name
+		    )
+	    values
+		    (seq_class.nextval
+		     ,#{classNum}
+		     ,null<!--#{} 교수번호 -->
+		     ,#{className}
+		     ,#{classType}
+		     ,#{classScore}
+		     ,#{classSemester}
+		     ,#{classGrade}
+		     ,#{classRoom}
+		     ,#{classTime}
+		     ,#{classPeople}
+		     ,#{classEtc}
+		     ,#{originName}
+		     ,#{changeName}
+		     )
+	</insert>
 
 </mapper>

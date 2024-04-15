@@ -96,72 +96,74 @@
         <div>
             <h3>강의 등록</h3>
 
-            <form action="insert.me" method="post" id="enrollForm">
+            <form action="insertClass.do" method="post" id="enrollForm"  enctype="multipart/form-data">
                 <div class="form-group">
                     
+                    <input type="hidden" value="${loginUser.member_no }" name="profNo">
+                    
                     <label for="lectureNo">강의번호 :</label>
-                    <input type="text" class="form-control" id="lectureNo" name="lectureNo" placeholder="Please Enter Number" required><br>
+                    <input type="text" class="form-control" id="lectureNo" name="classNum" placeholder="" required><br>
                     
                     <label for="lectureNm"> &nbsp;강의이름 :</label>
-                    <input type="text" class="form-control" id="lectureNm" name="lectureNm" placeholder="강의명을 입력해주세요"><br>
+                    <input type="text" class="form-control" id="lectureNm" name="className" placeholder="강의명을 입력해주세요"><br>
                     
 
                     <table>
                         <tr>
                             <td >
                                 <label for="student_Grade"> &nbsp;대상학년 :</label>
-                                <select name="student_Grade" id="student_Grade" class="form-control dropdown">
-                                    <option value="">1학년</option>
-                                    <option value="">2학년</option>
-                                    <option value="">3학년</option>
-                                    <option value="">4학년</option>
+                                <select name="classGrade" id="student_Grade" class="form-control dropdown">
+                                    <option >1학년</option>
+                                    <option >2학년</option>
+                                    <option >3학년</option>
+                                    <option >4학년</option>
                                 </select><br> 
                             </td> 
                             <td >
                                 <label for="lectureSemester"> &nbsp;강의학기 :</label>
-                                <select name="lectureSemester" id="lectureSemester" class="form-control">
-                                    <option value="">1학기</option>
-                                    <option value="">2학기</option>
-                                    <option value="">여름계절학기</option>
-                                    <option value="">겨울계절학기</option>
+                                <select name="classSemester" id="lectureSemester" class="form-control">
+                                    <option >1학기</option>
+                                    <option >2학기</option>
+                                    <option >여름계절학기</option>
+                                    <option >겨울계절학기</option>
                                 </select><br>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label for="lectureRoom"> &nbsp;강의실 :</label>
-                                <input type="text" class="form-control" id="lectureRoom" name="lectureRoom" placeholder="예) 000관 000호"><br>
+                                <input type="text" class="form-control" id="lectureRoom" name="classRoom" placeholder="예) 000관 000호"><br>
                             </td>
 
                             <td>
                                 <label for="lectureTime"> &nbsp;강의시간 :</label>
-                                <input type="text" class="form-control" id="lectureTime" name="lectureTime" placeholder="예) 수 1,2,3"><br>
+                                <input type="text" class="form-control" id="lectureTime" name="classTime" placeholder="예) 수 1,2,3"><br>
                             </td>
                         </tr> 
                     </table>
                     
                     
                     <label for="lectureGrade"> &nbsp;학점 :</label>
-                    <input type="text" class="form-control" id="lectureGrade" name="lectureGrade" maxlength="1" placeholder="예) 1" onchange="onlyNumber();"><br>
+                    <input type="number" class="form-control" id="lectureGrade" name="classScore" maxlength="1" placeholder="예) 1" onchange="onlyNumber();"><br>
                     
                     <label for="lectureType"> &nbsp;구분 :</label><br>
-                    <select name="lectureType" id="lectureType" class="form-control">
-                        <option value="">전공</option>
-                        <option value="">교양</option>
-                        <option value="">전공기초</option>
-                        <option value="">기타</option>
+                    <select name="classType" id="lectureType" class="form-control">
+                        <option value="C1" >전공</option>
+                        <option value="C2" >교양</option>
+                        <option value="C3" >전공기초</option>
+                        <option value="C4" >기타</option>
                     </select><br>
 
                     <label for="headCount"> &nbsp;수강정원 :</label>
-                    <input type="text" class="form-control" id="headCount" name="headCount" placeholder="숫자만 입력해주세요" maxlength="3" onchange="onlyNumber2();"><br>
+                    <input type="text" class="form-control" id="headCount" name="classPeople" placeholder="숫자만 입력해주세요" maxlength="3" onchange="onlyNumber2();"><br>
                    
                     <label for="etc"> &nbsp;기타사항 :</label>
-                    <input type="text" class="form-control" id="etc" name="etc" placeholder="기타사항을 입력해주세요"><br>
+                    <input type="text" class="form-control" id="etc" name="classEtc" placeholder="기타사항을 입력해주세요"><br>
 
-                    <label for="fileUpload"> &nbsp;강의계획서 업로드 : </label>
-                    <input type="file" id="fileUpload" name="fileUpload" accept=".pdf, .hwp, .docx, .doc"><br>
+                    <label for="classPlan"> &nbsp;강의계획서 업로드 : </label>
+                    <input type="file" id="classPlan" name="fileupload" accept=".pdf, .hwp, .docx, .doc"><br>
                     <div style="font-size: 0.8em; color: rgb(248, 123, 123);" >.pdf, .hwp, .docx, .doc 파일만 첨부 가능합니다.</div>
-                    <div></div>
+                    <div></div> 
                    
 
 
@@ -170,7 +172,7 @@
                 <div class="btns" align="center">
                     <button id="enrollBtn" type="submit" class="btn btn-primary">등록</button>
                     <button type="reset" class="btn btn-danger">취소</button>
-                    <button type="button" class="btn btn-secondary">목록</button>
+                    <!-- <button type="button" class="btn btn-secondary">목록</button> -->
                 </div>
             </form>
         </div>

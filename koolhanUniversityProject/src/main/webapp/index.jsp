@@ -37,15 +37,15 @@ pageEncoding="UTF-8"%>
     <%-- <jsp:forward page="WEB-INF/views/student/studentTuitionbill.jsp" /> --%>
 
     <!-- 조연정 -->
-	<%--<jsp:forward page="WEB-INF/views/professor/professorClassEnrollForm.jsp"/> --%>
-	<%-- <jsp:forward page="WEB-INF/views/professor/professorClassListView.jsp"/> --%>
+   <jsp:forward page="WEB-INF/views/professor/professorClassEnrollForm.jsp"/> 
+  <%--<jsp:forward page="WEB-INF/views/professor/professorClassListView.jsp"/> --%>
 	<%-- <jsp:forward page="WEB-INF/views/professor/professorHomeworkEnrollForm.jsp"/> --%>
 	<%-- <jsp:forward page="WEB-INF/views/professor/professorHomeworkState.jsp"/> --%>
-	<%-- <jsp:forward page="WEB-INF/views/professor/professorHomeworkDetail.jsp"/>  --%>
+	<%-- <jsp:forward page="WEB-INF/views/professor/professorHomeworkDetail.jsp"/> --%>
 	<%--  <jsp:forward page="WEB-INF/views/professor/professorPointList.jsp" /> --%>
 	<%-- <jsp:forward page="WEB-INF/views/professor/professorPointStudentList.jsp" /> --%>
   <%--<jsp:forward page="WEB-INF/views/common/academic_calendar.jsp"/>--%>
-  <jsp:forward page="WEB-INF/views/common/mmain.jsp"/>
+  <%--<jsp:forward page="WEB-INF/views/common/mmain.jsp"/>--%>
 	
     <!-- 공통 -->
     <%-- <jsp:forward page="WEB-INF/views/common/errorPage404.jsp" /> --%>
