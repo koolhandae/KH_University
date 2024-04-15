@@ -16,6 +16,10 @@
 		<jsp:forward page="WEB-INF/views/admin/noticeListView.jsp" />
 		<%-- <jsp:forward page="WEB-INF/views/student/certificateIssuingPage.jsp" /> --%>
 
+
+
+
+    
 		<!-- 김도현 -->
 		<%--<jsp:forward page="WEB-INF/views/main.jsp" /> --%>
 		<%--<jsp:forward page="WEB-INF/views/student/studentClassPage.jsp" />--%>
@@ -29,40 +33,55 @@
 		<%--<jsp:forward page="WEB-INF/views/student/studentBoardInsertForm.jsp" /> --%>
 
 
-		<!-- 어수지 -->
-		<%-- <jsp:forward page="WEB-INF/views/student/studentUpdateForm.jsp" /> --%>
+
+
+
+    <!-- 어수지 -->
+<%--    <jsp:forward page="WEB-INF/views/student/studentUpdateForm.jsp" />  --%>
 		<%-- 학생 개인정보 수정 --%>
-			<jsp:forward page="WEB-INF/views/student/studentTuition.jsp" />
-			<%-- 학생 등록금 납부 내역 조회 --%>
-				<%-- <jsp:forward page="WEB-INF/views/student/studentTuitionBill.jsp" /> --%>
-				<%-- 학생 등록금 고지서 --%>
-					<%-- <jsp:forward page="WEB-INF/views/student/studentTuitionPay.jsp" /> --%>
-					<%-- 학생 등록금 결제 --%>
-						<%-- <jsp:forward page="WEB-INF/views/student/studentTakeOff.jsp" /> --%>
-						<%-- 학생 휴복학 신청 --%>
+<%--    <jsp:forward page="WEB-INF/views/student/studentTuition.jsp" /> --%>
+		<%-- 학생 등록금 납부 내역 조회 --%>
+<%-- 	<jsp:forward page="WEB-INF/views/student/studentTuitionBill.jsp" /> --%>
+		<%-- 학생 등록금 고지서 --%>
+<%-- 	<jsp:forward page="WEB-INF/views/student/studentTuitionPay.jsp" /> --%>
+		<%-- 학생 등록금 결제 --%>
+<%-- 	<jsp:forward page="WEB-INF/views/student/studentTakeOff.jsp" /> --%>
+		<%-- 학생 휴학 신청 --%>
+<%-- 	<jsp:forward page="WEB-INF/views/student/studentReturnSchool.jsp" /> --%>
+		<%-- 학생 복학 신청 --%>
+		
+		
+<%--    <jsp:forward page="WEB-INF/views/admin/adminUpdateForm.jsp" /> --%>
+		<%-- 교수 개인정보 수정 --%>
+<%--    <jsp:forward page="WEB-INF/views/admin/adminTuitionManage.jsp" /> --%>
+   		<%-- 관리자 등록금 조회 --%>
+   		
+<%--   <jsp:forward page="WEB-INF/views/common/busMapApi.jsp" /> --%>
+   		<%-- 지도 api --%>
+<%--    <jsp:forward page="WEB-INF/views/common/realTimeBus.jsp" /> --%>
+   		<%-- 실시간 버스 공공데이터 --%>
+		
 
-							<%-- <jsp:forward page="WEB-INF/views/admin/adminUpdateForm.jsp" /> --%>
-							<%-- 교수 개인정보 수정 --%>
-								<%-- <jsp:forward page="WEB-INF/views/admin/adminTuitionManage.jsp" /> --%>
-								<%-- 관리자 등록금 조회 --%>
+<%-- <jsp:forward page="WEB-INF/views/admin/adminUpdateForm.jsp" /> --%>
+      <%-- 교수 개인정보 수정 --%>
+<%-- <jsp:forward page="WEB-INF/views/admin/adminTuitionManage.jsp" /> --%>
+      <%-- 관리자 등록금 조회 --%>
 
-									<!-- 조연정 -->
-									<%--<jsp:forward page="WEB-INF/views/professor/professorClassEnrollForm.jsp" /> --%>
-									<%-- <jsp:forward page="WEB-INF/views/professor/professorClassListView.jsp" /> --%>
-									<%-- <jsp:forward page="WEB-INF/views/professor/professorHomeworkEnrollForm.jsp" />
-									--%>
-									<%-- <jsp:forward page="WEB-INF/views/professor/professorHomeworkState.jsp" /> --%>
-									<%-- <jsp:forward page="WEB-INF/views/professor/professorHomeworkDetail.jsp" /> --%>
-									<%-- <jsp:forward page="WEB-INF/views/professor/professorPointList.jsp" /> --%>
-									<%-- <jsp:forward page="WEB-INF/views/professor/professorPointStudentList.jsp" />
-									--%>
-									<%--<jsp:forward page="WEB-INF/views/common/academic_calendar.jsp" />--%>
-									<jsp:forward page="WEB-INF/views/common/mmain.jsp" />
 
-									<!-- 공통 -->
-									<%-- <jsp:forward page="WEB-INF/views/common/errorPage404.jsp" /> --%>
-									<%-- <jsp:include page="WEB-INF/views/common/errorPage500.jsp" /> --%>
 
-	</body>
-
-	</html>
+    <!-- 조연정 -->
+	<%--<jsp:forward page="WEB-INF/views/professor/professorClassEnrollForm.jsp"/> --%>
+	<%-- <jsp:forward page="WEB-INF/views/professor/professorClassListView.jsp"/> --%>
+	<%-- <jsp:forward page="WEB-INF/views/professor/professorHomeworkEnrollForm.jsp"/> --%>
+	<%-- <jsp:forward page="WEB-INF/views/professor/professorHomeworkState.jsp"/> --%>
+	<%-- <jsp:forward page="WEB-INF/views/professor/professorHomeworkDetail.jsp"/>  --%>
+	<%--  <jsp:forward page="WEB-INF/views/professor/professorPointList.jsp" /> --%>
+	<%-- <jsp:forward page="WEB-INF/views/professor/professorPointStudentList.jsp" /> --%>
+  <%--<jsp:forward page="WEB-INF/views/common/academic_calendar.jsp"/>--%>
+<%--   <jsp:forward page="WEB-INF/views/common/mmain.jsp"/> --%>
+	
+    <!-- 공통 -->
+    <%-- <jsp:forward page="WEB-INF/views/common/errorPage404.jsp" /> --%>
+    <%-- <jsp:include page="WEB-INF/views/common/errorPage500.jsp" /> --%>
+  </body>
+</html>
