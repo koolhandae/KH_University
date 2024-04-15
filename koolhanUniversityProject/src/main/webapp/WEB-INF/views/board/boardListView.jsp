@@ -50,6 +50,9 @@
         <div class="innerOuter" style="padding:5% 10%;">
             <h2>커뮤니티 게시판</h2>
             <br>
+            	<c:if test="${not empty loginUser}">
+           			<a class="btn btn-secondary btn-sm" style="float:right" href="enrollForm.bo">글쓰기</a>
+	            </c:if>
             <br></br>
             <table id="boardList" class="table table-hover" align="center">
                 <thead>
@@ -57,16 +60,18 @@
                     <th>글번호</th>
                     <th>제목</th>
                     <th>작성자</th>
+                    <th>조회수</th>
                     <th>작성일</th>
                   </tr>
                 </thead>
                 <tbody>
-                	<c:forEach var="n" items="${list}">
+                	<c:forEach var="b" items="${list}">
 	                    <tr>
-	                        <td class="nno">${n.noticeNo}</td>
-	                        <td>${n.noticeTitle}</td>
-	                        <td>${n.noticeWriter}</td>
-	                        <td>${n.createDate}</td>
+	                        <td class="bno">${b.boardNo}</td>
+	                        <td>${b.boardTitle}</td>
+	                        <td>${b.boardWriter}</td>
+	                        <td>${b.count}</td>
+	                        <td>${b.createDate}</td>
 	                    </tr>
                 	</c:forEach>
                 	
@@ -87,31 +92,31 @@
                 <ul class="pagination">
                 	<c:choose>
                 		<c:when test="${pi.currentPage eq 1 }">
-		                    <li class="page-item disabled"><a class="page-link" href="list.no?cpage=${pi.currentPage - 1}">Previous</a></li>
+		                    <li class="page-item disabled"><a class="page-link" href="list.bo?cpage=${pi.currentPage - 1}">Previous</a></li>
                 		</c:when>
                 		<c:otherwise>
-		                    <li class="page-item"><a class="page-link" href="list.no?cpage=${pi.currentPage - 1}">Previous</a></li>
+		                    <li class="page-item"><a class="page-link" href="list.bo?cpage=${pi.currentPage - 1}">Previous</a></li>
                 		</c:otherwise>
                 	</c:choose>
                 	
 	            	<c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
 	            		<c:choose>
 		            		<c:when test="${pi.currentPage eq p}">
-	                    		<li class="page-item disabled"><a class="page-link" href="list.no?cpage=${p}">${p}</a></li>
+	                    		<li class="page-item disabled"><a class="page-link" href="list.bo?cpage=${p}">${p}</a></li>
 		            		</c:when>
 		            		
 		            		<c:otherwise>
-	                    		<li class="page-item"><a class="page-link" href="list.no?cpage=${p}">${p}</a></li>
+	                    		<li class="page-item"><a class="page-link" href="list.bo?cpage=${p}">${p}</a></li>
 		            		</c:otherwise>
 	            		</c:choose>
 	            	</c:forEach>
 	            	
 	            	<c:choose>
                 		<c:when test="${pi.currentPage eq pi.maxPage }">
-	                    	<li class="page-item disabled"><a class="page-link" href="list.no?cpage=${pi.currentPage + 1}">Next</a></li>
+	                    	<li class="page-item disabled"><a class="page-link" href="list.bo?cpage=${pi.currentPage + 1}">Next</a></li>
                 		</c:when>
                 		<c:otherwise>
-	                    	<li class="page-item"><a class="page-link" href="list.no?cpage=${pi.currentPage + 1}">Next</a></li>
+	                    	<li class="page-item"><a class="page-link" href="list.bo?cpage=${pi.currentPage + 1}">Next</a></li>
                 		</c:otherwise>
                 	</c:choose>
                 </ul>

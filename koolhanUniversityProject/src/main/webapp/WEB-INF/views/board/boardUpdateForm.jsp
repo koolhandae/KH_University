@@ -24,22 +24,34 @@
             <h2>커뮤니티 게시판 수정하기</h2>
             <br>
 
-            <form id="updateForm" method="post" action="update.no" enctype="multipart/form-data">
-            	<input type="hidden" name="noticeNo" value="${n.noticeNo}">
+            <form id="updateForm" method="post" action="update.bo" enctype="multipart/form-data">
+            	<input type="hidden" name="boardNo" value="${b.boardNo }">
                 <table align="center">
                     <tr>
                         <th><label for="title">제목</label></th>
-                        <td><input type="text" id="title" class="form-control" name="noticeTitle" value="${n.noticeTitle}" required></td>
+                        <td><input type="text" id="title" class="form-control" name="boardTitle" value="${b.boardTitle}" required></td>
                     </tr>
                     <tr>
                         <th><label for="writer">작성자</label></th>
-                        <td><input type="text" id="writer" class="form-control" name="noticeWriter" value="${n.noticeWriter}"  readonly></td>
+                        <td><input type="text" id="writer" class="form-control" name="boardWriter" value="${b.boardWriter}"  readonly></td>
+                    </tr>
+                    <tr>
+                        <th><label for="upfile">첨부파일</label></th>
+                        <td>
+                           	<input type="file" id="upfile" class="form-control-file border" name="reupfile">
+	                  		 	<c:if test="${not empty b.originName }">
+		                           	 현재 업로드된 파일 : 
+		                            <a href="${b.changeName}" download="${b.originName}">${b.originName}</a>
+		                            <input type="hidden" name="originName" value="${b.originName }">
+		                            <input type="hidden" name="changeName" value="${b.changeName }">
+	                   			</c:if>
+                        </td>
                     </tr>
                     <tr>
                         <th colspan="2"><label for="content">내용</label></th>
                     </tr>
                     <tr>
-                        <th colspan="2"><textarea class="form-control" required name="noticeContent" id="content" rows="10" style="resize:none;">${n.noticeContent }</textarea></th>
+                        <th colspan="2"><textarea class="form-control" required name="boardContent" id="content" rows="10" style="resize:none;">${b.boardContent }</textarea></th>
                     </tr>
                 </table>
                 <br>
@@ -51,7 +63,8 @@
             </form>
         </div>
         <br><br>
-   </div>
+    </div>
+    
    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
