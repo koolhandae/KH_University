@@ -11,9 +11,11 @@
 		<typeAlias type="com.kh.khu.board.model.vo.Reply" alias="Reply"/>
 		<typeAlias type="com.kh.khu.classroom.model.vo.Class" alias="Class"/>
 		<typeAlias type="com.kh.khu.classroom.model.vo.ClassDetail" alias="ClassDetail"/>
+		<typeAlias type="com.kh.khu.classroom.model.vo.ClassNotice" alias="ClassNotice"/>
 		<typeAlias type="com.kh.khu.grade.model.vo.Grade" alias="Grade"/>
 		<typeAlias type="com.kh.khu.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.khu.notice.model.vo.Notice" alias="Notice"/>
+		<typeAlias type="com.kh.khu.project.model.vo.Project" alias="Project"/>
 		<typeAlias type="com.kh.khu.scholarships.model.vo.Scholarships" alias="Scholarship"/>
 		<typeAlias type="com.kh.khu.scholarships.model.vo.ScholarshipsStu" alias="ScholarshipStu"/>
 		<typeAlias type="com.kh.khu.student.model.vo.Student" alias="Student"/>
