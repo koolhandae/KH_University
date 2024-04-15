@@ -44,8 +44,8 @@ public class MemberController {
 	@RequestMapping("login.me")
 	public String loginMember(String userId, String userPwd, HttpSession session, Model model) {
 		
-		//String encPwd = bcryptPasswordEncoder.encode(userPwd);
-		//System.out.println(encPwd);
+		String encPwd = bcryptPasswordEncoder.encode(userPwd);
+		System.out.println(encPwd);
 		
 		if(userId.startsWith("kh")) {
 			
