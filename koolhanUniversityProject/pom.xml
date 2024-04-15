@@ -19,6 +19,11 @@
 			<id>Datanucleus</id>
 			<url>http://www.datanucleus.org/downloads/maven2/</url>
 		</repository>
+		<repository>
+            <id>AsposeJavaAPI</id>
+            <name>Aspose Java API</name>
+            <url>https://releases.aspose.com/java/repo/</url>
+        </repository>
 	</repositories>
 	
 	<dependencies>
@@ -254,9 +259,13 @@
             <version>2.9.5</version>
         </dependency>
 	    
-	    
-	    
-	    
+	    <!-- aspose-total doc컨버터 -->
+	    <dependency>
+		    <groupId>com.aspose</groupId>
+		    <artifactId>aspose-total</artifactId>
+		    <version>24.3</version>
+		    <type>pom</type>
+		</dependency>
 	    
 		
 	</dependencies>
