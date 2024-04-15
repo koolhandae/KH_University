@@ -28,13 +28,13 @@ public class MemberController {
 		return "admin/noticeListView";
 	}
 	
-	@RequestMapping("insert.me")
-	public String insertMember(Member m, HttpSession session) {
-		m.setMemberPwd((m.getMemberSsn().substring(0, 6)) + "1!");
-		int result = mService.insertMember(m);
-		if(result > 0) {
-			
-		}
-	}
-	
+//	@RequestMapping("insert.me")
+//	public String insertMember(Member m, HttpSession session) {
+//		m.setMemberPwd((m.getMemberSsn().substring(0, 6)) + "1!");
+//		int result = mService.insertMember(m);
+//		if(result > 0) {
+//			
+//		}
+//	}
+//	
 }
