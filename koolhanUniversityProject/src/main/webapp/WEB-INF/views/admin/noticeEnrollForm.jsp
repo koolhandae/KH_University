@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <style>
     #enrollForm>table {
         width: 100%;
@@ -18,6 +19,7 @@
 </head>
 <body>
    <jsp:include page="../common/header_with_sidebar.jsp"/>
+
    <div class="content">
       <br><br>
          <div class="innerOuter">
@@ -47,7 +49,7 @@
                      </tr>
                  </table>
                  <br>
- 
+
                  <div align="center">
                      <button type="submit" class="btn btn-primary">등록하기</button>
                      <button type="reset" class="btn btn-danger">취소하기</button>
