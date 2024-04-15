@@ -37,6 +37,7 @@ pageEncoding="UTF-8"%>
 
     <!-- icon -->
     <script src="https://kit.fontawesome.com/12b80a3a82.js" crossorigin="anonymous"></script>
+
 	
 <style>
 	@font-face {
@@ -80,7 +81,16 @@ pageEncoding="UTF-8"%>
 	
 </style>
 </head>
+
 <body class="bg-gradient-primary">
+
+	<c:if test="${ not empty alertMsg }">
+		<script>
+			alert("${ alertMsg }");
+			<c:remove var="alertMsg" scope="session"/>
+		</script>
+	</c:if>
+	
 		<div class="container" style="min-width: 912px;">
 			<!-- Outer Row -->
 			<div class="row justify-content-center">
@@ -102,28 +112,28 @@ pageEncoding="UTF-8"%>
 											<h5 class="h5 text-gray-800 mb-2">쿨한대학교</h5>
 											<h5 class="h5 text-gray-800 mb-4">컴퓨터공학과 학사정보시스템</h5>
 										</div>
-										<form class="user" action="login.me" method="post">
+										<form class="user" action="login.me" method="post" id="loginForm">
 											<div class="form-group">
 												<input type="text" name="userId" class="form-control form-control-user"
-													id="exampleInputEmail" aria-describedby="emailHelp"
-													placeholder="학번을 입력해주세요">
+													id="userId" aria-describedby="emailHelp"
+													placeholder="학번을 입력해주세요" required>
 											</div>
 											<div class="form-group">
 												<input type="password" name="userPwd" class="form-control form-control-user"
-													id="exampleInputPassword" placeholder="비밀번호를 입력해주세요">
+													id="userPwd" placeholder="비밀번호를 입력해주세요" required>
 											</div>
 											<div class="form-group" style="display: flex;">
 												<div class="custom-control custom-checkbox small">
 													<input type="checkbox" class="custom-control-input" id="customCheck">
-													<label class="custom-control-label" for="customCheck">Remember Me</label>
+													<label class="custom-control-label" for="customCheck">아이디/비밀번호 저장</label>
 												</div>
 												<div class="find-area">
 													<i class="fa-solid fa-key"></i>
-													<a class="find_login" href="forgot-password.html">학번/비밀번호 찾기</a>
+													<a class="find_login" href="forgot.me">학번/비밀번호 찾기</a>
 												</div>
 											</div>
-											<button type="submit" class="btn btn-facebook btn-user btn-block">
-												Login
+											<button type="button" id="login-btn" onclick="loginProcess();" class="btn btn-facebook btn-user btn-block" >
+												로그인
 											</button>
 										</form>
 										<hr>
@@ -135,5 +145,78 @@ pageEncoding="UTF-8"%>
 				</div>
 			</div>
 		</div>
+		
+	<script>
+		
+		// 페이지 로드시 저장된 쿠키값 읽어오기
+		$(function(){
+			  // 쿠키값 읽어오기
+			  var cId = getCookie("cookie_id");
+			  var cPwd = getCookie("cookie_pwd");
+	
+			  if(cId){
+			    $("#userId").val(cId);
+			    $("#userPwd").val(cPwd);
+			    $("#customCheck").attr("checked", true);
+			  }
+		});
+
+		function loginProcess(){
+			var id = $("#userId").val();
+			var pwd = $("#userPwd").val();
+			var check = $("#customCheck").is(":checked"); // 체크박스가 체크되었는지확인 (true/false)
+			
+			if(id == ""){ // 아이디가 입력이 안된 채 로그인 버튼을 누른 경우
+			    return false; // 서버이동을 막음
+			    
+			  }else if(pwd ==""){
+			    return false;
+			    
+			  }else if(check){	// 아이디, 비밀번호 저장 체크박스가 체크 된 경우 (true)
+			    setCookie("cookie_id", id, 7);	// 쿠키에 저장하는 이벤트 호출 , Cookie_mail 이름으로 id가 7일동안 저장
+			    setCookie("cookie_pwd", pwd, 7);		
+			  }else{ // 체크가 해제 된 경우 (false)
+			    deleteCookie("cookie_id"); // 쿠키 정보를 지우는 이벤트 호출
+			    deleteCookie("cookie_pwd");
+			  }
+			$("#loginForm").submit();		
+			
+		};
+		
+		
+		// 쿠키값 저장하는 이벤트
+		function setCookie(cookieName, value, exdays){
+		  var exdate = new Date();
+		  exdate.setDate(exdate.getDate() + exdays);	// 쿠키 저장 기간
+		  var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
+		  document.cookie = cookieName + "=" + cookieValue;
+		}
+
+		// 쿠키값 조회하는 이벤트
+		function getCookie(cookieName) {
+		  cookieName = cookieName + '=';
+		  var cookieData = document.cookie;
+		  var start = cookieData.indexOf(cookieName);
+		  var cookieValue = '';
+		  
+		  if(start != -1){
+		    start += cookieName.length;
+		    var end = cookieData.indexOf(';', start);
+		  if(end == -1)end = cookieData.length;
+		  	cookieValue = cookieData.substring(start, end);
+		  }
+		  return unescape(cookieValue);
+		}
+
+		// 쿠키값 지우는 이벤트
+		function deleteCookie(cookieName){
+		  var expireDate = new Date();
+		  expireDate.setDate(expireDate.getDate() - 1);
+		  document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
+		}
+		
+		
+	</script>
+
 </body>
 </html>

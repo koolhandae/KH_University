@@ -29,6 +29,9 @@
 
     <!-- Custom scripts for all pages-->
     <script src="resources/js/sb-admin-2.min.js"></script>
+    
+    <!-- google rechapcha-->
+	<script src="https://www.google.com/recaptcha/api.js"></script>
 
 <title>Insert title here</title>
 <style>
@@ -95,6 +98,11 @@
         background-position: center;
         background-size: cover;
     }
+    #g-recaptcha{
+        margin: auto;
+        display: table;
+    }
+
 	
 </style>
 </head>
@@ -110,6 +118,7 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">                    
                             <div class="col-lg-6">
+                                <!--
                                 <div class="p-5">
                                     <br><br>
                                     <div class="text-center">
@@ -121,27 +130,38 @@
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="아이디(학번)을 입력해주세요">
+                                            <input type="email" class="form-control form-control-user"
+                                                id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="이메일을 입력해주세요">
                                         </div>
-                                        <a href="login.html" class="btn btn-primary btn-user btn-block">
+                                      
+                                        <div id="g-recaptcha" class="g-recaptcha" data-sitekey="6LcIX7opAAAAAMfUU33mcaDP-7AbkuQPTYu_ES15" data-callback="callBackRecaptcha"></div>
+                                        <br>
+                                        <a href="login.html" id="forgot-btn" class="btn btn-facebook btn-user btn-block">
                                             인증번호 전송
                                         </a>
                                         <div id="back-btn">
-                                            <a href="">이전으로</a>
+                                            <a href="#" onclick="history.back();" >이전으로</a>
                                         </div>
 
                                     </form>
                                     <br><br>
                                 </div>
-                                <!--
+                                -->
+                               
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-2">이메일을 성공적으로 보냈습니다!!</h1>
-                                        <p class="mb-4">메일함을 확인해주세요</p>
+                                        <p class="mb-4">khuniversity@gmail.com</p>
+                                        <p class="mb-4">메일을 확인해주세요</p>
                                         <img width="26" height="26" src="https://img.icons8.com/ios-filled/50/737373/secured-letter--v1.png" style="margin-top:-30px"/>
-                                    </div>                                  
+                                        <div id="back-btn">
+                                            <a href="login.me">로그인페이지</a>
+                                        </div> 
+                                    </div>                              
                                 </div>
-                                -->
+                                
 
                             </div>
                             <div class="col-lg-6 d-none d-lg-block bg-password-image"></div>
@@ -152,5 +172,42 @@
         </div>
     </div>
 
+	<script>
+		function callBackRecaptcha(){
+		    reCAPTCHA();
+		}
+	</script>	
+		
+		
+	<script>
+	$(function() {
+		function reCAPTCHA() {
+				$.ajax({
+		            url: "rechapcha.do",
+		            type: 'post',
+		            data: {
+		                recaptcha: $("#g-recaptcha-response").val()
+		            },
+		            success: function(data) {
+		                switch (data) {
+		                    case 0:
+		                        console.log("자동 가입 방지 봇 통과");
+		                        captcha = 0;
+		                		break;
+		                    case 1:
+		                        alert("자동 가입 방지 봇을 확인 한뒤 진행 해 주세요.");
+		                        break;
+		                    default:
+		                        alert("자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다. [Error bot Code : " + Number(data) + "]");
+		                   		break;
+		                }
+		            }
+		        });
+				if(captcha != 0) {
+					return false;
+				} 
+		}
+	});
+	</script>
 </body>
 </html>
