@@ -13,7 +13,7 @@ public class HomeController {
 	
 	@RequestMapping("mainPage.me")
 	public String mainPage() {
-		return "common/mainPage";
+		return "common/mmain";
 	}
 	
 	

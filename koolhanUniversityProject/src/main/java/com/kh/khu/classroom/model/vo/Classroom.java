@@ -12,7 +12,7 @@ import lombok.ToString;
 @Getter
 @ToString
 
-public class Class {
+public class Classroom {
 
 	private int classNo;
 	private int profNo;

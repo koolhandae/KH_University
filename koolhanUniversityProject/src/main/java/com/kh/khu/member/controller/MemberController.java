@@ -97,10 +97,7 @@ public class MemberController {
 		return "common/forgotPassword";
 	}
 	
-	
-	
-	
-	
+
 	/*
 	@RequestMapping("insert.me")
 	public String insertMember(Member m, HttpSession session) {

@@ -64,4 +64,14 @@ public class BoardServiceImpl implements BoardService {
 		return 0;
 	}
 
+	@Override
+	public int updateReply(Reply r) {
+		return 0;
+	}
+
+	@Override
+	public int deleteReply(Reply r) {
+		return 0;
+	}
+
 }
