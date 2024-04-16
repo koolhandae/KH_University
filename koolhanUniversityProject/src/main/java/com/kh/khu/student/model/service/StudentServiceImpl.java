@@ -17,6 +17,7 @@ public class StudentServiceImpl implements StudentService{
 	
 	@Override
 	public Student loginStudent(Student s) {
+		System.out.println("service" + s);
 		return sDao.loginStudent(sqlSession, s);
 	}
 	

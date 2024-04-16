@@ -1,5 +1,7 @@
 package com.kh.khu.classroom.model.vo;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,5 +29,6 @@ public class Classroom {
 	private String classEtc; 		// 기타사항
 	private String originName;		// 강의계획서 업로드 첨부파일 원래이름
 	private String changeName;		// 강의계획서 첨부파일 바뀐이름
+	private String enrollDate;		// 강의년도
 	
 }

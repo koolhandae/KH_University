@@ -99,7 +99,7 @@
             <form action="insertClass.do" method="post" id="enrollForm"  enctype="multipart/form-data">
                 <div class="form-group">
                     
-                    <input type="hidden" value="${loginUser.member_no }" name="profNo">
+                    <input type="hidden" value="${loginUser.memberNo}" name="profNo">
                     
                     <label for="lectureNo">강의번호 :</label>
                     <input type="text" class="form-control" id="lectureNo" name="classNum" placeholder="" required><br>
@@ -180,6 +180,7 @@
 
 
         <script>
+				
 
                 function onlyNumber(){ //학점에 숫자만 입력되게 하는 거..!
                     let lectureGradeVal = $("#lectureGrade").val();

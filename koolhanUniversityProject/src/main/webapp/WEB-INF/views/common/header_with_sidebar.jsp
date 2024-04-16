@@ -10,32 +10,22 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <!-- 부트스트랩 JS CSS -->
 <!-- Popper JS -->
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-	crossorigin="anonymous"></script>
+<script	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"crossorigin="anonymous"></script>
 
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <!-- 부트 스트랩 템플릿 -->
 <!-- 	Custom fonts for this template -->
 <link href="resources/css/all.css" rel="stylesheet" type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"rel="stylesheet">
 
-<script src="https://kit.fontawesome.com/12b80a3a82.js"
-	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/12b80a3a82.js" crossorigin="anonymous"></script>
 <!-- Custom styles for this template-->
 <link href="resources/css/sb-admin-2.css" rel="stylesheet">
 
 <!-- sweetalert2 -->
-<script
-	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css"
-	rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet">
 
 <style>
     /* 폰트 */
@@ -64,27 +54,30 @@
 </style>
 </head>
 <body id="page-top">
-	
-	<c:if test="${ not empty alertMsg }"> 
-		<script>
-			alert("${ alertMsg }");
-		</script>
-		<c:remove var="alertMsg" scope="session"/>
-	</c:if>
-	<!-- 
-	<c:if test="${not empty alertMsg}">
+
+    <c:if test="${ not empty alertMsg }">
 		<script>
 			$(function(){
 		    	Swal.fire({
 		    		icon: '${alertMsg.icon}',
 		    		title: '${alertMsg.title}',
 		    		text: '${alertMsg.text}',
-		    	});
+		    	})
 			});
-	    </script>
 	    <c:remove var="alertMsg" scope="session" />
+	    </script>
+	</c:if>
+
+	
+	<!-- 
+	<c:if test="${ not empty alertMsg }"> 
+		<script>
+			alert("${ alertMsg }");
+		</script>
+		<c:remove var="alertMsg" scope="session"/>
 	</c:if>
 	 -->
+	
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -93,7 +86,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center"  style="height: 150px" href="/khu">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" style="height: 150px" href="/khu">
                 <div class="sidebar-brand-icon">
                    <img style="width:100px;" src="resources/images/logo.png" alt="">
                 </div>
@@ -198,7 +191,7 @@
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="WEB-INF/views/student/certificateIssuingPage.jsp">나의 수강조회</a>
-                        <a class="collapse-item" href="cards.html">강의 등록</a>
+                        <a class="collapse-item" href="classEnroll.co">강의 등록</a>
                         <a class="collapse-item" href="cards.html">강의 관리</a>
                     </div>
                 </div>
@@ -206,7 +199,7 @@
 
 			<!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="professorPJEnrollForm.do">
                     <i class="fa-solid fa-check-to-slot"></i>
                     <span>과제</span></a>
             </li>

@@ -3,6 +3,7 @@ package com.kh.khu.classroom.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -12,11 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.kh.khu.classroom.model.service.ClassService;
 import com.kh.khu.classroom.model.service.ClassServiceImpl;
 import com.kh.khu.classroom.model.vo.Classroom;
+import com.kh.khu.project.model.vo.Project;
 
 @Controller
 public class ClassController {
@@ -24,14 +29,24 @@ public class ClassController {
 	@Autowired
 	private ClassServiceImpl cService;
 	
+	@RequestMapping("classEnroll.co")
+	public String classEnrollForm() {
+		return "professor/professorClassEnrollForm";
+	}
+	
+	
 	@RequestMapping("insertClass.do")
-	public String insertClass(Classroom c, MultipartFile fileupload,HttpSession session,Model model) {
-		System.out.println(c);
-		System.out.println(fileupload);
+	public String insertClass(int profNo, Classroom c, MultipartFile fileupload,HttpSession session,Model model) {
+		System.out.println("class c"+c);
+		System.out.println("class fileupload"+fileupload);
+		System.out.println("class memberNo"+profNo);
+		
+		c.setProfNo(profNo);
+		
 		
 		if(!fileupload.getOriginalFilename().equals("")) { //전달된 파일의 이름이 비어있는게 아닐때
 			
-
+			
 			// 파일명 수정 작업 후 서버에 업로드 시키기 ("flower.png" => "202404151510"+랜덤숫자 5개.png")
 			String changeName = SaveFile(fileupload,session);
 			
@@ -53,7 +68,7 @@ public class ClassController {
 	         alertMsg.put("title", "성공!");
 	         alertMsg.put("text", "성공적으로 강의 등록이 완료되었습니다");
 	         session.setAttribute("alertMsg", alertMsg);
-			return "professor/professorClassListView";
+			 return "professor/professorClassListView";
 		}else {
 			//실패
 			model.addAttribute("errorMsg","게시글 등록 실패");
@@ -94,5 +109,20 @@ public class ClassController {
 		
 		return changeName;
 		
+	}
+	
+	@RequestMapping(value="professorPJEnrollForm.do")
+	public String projectEnrollForm() {
+		return "professor/professorHomeworkEnrollForm";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="classSelectAjax.do",produces="application/json; charset=utf-8")
+	public String classSelectAjaxMethod(String memberId) {
+		System.out.println("memberId" + memberId);
+		ArrayList<Classroom> list = cService.classSelect(memberId);
+		System.out.println("list" + list);
+		
+		return new Gson().toJson(list);
 	}
 }
