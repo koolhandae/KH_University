@@ -30,17 +30,22 @@ public class MemberController {
 	/*
 	@RequestMapping("login.me")
 	public String loginMember(String userId, String userPwd, HttpSession session) {
+		System.out.println("userID" + userId);
+		System.out.println("userPwd" + userPwd);
+		
 		Member m = new Member();
 		m.setMemberId(userId);
 		m.setMemberPwd(userPwd);
 		Member loginUser = mService.loginMember(m);
 		
+		System.out.println("member콘트롤러" +loginUser);
 		session.setAttribute("loginUser", loginUser);
-		
 		return "admin/noticeListView";
 	}
 	*/
-
+	
+	
+	
 	@RequestMapping("login.me")
 	public String loginMember(String userId, String userPwd, HttpSession session, Model model) {
 		
@@ -55,7 +60,7 @@ public class MemberController {
 	
 			Student loginStudent  = sService.loginStudent(s);
 			
-			//System.out.println(loginStudent);
+			System.out.println(loginStudent);
 			
 			if(loginStudent != null && bcryptPasswordEncoder.matches(s.getStudentPwd(), loginStudent.getStudentPwd())){
 				// 로그인성공
@@ -86,6 +91,7 @@ public class MemberController {
 		
 	}
 	
+	
 	@RequestMapping("logout.me")
 	public String logoutMember(HttpSession session) {
 		session.invalidate();
@@ -96,6 +102,7 @@ public class MemberController {
 	public String forgotMember() {
 		return "common/forgotPassword";
 	}
+	*/
 	
 
 	/*

@@ -10,6 +10,7 @@ import com.kh.khu.classroom.model.dao.ClassDao;
 import com.kh.khu.classroom.model.vo.ClassNotice;
 import com.kh.khu.classroom.model.vo.Classroom;
 import com.kh.khu.common.model.vo.PageInfo;
+import com.kh.khu.project.model.vo.Project;
 
 @Service
 public class ClassServiceImpl implements ClassService{
@@ -48,5 +49,11 @@ public class ClassServiceImpl implements ClassService{
 	public int insertClass(Classroom c) {
 		return cDao.insertClass(sqlSession, c);
 	}
+
+	@Override
+	public ArrayList<Classroom> classSelect(String memberId) {
+		return cDao.classSelect(sqlSession,memberId);
+	}
+	
 	
 }
