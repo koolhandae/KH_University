@@ -266,7 +266,8 @@
 		    <version>24.3</version>
 		    <type>pom</type>
 		</dependency>
-	    
+		
+		<!-- itext + flyingsaucer pdf maker -->
 		
 	</dependencies>
     <build>
