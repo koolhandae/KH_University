@@ -6,6 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+    #updateForm>table {
+        width: 90%;
+    }
+    
+    #updateForm>table * {
+        margin: 5px;
+    }
+</style>
 </head>
 <body>
    <jsp:include page="../common/header_with_sidebar.jsp"/>

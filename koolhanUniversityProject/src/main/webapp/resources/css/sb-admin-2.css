@@ -11280,9 +11280,9 @@ body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
 .innerOuter {
-  border: 1px solid lightgray;
-  width: 80%;
+/*   border: 1px solid lightgray; */
+  width: 95%;
   margin: auto;
-  padding: 5% 10%;
+  padding: 3% 3%;
   background-color: white;
 }
