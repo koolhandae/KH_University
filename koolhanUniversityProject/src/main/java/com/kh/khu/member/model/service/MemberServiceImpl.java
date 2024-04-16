@@ -25,4 +25,17 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.insertMember(sqlSession, m);
 	}
 
+	@Override
+	public Member selectChkMember(String email) {
+		return mDao.selectChkMember(sqlSession, email);
+	}
+
+	@Override
+	public int changemPwd(String memberId, String encPwd) {
+		return mDao.changemPwd(sqlSession, memberId, encPwd);
+	}
+	
+
+	
+
 }

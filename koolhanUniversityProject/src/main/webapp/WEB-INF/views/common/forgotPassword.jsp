@@ -140,6 +140,8 @@
                                     </div>
                                     <form class="user" id="send-mail">
                                         <div class="form-group">
+                                            <input type="radio" id="chkmember" name="chkmember" value="s" checked>학생
+                                        	<input type="radio" id="chkmember" name="chkmember" value="p">교수
                                             <input type="email" class="form-control form-control-user"
                                                 id="InputEmail" aria-describedby="emailHelp"
                                                 placeholder="이메일을 입력해주세요" required>
@@ -183,6 +185,8 @@
 	<script>
         $(document).ready(function(){
             $("#forgot-btn").click(function(){
+
+                console.log("왜안되노");
 					
                 console.log($("#InputEmail"))
                 
@@ -192,17 +196,17 @@
                 }else{  	
                 	$.ajax({
                 		url:"chkmail.me",
-                		data:{email:$("#InputEmail").val()},
+                		data:{email:$("#InputEmail").val(),
+                              memberType : $("input[name='chkmember']").val()},
                 		success:function(result){
                 			console.log("ajax통신성공");
                 			console.log("chkmail" + result);
-                			
-                			
+
                 			const email = result.semail;
                 			const userId = result.studentId;
                 			
                 			
-                			if(result != ""){
+                			if(result == "NNNNY"){
                 				
                 				$.ajax({
             			            url: "/khu/VerifyRecaptcha",
@@ -217,19 +221,17 @@
             			                        
             			                        $("#send-mail").hide();
             	             	                $("#after-send-mail").show();
-            	             	                $("#userEmail").text(email);
-            	             	                
-            	             	                
+            	             	                $("#userEmail").text($("#InputEmail").val());
+            
             	             	                $.ajax({
             	             	                	url:"sendmail.do",
-            	             	                	data:{email : email,
-            	             	                		  userId : userId},
+            	             	                	data:{email : $("#InputEmail").val()},
             	             	                	success:function(result){
             	             	                		//console.log("ajax통신성공");
             	                                        // console.log("User ID:", result.userId);
             	                                        // console.log("Check Number:", result.checkNum);
-            	                                        const memberId = result.userId;
-            	                                        const checkNum = result.checkNum;
+            	                                        //const memberId = result.userId;
+            	                                        //const checkNum = result.checkNum;
             	                                        
             	                                        //location.href = "changePwdForm.me?checkNum=" + checkNum + "&memberId=" + memberId;
             	                                     

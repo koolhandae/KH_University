@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.CglibSubclassingInstantiationStrategy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -24,6 +25,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.khu.common.recaptcha.VerifyRecaptcha;
+import com.kh.khu.member.model.service.MemberServiceImpl;
+import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.student.model.service.StudentService;
 import com.kh.khu.student.model.service.StudentServiceImpl;
 import com.kh.khu.student.model.vo.Student;
@@ -36,6 +39,9 @@ public class HomeController {
 	
 	@Autowired
 	private StudentServiceImpl sService;
+	
+	@Autowired
+	private MemberServiceImpl mService;
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -69,18 +75,38 @@ public class HomeController {
 	
 	@ResponseBody
 	@RequestMapping("chkmail.me")
-	public Student chkMail(String email, HttpSession session) {
+	public String chkMail(String memberType, String email, HttpSession session) {
 		
-		Student s = sService.selectChkStudent(email);
+		Student s = new Student();
+		Member m = new Member();
 		
-		System.out.println("chkmail " + s);
+		System.out.println(memberType);
+		
+		if(memberType.equals("s")) {
+			s = sService.selectChkStudent(email);			
+		}else if(memberType.equals("m")){
+			m = mService.selectChkMember(email);			
+		}else {
+			s=null; m=null;
+		}
+		
+		System.out.println(s == null);
+		System.out.println(s);
+		System.out.println(m);
 		
 		if(s != null) {
 			/* 해당이메일에 해당하는 Id를 세션값에 올려서 사용해줌 */
-			session.setAttribute("targetId", s.getStudentId());			
+			session.setAttribute("targetId", s.getStudentId());	
+			return "NNNNY";
+			
+		}else if(m != null){
+			session.setAttribute("targetId", m.getMemberId());		
+			return "NNNNY";
+		}else {
+			return "NNNNN";
 		}
-
-		return s;
+		
+//		return (s != null || m != null) ? "NNNNY" : "NNNNN";
 	}
 	
 	@ResponseBody
@@ -122,7 +148,7 @@ public class HomeController {
 					e.printStackTrace();
 				}
 			
-				resultMap.put("userId", userId);
+				//resultMap.put("userId", userId);
 				resultMap.put("checkNum", checkNum);
 				
 				
@@ -156,12 +182,19 @@ public class HomeController {
 		String encPwd = bcryptPasswordEncoder.encode(userPwd);
 		System.out.println(encPwd);
 		
-		int result = sService.changePwd(memberId, encPwd);
+		int result = 0;
+		int mresult = 0;
+		
+		if(memberId.startsWith("kh")) {
+			result = sService.changePwd(memberId, encPwd);			
+		}else {
+			mresult = mService.changemPwd(memberId, encPwd);			
+		}
 		
 		/*tagetId를 더이상 사용할 필요가없으므로 session 값을 지워줌*/
 		session.removeAttribute("targetId");
 		
-		if(result>0) {
+		if(result>0 || mresult >0) {
 			session.setAttribute("alertMsg", "비밀번호를 변경하였습니다!");
 			return "redirect:/";
 			
