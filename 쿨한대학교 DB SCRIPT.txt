@@ -90,6 +90,21 @@ COMMENT ON COLUMN STUDENT.GRAD_DATE IS '졸업년도';
 
 
 CREATE SEQUENCE SEQ_SNO NOCACHE;
+------------------------------------ 휴학생 정보
+create table absence
+    ( abs_no number primary key
+      ,abs_semester varchar2(1) not null
+      ,abs_grade varchar2(1) not null
+      ,abs_sort varchar2(2) default 'a1' check(abs_sort in ('a1','a2','a3','a4'))
+      ,abs_status varchar2(1) default 'H' check(abs_status in('Y','N','H','Z','j')) 
+    );
+    
+comment on column absence.abs_no is '휴학생 학번';
+comment on column absence.abs_semester is '휴학 학기';
+comment on column absence.abs_grade is '휴학생 학년';
+comment on column absence.abs_sort is '휴학 구분';
+comment on column absence.abs_status is '휴학생 상태';
+
 -------------------- 과목
 CREATE
  TABLE CLASS
@@ -271,7 +286,8 @@ CREATE
      , NOTICE_CONTENT VARCHAR2(4000) NOT NULL
      , CREATE_DATE DATE DEFAULT SYSDATE NOT NULL
      );
-     
+
+
      
 COMMENT ON COLUMN NOTICE.NOTICE_NO IS '공지사항 번호';
 COMMENT ON COLUMN NOTICE.NOTICE_WRITER IS '작성회원번호';

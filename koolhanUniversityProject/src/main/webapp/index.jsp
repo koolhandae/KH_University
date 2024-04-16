@@ -10,7 +10,7 @@
 	<body>
 		<!-- 정동석 -->
 <%-- 		<jsp:forward page="WEB-INF/views/admin/noticeDetailView.jsp" /> --%>
-		<jsp:forward page="WEB-INF/views/admin/noticeUpdateForm.jsp" />
+<%-- 		<jsp:forward page="WEB-INF/views/admin/noticeUpdateForm.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/admin/noticeEnrollForm.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/student/studentEnrollForm.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/admin/adminEnrollForm.jsp" /> --%>
@@ -50,7 +50,7 @@
 		<%-- 학생 등록금 고지서 --%>
 <%-- 	<jsp:forward page="WEB-INF/views/student/studentTuitionPay.jsp" /> --%>
 		<%-- 학생 등록금 결제 --%>
-<%-- 	<jsp:forward page="WEB-INF/views/student/studentTakeOff.jsp" /> --%>
+	<jsp:forward page="WEB-INF/views/student/studentTakeOff.jsp" />
 		<%-- 학생 휴학 신청 --%>
 <%-- 	<jsp:forward page="WEB-INF/views/student/studentReturnSchool.jsp" /> --%>
 		<%-- 학생 복학 신청 --%>
@@ -60,10 +60,16 @@
 		<%-- 교수 개인정보 수정 --%>
 <%--    <jsp:forward page="WEB-INF/views/admin/adminTuitionManage.jsp" /> --%>
    		<%-- 관리자 등록금 조회 --%>
+	<jsp:forward page="WEB-INF/views/admin/adminTakeOffSelect.jsp" />
+		<%-- 학생 휴학 신청서 조회 --%>
+<%-- 	<jsp:forward page="WEB-INF/views/admin/studentReturnSchool.jsp" /> --%>
+		<%-- 학생 복학 신청서 조회 --%>
+		
+		
    		
-  <jsp:forward page="WEB-INF/views/common/busMapApi.jsp" />
+<%--   <jsp:forward page="WEB-INF/views/common/busMapApi.jsp" /> --%>
    		<%-- 지도 api --%>
-   <jsp:forward page="WEB-INF/views/common/busRealTime.jsp" />
+<%--    <jsp:forward page="WEB-INF/views/common/busRealTime.jsp" /> --%>
    		<%-- 실시간 버스 공공데이터 --%>
 		
 

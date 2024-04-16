@@ -35,5 +35,22 @@
    and s_status = 'Y'
 </select>
 
+<insert id="insertTakeOff">
+	insert
+	  into absence
+	  (
+	  	abs_no
+	  , abs_semester
+	  , abs_grade
+	  , abs_sort
+	  )
+	  values
+	  (
+	  	
+	  )
+	
+</insert>
+
+
 
 </mapper>

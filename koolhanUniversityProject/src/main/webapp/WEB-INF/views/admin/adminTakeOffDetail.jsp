@@ -55,7 +55,9 @@
    	<div class="tuitionBtn" align="center";>
    		<a class="btn btn-primary btn-lg"  href="takeOff.do" roll="button" style="background-color:rgb(48, 76, 121)">휴학 신청</a>
    		   <span style="margin-left: 40px; margin-right: 40px;"></span>
-   		<a class="btn btn-primary btn-lg"  href="turnSchool.do" roll="button" style="background-color:rgb(48, 76, 121)">복학 신청</a>  	
+   		<a class="btn btn-primary btn-lg"  href="turnSchool.do" roll="button" style="background-color:rgb(48, 76, 121)">복학 신청</a>  		
+<!--          <button class="selectTuitionbtn btn" href="takeOff.do">휴학 신청</button> -->
+<!--          <button class="paymentTuition btn" href="turnSchool.do">복학 신청</button> -->
     </div>
       <br><br><br>
    	
@@ -68,37 +70,32 @@
           <th>학부(과)</th>
           <td>컴퓨터 공학과</td>
           <th>학번</th>
-          <td>${ loginUser.studentNo }</td>
+          <td>2401010</td>
         </tr>
 
         <tr>
           <th>학년</th>
-          <td>3</td>
+          <td>2</td>
           <th>성명</th>
-          <td>${ loginUser.studentName }</td>
+          <td>김뫄뫄</td>
         </tr>
 
         <tr>
           <th>전화번호</th>
-          <td colspan="3">${ loginUser.sPhone }</td>
-        </tr>
-        
-        <tr>
-          <th>주소</th>
-          <td colspan="3">${ loginUser.sAddress }</td>
+          <td colspan="3">010-1234-1234</td>
         </tr>
         
         <tr>
           <th>기간</th>
           <td id="takeOffDay" colspan="3">2024년도 1학기부터
             <select name="" id="">
-              <option value="2024">2024</option>
-              <option value="2025">2025</option>
-              <option value="2026">2026</option>
+              <option value="">2024</option>
+              <option value="">2025</option>
+              <option value="">2026</option>
             </select>년도 
             <select name="" id="">
-              <option value="1">1</option>
-              <option value="2">2</option>
+              <option value="">1</option>
+              <option value="">2</option>
             </select>학기까지
           </td>
         </tr>
@@ -126,7 +123,7 @@
                 <span>위와 같이 휴학하고자 하오니 허가하여 주시길 바랍니다.</span>
               </div>
               <div style="margin-top: 10px; text-align: right;">
-                ${ sysdate }
+                2024년 4월 15일
               </div>
           </td>
         </tr>
@@ -135,7 +132,10 @@
 		<button type="submit" class="btn btn-m" id="btn">조회</button>
 	  </div>
     </form>
-
+      
+   	
+   	
+   	
    	
    	
    	</div>  

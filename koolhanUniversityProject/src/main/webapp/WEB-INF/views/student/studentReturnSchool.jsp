@@ -57,6 +57,10 @@
     #takeOffDay{
       text-align: right;
     }
+    
+    hr{
+      width: 1000px;
+    }
 
 </style>
 </head>
@@ -66,15 +70,16 @@
    	<div class="innerOuter">
    	
    	<div class="tuitionBtn" align="center";>
-         <button class="selectTuitionbtn btn">휴학 신청</button>
-         <button class="paymentTuition btn" id="">복학 신청</button>
+   		<a class="btn btn-primary btn-lg"  href="takeOff.do" roll="button" style="background-color:rgb(48, 76, 121)">휴학 신청</a>
+   		   <span style="margin-left: 40px; margin-right: 40px;"></span>
+   		<a class="btn btn-primary btn-lg"  href="turnSchool.do" roll="button" style="background-color:rgb(48, 76, 121)">복학 신청</a>  
     </div>
       <br><br><br>
    	
-   		<h2 style="margin-left: 40px; font-weight:900; color: rgb(75,75,75);">휴학 신청서</h2>
+   		<h2 style="margin-left: 290px; font-weight:900; color: rgb(75,75,75);">휴학 신청서</h2>
    		<hr><br>
 
-      <table id="boardList" class="selectTuition table" style="width: 900px;">
+      <table id="boardList" class="selectTuition table" style="width: 900px; margin: auto;">
         <tr>
           <th>학부(과)</th>
           <td>컴퓨터 공학과</td>
@@ -116,7 +121,7 @@
         </tr>
       </table>
       
-    
+      <br>
       <div class="btnbtn" align="center">
 				<button class="btn btn-m" id="btn">조회</button>
 	  </div>

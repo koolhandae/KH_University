@@ -19,5 +19,10 @@ public class StudentServiceImpl implements StudentService{
 	public Student loginStudent(Student s) {
 		return sDao.loginStudent(sqlSession, s);
 	}
+
+	@Override
+	public int insertTakeOff(Student s) {
+		return sDao.insertTakeOff(sqlSession, s);
+	}
 	
 }
