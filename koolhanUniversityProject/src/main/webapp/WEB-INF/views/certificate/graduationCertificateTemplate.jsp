@@ -4,6 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		 <script src="resources/js/jquery.min.js"></script>
+	    <script src="resources/js/jspdf.min.js"></script>
+	    <script src="resources/js/html2canvas.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -14,7 +18,6 @@
 .content {
 	width: 794px;
 	height: 1123px;
-	border: 1px solid red;
 }
 
 .innerContent {
@@ -43,7 +46,7 @@ thead * {
 </style>
 </head>
 <body>
-   <div class="content" style="padding:10px;">
+   <div id="pdfDiv" class="content" style="padding:10px;">
 		<div class="innerContnent">
 			<div id="schoolName" style="text-align: center;">
 				<h1>쿨한대학교 졸업 증명서</h1>
@@ -97,5 +100,39 @@ thead * {
 			</div>
 		</div>
 	</div>
+	
+	<button id="savePdfBtn">pdf다운로드</button>
+	<script>
+		$('#savePdfBtn').click(function() {
+		    html2canvas($('#pdfDiv')[0]).then(function(canvas) {
+		        // 캔버스를 이미지로 변환
+		        let imgData = canvas.toDataURL('image/png');
+		
+		        let margin = 1; // 출력 페이지 여백설정
+		        let imgWidth = 210 - (10 * 2); // 이미지 가로 길이(mm) A4 기준
+		        let pageHeight = imgWidth * 1.414;  // 출력 페이지 세로 길이 계산 A4 기준
+		        let imgHeight = canvas.height * imgWidth / canvas.width;
+		        let heightLeft = imgHeight;
+		
+		        let doc = new jsPDF('p', 'mm');
+		        let position = margin;
+		
+		        // 첫 페이지 출력
+		        doc.addImage(imgData, 'PNG', margin, position, imgWidth, imgHeight);
+		        heightLeft -= pageHeight;
+		
+		        // 한 페이지 이상일 경우 루프 돌면서 출력
+		        while (heightLeft >= 20) {
+		            position = heightLeft - imgHeight;
+		            doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+		            doc.addPage();
+		            heightLeft -= pageHeight;
+		        }
+		
+		        // 파일 저장
+		        doc.save('sample.pdf');
+		    });
+		});
+		</script>
 </body>
 </html>
