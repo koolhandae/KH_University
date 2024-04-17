@@ -7,14 +7,19 @@ import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.khu.student.model.vo.Absence;
 import com.kh.khu.student.model.vo.Student;
 
 @Repository
 public class StudentDao {
 	
 	public Student loginStudent(SqlSession sqlSession, Student s) {
-		System.out.println("dao" + s);
+		// System.out.println("dao" + s);
 		return sqlSession.selectOne("studentMapper.loginStudent", s);
+	}
+
+	public int insertTakeOff(SqlSessionTemplate sqlSession, Absence a) {
+		return sqlSession.insert("studentMapper.insertTakeOff", a);
 	}
 	
 	public Student selectChkStudent(SqlSession sqlSession, String email) {
@@ -29,4 +34,9 @@ public class StudentDao {
 		    /*hashmap에선 키값을 mapper에 담아줘야됨!*/
 		    return sqlSession.update("studentMapper.changePwd", parameters);
 	}
+	
+	public int selectTakeOff(SqlSessionTemplate sqlSession, Absence a) {
+		return sqlSession.selectOne("studentMapper.selectTakeOff", a);
+	}
+
 }

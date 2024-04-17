@@ -19,6 +19,7 @@
 		<typeAlias type="com.kh.khu.scholarships.model.vo.Scholarships" alias="Scholarship"/>
 		<typeAlias type="com.kh.khu.scholarships.model.vo.ScholarshipsStu" alias="ScholarshipStu"/>
 		<typeAlias type="com.kh.khu.student.model.vo.Student" alias="Student"/>
+		<typeAlias type="com.kh.khu.student.model.vo.Absence" alias="Absence"/>
 		<typeAlias type="com.kh.khu.tuition.model.vo.Tuition" alias="Tuition"/>
 		<typeAlias type="com.kh.khu.tuition.model.vo.TuitionPayment" alias="TuitionPayment"/>
 	</typeAliases>

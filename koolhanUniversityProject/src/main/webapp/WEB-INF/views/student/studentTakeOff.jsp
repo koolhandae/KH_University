@@ -62,43 +62,47 @@
    		<h2 style="margin-left: 290px; font-weight:900; color: rgb(75,75,75);">휴학 신청서</h2>
    		<hr><br>
 	
-	<form action="takeOff.do" method="post">
+	<form action="insertTakeOff.do">
+	  
+      <input type="hidden" name="absNo" value="${ loginStudent.studentNo }">
+      <input type="hidden" name="absId" value="${ loginStudent.studentId }">
       <table id="boardList" class="selectTuition table" style="width: 900px; margin: auto;">
         <tr>
           <th>학부(과)</th>
           <td>컴퓨터 공학과</td>
           <th>학번</th>
-          <td>${ loginUser.studentNo }</td>
+          <td>${ loginStudent.studentId }</td>
         </tr>
+        
 
         <tr>
           <th>학년</th>
           <td>3</td>
           <th>성명</th>
-          <td>${ loginUser.studentName }</td>
+          <td>${ loginStudent.studentName }</td>
         </tr>
 
         <tr>
           <th>전화번호</th>
-          <td colspan="3">${ loginUser.sPhone }</td>
+          <td colspan="3">${ loginStudent.stPhone }</td>
         </tr>
         
         <tr>
           <th>주소</th>
-          <td colspan="3">${ loginUser.sAddress }</td>
+          <td colspan="3">${ loginStudent.stAddress }</td>
         </tr>
         
         <tr>
           <th>기간</th>
           <td id="takeOffDay" colspan="3">2024년도 1학기부터
-            <select name="" id="">
-              <option value="2024">2024</option>
-              <option value="2025">2025</option>
-              <option value="2026">2026</option>
+            <select name="absSemester">
+              <option>2024</option>
+              <option>2025</option>
+              <option>2026</option>
             </select>년도 
-            <select name="" id="">
-              <option value="1">1</option>
-              <option value="2">2</option>
+            <select name="absGrade">
+              <option>1</option>
+              <option>2</option>
             </select>학기까지
           </td>
         </tr>
@@ -106,16 +110,16 @@
         <tr>
           <th>휴학구분</th>
           <td colspan="3">
-              <input type="radio" name="takeOffSort" id="normalRadio" value="a1"> 
+              <input type="radio" name="absSort" id="normalRadio" value="a1"> 
               <label for="normalRadio">일반</label>
               
-              <input type="radio" name="takeOffSort" id="illnessRadio" value="a2"> 
+              <input type="radio" name="absSort" id="illnessRadio" value="a2"> 
               <label for="illnessRadio">질병</label>
               
-              <input type="radio" name="takeOffSort" id="childbirthRadio" value="a3"> 
+              <input type="radio" name="absSort" id="childbirthRadio" value="a3"> 
               <label for="childbirthRadio">출산 및 육아</label>
               
-              <input type="radio" name="takeOffSort" id="militaryRadio" value="a4"> 
+              <input type="radio" name="absSort" id="militaryRadio" value="a4"> 
               <label for="militaryRadio">군입대</label>
           </td>
         </tr>
@@ -126,7 +130,7 @@
                 <span>위와 같이 휴학하고자 하오니 허가하여 주시길 바랍니다.</span>
               </div>
               <div style="margin-top: 10px; text-align: right;">
-                ${ sysdate }
+                2024.04.17
               </div>
           </td>
         </tr>

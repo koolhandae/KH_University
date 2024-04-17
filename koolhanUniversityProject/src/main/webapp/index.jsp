@@ -60,7 +60,7 @@
 		<%-- 교수 개인정보 수정 --%>
 <%--    <jsp:forward page="WEB-INF/views/admin/adminTuitionManage.jsp" /> --%>
    		<%-- 관리자 등록금 조회 --%>
-	<jsp:forward page="WEB-INF/views/admin/adminTakeOffSelect.jsp" />
+<%-- 	<jsp:forward page="WEB-INF/views/admin/adminTakeOffSelect.jsp" /> --%>
 		<%-- 학생 휴학 신청서 조회 --%>
 <%-- 	<jsp:forward page="WEB-INF/views/admin/studentReturnSchool.jsp" /> --%>
 		<%-- 학생 복학 신청서 조회 --%>

@@ -14,7 +14,7 @@ import com.kh.khu.student.model.vo.Student;
 public class MemberDao {
 
 	public Member loginMember(SqlSessionTemplate sqlSession, Member m) {
-		System.out.println("Dao임!!"+m);
+		//System.out.println("Dao임!!"+m);
 		return sqlSession.selectOne("memberMapper.loginMember", m);
 	}
 	
@@ -27,7 +27,7 @@ public class MemberDao {
 	}
 	
 	public int changemPwd(SqlSession sqlSession, String memberId, String encPwd) {
-		System.out.println("encPwd : " + encPwd);
+		//System.out.println("encPwd : " + encPwd);
 		 	Map<String, String> parameters = new HashMap();
 		    parameters.put("memberId", memberId);
 		    parameters.put("userPwd", encPwd);

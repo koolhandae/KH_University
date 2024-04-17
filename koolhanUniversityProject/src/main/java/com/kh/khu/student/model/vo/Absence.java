@@ -14,6 +14,7 @@ import lombok.ToString;
 public class Absence {
 
 	private int absNo;
+	private String absId;
 	private String absSemester;
 	private String absGrade;
 	private String absSort;

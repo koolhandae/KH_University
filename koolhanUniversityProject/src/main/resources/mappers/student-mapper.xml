@@ -16,6 +16,15 @@
 		<result column="absence_date" property="absenceDate"/>
 		<result column="grad_date" property="gradDate"/>
 	</resultMap>
+	
+	<resultMap type="Absence" id="absenceResult">
+		<result column="abs_no" property="absNo"/>
+		<result column="abs_id" property="absId"/>
+		<result column="abs_semester" property="absSemester"/>	
+		<result column="abs_grade" property="absGrade"/>	
+		<result column="abs_sort" property="absSort"/>	
+		<result column="abs_status" property="absStatus"/>	
+	</resultMap>
 
 <select id="loginStudent" resultMap="studentResult">
 	select 
@@ -39,19 +48,32 @@
 	insert
 	  into absence
 	  (
-	  	abs_no
+	    abs_no
+	  , abs_id
 	  , abs_semester
 	  , abs_grade
 	  , abs_sort
 	  )
 	  values
-	  (
+	  (	
 	  	#{absNo}
+	  , #{absId}
 	  , #{absSemester}
 	  , #{absGrade}
 	  , #{absSort}
 	  )
 </insert>
+
+<select id="selectTakeOff" resultMap="absenceResult">
+	select
+	       student_no
+	     , abs_semester
+	     , abs_grade
+	     , abs_sort
+	  from absence
+	  join student on (student_no = abs_no)
+	 where s_status = 'Y'	  
+</select>
 
 
 <select id="selectChkStudent" resultMap="studentResult">

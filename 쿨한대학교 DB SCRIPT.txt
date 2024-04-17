@@ -92,8 +92,9 @@ COMMENT ON COLUMN STUDENT.GRAD_DATE IS '졸업년도';
 CREATE SEQUENCE SEQ_SNO NOCACHE;
 ------------------------------------ 휴학생 정보
 CREATE TABLE absence (
-
-    abs_no NUMBER PRIMARY KEY,
+    
+    abs_no number PRIMARY KEY,
+    abs_id VARCHAR2(30) NOT NULL,
     abs_semester VARCHAR2(1) NOT NULL,
     abs_grade VARCHAR2(1) NOT NULL,
     abs_sort VARCHAR2(2) DEFAULT 'a1' CHECK(abs_sort IN ('a1', 'a2', 'a3', 'a4')),
@@ -101,6 +102,7 @@ CREATE TABLE absence (
     CONSTRAINT FK_ABSENCE_STUDENT FOREIGN KEY (abs_no) REFERENCES student(student_no)
 );
 
+COMMENT ON COLUMN absence.abs_no IS '휴학생 번호';
 COMMENT ON COLUMN absence.abs_no IS '휴학생 학번';
 COMMENT ON COLUMN absence.abs_semester IS '휴학 학기';
 COMMENT ON COLUMN absence.abs_grade IS '휴학생 학년';

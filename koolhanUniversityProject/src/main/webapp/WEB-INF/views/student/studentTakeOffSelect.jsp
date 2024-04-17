@@ -35,6 +35,7 @@
    		<h2 style="margin-left: 290px; font-weight:900; color: rgb(75,75,75);">휴학 신청 처리</h2>
    		<hr><br>
    		
+   		<form action="takeOffSelect.do">
    		<table id="boardList" class="selectTuition table" style="width: 900px; margin: auto;">
    			<thead>
 	   		  <tr>
@@ -54,14 +55,14 @@
 		   		  	<td>${ a.absSort }</td>
 		   		  	<td>2024년도 1학기</td>
 		   		  	<td>${ a.absSemester }</td>
-		   		  	<td id="takeOffSelect" location href="">조회</td>
+		   		  	<td id="takeOffSelect">조회</td>
 		   		  	<td>${ a.absStatus }</td>
 		   		  </tr>
 		   	 </c:forEach>
 	   		</tbody>
    		  </table>
+   		</form>
    		  <br>
-   	
    	</div>
       
    </div>
