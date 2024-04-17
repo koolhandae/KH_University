@@ -40,6 +40,11 @@ public class MemberServiceImpl implements MemberService{
 	public String selectMemberId(Member m) {
 		return mDao.selectMemberId(sqlSession, m);
 	}
+
+	@Override
+	public int verifyEmail(String email) {
+		return mDao.verifyEmail(sqlSession, email);
+	}
 	
 
 	

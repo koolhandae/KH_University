@@ -16,5 +16,7 @@ public interface MemberService {
 	
 	// 회원 가입시 아이디 확인용 메소드
 	String selectMemberId(Member m);
+	
+	int verifyEmail(String email);
 
 }

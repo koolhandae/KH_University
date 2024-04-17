@@ -9,4 +9,8 @@ public interface StudentService {
 	Student selectChkStudent(String email);
 	
 	int changePwd(String userId, String encPwd);
+	
+	int insertStudent(Student s);
+	
+	String selectStudentId(Student s);
 }

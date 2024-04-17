@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.khu.student.model.vo.Student;
@@ -27,5 +28,13 @@ public class StudentDao {
 		    parameters.put("userPwd", encPwd);
 		    /*hashmap에선 키값을 mapper에 담아줘야됨!*/
 		    return sqlSession.update("studentMapper.changePwd", parameters);
+	}
+	
+	public int insertStudent(SqlSessionTemplate sqlSession, Student s) {
+		return sqlSession.insert("studentMapper.insertStudent", s);
+	}
+	
+	public String selectStudentId(SqlSessionTemplate sqlSession, Student s) {
+		return sqlSession.selectOne("studentMapper.selectStudentId", s);
 	}
 }

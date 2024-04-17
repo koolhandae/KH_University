@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.khu.common.model.vo.Address;
@@ -127,7 +128,7 @@ public class MemberController {
 							+ "<h4>로그인 아이디 : " + mService.selectMemberId(m) + "</h4><br>"
 							+ "<h4>비밀번호 : 본인 생년월일 6자리 + '1!'</h4><br>"
 							+ "<h4>로그인 이후 비밀번호를 변경해주세요</h4><br>"
-							+ "<h3><a href='" + url + "' style='color:#1c4587; text-decoration:none;'>'쿨대학 홈페이지'</a>" +"</h4>"
+							+ "<h3><a href='" + url.substring(0, url.lastIndexOf("/") + 1) + "' style='color:#1c4587; text-decoration:none;'>'쿨대학 홈페이지'</a>" +"</h4>"
 							+ "<h5>감사합니다😀</h5><br><br>";	
 			try {
 				MimeMessage message = mailSender.createMimeMessage();
@@ -153,6 +154,14 @@ public class MemberController {
 			mv.setViewName("common/errorPage404");
 		}
 		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping("verifyEmail.me")
+	public String verifyEmail(String email) {
+		int result = mService.verifyEmail(email);
+		
+		return result == 0 ? "NNNNY" : "NNNNN";
 	}
 
 }

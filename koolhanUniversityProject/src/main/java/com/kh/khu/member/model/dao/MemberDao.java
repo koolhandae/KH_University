@@ -38,4 +38,8 @@ public class MemberDao {
 	public String selectMemberId(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.selectOne("memberMapper.selectMemberId", m);
 	}
+	
+	public int verifyEmail(SqlSessionTemplate sqlSession, String email) {
+		return sqlSession.selectOne("memberMapper.verifyEmail", email);
+	}
 }

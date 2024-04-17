@@ -31,5 +31,15 @@ public class StudentServiceImpl implements StudentService{
 		return sDao.changePwd(sqlSession, memberId, encPwd);
 	}
 
+	@Override
+	public int insertStudent(Student s) {
+		return sDao.insertStudent(sqlSession, s);
+	}
+
+	@Override
+	public String selectStudentId(Student s) {
+		return sDao.selectStudentId(sqlSession, s);
+	}
+
 
 }

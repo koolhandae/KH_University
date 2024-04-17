@@ -15,7 +15,7 @@
             <h2>학생 등록</h2>
             <br>
 
-            <form action="insert.me" method="post" id="enrollForm">
+            <form action="insert.stu" method="post" id="enrollForm">
                 <div class="form-group">
                     <label for="userName">* 이름 :</label>
                     <input type="text" class="form-control" id="studentName" name="studentName" placeholder="이름을 입력하세요" required><br>
@@ -36,7 +36,7 @@
                     </div>
 					<input type="text" class="form-control" onclick="execDaumPostcode()" id="address" name="address" placeholder="주소">
                     <div style="display:flex;">
-						<input type="text" class="form-control" onclick="execDaumPostcode()" id="detailAddress" name="detailAddress"placeholder="상세주소">
+						<input type="text" class="form-control" id="detailAddress" name="detailAddress"placeholder="상세주소">
 						<input type="text" class="form-control" onclick="execDaumPostcode()" id="extraAddress" name="extraAddress" placeholder="참고항목">
                     </div>
 					

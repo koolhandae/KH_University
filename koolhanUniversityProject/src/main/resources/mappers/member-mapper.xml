@@ -54,7 +54,7 @@
 		     , #{memberSsn}
 		     , #{mePhone}
 		     , #{meEmail}
-		     , #{meddress}
+		     , #{meAddress}
 		     , #{meType}
 		     )
 	</insert>
@@ -79,6 +79,12 @@
 	     where member_id = #{memberId}
 	</update>
 	
+	<select id="verifyEmail" resultType="_int">
+		select
+		       count(*)
+		  from member
+		 where m_email = #{email}      
+	</select>
 	
 	
 </mapper>
