@@ -14,6 +14,7 @@ import com.kh.khu.student.model.vo.Student;
 public class MemberDao {
 
 	public Member loginMember(SqlSessionTemplate sqlSession, Member m) {
+		System.out.println("Dao임!!"+m);
 		return sqlSession.selectOne("memberMapper.loginMember", m);
 	}
 	
