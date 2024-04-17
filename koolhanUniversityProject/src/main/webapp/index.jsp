@@ -13,10 +13,10 @@
 		<%-- <jsp:forward page="WEB-INF/views/admin/noticeUpdateForm.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/admin/noticeEnrollForm.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/student/studentEnrollForm.jsp" /> --%>
-		<<<<<<< HEAD <%-- <jsp:forward page="WEB-INF/views/admin/adminEnrollForm.jsp" /> --%>
-		=======
-		<%--<jsp:forward page="WEB-INF/views/admin/adminEnrollForm.jsp" /> --%>
-		>>>>>>> 6c93c405a68a2a49b9365b0242500ee476103e1c
+		<%-- <jsp:forward page="WEB-INF/views/admin/adminEnrollForm.jsp" /> --%>
+
+
+
 		<%-- <jsp:forward page="WEB-INF/views/admin/noticeListView.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/student/certificateIssuingPage.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/board/boardDetailView.jsp" /> --%>
