@@ -71,43 +71,43 @@ public class HomeController {
 		    }
 	    
 	}
-	
+		
+	@ResponseBody
+	@RequestMapping("chkmail.st")
+	public Student chkMailSt(String email, HttpSession session) {
+		
+		System.out.println(email);
+		
+		Student s = new Student();
+        s = sService.selectChkStudent(email);			
+        
+        System.out.println(s);
+
+		if(s != null) {
+			/* 해당이메일에 해당하는 Id를 세션값에 올려서 사용해줌 */
+			session.setAttribute("targetId", s.getStudentId());		
+		}
+		
+		return s;
+	}
 	
 	@ResponseBody
 	@RequestMapping("chkmail.me")
-	public String chkMail(String memberType, String email, HttpSession session) {
+	public Member chkMailMe(String email, HttpSession session) {
 		
-		Student s = new Student();
 		Member m = new Member();
 		
-		System.out.println(memberType);
+		m = mService.selectChkMember(email);			
 		
-		if(memberType.equals("s")) {
-			s = sService.selectChkStudent(email);			
-		}else if(memberType.equals("m")){
-			m = mService.selectChkMember(email);			
-		}else {
-			s=null; m=null;
-		}
-		
-		System.out.println(s == null);
-		System.out.println(s);
-		System.out.println(m);
-		
-		if(s != null) {
+		if(m != null) {
 			/* 해당이메일에 해당하는 Id를 세션값에 올려서 사용해줌 */
-			session.setAttribute("targetId", s.getStudentId());	
-			return "NNNNY";
-			
-		}else if(m != null){
-			session.setAttribute("targetId", m.getMemberId());		
-			return "NNNNY";
-		}else {
-			return "NNNNN";
+			session.setAttribute("targetId", m.getMemberId());	
 		}
 		
-//		return (s != null || m != null) ? "NNNNY" : "NNNNN";
+		return m;
+		
 	}
+	
 	
 	@ResponseBody
 	@RequestMapping("sendmail.do")
@@ -148,7 +148,7 @@ public class HomeController {
 					e.printStackTrace();
 				}
 			
-				//resultMap.put("userId", userId);
+				resultMap.put("userId", userId);
 				resultMap.put("checkNum", checkNum);
 				
 				

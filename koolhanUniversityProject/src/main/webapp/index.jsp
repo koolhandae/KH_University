@@ -13,7 +13,7 @@
 <%-- 		<jsp:forward page="WEB-INF/views/admin/noticeUpdateForm.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/admin/noticeEnrollForm.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/student/studentEnrollForm.jsp" /> --%>
-		<%-- <jsp:forward page="WEB-INF/views/admin/adminEnrollForm.jsp" /> --%>
+		 <%--<jsp:forward page="WEB-INF/views/admin/adminEnrollForm.jsp" />  --%>
 		<%-- <jsp:forward page="WEB-INF/views/admin/noticeListView.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/student/certificateIssuingPage.jsp" /> --%>
     <%-- 		<jsp:forward page="WEB-INF/views/board/boardDetailView.jsp" /> --%>
@@ -36,7 +36,7 @@
 <%-- 		<jsp:forward page="WEB-INF/views/student/studentBoardInsertForm.jsp" /> --%>
 <%-- 		<jsp:forward page="WEB-INF/views/common/forgotPassword.jsp" /> --%>
 <%-- 		<jsp:forward page="WEB-INF/views/student/studentBoardInsertForm.jsp" /> --%>
-<%--<jsp:forward page="WEB-INF/views/common/findPassword.jsp" />  --%>
+<%--		<jsp:forward page="WEB-INF/views/common/findPassword.jsp" />  --%>
 
 
 
