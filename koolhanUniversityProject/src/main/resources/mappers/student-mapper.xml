@@ -46,7 +46,10 @@
 	  )
 	  values
 	  (
-	  	
+	  	#(absNo)
+	  , #(absSemester)
+	  , #(absGrade)
+	  , #(absSort)
 	  )
 	
 </insert>
