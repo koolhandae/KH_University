@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.khu.student.model.dao.StudentDao;
 import com.kh.khu.student.model.vo.Absence;
+import com.kh.khu.student.model.vo.Presence;
 import com.kh.khu.student.model.vo.Student;
 
 @Service
@@ -24,7 +25,7 @@ public class StudentServiceImpl implements StudentService{
 
 	@Override
 	public int insertTakeOff(Absence a) {
-		System.out.println("service" + a);
+		//System.out.println("service" + a);
 		return sDao.insertTakeOff(sqlSession, a);
 	}
 	
@@ -41,6 +42,13 @@ public class StudentServiceImpl implements StudentService{
 	public int selectTakeOff(Absence a) {
 		return sDao.selectTakeOff(sqlSession, a);
 	}
+
+	@Override
+	public int insertReturnSchool(Presence p) {
+		return sDao.insertReturnSchool(sqlSession, p);
+	}
+	
+	
 
 
 }

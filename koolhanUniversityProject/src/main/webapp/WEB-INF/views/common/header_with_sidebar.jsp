@@ -149,6 +149,7 @@
 								<a class="collapse-item" href="#">등록금 납부 조회</a>
 								<a class="collapse-item" href="#">학점 / 성적 조회</a>
 								<a class="collapse-item" href="takeOff.do">휴 · 복학 신청</a>
+								<a class="collapse-item" href="takeOffSelect.do">휴 · 복학 신청 조회</a>
 								<a class="collapse-item" href="#">증명서 발급</a>
 							</div>
 						</div>

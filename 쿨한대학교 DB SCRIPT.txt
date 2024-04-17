@@ -95,10 +95,10 @@ CREATE TABLE absence (
     
     abs_no number PRIMARY KEY,
     abs_id VARCHAR2(30) NOT NULL,
-    abs_semester VARCHAR2(1) NOT NULL,
+    abs_semester VARCHAR2(4) NOT NULL,
     abs_grade VARCHAR2(1) NOT NULL,
     abs_sort VARCHAR2(2) DEFAULT 'a1' CHECK(abs_sort IN ('a1', 'a2', 'a3', 'a4')),
-    abs_status VARCHAR2(1) DEFAULT 'H' CHECK(abs_status IN ('Y', 'N', 'H', 'Z', 'j')),
+    abs_status VARCHAR2(1) DEFAULT 'Y' CHECK(abs_status IN ('Y', 'N', 'H', 'Z', 'j')),
     CONSTRAINT FK_ABSENCE_STUDENT FOREIGN KEY (abs_no) REFERENCES student(student_no)
 );
 
@@ -108,6 +108,22 @@ COMMENT ON COLUMN absence.abs_semester IS '휴학 학기';
 COMMENT ON COLUMN absence.abs_grade IS '휴학생 학년';
 COMMENT ON COLUMN absence.abs_sort IS '휴학 구분';
 COMMENT ON COLUMN absence.abs_status IS '휴학생 상태';
+
+------------------------------------ 복학생 정보
+CREATE TABLE presence (
+    pre_no number PRIMARY KEY,
+    pre_id VARCHAR2(30) NOT NULL,
+    pre_semester VARCHAR2(4) NOT NULL,
+    pre_grade VARCHAR2(1) NOT NULL,
+    pre_status VARCHAR2(1) DEFAULT 'H' CHECK(pre_status IN ('Y', 'N', 'H', 'Z', 'J')),
+    CONSTRAINT FK_PRESENCE_STUDENT FOREIGN KEY (pre_no) REFERENCES student(student_no)
+);
+
+COMMENT ON COLUMN presence.pre_no IS '복학생 번호';
+COMMENT ON COLUMN presence.pre_id IS '복학생 학번';
+COMMENT ON COLUMN presence.pre_semester IS '복학 연도';
+COMMENT ON COLUMN presence.pre_grade IS '복학 학기';
+COMMENT ON COLUMN presence.pre_status IS '복학생 상태: 학생 상태 - 재학(Y), 자퇴(N), 휴학(H), 제적(Z), 졸업(J)';
 
 -------------------- 과목
 CREATE

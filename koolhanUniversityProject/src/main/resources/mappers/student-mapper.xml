@@ -8,10 +8,10 @@
 		<result column="student_pwd" property="studentPwd"/>
 		<result column="student_name" property="studentName"/>
 		<result column="student_ssn" property="studentSsn"/>
-		<result column="s_phone" property="sPhone"/>
-		<result column="s_email" property="sEmail"/>
-		<result column="a_address" property="sAddress"/>
-		<result column="s_status" property="sStatus"/>
+		<result column="s_phone" property="stPhone"/>
+		<result column="s_email" property="stEmail"/>
+		<result column="s_address" property="stAddress"/>
+		<result column="s_status" property="stStatus"/>
 		<result column="enroll_date" property="enrollDate"/>
 		<result column="absence_date" property="absenceDate"/>
 		<result column="grad_date" property="gradDate"/>
@@ -24,6 +24,14 @@
 		<result column="abs_grade" property="absGrade"/>	
 		<result column="abs_sort" property="absSort"/>	
 		<result column="abs_status" property="absStatus"/>	
+	</resultMap>
+	
+	<resultMap type="Presence" id="presenceResult">
+		<result column="pre_no" property="preNo"/>
+		<result column="pre_id" property="preId"/>
+		<result column="pre_semester" property="preSemester"/>	
+		<result column="pre_grade" property="preGrade"/>	
+		<result column="pre_status" property="preStatus"/>	
 	</resultMap>
 
 <select id="loginStudent" resultMap="studentResult">
@@ -64,6 +72,24 @@
 	  )
 </insert>
 
+<insert id="insertReturnSchool">
+	insert
+	  into presence
+	  (
+	  	pre_no
+	  , pre_id
+	  , pre_semester
+	  , pre_grade
+	  )
+	  values
+	  (
+	  	#{preNo}
+	  , #{preId}
+	  , #{preSemester}
+	  , #{preGrade}
+	  )
+</insert>
+
 <select id="selectTakeOff" resultMap="absenceResult">
 	select
 	       student_no
@@ -88,5 +114,6 @@
     set student_pwd = #{userPwd}
     where student_id = #{memberId}
 </update>
+
 
 </mapper>

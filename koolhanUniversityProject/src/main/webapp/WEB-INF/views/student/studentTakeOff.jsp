@@ -55,7 +55,7 @@
    	<div class="tuitionBtn" align="center";>
    		<a class="btn btn-primary btn-lg"  href="takeOff.do" roll="button" style="background-color:rgb(48, 76, 121)">휴학 신청</a>
    		   <span style="margin-left: 40px; margin-right: 40px;"></span>
-   		<a class="btn btn-primary btn-lg"  href="turnSchool.do" roll="button" style="background-color:rgb(48, 76, 121)">복학 신청</a>  	
+   		<a class="btn btn-primary btn-lg"  href="returnSchool.do" roll="button" style="background-color:rgb(48, 76, 121)">복학 신청</a>  	
     </div>
       <br><br><br>
    	
@@ -130,13 +130,24 @@
                 <span>위와 같이 휴학하고자 하오니 허가하여 주시길 바랍니다.</span>
               </div>
               <div style="margin-top: 10px; text-align: right;">
-                2024.04.17
+                 <% 
+				    // 현재 날짜를 가져오는 코드
+				    java.util.Date today = new java.util.Date();
+				    
+				    // 날짜를 원하는 형식으로 포맷팅
+				    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy년 MM월 dd일");
+				    String formattedDate = sdf.format(today);
+				    
+				    // 포맷팅된 날짜를 출력
+				    out.print(formattedDate);
+				  %>
+              </div>
               </div>
           </td>
         </tr>
       </table>
       <div class="btnbtn" align="center">
-		<button type="submit" class="btn btn-m" id="btn">조회</button>
+		<button type="submit" class="btn btn-m" id="btn">신청하기</button>
 	  </div>
     </form>
 

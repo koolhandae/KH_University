@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.khu.student.model.vo.Absence;
+import com.kh.khu.student.model.vo.Presence;
 import com.kh.khu.student.model.vo.Student;
 
 @Repository
@@ -37,6 +38,10 @@ public class StudentDao {
 	
 	public int selectTakeOff(SqlSessionTemplate sqlSession, Absence a) {
 		return sqlSession.selectOne("studentMapper.selectTakeOff", a);
+	}
+	
+	public int insertReturnSchool(SqlSessionTemplate sqlSession, Presence p) {
+		return sqlSession.insert("studentMapper.insertReturnSchool", p);
 	}
 
 }
