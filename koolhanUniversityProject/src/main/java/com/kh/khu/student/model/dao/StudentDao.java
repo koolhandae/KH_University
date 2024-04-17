@@ -44,4 +44,11 @@ public class StudentDao {
 		return sqlSession.insert("studentMapper.insertReturnSchool", p);
 	}
 
+	public int insertStudent(SqlSessionTemplate sqlSession, Student s) {
+		return sqlSession.insert("studentMapper.insertStudent", s);
+	}
+	
+	public String selectStudentId(SqlSessionTemplate sqlSession, Student s) {
+		return sqlSession.selectOne("studentMapper.selectStudentId", s);
+	}
 }

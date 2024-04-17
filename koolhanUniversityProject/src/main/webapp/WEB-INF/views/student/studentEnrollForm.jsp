@@ -15,19 +15,19 @@
             <h2>학생 등록</h2>
             <br>
 
-            <form action="insert.me" method="post" id="enrollForm">
+            <form action="insert.stu" method="post" id="enrollForm">
                 <div class="form-group">
                     <label for="userName">* 이름 :</label>
                     <input type="text" class="form-control" id="studentName" name="studentName" placeholder="이름을 입력하세요" required><br>
                     
                     <label for="email"> &nbsp; * 이메일 :</label>
-                    <input type="email" class="form-control" id="email" name="sEmail" placeholder="이메일을 입력하세요" required><br>
+                    <input type="email" class="form-control" id="email" name="stEmail" placeholder="이메일을 입력하세요" required><br>
                     
                     <label for="age"> &nbsp; * 주민등록번호 :</label>
-                    <input type="text" class="form-control" id="memberSsn" name="studentSsn" placeholder="주민등록번호를 입력하세요( - 포함)" required><br>
+                    <input type="text" class="form-control" id="memberSsn" name="sttudentSsn" placeholder="주민등록번호를 입력하세요( - 포함)" required><br>
                     
                     <label for="phone"> &nbsp; * 전화번호 :</label>
-                    <input type="text" class="form-control" id="phone" name="sPhone" placeholder="전화번호를 입력하세요(- 포함)" required><br>
+                    <input type="text" class="form-control" id="phone" name="stPhone" placeholder="전화번호를 입력하세요(- 포함)" required><br>
                     
                     <label for="address"> &nbsp; * 주소 :</label>
                     <div style="display:flex;">
@@ -36,7 +36,7 @@
                     </div>
 					<input type="text" class="form-control" onclick="execDaumPostcode()" id="address" name="address" placeholder="주소">
                     <div style="display:flex;">
-						<input type="text" class="form-control" onclick="execDaumPostcode()" id="detailAddress" name="detailAddress"placeholder="상세주소">
+						<input type="text" class="form-control" id="detailAddress" name="detailAddress"placeholder="상세주소">
 						<input type="text" class="form-control" onclick="execDaumPostcode()" id="extraAddress" name="extraAddress" placeholder="참고항목">
                     </div>
 					

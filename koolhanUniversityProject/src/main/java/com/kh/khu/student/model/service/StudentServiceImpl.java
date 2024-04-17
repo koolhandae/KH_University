@@ -49,6 +49,14 @@ public class StudentServiceImpl implements StudentService{
 	}
 	
 	
+	public int insertStudent(Student s) {
+		return sDao.insertStudent(sqlSession, s);
+	}
+
+	@Override
+	public String selectStudentId(Student s) {
+		return sDao.selectStudentId(sqlSession, s);
+	}
 
 
 }

@@ -52,7 +52,7 @@
 	                        <td class="bno">2</td>
 	                        <td>졸업 증명서</td>
 	                        <td>
-	                        	<button class="btn btn-primary">PDF 파일 / 인쇄</button>
+	                        	<button class="btn btn-primary" onclick="location.href='grad.certificate'">PDF 파일 / 인쇄</button>
 	                        </td>
 	                        <td>
 	                        	<button class="btn btn-primary">이메일로 보내기</button>

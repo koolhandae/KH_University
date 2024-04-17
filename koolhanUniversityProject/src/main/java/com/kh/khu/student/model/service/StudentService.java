@@ -17,4 +17,8 @@ public interface StudentService {
 	int selectTakeOff(Absence a);
 	
 	int insertReturnSchool(Presence p);
+	
+	int insertStudent(Student s);
+	
+	String selectStudentId(Student s);
 }

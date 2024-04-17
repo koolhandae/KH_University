@@ -10,7 +10,11 @@
 		<result column="student_ssn" property="studentSsn"/>
 		<result column="s_phone" property="stPhone"/>
 		<result column="s_email" property="stEmail"/>
+<<<<<<< HEAD
 		<result column="s_address" property="stAddress"/>
+=======
+		<result column="a_address" property="stAddress"/>
+>>>>>>> 264804e148e739c24a433fee7336e158e9ca26b1
 		<result column="s_status" property="stStatus"/>
 		<result column="enroll_date" property="enrollDate"/>
 		<result column="absence_date" property="absenceDate"/>
@@ -106,14 +110,55 @@
 	select 
 	       *
 	  from student
-	 where s_email = #{email}
-</select>
+	 where student_id = #{studentId}
+	   and s_status = 'Y'
+	</select>
 
-<update id="changePwd" parameterType="map">
-    update student
-    set student_pwd = #{userPwd}
-    where student_id = #{memberId}
-</update>
+	<select id="selectChkStudent" resultMap="studentResult">
+		select 
+		       *
+		  from student
+		 where s_email = #{email}
+	</select>
+
+	<update id="changePwd" parameterType="map">
+	    update student
+	    set student_pwd = #{userPwd}
+	    where student_id = #{studentId}
+	</update>
+
+	<insert id="insertStudent">
+		insert
+		  into student
+		     (
+		       student_no
+		     , student_id
+		     , student_pwd
+		     , student_name
+		     , student_ssn
+		     , s_phone
+		     , s_email
+		     , s_address
+		     )
+		values
+		     (
+		       seq_mno.nextval
+		     , 'kh'||to_char(sysdate, 'yy')||to_char(seq_user_no.nextval, 'FM0000')
+		     , #{studentPwd}
+		     , #{studentName}
+		     , #{studentSsn}
+		     , #{stPhone}
+		     , #{stEmail}
+		     , #{stAddress}
+		     )
+	</insert>
+
+	<select id="selectStudentId" resultType="String">
+		select
+		       student_id
+		  from student
+		 where s_email = #{stEmail}     
+	</select>
 
 
 </mapper>

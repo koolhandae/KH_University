@@ -35,6 +35,16 @@ public class MemberServiceImpl implements MemberService{
 	public int changemPwd(String memberId, String encPwd) {
 		return mDao.changemPwd(sqlSession, memberId, encPwd);
 	}
+
+	@Override
+	public String selectMemberId(Member m) {
+		return mDao.selectMemberId(sqlSession, m);
+	}
+
+	@Override
+	public int verifyEmail(String email) {
+		return mDao.verifyEmail(sqlSession, email);
+	}
 	
 
 	
