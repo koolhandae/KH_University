@@ -10,7 +10,9 @@ public interface MemberService {
 	// 교직원 / 교수 추가 메소드
 	int insertMember(Member m);
 	
+	Member selectChkMember(String email);
 	
+	int changemPwd(String userId, String encPwd);
 	
 
 }

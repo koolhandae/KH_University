@@ -22,6 +22,6 @@ public class Board {
 	private String createDate;
 	private String bStatus;
 	private String originName;
-	private String chageName;
+	private String changeName;
 	
 }

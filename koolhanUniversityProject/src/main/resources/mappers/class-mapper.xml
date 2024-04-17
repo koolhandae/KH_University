@@ -16,6 +16,7 @@
 		<result column="class_etc" property="classEtc"/>
 		<result column="origin_name" property="originName"/>
 		<result column="change_name" property="changeName"/>
+		<result column="enroll_date" property="enrollDate"/>
 	</resultMap>
 	
 	<resultMap type="ClassDetail" id="classDetailResult">
@@ -43,11 +44,12 @@
 		    , class_etc
 		    , origin_name
 		    , change_name
+		    , enroll_date
 		    )
 	    values
 		    (seq_class.nextval
 		     ,#{classNum}
-		     ,null<!--#{} 교수번호 -->
+		     ,#{profNo}
 		     ,#{className}
 		     ,#{classType}
 		     ,#{classScore}
@@ -59,7 +61,19 @@
 		     ,#{classEtc}
 		     ,#{originName}
 		     ,#{changeName}
+		     ,to_char(SYSDATE, 'YYYY')
 		     )
 	</insert>
+	
+	
+	<select id="classSelect" resultMap="classResult">
+    select *
+    from class
+    where prof_no = (
+			         select member_no
+			         from member
+			         where m_type = 'P' and member_id = #{memberId}
+			   		 )
+</select>
 
 </mapper>

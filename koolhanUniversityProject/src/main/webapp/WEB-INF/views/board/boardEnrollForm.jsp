@@ -26,30 +26,31 @@
              <h2>커뮤니티 게시판 작성하기</h2>
              <br>
  
-             <form id="enrollForm" method="post" action="insert.no">
+             <form id="enrollForm" method="post" action="insert.bo" enctype="multipart/form-data">
                  <table align="center">
                      <tr>
                          <th><label for="title">제목</label></th>
-                         <td><input type="text" id="title" class="form-control" name="noticeTitle" required></td>
+                         <td><input type="text" id="title" class="form-control" name="boardTitle" required></td>
                      </tr>
                      <tr>
                          <th><label for="writer">작성자</label></th>
-                         <td>
-                         <input type="text" id="writer" class="form-control" value="${loginUser.memberName}" readonly>
-                         <input type="hidden" id="writerNo" value="${loginUser.memberNo}" name="noticeWriter">
-                         </td>
+                         <td><input type="text" id="writer" class="form-control" value="${loginUser.userId}" name="boardWriter" readonly></td>
+                     </tr>
+                     <tr>
+                         <th><label for="upfile">첨부파일</label></th>
+                         <td><input type="file" id="upfile" class="form-control-file border" name="upfile"></td>
                      </tr>
                      <tr>
                          <th colspan="2"><label for="content">내용</label></th>
                      </tr>
                      <tr>
                          <th colspan="2">
-                             <textarea class="form-control" required name="noticeContent" id="content" rows="10" style="resize:none;"></textarea>
+                             <textarea class="form-control" required name="boardContent" id="content" rows="10" style="resize:none;"></textarea>
                          </th>
                      </tr>
                  </table>
                  <br>
-
+ 
                  <div align="center">
                      <button type="submit" class="btn btn-primary">등록하기</button>
                      <button type="reset" class="btn btn-danger">취소하기</button>
@@ -57,7 +58,8 @@
              </form>
          </div>
          <br><br>
-   </div>
+     </div>
+     
    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

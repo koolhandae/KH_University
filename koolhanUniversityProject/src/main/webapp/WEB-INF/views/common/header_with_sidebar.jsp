@@ -77,12 +77,22 @@
 		    		icon: '${alertMsg.icon}',
 		    		title: '${alertMsg.title}',
 		    		text: '${alertMsg.text}',
-		    	});
+		    	})
 			});
-	    </script>
 	    <c:remove var="alertMsg" scope="session" />
+	    </script>
+	</c:if>
+
+	
+	<!-- 
+	<c:if test="${ not empty alertMsg }"> 
+		<script>
+			alert("${ alertMsg }");
+		</script>
+		<c:remove var="alertMsg" scope="session"/>
 	</c:if>
 	 -->
+	
 
 			<!-- Page Wrapper -->
 			<div id="wrapper">
@@ -186,103 +196,99 @@
 						</div>
 					</li>
 
-					<!-- Divider -->
-					<hr class="sidebar-divider d-none d-md-block">
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+            
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+                    aria-expanded="true" aria-controls="collapseFour">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                    <span>나의 강의실</span>
+                </a>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="WEB-INF/views/student/certificateIssuingPage.jsp">나의 수강조회</a>
+                        <a class="collapse-item" href="classEnroll.co">강의 등록</a>
+                        <a class="collapse-item" href="cards.html">강의 관리</a>
+                    </div>
+                </div>
+            </li>
 
-					<!-- Nav Item - Pages Collapse Menu -->
-					<li class="nav-item">
-						<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
-							aria-expanded="true" aria-controls="collapseFour">
-							<i class="fa-solid fa-book-open-reader"></i>
-							<span>나의 강의실</span>
-						</a>
-						<div id="collapseFour" class="collapse" aria-labelledby="headingFour"
-							data-parent="#accordionSidebar">
-							<div class="bg-white py-2 collapse-inner rounded">
-								<a class="collapse-item" href="WEB-INF/views/student/certificateIssuingPage.jsp">나의
-									수강조회</a>
-								<a class="collapse-item" href="cards.html">강의 등록</a>
-								<a class="collapse-item" href="cards.html">강의 관리</a>
-							</div>
-						</div>
-					</li>
-
-					<!-- Nav Item - Charts -->
-					<li class="nav-item">
-						<a class="nav-link" href="charts.html">
-							<i class="fa-solid fa-check-to-slot"></i>
-							<span>과제</span></a>
-					</li>
-
-					<!-- Nav Item - Charts -->
-					<li class="nav-item">
-						<a class="nav-link" href="charts.html">
-							<i class="fa-solid fa-file-pen"></i>
-							<span>성적 등록</span></a>
-					</li>
-
-					<!-- Divider -->
-					<hr class="sidebar-divider">
-
-					<!-- Heading -->
-					<div class="sidebar-heading">
-						<h4>공통사항</h4>
-					</div>
-
-					<!-- Nav Item - Charts -->
-					<li class="nav-item">
-						<a class="nav-link" href="#">
-							<i class="fa-solid fa-users"></i>
-							<span>커뮤니티 게시판</span></a>
-					</li>
-
-					<!-- Nav Item - Charts -->
-					<li class="nav-item">
-						<a class="nav-link" href="#">
-							<i class="fa-solid fa-book-bookmark"></i>
-							<span>중앙 도서관</span></a>
-					</li>
-
-					<!-- Nav Item - Pages Collapse Menu -->
-					<li class="nav-item">
-						<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
-							aria-expanded="true" aria-controls="collapseTwo">
-							<i class="fa-solid fa-paper-plane"></i>
-							<span>쪽지함</span>
-						</a>
-						<div id="collapseFive" class="collapse" aria-labelledby="headingTwo"
-							data-parent="#accordionSidebar">
-							<div class="bg-white py-2 collapse-inner rounded">
-								<a class="collapse-item" href="#">쪽지 보내기</a>
-								<a class="collapse-item" href="#">받은 쪽지함</a>
-							</div>
-						</div>
-					</li>
-
-					<!-- Nav Item - Pages Collapse Menu -->
-					<li class="nav-item">
-						<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
-							aria-expanded="true" aria-controls="collapseTwo">
-							<i class="fa-solid fa-dove"></i>
-							<span>소식</span>
-						</a>
-						<div id="collapseSix" class="collapse" aria-labelledby="headingTwo"
-							data-parent="#accordionSidebar">
-							<div class="bg-white py-2 collapse-inner rounded">
-								<a class="collapse-item" href="list.no">공지사항</a>
-								<a class="collapse-item" href="#">학사일정</a>
-								<a class="collapse-item" href="#">셔틀버스 안내</a>
-								<a class="collapse-item" href="#">관련 취업 정보</a>
-							</div>
-						</div>
-					</li>
-
-
-
-					<!-- Sidebar Toggler (Sidebar) -->
-					<div class="text-center d-none d-md-inline">
-						<button class="rounded-circle border-0" id="sidebarToggle"></button>
-					</div>
+			<!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="professorPJEnrollForm.do">
+                    <i class="fa-solid fa-check-to-slot"></i>
+                    <span>과제</span></a>
+            </li>
+            
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <i class="fa-solid fa-file-pen"></i>
+                    <span>성적 등록</span></a>
+            </li>
+            
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+            
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                <h4>공통사항</h4>
+            </div>
+            
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-users"></i>
+                    <span>커뮤니티 게시판</span></a>
+            </li>
+            
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-book-bookmark"></i>
+                    <span>중앙 도서관</span></a>
+            </li>
+            
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>쪽지함</span>
+                </a>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="#">쪽지 보내기</a>
+                        <a class="collapse-item" href="#">받은 쪽지함</a>
+                    </div>
+                </div>
+            </li>
+            
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fa-solid fa-dove"></i>
+                    <span>소식</span>
+                </a>
+                <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="list.no">공지사항</a>
+                        <a class="collapse-item" href="#">학사일정</a>
+                        <a class="collapse-item" href="#">셔틀버스 안내</a>
+                        <a class="collapse-item" href="#">관련 취업 정보</a>
+                    </div>
+                </div>
+            </li>
+            
+            
+            
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
 
 				</ul>
 				<!-- End of Sidebar -->

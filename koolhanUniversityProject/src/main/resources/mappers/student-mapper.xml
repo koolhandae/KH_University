@@ -46,14 +46,25 @@
 	  )
 	  values
 	  (
-	  	#(absNo)
-	  , #(absSemester)
-	  , #(absGrade)
-	  , #(absSort)
+	  	#{absNo}
+	  , #{absSemester}
+	  , #{absGrade}
+	  , #{absSort}
 	  )
-	
 </insert>
 
 
+<select id="selectChkStudent" resultMap="studentResult">
+	select 
+	       *
+	  from student
+	 where s_email = #{email}
+</select>
+
+<update id="changePwd" parameterType="map">
+    update student
+    set student_pwd = #{userPwd}
+    where student_id = #{memberId}
+</update>
 
 </mapper>

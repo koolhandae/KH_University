@@ -32,6 +32,8 @@
     
     <!-- google rechapcha-->
 	<script src="https://www.google.com/recaptcha/api.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 
 <title>Insert title here</title>
 <style>
@@ -102,12 +104,22 @@
         margin: auto;
         display: table;
     }
+    #exampleInputEmail{
+        margin-top: 5px;
+    }
 
 	
 </style>
 </head>
 <body class="bg-gradient-primary">
 
+		<c:if test="${ not empty alertMsg }">
+			<script>
+				alert("${ alertMsg }");
+				<c:remove var="alertMsg" scope="session"/>
+			</script>
+		</c:if>
+	
     <div class="container" style="min-width: 800px;">
 
         <!-- Outer Row -->
@@ -118,27 +130,26 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">                    
                             <div class="col-lg-6">
-                                <!--
-                                <div class="p-5">
+                                
+                                <div class="p-5" id="send-mail">
                                     <br><br>
                                     <div class="text-center">
                                         <img width="26" height="26" src="https://img.icons8.com/metro/26/737373/lock.png" alt="lock"/>
-                                        <h1 class="h4 text-gray-900 mb-2">임시비밀번호 발급</h1>
-                                        <p class="mb-4">메일로 임시비밀번호를 발송해드립니다</p>
+                                        <h1 class="h4 text-gray-900 mb-2">비밀번호 재설정</h1>
+                                        <p class="mb-4">메일로 비밀번호 재설정 링크를 발송해드립니다</p>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" id="send-mail">
                                         <div class="form-group">
+                                            <input type="radio" id="chkmember" name="chkmember" value="s" checked>학생
+                                        	<input type="radio" id="chkmember" name="chkmember" value="p">교수
                                             <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="아이디(학번)을 입력해주세요">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="이메일을 입력해주세요">
+                                                id="InputEmail" aria-describedby="emailHelp"
+                                                placeholder="이메일을 입력해주세요" required>
                                         </div>
                                       
-                                        <div id="g-recaptcha" class="g-recaptcha" data-sitekey="6LcIX7opAAAAAMfUU33mcaDP-7AbkuQPTYu_ES15" data-callback="callBackRecaptcha"></div>
+                                        <div id="g-recaptcha" class="g-recaptcha" data-sitekey="6LemhLwpAAAAAE1xZEtDi08dxej4ldoVJUbSrURW"></div>
                                         <br>
-                                        <a href="login.html" id="forgot-btn" class="btn btn-facebook btn-user btn-block">
+                                        <a href="#" id="forgot-btn" class="btn btn-facebook btn-user btn-block">
                                             인증번호 전송
                                         </a>
                                         <div id="back-btn">
@@ -148,66 +159,135 @@
                                     </form>
                                     <br><br>
                                 </div>
-                                -->
-                               
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-2">이메일을 성공적으로 보냈습니다!!</h1>
-                                        <p class="mb-4">khuniversity@gmail.com</p>
-                                        <p class="mb-4">메일을 확인해주세요</p>
-                                        <img width="26" height="26" src="https://img.icons8.com/ios-filled/50/737373/secured-letter--v1.png" style="margin-top:-30px"/>
-                                        <div id="back-btn">
-                                            <a href="login.me">로그인페이지</a>
-                                        </div> 
-                                    </div>                              
-                                </div>
-                                
 
                             </div>
                             <div class="col-lg-6 d-none d-lg-block bg-password-image"></div>
+                        </div>
+                        <div id="after-send-mail" style="display: none;">
+                            <div class="text-center">
+                                <br><br>
+                                <h1 class="h4 text-gray-900 mb-2">이메일을 성공적으로 보냈습니다!!</h1>
+                                <p class="mb-4" id="userEmail"></p>
+                                <img width="26" height="26" src="https://img.icons8.com/ios-filled/50/737373/secured-letter--v1.png" style="margin-top:-30px"/>
+                                <p class="mb-4">메일함을 확인해주세요</p>
+                                <div id="back-btn">
+                                    <a href="/khu">로그인페이지</a>
+                                </div>  
+                                <br><br>
+                            </div>                              
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+	
+	<script>
+        $(document).ready(function(){
+            $("#forgot-btn").click(function(){
 
-	<script>
-		function callBackRecaptcha(){
-		    reCAPTCHA();
-		}
-	</script>	
+                console.log("왜안되노");
+					
+                console.log($("#InputEmail"))
+                
+                if($("#InputEmail").val() === ""){
+                	alert("이메일을 입력해주세요!");
+                	
+                }else{  	
+                	$.ajax({
+                		url:"chkmail.me",
+                		data:{email:$("#InputEmail").val(),
+                              memberType : $("input[name='chkmember']").val()},
+                		success:function(result){
+                			console.log("ajax통신성공");
+                			console.log("chkmail" + result);
+
+                			const email = result.semail;
+                			const userId = result.studentId;
+                			
+                			
+                			if(result == "NNNNY"){
+                				
+                				$.ajax({
+            			            url: "/khu/VerifyRecaptcha",
+            			            type: 'post',
+            			            data: {
+            			                recaptcha: $("#g-recaptcha-response").val()
+            			            },
+            			            success: function(data) {
+            			                switch (data) {
+            			                    case 0:
+            			                        console.log("자동 가입 방지 봇 통과");
+            			                        
+            			                        $("#send-mail").hide();
+            	             	                $("#after-send-mail").show();
+            	             	                $("#userEmail").text($("#InputEmail").val());
+            
+            	             	                $.ajax({
+            	             	                	url:"sendmail.do",
+            	             	                	data:{email : $("#InputEmail").val()},
+            	             	                	success:function(result){
+            	             	                		//console.log("ajax통신성공");
+            	                                        // console.log("User ID:", result.userId);
+            	                                        // console.log("Check Number:", result.checkNum);
+            	                                        //const memberId = result.userId;
+            	                                        //const checkNum = result.checkNum;
+            	                                        
+            	                                        //location.href = "changePwdForm.me?checkNum=" + checkNum + "&memberId=" + memberId;
+            	                                     
+            	             	                	}, error:function(){
+            	             	                		console.log("ajax통신실패");
+            	             	                	}
+            	             	                });                				
+
+            			                        captcha = 0;
+            			                		break;
+            			                    case 1:
+            			                        alert("자동 가입 방지 봇을 확인 한뒤 진행 해 주세요.");
+            			                        break;
+            			                    default:
+            			                        alert("자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다. [Error bot Code : " + Number(data) + "]");
+            			                   		break;
+            			                }
+            			            }
+            			        });
+                				
+                				
+                				
+
+                			}else{
+                				alert("해당 메일로 등록된 정보가 없습니다! 재입력해주세요!");
+                				$("#InputEmail").val("");
+                				
+                			}
+							                		
+                		}, error:function(){
+
+
+                		}
+                	});
+                	
+                }
+            });
+        });
+    </script>
 		
-		
+	<!--  
 	<script>
-	$(function() {
-		function reCAPTCHA() {
-				$.ajax({
-		            url: "rechapcha.do",
-		            type: 'post',
-		            data: {
-		                recaptcha: $("#g-recaptcha-response").val()
-		            },
-		            success: function(data) {
-		                switch (data) {
-		                    case 0:
-		                        console.log("자동 가입 방지 봇 통과");
-		                        captcha = 0;
-		                		break;
-		                    case 1:
-		                        alert("자동 가입 방지 봇을 확인 한뒤 진행 해 주세요.");
-		                        break;
-		                    default:
-		                        alert("자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다. [Error bot Code : " + Number(data) + "]");
-		                   		break;
-		                }
-		            }
-		        });
+	
+		$(document).ready(function(){		
+			$("#forgot-btn").click(function(){
+					
 				if(captcha != 0) {
 					return false;
 				} 
-		}
-	});
+			})
+		})
+	
 	</script>
+	-->
+
+
+    
 </body>
 </html>

@@ -22,4 +22,133 @@
 		<result column="create_date" property="createDate"/>	
 		<result column="r_status" property="rStatus"/>	
 	</resultMap>
+	
+	<select id="selectListCount" resultType="_int">
+		select
+			   count(*)
+		  from board
+		 where bStatus = 'Y'
+	</select>
+
+	<select id="selectList" resultMap="boardResult">
+		select
+		       board_no
+		     , board_title
+		     , board_writer
+		     , count
+		     , to_char(create_date, 'yyyy-mm-dd') create_date
+		     , origin_name
+		  from board
+		 where bStatus = 'Y'  
+		 order
+		    by board_no desc
+	</select>
+	
+	<insert id="insertBoard">
+		insert
+		  into board
+		     (
+		       board_no
+		     , board_title
+		     , board_writer
+		     , board_content
+		     , origin_name
+		     , change_name
+		     )
+		values
+		     (
+		       seq_bno.nextval
+		     , #{boardTitle}
+		     , #{boardWriter}
+		     , #{boardContent}
+		     , #{originName}
+		     , #{changeName}
+		     )
+	</insert>
+	
+	<update id="increaseCount">
+		update
+			   board
+		   set count = count + 1
+	     where board_no = #{boardNo}
+	       and bStatus = 'Y'
+	</update>
+	
+	<select id="selectBoard" resultMap="boardResult">
+		select
+		       board_no
+		     , board_title
+		     , board_writer
+		     , board_content
+		     , origin_name
+		     , change_name
+		     , count
+		     , create_date
+		  from board
+		 where bStatus = 'Y'
+		   and board_no = #{boardNo}
+	</select>
+	
+	<update id="deleteBoard">
+		update board
+		   set bStatus = 'N'
+		 where board_no = #{boardNo}
+	</update>
+	
+	<update id="updateBoard">
+		update 
+			   board
+		   set board_title = #{boardTitle}
+		     , board_content = #{boardContent} 
+		     , origin_name = #{originName}
+		     , change_name = #{changeName}
+		 where board_no = #{boardNo}
+	</update>
+	
+	<select id="selectReplyList" resultMap="replyResult">
+		select
+		       reply_no
+		     , reply_content
+		     , reply_writer
+		     , to_char(create_date, 'yyyy-MM-dd') as create_date
+		  from reply
+		 where rStatus = 'Y'
+		   and ref_bno = #{boardNo}
+		 order by reply_no desc
+	</select>
+	
+	<insert id="insertReply">
+		insert
+		  into reply
+		     (
+		       reply_no
+		     , reply_content
+		     , ref_bno
+		     , reply_writer  
+		     )
+		values
+		     (
+		       seq_rno.nextval
+		     , #{replyContent}
+		     , #{refBoardNo}
+		     , #{replyWriter}  
+		     )
+	</insert>
+	
+	<update id="updateReply">
+		update
+		       reply
+		   set reply_content = ${replyContent}
+		 where reply_no = ${replyNo}
+		   and r_status = 'Y' 
+	</update>
+	
+	<update id="deleteReply">
+		update
+		       reply
+		   set r_status = 'N'
+		 where reply_no = ${replyNo}
+	</update>
+	
+	
 </mapper>

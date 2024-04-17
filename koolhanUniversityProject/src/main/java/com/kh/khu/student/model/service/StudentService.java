@@ -7,4 +7,8 @@ public interface StudentService {
 	Student loginStudent(Student s);
 
 	int insertTakeOff(Student s);
+	
+	Student selectChkStudent(String email);
+	
+	int changePwd(String userId, String encPwd);
 }

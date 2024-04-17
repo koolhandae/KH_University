@@ -56,6 +56,22 @@
 		     , #{mEmail}
 		     , #{mAddress}
 		     , #{mType}
-		     );
+		     )
 	</insert>
+	
+	<select id="selectChkMember" resultMap="memberResult">
+		select 
+		       *
+		  from member
+		 where m_email = #{email}
+	</select>
+
+	<update id="changemPwd" parameterType="map">
+	    update member
+	       set member_pwd = #{userPwd}
+	     where member_id = #{memberId}
+	</update>
+	
+	
+	
 </mapper>

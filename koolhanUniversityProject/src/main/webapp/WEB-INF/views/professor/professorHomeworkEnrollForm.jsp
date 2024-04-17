@@ -91,6 +91,12 @@
         padding-bottom: 50px;
     }
 
+    input[type="date"]::-webkit-calendar-picker-indicator,/*역삼각형 모양의 datepicker 드롭다운 시키는 버튼 선택자*/
+    input[type="date"]::-webkit-inner-spin-button { /*1일씩 올리거나 내리는 위아래 버튼 선택자이다.*/
+     display: none;
+     appearance: none; /*platform-native 스타일링을 제거*/
+    }
+
 </style>
 </head>
 <body>
@@ -134,18 +140,18 @@
             <div>
                 <h3>과제 등록</h3>
     
-                <form action="insert.me" method="post" id="enrollForm">
+                <form action="classEnrollForm.do" method="post" id="enrollForm">
                     <div class="form-group">
                         
+                     
+                        
                         <label for="lectureSelect">강의 선택 </label>
-                        <select name="lectureSelect" id="lectureSelect" class="form-control ">
-                            <option>자바기초</option>
-                            <option>컴퓨터프로그래밍</option>
-                            <option>이산수학</option>
-                            <option>공학수학1</option>
-                        </select>
-
-                        <br>
+						<select name="lectureSelect" id="lectureSelect" class="form-control">
+						    <option></option>
+						</select>
+						<br>
+                        
+                       
 
                         <label for="lectureTitle">제목 </label>
                         <input type="text" class="form-control" id="lectureTitle" name="lectureTitle" required><br>
@@ -155,13 +161,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    <input type="text" id="datepicker" class="form-control">
-                                </td>
-                                <td id="wave">
-                                    ~
-                                </td>
-                                <td>
-                                    <input type="text" id="datepicker2" class="form-control">
+                                    <input type="date" id="datepicker" class="form-control">
                                 </td>
                             </tr>
                         </table>
@@ -170,7 +170,7 @@
     
                         
                         <label for="content"> &nbsp;내용 </label>
-                        <textarea id="summernote" name="editordata" cols="30" rows="10" class="form-control summernote" style="resize:none;"> </textarea>
+                        <textarea id="summernote" name="editordata"  class="form-control summernote" style="resize:none;"> </textarea>
                        
     
     
@@ -178,7 +178,7 @@
                     <br>
                     <div class="btns" align="center">
                         <button id="enrollBtn" type="submit" class="btn btn-primary">등록</button>
-                        <button type="reset" class="btn btn-danger">취소</button>
+                        <!-- <button type="reset" class="btn btn-danger">취소</button> -->
                     </div>
                 </form>
             </div>
@@ -186,8 +186,40 @@
    	
       
    </div>
+	
+	
+	<input type="hidden" id="userId" value="${loginUser.memberId}">
+	<!-- select option에 들어가는 값 -->
+	<script>
+		$(function() {
+			$.ajax({
+				url:"classSelectAjax.do",
+				data:{memberId:$("#userId").val()},
+			    success:function(list){
+			    	console.log(list);
+			    	
+			    	let value = "";
+			    	
+			    	if(list != ""){
+                        for(let i in list){
+                            value += "<option>" + list[i].className+"</option>"
+                        }
+                    }else{
+			    		value += "<option>" + "개설된 강좌가 없습니다."+"</option>"
+                        $("#enrollBtn").attr("disabled",true);
+                        $("#lectureTitle").attr("readonly",true);
 
-
+			    	}
+                    
+			    	
+			    	$("#lectureSelect").html(value);
+			    	
+			    },error:function(){
+			    	console.log("ajax다 터져서왓다고요")
+			    }
+			})
+        });
+	</script>
 
 
 <script>
@@ -218,6 +250,8 @@
                 });
         });
    </script>
+
+
 
 
 
