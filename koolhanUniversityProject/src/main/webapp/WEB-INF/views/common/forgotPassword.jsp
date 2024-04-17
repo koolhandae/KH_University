@@ -107,8 +107,21 @@
     #exampleInputEmail{
         margin-top: 5px;
     }
+    #radiobox{
+        display: flex;
+        flex-direction: row;
+        align-content: stretch;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    #radiobox input{
+        margin-right: 5px;
+    }
+    #chkmember_p{
+        margin-left: 20px;
+    }
 
-	
 </style>
 </head>
 <body class="bg-gradient-primary">
@@ -140,8 +153,10 @@
                                     </div>
                                     <form class="user" id="send-mail">
                                         <div class="form-group">
-                                            <input type="radio" id="chkmember" name="chkmember" value="s" checked>학생
-                                        	<input type="radio" id="chkmember" name="chkmember" value="p">교수
+                                            <div id="radiobox">
+                                                <input type="radio" id="chkmember_s" name="chkmember" value="s" checked>학생
+                                                <input type="radio" id="chkmember_p" name="chkmember" value="p">교수
+                                            </div>
                                             <input type="email" class="form-control form-control-user"
                                                 id="InputEmail" aria-describedby="emailHelp"
                                                 placeholder="이메일을 입력해주세요" required>
@@ -181,113 +196,115 @@
             </div>
         </div>
     </div>
-	
+
 	<script>
-        $(document).ready(function(){
-            $("#forgot-btn").click(function(){
-
-                console.log("왜안되노");
-					
-                console.log($("#InputEmail"))
-                
-                if($("#InputEmail").val() === ""){
-                	alert("이메일을 입력해주세요!");
-                	
-                }else{  	
-                	$.ajax({
-                		url:"chkmail.me",
-                		data:{email:$("#InputEmail").val(),
-                              memberType : $("input[name='chkmember']").val()},
-                		success:function(result){
-                			console.log("ajax통신성공");
-                			console.log("chkmail" + result);
-
-                			const email = result.semail;
-                			const userId = result.studentId;
-                			
-                			
-                			if(result == "NNNNY"){
-                				
-                				$.ajax({
-            			            url: "/khu/VerifyRecaptcha",
-            			            type: 'post',
-            			            data: {
-            			                recaptcha: $("#g-recaptcha-response").val()
-            			            },
-            			            success: function(data) {
-            			                switch (data) {
-            			                    case 0:
-            			                        console.log("자동 가입 방지 봇 통과");
-            			                        
-            			                        $("#send-mail").hide();
-            	             	                $("#after-send-mail").show();
-            	             	                $("#userEmail").text($("#InputEmail").val());
-            
-            	             	                $.ajax({
-            	             	                	url:"sendmail.do",
-            	             	                	data:{email : $("#InputEmail").val()},
-            	             	                	success:function(result){
-            	             	                		//console.log("ajax통신성공");
-            	                                        // console.log("User ID:", result.userId);
-            	                                        // console.log("Check Number:", result.checkNum);
-            	                                        //const memberId = result.userId;
-            	                                        //const checkNum = result.checkNum;
-            	                                        
-            	                                        //location.href = "changePwdForm.me?checkNum=" + checkNum + "&memberId=" + memberId;
-            	                                     
-            	             	                	}, error:function(){
-            	             	                		console.log("ajax통신실패");
-            	             	                	}
-            	             	                });                				
-
-            			                        captcha = 0;
-            			                		break;
-            			                    case 1:
-            			                        alert("자동 가입 방지 봇을 확인 한뒤 진행 해 주세요.");
-            			                        break;
-            			                    default:
-            			                        alert("자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다. [Error bot Code : " + Number(data) + "]");
-            			                   		break;
-            			                }
-            			            }
-            			        });
-                				
-                				
-                				
-
-                			}else{
-                				alert("해당 메일로 등록된 정보가 없습니다! 재입력해주세요!");
-                				$("#InputEmail").val("");
-                				
-                			}
-							                		
-                		}, error:function(){
-
-
-                		}
-                	});
-                	
-                }
-            });
-        });
-    </script>
+	$(document).ready(function(){
 		
-	<!--  
-	<script>
-	
-		$(document).ready(function(){		
-			$("#forgot-btn").click(function(){
-					
-				if(captcha != 0) {
-					return false;
-				} 
-			})
-		})
-	
+		let chkmember = $("input[name='chkmember']:checked").val();
+	    // 라디오 버튼 값 변경 시 이벤트 핸들러 추가
+	    
+	    $("input[name='chkmember']").change(function(){
+	        // 변경된 라디오 버튼의 값을 변수에 할당
+	        chkmember = $(this).val();
+	    });
+
+	    $("#forgot-btn").click(function(){
+			
+	    	console.log(chkmember);
+	    	
+	        if($("#InputEmail").val() === ""){
+	            alert("이메일을 입력해주세요!");
+	            
+	        } else {    
+
+	            if(chkmember === "s"){
+	                $.ajax({
+	                    url:"chkmail.st",
+	                    data:{email:$("#InputEmail").val()},
+	                    success:function(result){
+	                        console.log(result);
+	                        console.log(result.smail);
+	                        if(result != ""){
+	                            rechapcha(result.smail);    
+	                        } else {
+	                            alert("해당 메일로 등록된 정보가 없습니다! 재입력해주세요!");
+	                            $("#InputEmail").val("");
+	                        }
+	                    },
+	                    error:function(){
+	                        console.log("ajax통신실패");
+	                    }
+	                }); 
+	            } else if(chkmember === "p"){
+	                $.ajax({
+	                    url:"chkmail.me",
+	                    data:{email:$("#InputEmail").val()},
+	                    success:function(result){
+	                        console.log(result);
+	                        if(result != ""){
+	                            rechapcha(result.mmail);    
+	                        } else {
+	                            alert("해당 메일로 등록된 정보가 없습니다! 재입력해주세요!");
+	                            $("#InputEmail").val("");
+	                        }
+	                    },
+	                    error:function(){
+	                        console.log("ajax통신실패");
+	                    }
+	                });
+	            } else {
+	                alert("해당 정보가 없습니다!");
+	            }
+	        }
+	    });
+	});
 	</script>
-	-->
+	
+	<script>
 
+		function rechapcha(result){
+			$.ajax({
+	            url: "/khu/VerifyRecaptcha",
+	            type: 'post',
+	            data: {
+	                recaptcha: $("#g-recaptcha-response").val()
+	            },
+	            success: function(data) {
+	                switch (data) {
+	                    case 0:
+	                        console.log("자동 가입 방지 봇 통과");
+	                        
+	                        $("#send-mail").hide();
+         	                $("#after-send-mail").show();
+         	                $("#userEmail").text($("#InputEmail").val());
 
-    
+         	                $.ajax({
+         	                	url:"sendmail.do",
+         	                	data:{email : $("#InputEmail").val()},
+         	                	success:function(result){
+                                    const memberId = result.userId;
+                                    const checkNum = result.checkNum;
+
+         	                	}, error:function(){
+         	                		console.log("ajax통신실패");
+         	                	}
+         	                });                				
+
+	                        captcha = 0;
+	                		break;
+	                    case 1:
+	                        alert("자동 가입 방지 봇을 확인 한뒤 진행 해 주세요.");
+	                        break;
+	                    default:
+	                        alert("자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다. [Error bot Code : " + Number(data) + "]");
+	                   		break;
+	                }
+	            }
+	        });
+
+		}
+
+</script>
+	
 </body>
 </html>
