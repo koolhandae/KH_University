@@ -19,10 +19,10 @@ public class Member {
 	private String memberPwd;
 	private String memberName;
 	private String memberSsn;
-	private String mPhone;
-	private String mEmail;
-	private String mAddress;
-	private String mType;
-	private String mStatus;
+	private String mePhone;
+	private String meEmail;
+	private String meAddress;
+	private String meType;
+	private String meStatus;
 	
 }

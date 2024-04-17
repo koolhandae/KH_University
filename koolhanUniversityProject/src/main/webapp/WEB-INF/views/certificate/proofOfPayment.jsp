@@ -45,11 +45,11 @@ thead * {
 				<h1>쿨한대학교 등록금 납부 영수증</h1>
 			</div>
 			<div id="studentNo">
-				<span>학생 번호 : </span> <span>12345645</span>
+				<span>학생 번호 : </span> <span>${loginStudent.studentNo}</span>
 			</div>
 			<br>
 			<div id="studentName">
-				<span>이름 : </span> <span>김아무개</span>
+				<span>이름 : </span> <span>${loginStudent.studentName}</span>
 			</div>
 			<br>
 			<div>
@@ -65,19 +65,15 @@ thead * {
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="4">입학금 (A)</td>
-						<td>0</td>
-					</tr>
-					<tr>
-						<td colspan="4">수업료 (B)</td>
+						<td colspan="4">수업료 (A)</td>
 						<td>4,200,000</td>
 					</tr>
 					<tr>
-						<td colspan="4">감면액 (C)</td>
+						<td colspan="4">감면액 (B)</td>
 						<td>1,700,000</td>
 					</tr>
 					<tr>
-						<th colspan="4">합계 (A + B - C)</th>
+						<th colspan="4">합계 (A - B)</th>
 						<td>2,500,000</td>
 					</tr>
 				</tbody>
@@ -89,10 +85,11 @@ thead * {
 				<h3>2024년 04월 16일</h3>
 			</div>
 			<div id="signature" style="display:flex; justify-content: flex-end;" >
+			<div style="width:280px"> </div>
 				<div style="height: 150px;  margin: 0 15px">
 					<img alt="" src="resources/images/logo.png" style="height:100%">
 				</div>
-				<div id="stamp" style="position:relative;padding-left: 40px; margin-right: 15px; width:310px">
+				<div id="stamp" style="position:relative;padding-left: 10px; margin-right: 15px; width:280px">
 					<img alt="" src="resources/images/KHU_Stamp.png" style="position: absolute; right:-15px; height:100px"><br>
 					<img alt="" src="resources/images/KHU_Signature.png"><br>
 					<br>

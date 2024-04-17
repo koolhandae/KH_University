@@ -8,10 +8,10 @@
 		<result column="student_pwd" property="studentPwd"/>
 		<result column="student_name" property="studentName"/>
 		<result column="student_ssn" property="studentSsn"/>
-		<result column="s_phone" property="sPhone"/>
-		<result column="s_email" property="sEmail"/>
-		<result column="a_address" property="sAddress"/>
-		<result column="s_status" property="sStatus"/>
+		<result column="s_phone" property="stPhone"/>
+		<result column="s_email" property="stEmail"/>
+		<result column="a_address" property="stAddress"/>
+		<result column="s_status" property="stStatus"/>
 		<result column="enroll_date" property="enrollDate"/>
 		<result column="absence_date" property="absenceDate"/>
 		<result column="grad_date" property="gradDate"/>

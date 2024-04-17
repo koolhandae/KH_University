@@ -168,8 +168,8 @@
 						</a>
 						<div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionSidebar">
 							<div class="bg-white py-2 collapse-inner rounded">
-								<a class="collapse-item" href="insert.stu">학생 등록</a>
-								<a class="collapse-item" href="insert.me">교직원 등록</a>
+								<a class="collapse-item" href="insertForm.stu">학생 등록</a>
+								<a class="collapse-item" href="insertForm.me">교직원 등록</a>
 							</div>
 						</div>
 					</li>

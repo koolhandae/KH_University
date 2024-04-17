@@ -13,7 +13,7 @@
 		<%-- <jsp:forward page="WEB-INF/views/admin/noticeUpdateForm.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/admin/noticeEnrollForm.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/student/studentEnrollForm.jsp" /> --%>
-		<%-- <jsp:forward page="WEB-INF/views/admin/adminEnrollForm.jsp" /> --%>
+<%-- 		<jsp:forward page="WEB-INF/views/admin/adminEnrollForm.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/admin/noticeListView.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/student/certificateIssuingPage.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/board/boardDetailView.jsp" /> --%>
@@ -21,7 +21,7 @@
 		<%-- <jsp:forward page="WEB-INF/views/board/boardListView.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/board/boardUpdateForm.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/certificate/transcriptTemplate.jsp" /> --%>
-		<%-- <jsp:forward page="WEB-INF/views/certificate/graduationCertificateTemplate.jsp" /> --%>
+<%-- 		<jsp:forward page="WEB-INF/views/certificate/graduationCertificateTemplate.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/certificate/proofOfPayment.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/certificate/tuitionPaymentNotice.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/student/librarySearch.jsp" /> --%>

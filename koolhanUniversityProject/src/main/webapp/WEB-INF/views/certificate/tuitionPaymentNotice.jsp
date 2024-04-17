@@ -84,10 +84,11 @@ thead * {
 				<h3>2024년 04월 16일</h3>
 			</div>
 			<div id="signature" style="display:flex; justify-content: flex-end;" >
+			<div style="width:280px"> </div>
 				<div style="height: 150px;  margin: 0 15px">
 					<img alt="" src="resources/images/logo.png" style="height:100%">
 				</div>
-				<div id="stamp" style="position:relative;padding-left: 40px; margin-right: 15px; width:310px">
+				<div id="stamp" style="position:relative;padding-left: 10px; margin-right: 15px; width:280px">
 					<img alt="" src="resources/images/KHU_Stamp.png" style="position: absolute; right:-15px; height:100px"><br>
 					<img alt="" src="resources/images/KHU_Signature.png"><br>
 					<br>

@@ -28,6 +28,7 @@ END LOOP;
 END;
 /
 
+create sequence SEQ_USER_NO nocache;
 
 ------------- 교수 교직원 테이블
 CREATE 

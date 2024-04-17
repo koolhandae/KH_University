@@ -26,23 +26,23 @@ color: rgb(100,100,100);
                     <input type="text" class="form-control" id="userName" name="memberName" placeholder="이름을 입력하세요" required><br>
                     
                     <label for="email"> &nbsp; * 이메일 :</label>
-                    <input type="email" class="form-control" id="email" name="mEmail" placeholder="이메일을 입력하세요" required><br>
+                    <input type="email" class="form-control" id="email" name="meEmail" placeholder="이메일을 입력하세요" required><br>
                     
                     <label for="age"> &nbsp; * 주민등록번호 :</label>
                     <input type="text" class="form-control" id="memberSsn" name="memberSsn" placeholder="주민등록번호를 입력하세요( - 포함)" required><br>
                     
                     <label for="phone"> &nbsp; * 전화번호 :</label>
-                    <input type="text" class="form-control" id="phone" name="mPhone" placeholder="전화번호를 입력하세요(- 포함)" required><br>
+                    <input type="text" class="form-control" id="phone" name="mePhone" placeholder="전화번호를 입력하세요(- 포함)" required><br>
                     
                     <label for="address"> &nbsp; * 주소 :</label>
                     <div style="display:flex;">
-	                    <input type="text" class="form-control" onclick="execDaumPostcode()" id="postcode" name="postcode" placeholder="우편번호">
-						<input type="button" class="btn btn-secondary" onclick="execDaumPostcode()" value="우편번호 찾기">
+	                    <input type="text" class="form-control" onclick="execDaumPostcode()" id="postcode" name="postcode" placeholder="우편번호" readonly>
+						<input type="button" class="btn btn-secondary" onclick="execDaumPostcode()" value="우편번호 찾기" readonly>
                     </div>
-					<input type="text" class="form-control" onclick="execDaumPostcode()" id="address" name="address" placeholder="주소">
+					<input type="text" class="form-control" onclick="execDaumPostcode()" id="address" name="address" placeholder="주소" readonly>
                     <div style="display:flex;">
-						<input type="text" class="form-control" onclick="execDaumPostcode()" id="detailAddress" name="detailAddress"placeholder="상세주소">
-						<input type="text" class="form-control" onclick="execDaumPostcode()" id="extraAddress" name="extraAddress" placeholder="참고항목">
+						<input type="text" class="form-control" id="detailAddress" name="detailAddress"placeholder="상세주소">
+						<input type="text" class="form-control" readonly onclick="execDaumPostcode()" id="extraAddress" name="extraAddress" placeholder="참고항목">
                     </div>
 					
 					<div id="wrap" style="display:none;border:1px solid;width:500px;height:470px;margin:5px 0;position:relative">
@@ -124,9 +124,9 @@ color: rgb(100,100,100);
 					<br>
 					
                     <label for=""> &nbsp; * 교수 / 교직원 : </label> &nbsp;&nbsp;
-                    <input type="radio" name="gender" id="Professor" value="P" checked>
+                    <input type="radio" name="meType" id="Professor" value="P" checked>
                     <label for="Professor">교수</label> &nbsp;&nbsp;
-                    <input type="radio" name="gender" id="Administrator" value="A">
+                    <input type="radio" name="meType" id="Administrator" value="A">
                     <label for="Administrator">교직원</label><br>
                     
                 </div>

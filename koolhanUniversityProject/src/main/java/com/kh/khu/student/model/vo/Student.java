@@ -19,10 +19,10 @@ public class Student {
 	private String studentPwd;
 	private String studentName;
 	private String studentSsn;
-	private String sPhone;
-	private String sEmail;
-	private String sAddress;
-	private String sStatus;
+	private String stPhone;
+	private String stEmail;
+	private String stAddress;
+	private String stStatus;
 	private String enrollDate;
 	private String absenceDate;
 	private String gradDate;

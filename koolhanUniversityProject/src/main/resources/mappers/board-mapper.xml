@@ -20,7 +20,7 @@
 		<result column="reply_writer" property="replyWriter"/>	
 		<result column="reply_content" property="replyContent"/>	
 		<result column="create_date" property="createDate"/>	
-		<result column="r_status" property="rStatus"/>	
+		<result column="r_status" property="status"/>	
 	</resultMap>
 	
 	<select id="selectListCount" resultType="_int">

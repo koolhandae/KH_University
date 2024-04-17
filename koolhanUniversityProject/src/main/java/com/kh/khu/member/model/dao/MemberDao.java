@@ -34,4 +34,8 @@ public class MemberDao {
 		    /*hashmap에선 키값을 mapper에 담아줘야됨!*/
 		    return sqlSession.update("memberMapper.changemPwd", parameters);
 	}
+	
+	public String selectMemberId(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.selectMemberId", m);
+	}
 }
