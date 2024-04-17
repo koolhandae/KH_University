@@ -10,7 +10,7 @@
 	<body>
 		<!-- 정동석 -->
 <%-- 		<jsp:forward page="WEB-INF/views/admin/noticeDetailView.jsp" /> --%>
-		<jsp:forward page="WEB-INF/views/admin/noticeUpdateForm.jsp" />
+<%-- 		<jsp:forward page="WEB-INF/views/admin/noticeUpdateForm.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/admin/noticeEnrollForm.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/student/studentEnrollForm.jsp" /> --%>
 		<%-- <jsp:forward page="WEB-INF/views/admin/adminEnrollForm.jsp" /> --%>
@@ -26,7 +26,7 @@
 
     
 		<!-- 김도현 -->
-<%-- 		<jsp:forward page="WEB-INF/views/main.jsp" /> --%>
+ 		<jsp:forward page="WEB-INF/views/main.jsp" /> 
 <%-- 		<jsp:forward page="WEB-INF/views/student/studentClassPage.jsp" /> --%>
 <%-- 		<jsp:forward page="WEB-INF/views/student/studentBeforeClassPage.jsp" /> --%>
 <%-- 		<jsp:forward page="WEB-INF/views/student/studentScorePage.jsp" /> --%>
