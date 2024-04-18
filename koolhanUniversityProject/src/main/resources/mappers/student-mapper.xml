@@ -80,5 +80,12 @@
 		  from student
 		 where s_email = #{stEmail}     
 	</select>
+	
+		<select id="verifyEmail" resultType="_int">
+		select
+		       count(*)
+		  from student
+		 where s_email = #{email}      
+	</select>
 
 </mapper>

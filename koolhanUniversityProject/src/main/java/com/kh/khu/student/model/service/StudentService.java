@@ -13,4 +13,6 @@ public interface StudentService {
 	int insertStudent(Student s);
 	
 	String selectStudentId(Student s);
+	
+	int verifyEmail(String email);
 }

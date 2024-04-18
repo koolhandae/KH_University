@@ -21,23 +21,28 @@
                     <input type="text" class="form-control" id="studentName" name="studentName" placeholder="이름을 입력하세요" required><br>
                     
                     <label for="email"> &nbsp; * 이메일 :</label>
-                    <input type="email" class="form-control" id="email" name="stEmail" placeholder="이메일을 입력하세요" required><br>
+                    <div style="display:flex;">
+                    <input type="email" class="form-control" id="email" name="stEmail" placeholder="이메일을 입력하세요" required>
+                    &nbsp;
+                    <input id="emailCheck" type="button" class="btn btn-secondary" value="이메일 확인">
+                    </div>
+                    <br>
                     
                     <label for="age"> &nbsp; * 주민등록번호 :</label>
-                    <input type="text" class="form-control" id="memberSsn" name="sttudentSsn" placeholder="주민등록번호를 입력하세요( - 포함)" required><br>
+                    <input type="text" class="form-control" id="memberSsn" name="studentSsn" placeholder="주민등록번호를 입력하세요( - 포함)" required><br>
                     
                     <label for="phone"> &nbsp; * 전화번호 :</label>
                     <input type="text" class="form-control" id="phone" name="stPhone" placeholder="전화번호를 입력하세요(- 포함)" required><br>
                     
                     <label for="address"> &nbsp; * 주소 :</label>
                     <div style="display:flex;">
-	                    <input type="text" class="form-control" onclick="execDaumPostcode()" id="postcode" name="postcode" placeholder="우편번호">
-						<input type="button" class="btn btn-secondary" onclick="execDaumPostcode()" value="우편번호 찾기">
+	                    <input type="text" class="form-control" onclick="execDaumPostcode()" id="postcode" name="postcode" placeholder="우편번호" readonly>
+						<input type="button" class="btn btn-secondary" onclick="execDaumPostcode()" value="우편번호 찾기" readonly>
                     </div>
-					<input type="text" class="form-control" onclick="execDaumPostcode()" id="address" name="address" placeholder="주소">
+					<input type="text" class="form-control" onclick="execDaumPostcode()" id="address" name="address" placeholder="주소" readonly>
                     <div style="display:flex;">
 						<input type="text" class="form-control" id="detailAddress" name="detailAddress"placeholder="상세주소">
-						<input type="text" class="form-control" onclick="execDaumPostcode()" id="extraAddress" name="extraAddress" placeholder="참고항목">
+						<input type="text" class="form-control" onclick="execDaumPostcode()" id="extraAddress" name="extraAddress" placeholder="참고항목" readonly>
                     </div>
 					
 					<div id="wrap" style="display:none;border:1px solid;width:500px;height:470px;margin:5px 0;position:relative">
@@ -115,9 +120,49 @@
 					        // iframe을 넣은 element를 보이게 한다.
 					        element_wrap.style.display = 'block';
 					    }
+					    
+					    $("#emailCheck").click(function(){
+					    	$.ajax({
+					    		url:"verifyEmail.stu",
+					    		data:{email:$("#email").val()},
+					    		success:function(response){
+					    			if(response === "NNNNY"){
+					    				Swal.fire({
+					    		    		icon: "success",
+					    		    		title: "이메일 사용 가능",
+					    		    		text: "사용 가능한 이메일 입니다.",
+					    		    	});
+					    				$("#enrollBtn").removeAttr("disabled");
+					    				$("#email").attr("readonly", true);
+					    				$("#emailCheck").val("이메일 수정하기");
+					    			}else{
+					    				Swal.fire({
+					    		    		icon: "error",
+					    		    		title: "이메일 사용 불가",
+					    		    		text: "중복된 이메일 입니다.",
+					    		    	});
+					    				$("#email").select();
+					    			}
+					    		},
+					    		error:function(){
+					    			console.log($("#email").val());
+					    			console.log("ajax tongsin silpae")
+					    		},
+					    	});
+					    });
 					</script>
 					<br>
-        
+					
+					<div class="btns" align="center">
+	                    <button id="enrollBtn" type="submit" class="btn btn-primary" disabled>회원가입</button>
+	                    <button type="reset" class="btn btn-danger"> 초기화</button>
+	                </div>
+        		</div>
+	            </form>
+	        </div>
+	        
+	      
+	        <br><br>
    </div>
    <jsp:include page="../common/footer.jsp"/>
 </body>

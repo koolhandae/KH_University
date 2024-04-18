@@ -31,10 +31,6 @@
                     	PDF / 인쇄 
                     	<i class="fa-solid fa-file-pdf"></i>
                     </th>
-                    <th>
-	                    이메일 
-	                    <i class="fa-solid fa-envelope"></i>
-                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -42,10 +38,7 @@
 	                        <td class="bno">1</td>
 	                        <td>성적 증명서</td>
 	                        <td>
-	                        	<button class="btn btn-primary">PDF 파일 / 인쇄</button>
-	                        </td>
-	                        <td>
-	                        	<button class="btn btn-primary">이메일로 보내기</button>
+	                        	<button class="btn btn-primary"  onclick="location.href='transcript.certificate'">PDF 파일 / 인쇄</button>
 	                        </td>
 	                    </tr>
 	                    <tr>
@@ -54,38 +47,26 @@
 	                        <td>
 	                        	<button class="btn btn-primary" onclick="location.href='grad.certificate'">PDF 파일 / 인쇄</button>
 	                        </td>
-	                        <td>
-	                        	<button class="btn btn-primary">이메일로 보내기</button>
-	                        </td>
 	                    </tr>
 	                    <tr>
 	                        <td class="bno">3</td>
-	                        <td>돈냄 증명서</td>
+	                        <td>등록금 납부 영수증</td>
 	                        <td>
-	                        	<button class="btn btn-primary">PDF 파일 / 인쇄</button>
-	                        </td>
-	                        <td>
-	                        	<button class="btn btn-primary">이메일로 보내기</button>
+	                        	<button class="btn btn-primary" onclick="location.href='tuition.reciept'">PDF 파일 / 인쇄</button>
 	                        </td>
 	                    </tr>
 	                    <tr>
 	                        <td class="bno">4</td>
-	                        <td>아몰라 증명서</td>
+	                        <td>등록금 고지서</td>
 	                        <td>
-	                        	<button class="btn btn-primary">PDF 파일 / 인쇄</button>
-	                        </td>
-	                        <td>
-	                        	<button class="btn btn-primary">이메일로 보내기</button>
+	                        	<button class="btn btn-primary" onclick="location.href='tuition.notice'">PDF 파일 / 인쇄</button>
 	                        </td>
 	                    </tr>
 	                    <tr>
 	                        <td class="bno">5</td>
-	                        <td>어쩌구 증명서</td>
+	                        <td>재학 증명서</td>
 	                        <td>
-	                        	<button class="btn btn-primary">PDF 파일 / 인쇄</button>
-	                        </td>
-	                        <td>
-	                        	<button class="btn btn-primary">이메일로 보내기</button>
+	                        	<button class="btn btn-primary"  onclick="location.href='attending.certificate'">PDF 파일 / 인쇄</button>
 	                        </td>
 	                    </tr>
                 </tbody>

@@ -41,5 +41,10 @@ public class StudentServiceImpl implements StudentService{
 		return sDao.selectStudentId(sqlSession, s);
 	}
 
+	@Override
+	public int verifyEmail(String email) {
+		return sDao.verifyEmail(sqlSession, email);
+	}
+
 
 }

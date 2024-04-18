@@ -12,6 +12,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.khu.common.model.vo.Address;
@@ -79,5 +80,19 @@ public class StudentController {
 		}
 		return mv;
 	}
+	
+	@ResponseBody
+	@RequestMapping("verifyEmail.stu")
+	public String verifyEmail(String email) {
+		int result = sService.verifyEmail(email);
+		
+		return result == 0 ? "NNNNY" : "NNNNN";
+	}
+	
+	@RequestMapping("certificate.issue")
+	public String connectCertificateIssuePage() {
+		return "student/certificateIssuingPage";
+	}
+	
 	
 }

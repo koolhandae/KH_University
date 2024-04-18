@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	
 		<!DOCTYPE html>
 		<html>
 
@@ -7,6 +8,9 @@
 
 			<meta charset="UTF-8">
 			<title>Insert title here</title>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+   			<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
 			<!-- 다음 주소 -->
 			<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 			<!-- 구글 제이쿼리 스니펫 -->
@@ -64,35 +68,26 @@
 
 		<body id="page-top">
 
-			<c:if test="${ not empty alertMsg }">
-				<script>
-					alert("${ alertMsg }");
-				</script>
-				<c:remove var="alertMsg" scope="session" />
-			</c:if>
-			<!-- 
-	<c:if test="${not empty alertMsg}">
-		<script>
-			$(function(){
-		    	Swal.fire({
-		    		icon: '${alertMsg.icon}',
-		    		title: '${alertMsg.title}',
-		    		text: '${alertMsg.text}',
-		    	})
-			});
-	    <c:remove var="alertMsg" scope="session" />
-	    </script>
-	</c:if>
-
-	
-	<!-- 
+<%-- 			<c:if test="${not empty alertMsg}"> --%>
+<!-- 				<script> -->
+<!-- 					$(function(){ -->
+<!-- 				    	Swal.fire({ -->
+<%-- 				    		icon: '${alertMsg.icon}', --%>
+<%-- 				    		title: '${alertMsg.title}', --%>
+<%-- 				    		text: '${alertMsg.text}', --%>
+<!-- 				    	}) -->
+<!-- 					}); -->
+<!-- 			    </script> -->
+<%-- 			    <c:remove var="alertMsg" scope="session" /> --%>
+<%-- 			</c:if> --%>
+	 
 	<c:if test="${ not empty alertMsg }"> 
 		<script>
 			alert("${ alertMsg }");
 		</script>
 		<c:remove var="alertMsg" scope="session"/>
 	</c:if>
-	 -->
+	
 	
 
 			<!-- Page Wrapper -->
@@ -151,7 +146,7 @@
 								<a class="collapse-item" href="#">등록금 납부 조회</a>
 								<a class="collapse-item" href="#">학점 / 성적 조회</a>
 								<a class="collapse-item" href="#">휴 · 복학 신청</a>
-								<a class="collapse-item" href="#">증명서 발급</a>
+								<a class="collapse-item" href="certificate.issue">증명서 발급</a>
 							</div>
 						</div>
 					</li>
@@ -247,7 +242,7 @@
             
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="library.go">
                     <i class="fa-solid fa-book-bookmark"></i>
                     <span>중앙 도서관</span></a>
             </li>

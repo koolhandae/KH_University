@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,17 +39,27 @@ thead * {
 </style>
 </head>
 <body>
-	<div class="content" style="padding:10px;">
+<jsp:include page="../common/header_with_sidebar.jsp"/>
+
+	<br>
+	<br>
+	<div align="center">
+	<button onclick="printPDF();" class="btn btn-primary">pdf다운로드</button>
+	</div>
+	<br>
+	<br>
+	<br>
+   <div id="pdfDiv" class="content" style="padding:10px; background-color: white; color: black; margin:auto; padding:40px;">
 		<div class="innerContnent">
 			<div id="schoolName" style="text-align: center;">
 				<h1>쿨한대학교 성적 증명서</h1>
 			</div>
 			<div id="studentNo">
-				<span>학생 번호 : </span> <span>12345645</span>
+				<span>학생 번호 : </span> <span>${loginStudent.studentId }</span>
 			</div>
 			<br>
 			<div id="studentName">
-				<span>이름 : </span> <span>김아무개</span>
+				<span>이름 : </span> <span>${loginStudent.studentName }</span>
 			</div>
 			<br>
 			<table>
@@ -177,11 +188,16 @@ thead * {
 			<div id="grade" style="font-size: 10px">
 				* A+ : 4.5 (95-100), A : 4.0 (90-94), B+ : 3.5 (85-89), B : 3.0 (80-84), C+ : 2.5 (75-79), C : 2.0 (70-74), D+ : 1.5 (65-69), D = 1.0 (60-64), F : 0 (0-59)
 			</div>
-			
+			<br>
+	<br>
+	<br>
 			<div id="date" style="text-align:center;">
 				<h3>성적원부와 상위 없음을 증명함</h3>
-				<h3>2024년 04월 16일</h3>
+				<h3><fmt:formatDate value="${now}" pattern="yyyy년 MM월 dd일"/></h3>
 			</div>
+			<br>
+	<br>
+	<br>
 			<div id="signature" style="display:flex; justify-content: flex-end;" >
 			<div style="width:280px"> </div>
 				<div style="height: 150px;  margin: 0 15px">
@@ -197,5 +213,27 @@ thead * {
 			</div>
 		</div>
 	</div>
+	<br>
+	<br>
+	<br>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
+	<script>
+        async function printPDF() {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
+
+            const element = document.getElementById('pdfDiv');
+            const canvas = await html2canvas(element);
+            const imgData = canvas.toDataURL('image/png');
+
+            const imgProps = pdf.getImageProperties(imgData);
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            pdf.save('${loginStudent.studentName} 성적 증명서.pdf');
+        }
+    </script>
+	
+	
 </body>
 </html>

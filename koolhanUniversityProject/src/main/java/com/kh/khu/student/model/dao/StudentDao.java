@@ -37,4 +37,7 @@ public class StudentDao {
 	public String selectStudentId(SqlSessionTemplate sqlSession, Student s) {
 		return sqlSession.selectOne("studentMapper.selectStudentId", s);
 	}
+	public int verifyEmail(SqlSessionTemplate sqlSession, String email) {
+		return sqlSession.selectOne("studentMapper.verifyEmail", email);
+	}
 }

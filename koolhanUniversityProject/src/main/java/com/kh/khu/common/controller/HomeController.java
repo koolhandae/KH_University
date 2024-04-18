@@ -1,5 +1,11 @@
 package com.kh.khu.common.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -8,28 +14,29 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.support.CglibSubclassingInstantiationStrategy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.common.recaptcha.VerifyRecaptcha;
+import com.kh.khu.common.template.Pagination;
 import com.kh.khu.member.model.service.MemberServiceImpl;
 import com.kh.khu.member.model.vo.Member;
-import com.kh.khu.student.model.service.StudentService;
 import com.kh.khu.student.model.service.StudentServiceImpl;
 import com.kh.khu.student.model.vo.Student;
+
 
 @Controller
 public class HomeController {
@@ -203,5 +210,46 @@ public class HomeController {
 		}
 		return "redirect:/";
 		
+	}
+	
+	@RequestMapping("library.go")
+	public String goLibrary() {
+		return "student/librarySearchView";
+	}
+	
+	@RequestMapping("search.lib")
+	public ModelAndView librarySearchApi(@RequestParam(value="pageNum", defaultValue="1") int pageNum, String keyWord, String condition, ModelAndView mv) throws IOException {
+		String libraryServiceKey = "906401d0194b3fa7e7e67e2a8287d63fa7bb118f60ec1241a32751cc6d211f6a";
+		String url = "https://www.nl.go.kr/NL/search/openApi/search.do";
+		
+		// url parameters
+		url += "?key=" + libraryServiceKey;
+		url += "&srchTarget=" + condition;
+		url += "&kwd=" + URLEncoder.encode(keyWord, "UTF-8");
+		url += "&pageNum=" + pageNum;
+		url += "&pageSize=20";
+		url += "&apiType=json";
+		
+		URL requestUrl = new URL(url);
+		HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection();
+		urlConnection.setRequestMethod("GET");
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+		String responseText = "";
+		String line;
+		while((line=br.readLine()) != null) {
+			responseText += line;
+		}
+		
+		JsonObject jObj = JsonParser.parseString(responseText).getAsJsonObject();
+		
+		int listCount = jObj.get("total").getAsInt();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, pageNum, 5, 20);
+		
+		mv.addObject("list",jObj).addObject("pi",pi).addObject("keyWord",keyWord).addObject("condition",condition).setViewName("student/librarySearchList");
+		
+		
+		return mv;
 	}
 }

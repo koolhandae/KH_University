@@ -87,8 +87,8 @@ pageEncoding="UTF-8"%>
 	<c:if test="${ not empty alertMsg }">
 		<script>
 			alert("${ alertMsg }");
-			<c:remove var="alertMsg" scope="session"/>
 		</script>
+			<c:remove var="alertMsg" scope="session"/>
 	</c:if>
 	
 		<div class="container" style="min-width: 912px;">
