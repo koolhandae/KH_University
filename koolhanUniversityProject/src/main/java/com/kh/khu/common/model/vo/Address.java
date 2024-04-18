@@ -13,7 +13,6 @@ import lombok.ToString;
 @ToString
 
 public class Address {
-
 	private String postcode;
 	private String address;
 	private String detailAddress;

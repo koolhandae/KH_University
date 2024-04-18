@@ -89,4 +89,8 @@ public class StudentDao {
 	public int verifyEmail(SqlSessionTemplate sqlSession, String email) {
 		return sqlSession.selectOne("studentMapper.verifyEmail", email);
 	}
+	
+	public int updateAddress(SqlSessionTemplate sqlSession, Student s) {
+		return sqlSession.update("studentMapper.updateAddress", s);
+	}
 }

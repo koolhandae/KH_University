@@ -28,6 +28,8 @@
 <%-- 		<jsp:forward page="WEB-INF/views/student/librarySearchView.jsp" /> --%>
 
 
+<%-- 		<jsp:forward page="WEB-INF/views/student/studentUpdateForm.jsp" /> --%>
+		<%-- 학생 개인정보 수정 --%>
 
 
 
@@ -48,8 +50,6 @@
 
 
 		<!-- 어수지 -->
-		<%-- <jsp:forward page="WEB-INF/views/student/studentUpdateForm.jsp" /> --%>
-		<%-- 학생 개인정보 수정 --%>
 <%--    <jsp:forward page="WEB-INF/views/student/studentTuition.jsp" /> --%>
 		<%-- 학생 등록금 납부 내역 조회 --%>
 <%-- 	<jsp:forward page="WEB-INF/views/student/studentTuitionBill.jsp" /> --%>
@@ -66,7 +66,7 @@
 		<%-- 교수 개인정보 수정 --%>
 <%--    <jsp:forward page="WEB-INF/views/admin/adminTuitionManage.jsp" /> --%>
    		<%-- 관리자 등록금 조회 --%>
-	<jsp:forward page="WEB-INF/views/admin/adminTakeOffSelect.jsp" />
+<%-- 	<jsp:forward page="WEB-INF/views/admin/adminTakeOffSelect.jsp" /> --%>
 		<%-- 학생 휴학 신청서 조회 --%>
 <%-- 	<jsp:forward page="WEB-INF/views/admin/studentReturnSchool.jsp" /> --%>
 		<%-- 학생 복학 신청서 조회 --%>

@@ -217,7 +217,33 @@ public class StudentController {
 			model.addAttribute("errorMsg", "복학 신청서 등록 실패!");
 			return "common/errorPage404";
 		}
+	}
+	
+	@RequestMapping("update.stu")
+	public String updateStudentForm() {
+		return "student/studentUpdateForm";
+	}
+	
+	@ResponseBody
+	@RequestMapping("updateAddress.stu")
+	public HashMap<String, Object> updateAddress(Address a, String studentId, HttpSession session) {
+		System.out.println("자바왔냐");
+		String newAddress = AddressString.AddressMake(a);
+		Student s = new Student();
+		s.setStudentId(studentId);
+		s.setStAddress(newAddress);
+		int result = sService.updateAddress(s);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		if(result > 0) {
+			session.removeAttribute("loginStudent");
+			session.setAttribute("loginStudent", sService.loginStudent(s));
+			map.put("title", "주소 변경 성공");
+			map.put("text", "성공적으로 주소를 변경했습니다.");
+			map.put("icon", "success");
+			map.put("newAddress", s.getStAddress());
+		}
 		
+		return map;
 	}
 	
 }
