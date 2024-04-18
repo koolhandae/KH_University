@@ -68,7 +68,7 @@
       background-color: white;
       margin-top: 15px;
       width: 100%;
-      height: 500px;
+      height: auto;
    }
    .lecture-navigator{
       height: 55px;
@@ -166,8 +166,19 @@
       display: flex;
       justify-content: space-between;
    }
+   .pagenation{
+      justify-content: center;
+   }
 
+   .pagination.pagination-rounded-flat .page-item .page-link, a {
+      border: none;
+      border-radius: 50px;
+   }
 
+   .page-link.active {
+    background-color: #1c4587 !important;
+    color: white !important;
+  }
 
 </style>
 
@@ -190,7 +201,7 @@
          <div id="lecture-title">자바기초 강의실</div>
       </div>
       <div class="lecture-navigator">
-         <div id="notice" class="lec-nav-item">공지사항</div>
+         <div id="notice" class="lec-nav-item" style="background-color: #1c4587; color: white;">공지사항</div>
          <div id="classPlan" class="lec-nav-item">강의계획서</div>
          <div id="board" class="lec-nav-item">자유게시판</div>
          <div id="project" class="lec-nav-item">과제게시판</div>
@@ -201,7 +212,7 @@
 
          <div id="notice-area">
             <!-- 공지사항 게시판 클릭시 화면-->
-            <!--
+            
             <div class="list-title" style="margin-bottom: 20px;">공지사항</div>
             <table id="boardList" class="table table-hover" align="center">
                <thead>
@@ -213,35 +224,44 @@
                   </tr>
                </thead>
                <tbody>
+               <c:forEach var="n" items="${ list }">
                   <tr>
-                     <td>4</td>
-                     <td>중간과제 제출 관련공지입니다</td>
-                     <td>2024.04.12</td>
-                     <td>5</td>
+                     <td>${ n.classNoticeNo }</td>
+                     <td>${ n.cnTitle }</td>
+                     <td>${ n.cnDate}</td>
+                     <td>${ n.cnCount }</td>
                   </tr>
-                   <tr>
-                     <td>3</td>
-                     <td>3주차 강의자료입니다</td>
-                     <td>2024.03.19</td>
-                     <td>10</td>
-                  </tr>
-                   <tr>
-                     <td>2</td>
-                     <td>2주차 강의자료입니다</td>
-                     <td>2024.03.12</td>
-                     <td>2</td>
-                  </tr>
-                   <tr>
-                     <td>1</td>
-                     <td>1주차 강의자료입니다</td>
-                     <td>2024.03.05</td>
-                     <td>1</td>
-                  </tr>
+                </c:forEach>
                </tbody>
             </table>
          </div>
+
+       <div id="pagingArea">
+                <ul class="pagination d-flex justify-content-center flex-wrap pagination-rounded-flat pagination-success">
+               		<c:choose>
+               			<c:when test="${ pi.currentPage eq 1 }">
+                    		<li class="page-item disabled"><a class="page-link" href=""><i class="fa fa-angle-left"></i></a></li>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<li class="page-item"><a class="page-link" href="notice.co?classNum=${ classNum }&cpage=${ pi.currentPage - 1 }">&laquo;</a></li>	                    		
+                    	</c:otherwise>
+                    </c:choose>
+	                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }"  >
+                    		<li class="page-item"><a class="page-link" href="notice.co?classNum=${ classNum }&cpage=${ p }">${ p }</a></li>
+                    	</c:forEach>
+                    	
+                    <c:choose>	
+                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+	                   		<li class="page-item disabled"><a class="page-link" href=""><i class="fa fa-angle-right"></i></a></li>
+	                    </c:when>
+	                    <c:otherwise>
+	                   		<li class="page-item"><a class="page-link" href="notice.co?classNum=${ classNum }&cpage=${ pi.currentPage + 1 }">&raquo;</a></li>
+	                    </c:otherwise>
+                	</c:choose>
+                </ul>
+            </div>
+            <br>
       </div>
-      -->
       <!-- 공지사항 세부사항 클릭시 -->
 	  <!-- 
       <div class="list-title" style="margin-bottom: 20px;">공지사항</div>
@@ -317,7 +337,7 @@
       -->
 
       <!-- 자유게시판 클릭시 화면 -->
-      
+      <!-- 
       <div class="list-main-title">
 	      <div class="list-title" style="margin-bottom: 20px;">자유게시판</div>
 	      <div>
@@ -367,6 +387,7 @@
             </table>
          </div>
       </div>
+       -->
       <!--
       <div id="pagingArea">
                 <ul class="pagination">
@@ -471,6 +492,7 @@
       })
 
    </script>
+
    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

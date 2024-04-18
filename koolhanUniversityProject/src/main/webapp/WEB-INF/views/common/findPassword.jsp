@@ -30,6 +30,12 @@
     
     <!-- google rechapcha-->
 	<script src="https://www.google.com/recaptcha/api.js"></script>
+	
+	<!-- sweetalert2 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet">
+	
+	
 
 <title>Insert title here</title>
 <style>
@@ -101,6 +107,19 @@
 </style>
 </head>
 <body class="bg-gradient-primary">
+
+	<c:if test="${not empty alertMsg}">
+		<script>
+			$(function(){
+		    	Swal.fire({
+		    		icon: '${alertMsg.icon}',
+		    		title: '${alertMsg.title}',
+		    		text: '${alertMsg.text}',
+		    	})
+			});
+	    </script>
+	    <c:remove var="alertMsg" scope="session" />
+	</c:if>
 
     <div class="container" style="min-width: 800px;">
 

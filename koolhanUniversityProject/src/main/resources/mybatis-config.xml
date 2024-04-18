@@ -21,6 +21,7 @@
 		<typeAlias type="com.kh.khu.student.model.vo.Student" alias="Student"/>
 		<typeAlias type="com.kh.khu.tuition.model.vo.Tuition" alias="Tuition"/>
 		<typeAlias type="com.kh.khu.tuition.model.vo.TuitionPayment" alias="TuitionPayment"/>
+		<typeAlias type="com.kh.khu.classroom.model.vo.Course" alias="Course"/>
 	</typeAliases>
 	<!-- 유의사항 : 미리 등록해두려면 해당 클래스가 진짜 존재하고 있는 상태여야한다.(뿐만아니라 namespace까지도 지정되어있어야함) -->
 	<!-- 

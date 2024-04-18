@@ -21,30 +21,7 @@ public class ClassServiceImpl implements ClassService{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	@Override
-	public ArrayList<Classroom> selectClass() {
-		return null;
-	}
-	@Override
-	public int selectListCount() {
-		return 0;
-	}
-	@Override
-	public ArrayList<ClassNotice> selectClassNoticeList(PageInfo pi) {
-		return null;
-	}
-	@Override
-	public int increaseCount(int classNoticeNo) {
-		return 0;
-	}
-	@Override
-	public ClassNotice selectClassNoticeDetail(int classNoticeNo) {
-		return null;
-	}
-	@Override
-	public ArrayList<Class> selectCourseHistory(int studentNo) {
-		return null;
-	}
+	
 	@Override
 	public int insertClass(Classroom c) {
 		return cDao.insertClass(sqlSession, c);

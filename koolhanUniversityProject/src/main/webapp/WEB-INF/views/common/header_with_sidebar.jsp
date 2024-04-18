@@ -1,75 +1,68 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-		<!DOCTYPE html>
-		<html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
 
-		<head>
-			<meta charset="UTF-8">
-			<title>Insert title here</title>
-			<!-- 다음 주소 -->
-			<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-			<!-- 구글 제이쿼리 스니펫 -->
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-			<!-- 부트스트랩 JS CSS -->
-			<!-- Popper JS -->
-			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-				integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-				crossorigin="anonymous"></script>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<!-- 다음 주소 -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<!-- 구글 제이쿼리 스니펫 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<!-- 부트스트랩 JS CSS -->
+	<!-- Popper JS -->
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
 
-			<!-- Latest compiled and minified CSS -->
-			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-			<!-- 부트 스트랩 템플릿 -->
-			<!-- 	Custom fonts for this template -->
-			<link href="resources/css/all.css" rel="stylesheet" type="text/css">
-			<link
-				href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-				rel="stylesheet">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	<!-- 부트 스트랩 템플릿 -->
+	<!-- 	Custom fonts for this template -->
+	<link href="resources/css/all.css" rel="stylesheet" type="text/css">
+	<link
+		href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+		rel="stylesheet">
 
-			<script src="https://kit.fontawesome.com/12b80a3a82.js" crossorigin="anonymous"></script>
-			<!-- Custom styles for this template-->
-			<link href="resources/css/sb-admin-2.css" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/12b80a3a82.js" crossorigin="anonymous"></script>
+	<!-- Custom styles for this template-->
+	<link href="resources/css/sb-admin-2.css" rel="stylesheet">
 
-			<!-- sweetalert2 -->
-			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
-			<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet">
+	<!-- sweetalert2 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet">
 
-			<style>
-				/* 폰트 */
-				@font-face {
-					font-family: 'KIMM_Bold';
-					src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KIMM_Bold.woff2') format('woff2');
-					font-weight: 700;
-					font-style: normal;
-				}
+	<style>
+		/* 폰트 */
+		@font-face {
+			font-family: 'KIMM_Bold';
+			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KIMM_Bold.woff2') format('woff2');
+			font-weight: 700;
+			font-style: normal;
+		}
 
-				@font-face {
-					font-family: 'Pretendard-Regular';
-					src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-					font-weight: 400;
-					font-style: normal;
-				}
+		@font-face {
+			font-family: 'Pretendard-Regular';
+			src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+			font-weight: 400;
+			font-style: normal;
+		}
 
-				body {
-					font-family: 'Pretendard-Regular';
-				}
+		body {
+			font-family: 'Pretendard-Regular';
+		}
 
-				.bg-gradient-primary {
-					/* background-color:#4e73df; */
-					background-image: linear-gradient(180deg, #1c4587 10%, #1c4587 100%);
-					background-size: cover;
-				}
-			</style>
-		</head>
+		.bg-gradient-primary {
+			/* background-color:#4e73df; */
+			background-image: linear-gradient(180deg, #1c4587 10%, #1c4587 100%);
+			background-size: cover;
+		}
+	</style>
+</head>
 
-		<body id="page-top">
+<body id="page-top">
 
-			<c:if test="${ not empty alertMsg }">
-				<script>
-					alert("${ alertMsg }");
-				</script>
-				<c:remove var="alertMsg" scope="session" />
-			</c:if>
-			<!-- 
 	<c:if test="${not empty alertMsg}">
 		<script>
 			$(function(){
@@ -79,20 +72,10 @@
 		    		text: '${alertMsg.text}',
 		    	})
 			});
-	    <c:remove var="alertMsg" scope="session" />
 	    </script>
+	    <c:remove var="alertMsg" scope="session" />
 	</c:if>
 
-	
-	<!-- 
-	<c:if test="${ not empty alertMsg }"> 
-		<script>
-			alert("${ alertMsg }");
-		</script>
-		<c:remove var="alertMsg" scope="session"/>
-	</c:if>
-	 -->
-	
 
 			<!-- Page Wrapper -->
 			<div id="wrapper">
@@ -114,7 +97,7 @@
 					<a class="sidebar-brand d-flex align-items-center justify-content-center" href="/khu">
 						<div class="sidebar-brand-text mx-3">KH University<sup></sup></div>
 					</a>
-
+			<c:if test="${ not empty loginStudent }">
 					<!-- Divider -->
 					<hr class="sidebar-divider">
 
@@ -129,12 +112,12 @@
 							data-parent="#accordionSidebar">
 							<div class="bg-white py-2 collapse-inner rounded">
 								<a class="collapse-item" href="#">나의 시간표</a>
-								<a class="collapse-item" href="#">나의 수강 조회</a>
+								<a class="collapse-item" href="showCourse.st">나의 수강 조회</a>
 								<a class="collapse-item" href="#">이전 수강 내역 조회</a>
 							</div>
 						</div>
 					</li>
-
+			</c:if>
 					<!-- Nav Item - Utilities Collapse Menu -->
 					<li class="nav-item">
 						<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"

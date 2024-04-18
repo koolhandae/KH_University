@@ -37,7 +37,12 @@ pageEncoding="UTF-8"%>
 
     <!-- icon -->
     <script src="https://kit.fontawesome.com/12b80a3a82.js" crossorigin="anonymous"></script>
-
+	
+	
+	<!-- sweetalert2 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet">
+	
 	
 <style>
 	@font-face {
@@ -83,12 +88,17 @@ pageEncoding="UTF-8"%>
 </head>
 
 <body class="bg-gradient-primary">
-
-	<c:if test="${ not empty alertMsg }">
+	<c:if test="${not empty alertMsg}">
 		<script>
-			alert("${ alertMsg }");
-			<c:remove var="alertMsg" scope="session"/>
-		</script>
+			$(function(){
+		    	Swal.fire({
+		    		icon: '${alertMsg.icon}',
+		    		title: '${alertMsg.title}',
+		    		text: '${alertMsg.text}',
+		    	})
+			});
+	    </script>
+	    <c:remove var="alertMsg" scope="session" />
 	</c:if>
 	
 		<div class="container" style="min-width: 912px;">

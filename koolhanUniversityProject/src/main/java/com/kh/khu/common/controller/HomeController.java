@@ -173,8 +173,9 @@ public class HomeController {
 		
 	}
 	
+	
 	@RequestMapping("changePwd.me")
- 	public String changePwd(String memberId, String userPwd, HttpSession session) {
+ 	public String changePwd(String memberId, String userPwd, HttpSession session, Model model) {
 		
 		//System.out.println("changeCON" + memberId);
 		//System.out.println("changeCON" + userPwd);
@@ -195,11 +196,15 @@ public class HomeController {
 		session.removeAttribute("targetId");
 		
 		if(result>0 || mresult >0) {
-			session.setAttribute("alertMsg", "비밀번호를 변경하였습니다!");
-			return "redirect:/";
-			
+			 HashMap<String, Object> alertMsg = new HashMap<String, Object>();
+	         alertMsg.put("icon", "success");
+	         alertMsg.put("title", "비밀번호 변경 완료");
+	         alertMsg.put("text", "성공적으로 비밀번호를 변경하였습니다!");
+	         session.setAttribute("alertMsg", alertMsg);
+
 		}else {
-			session.setAttribute("alertMsg", "비밀번호 변경에 실패하였습니다");
+			model.addAttribute("errorMsg", "비밀번호 변경에 실패하였습니다");
+			return "common/errorPage404";	
 		}
 		return "redirect:/";
 		

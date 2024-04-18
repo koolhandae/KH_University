@@ -16,6 +16,20 @@
 		<result column="absence_date" property="absenceDate"/>
 		<result column="grad_date" property="gradDate"/>
 	</resultMap>
+	
+	
+	<resultMap id="courseResult" type="Course">
+		<result column="course_no" property="courseNo"/>
+		<result column="class_num" property="classNum"/>
+		<result column="student_id" property="studentId"/>
+		<result column="course_year" property="courseYear"/>
+		<result column="course_semester" property="courseSemester"/>
+		<result column="class_grade" property="classGrade"/>
+		<result column="class_room" property="classRoom"/>
+		<result column="class_time" property="classTime"/>
+		<result column="class_name" property="className"/>
+		<result column="class_score" property="classScore"/>
+	</resultMap>
 
 <select id="loginStudent" resultMap="studentResult">
 	select 
@@ -48,4 +62,38 @@
     where student_id = #{memberId}
 </update>
 
+<select id="selectCourseList" resultMap="courseResult">
+	select
+	       course_no
+	     , class_num
+	     , class_grade
+	     , course_semester
+	     , course_year
+	     , class_name
+	     , class_room
+	     , class_time
+	     , class_score
+	  from course
+	  join class using (class_num)
+	 where student_id = #{studentId}
+	   and course_year = '2024'
+</select>
+
+<select id="searchCourse" resultMap="courseResult">
+	select
+	       course_no
+	     , class_num
+	     , class_grade
+	     , course_semester
+	     , class_name
+	     , class_room
+	     , class_time
+	     , class_score
+	  from course
+	  join class using (class_num)
+	 where course_year = 2024
+       and class_num = #{courseNum}
+</select>
+
+	
 </mapper>

@@ -1,5 +1,7 @@
 package com.kh.khu.member.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +49,8 @@ public class MemberController {
       String encPwd = bcryptPasswordEncoder.encode(userPwd);
       System.out.println(encPwd);
       
+      HashMap<String, Object> alertMsg = new HashMap<String, Object>();
+      
       if(userId.startsWith("kh")) {
          
          Student s = new Student();
@@ -55,14 +59,18 @@ public class MemberController {
    
          Student loginStudent  = sService.loginStudent(s);
          
-         //System.out.println(loginStudent);
+         System.out.println("membercontroleer = " + loginStudent);
          
          if(loginStudent != null && bcryptPasswordEncoder.matches(s.getStudentPwd(), loginStudent.getStudentPwd())){
             // 로그인성공
-            session.setAttribute("loginStudent", loginStudent);
-            session.setAttribute("alertMsg", "로그인에 성공하셨습니다!");
-            
-            return "redirect:/mainPage.me";
+        	 session.setAttribute("loginStudent", loginStudent);
+        	 
+	         alertMsg.put("icon", "success");
+	         alertMsg.put("title", "로그인 성공");
+	         alertMsg.put("text", "성공적으로 로그인 됐습니다");
+	         session.setAttribute("alertMsg", alertMsg);
+     
+	         return "redirect:/mainPage.me"; 
          }
          
       }else {
@@ -74,14 +82,24 @@ public class MemberController {
          
          //System.out.println(loginUser);
          
+
+         
          if(loginUser != null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
             // 로그인 성공
-            session.setAttribute("loginUser", loginUser);         
-            session.setAttribute("alertMsg", "로그인에 성공하셨습니다!");   
+        	 session.setAttribute("loginUser", loginUser);         
+            
+	         alertMsg.put("icon", "success");
+	         alertMsg.put("title", "로그인 성공");
+	         alertMsg.put("text", "성공적으로 로그인 됐습니다");
+	         session.setAttribute("alertMsg", alertMsg);
             return "redirect:/mainPage.me";      
          }
       }
-       session.setAttribute("alertMsg", "아이디 또는 비밀번호가 올바르지 않습니다.");
+      	
+       alertMsg.put("icon", "error");
+       alertMsg.put("title", "로그인 실패");
+       alertMsg.put("text", "아이디 또는 비밀번호가 올바르지 않습니다.");
+       session.setAttribute("alertMsg", alertMsg);
        return "redirect:/"; 
       
    }
