@@ -8,8 +8,8 @@ import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
 @Getter
+@Setter
 @ToString
 
 public class Student {
@@ -25,6 +25,5 @@ public class Student {
 	private String stStatus;
 	private String enrollDate;
 	private String absenceDate;
-	private String gradDate;
-
+	private String gradDate; 
 }
