@@ -28,7 +28,7 @@ public class StudentDao {
 	}
 	
 	public int changePwd(SqlSession sqlSession, String memberId, String encPwd) {
-		System.out.println("encPwd : " + encPwd);
+		// System.out.println("encPwd : " + encPwd);
 		 	Map<String, String> parameters = new HashMap();
 		    parameters.put("memberId", memberId);
 		    parameters.put("userPwd", encPwd);

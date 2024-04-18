@@ -147,7 +147,8 @@
 							<div class="bg-white py-2 collapse-inner rounded">
 								<a class="collapse-item" href="#">개인 정보 수정</a>
 								<a class="collapse-item" href="#">나의 캘린더</a>
-								<a class="collapse-item" href="#">등록금 납부 조회</a>
+								<a class="collapse-item" href="tuitionBill.do">등록금 납부 신청</a>
+								<a class="collapse-item" href="">등록금 납부 내역 조회</a>
 								<a class="collapse-item" href="#">학점 / 성적 조회</a>
 								<a class="collapse-item" href="takeOff.do">휴 · 복학 신청</a>
 								<a class="collapse-item" href="takeOffSelect.do">휴 · 복학 신청 조회</a>
@@ -180,6 +181,13 @@
 							<i class="fa-solid fa-bullhorn"></i>
 							<span>공지사항 등록</span></a>
 					</li>
+					
+					<!-- Nav Item - Charts -->
+					<li class="nav-item">
+						<a class="nav-link" href="tuitionMake.ad">
+							<i class="fa-solid fa-bullhorn"></i>
+							<span>등록금 고지서 발급</span></a>
+					</li>	
 
 					<!-- Nav Item - Pages Collapse Menu -->
 					<li class="nav-item">

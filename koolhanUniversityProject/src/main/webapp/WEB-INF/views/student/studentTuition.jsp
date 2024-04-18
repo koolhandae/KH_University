@@ -98,16 +98,16 @@
       <br>
       	
       	<div class="semesterArea">
-         <select class="form-control" name="semester" id="semester">
-         	<option value="">전체</option>
-            <option value="">1학년 1학기</option>
-            <option value="">1학년 2학기</option>
-            <option value="">2학년 1학기</option>
-            <option value="">2학년 2학기</option>
-            <option value="">3학년 1학기</option>
-            <option value="">3학년 2학기</option>
-            <option value="">4학년 1학기</option>
-            <option value="">4학년 2학기</option>
+         <select class="form-control" name="termNo" id="semester">
+         	<option value="total">전체</option>
+            <option value="1_1">1학년 1학기</option>
+            <option value="1_2">1학년 2학기</option>
+            <option value="2_1">2학년 1학기</option>
+            <option value="2_2">2학년 2학기</option>
+            <option value="3_1">3학년 1학기</option>
+            <option value="3_2">3학년 2학기</option>
+            <option value="4_1">4학년 1학기</option>
+            <option value="4_2">4학년 2학기</option>
          </select>
          <button class="btn btn-xs" id="btn">조회</button>
       	</div>

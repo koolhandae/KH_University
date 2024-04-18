@@ -10,11 +10,7 @@
 		<result column="student_ssn" property="studentSsn"/>
 		<result column="s_phone" property="stPhone"/>
 		<result column="s_email" property="stEmail"/>
-<<<<<<< HEAD
 		<result column="s_address" property="stAddress"/>
-=======
-		<result column="a_address" property="stAddress"/>
->>>>>>> 264804e148e739c24a433fee7336e158e9ca26b1
 		<result column="s_status" property="stStatus"/>
 		<result column="enroll_date" property="enrollDate"/>
 		<result column="absence_date" property="absenceDate"/>
@@ -106,7 +102,7 @@
 </select>
 
 
-<select id="selectChkStudent" resultMap="studentResult">
+	<select id="selectChkStudent" resultMap="studentResult">
 	select 
 	       *
 	  from student
@@ -114,12 +110,12 @@
 	   and s_status = 'Y'
 	</select>
 
-	<select id="selectChkStudent" resultMap="studentResult">
-		select 
-		       *
-		  from student
-		 where s_email = #{email}
-	</select>
+<!-- 	<select id="selectChkStudent" resultMap="studentResult"> -->
+<!-- 		select  -->
+<!-- 		       * -->
+<!-- 		  from student -->
+<!-- 		 where s_email = #{email} -->
+<!-- 	</select> -->
 
 	<update id="changePwd" parameterType="map">
 	    update student

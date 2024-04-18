@@ -48,7 +48,7 @@ public class StudentServiceImpl implements StudentService{
 		return sDao.insertReturnSchool(sqlSession, p);
 	}
 	
-	
+	@Override
 	public int insertStudent(Student s) {
 		return sDao.insertStudent(sqlSession, s);
 	}
