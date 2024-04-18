@@ -30,6 +30,7 @@ color: rgb(100,100,100);
                     <input type="email" class="form-control" id="email" name="meEmail" placeholder="이메일을 입력하세요" required>
                     &nbsp;
                     <input id="emailCheck" type="button" class="btn btn-secondary" value="이메일 확인">
+                    <input id="emailFix" type="button" class="btn btn-secondary" value="이메일 수정" style="display:none">
                     </div>
                     <br>
                     
@@ -138,6 +139,9 @@ color: rgb(100,100,100);
 					    		    		text: "사용 가능한 이메일 입니다.",
 					    		    	});
 					    				$("#enrollBtn").removeAttr("disabled");
+					    				$("#email").attr("readonly", true);
+					    				$("#emailCheck").css("display","none");
+					    				$("#emailFix").css("display","block");
 					    			}else{
 					    				Swal.fire({
 					    		    		icon: "error",
@@ -153,6 +157,15 @@ color: rgb(100,100,100);
 					    		},
 					    	});
 					    });
+					    $(function(){
+					    	$("#emailFix").click(function(){
+					    		$("#enrollBtn").attr("disabled",true);
+			    				$("#email").removeAttr("readonly");
+			    				$("#emailCheck").css("display","block");
+			    				$("#emailFix").css("display","none");
+			    				$("#email").select();
+					    	})
+					    })
 					</script>
 					<br>
 					

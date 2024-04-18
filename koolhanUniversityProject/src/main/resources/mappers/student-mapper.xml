@@ -17,6 +17,20 @@
 		<result column="grad_date" property="gradDate"/>
 	</resultMap>
 	
+	
+	<resultMap id="courseResult" type="Course">
+		<result column="course_no" property="courseNo"/>
+		<result column="class_num" property="classNum"/>
+		<result column="student_id" property="studentId"/>
+		<result column="course_year" property="courseYear"/>
+		<result column="course_semester" property="courseSemester"/>
+		<result column="class_grade" property="classGrade"/>
+		<result column="class_room" property="classRoom"/>
+		<result column="class_time" property="classTime"/>
+		<result column="class_name" property="className"/>
+		<result column="class_score" property="classScore"/>
+	</resultMap>	
+		
 	<resultMap type="Absence" id="absenceResult">
 		<result column="abs_no" property="absNo"/>
 		<result column="abs_id" property="absId"/>
@@ -101,26 +115,27 @@
 	 where s_status = 'Y'	  
 </select>
 
-
+	<!-- 누구껀지확인부탁! 동석, 도현, 수지 아님 혹시 연뎡..? 하하
 	<select id="selectChkStudent" resultMap="studentResult">
-	select 
-	       *
-	  from student
-	 where student_id = #{studentId}
-	   and s_status = 'Y'
+		select 
+		       *
+		  from student
+		 where student_id = #{studentId}
+		   and s_status = 'Y'
+		</select>
+	 -->
+	 
+	<select id="selectChkStudent" resultMap="studentResult">
+		select 
+		       *
+		  from student
+		 where s_email = #{email}
 	</select>
-
-<!-- 	<select id="selectChkStudent" resultMap="studentResult"> -->
-<!-- 		select  -->
-<!-- 		       * -->
-<!-- 		  from student -->
-<!-- 		 where s_email = #{email} -->
-<!-- 	</select> -->
 
 	<update id="changePwd" parameterType="map">
 	    update student
 	    set student_pwd = #{userPwd}
-	    where student_id = #{studentId}
+	    where student_id = #{memberId}
 	</update>
 
 	<insert id="insertStudent">
@@ -155,6 +170,52 @@
 		  from student
 		 where s_email = #{stEmail}     
 	</select>
+	
+		<select id="verifyEmail" resultType="_int">
+		select
+		       count(*)
+		  from student
+		 where s_email = #{email}      
+	</select>
 
 
+<select id="selectCourseList" resultMap="courseResult">
+	select
+	       course_no
+	     , class_num
+	     , class_grade
+	     , course_semester
+	     , course_year
+	     , class_name
+	     , class_room
+	     , class_time
+	     , class_score
+	  from course
+	  join class using (class_num)
+	 where student_id = #{studentId}
+	   and course_year = '2024'
+</select>
+
+<select id="searchCourse" resultMap="courseResult">
+	select
+	       course_no
+	     , class_num
+	     , class_grade
+	     , course_semester
+	     , class_name
+	     , class_room
+	     , class_time
+	     , class_score
+	  from course
+	  join class using (class_num)
+	 where course_year = 2024
+       and class_num = #{courseNum}
+</select>
+
+<update id="updateAddress">
+	update student
+	   set s_address = #{stAddress}
+	 where student_id = #{studentId}
+</update>
+	
 </mapper>

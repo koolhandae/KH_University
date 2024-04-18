@@ -1,5 +1,7 @@
 package com.kh.khu.student.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,21 +13,32 @@ import java.util.HashMap;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.khu.common.model.vo.Address;
 import com.kh.khu.common.template.AddressString;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
+import com.kh.khu.classroom.model.vo.ClassDetail;
+import com.kh.khu.classroom.model.vo.ClassNotice;
+import com.kh.khu.classroom.model.vo.Course;
+import com.kh.khu.common.model.vo.PageInfo;
+import com.kh.khu.common.template.Pagination;
 import com.kh.khu.student.model.service.StudentService;
 import com.kh.khu.student.model.vo.Absence;
 import com.kh.khu.student.model.vo.Presence;
+import com.kh.khu.student.model.vo.Student;
+import com.kh.khu.student.model.service.StudentServiceImpl;
 import com.kh.khu.student.model.vo.Student;
 
 @Controller
@@ -37,8 +50,54 @@ public class StudentController {
 	JavaMailSenderImpl mailSender;
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
+
+	@RequestMapping("showCourse.st")
+	public String showCourseList() {
+		return "student/studentClassPage";
+	}
 	
+	@ResponseBody
+	@RequestMapping(value="selectCourse.st", produces="application/json; charset=utf-8")
+	public ArrayList<Course>  selectCourseList(String studentId) {
+
+	System.out.println(studentId);	
 	
+	ArrayList<Course> list = sService.selectCourseList(studentId);
+	
+	//System.out.println("courseList = " + list);
+
+	return list;
+
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="searchCourse.st", produces="application/json; charset=utf-8")
+	public Course searchCourse(String courseValue) {		
+		
+        Course c = new Course();  
+		c = sService.searchCourse(courseValue);
+		System.out.println("searchCourse = " + c);
+		
+		return c;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="notice.co", produces="application/json; charset=utf-8")
+	public ModelAndView selectListCount(@RequestParam(value="cpage", defaultValue="1")int currentPage, String classNum, ModelAndView mv) {
+		
+		System.out.println("classNum = " + classNum);
+		
+		int listCount = sService.selectListCount(classNum);		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+		ArrayList<ClassNotice> list = sService.selectClassNoticeList(pi, classNum);
+		
+		mv.addObject("pi", pi).addObject("list", list).addObject("classNum", classNum).setViewName("student/studentClassDetail");
+		return mv;
+		
+	}
+
+
+
 	@RequestMapping("insertForm.stu")
 	public String insertStudentForm() {
 		return "student/studentEnrollForm";
@@ -88,6 +147,20 @@ public class StudentController {
 		}
 		return mv;
 	}
+	
+	@ResponseBody
+	@RequestMapping("verifyEmail.stu")
+	public String verifyEmail(String email) {
+		int result = sService.verifyEmail(email);
+		
+		return result == 0 ? "NNNNY" : "NNNNN";
+	}
+	
+	@RequestMapping("certificate.issue")
+	public String connectCertificateIssuePage() {
+		return "student/certificateIssuingPage";
+	}
+	
 	
 	@RequestMapping("takeOff.do")
 	public String takeOffForm(HttpSession session) {
@@ -144,7 +217,33 @@ public class StudentController {
 			model.addAttribute("errorMsg", "복학 신청서 등록 실패!");
 			return "common/errorPage404";
 		}
+	}
+	
+	@RequestMapping("update.stu")
+	public String updateStudentForm() {
+		return "student/studentUpdateForm";
+	}
+	
+	@ResponseBody
+	@RequestMapping("updateAddress.stu")
+	public HashMap<String, Object> updateAddress(Address a, String studentId, HttpSession session) {
+		System.out.println("자바왔냐");
+		String newAddress = AddressString.AddressMake(a);
+		Student s = new Student();
+		s.setStudentId(studentId);
+		s.setStAddress(newAddress);
+		int result = sService.updateAddress(s);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		if(result > 0) {
+			session.removeAttribute("loginStudent");
+			session.setAttribute("loginStudent", sService.loginStudent(s));
+			map.put("title", "주소 변경 성공");
+			map.put("text", "성공적으로 주소를 변경했습니다.");
+			map.put("icon", "success");
+			map.put("newAddress", s.getStAddress());
+		}
 		
+		return map;
 	}
 	
 }

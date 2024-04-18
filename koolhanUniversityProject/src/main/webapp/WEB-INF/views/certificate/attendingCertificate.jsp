@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -36,11 +37,14 @@ thead * {
 #stamp img{
 	height: 50px
 }
-
+.center{
+	text-align:center;
+	font-size: 20px;
+}
 </style>
 </head>
 <body>
- <jsp:include page="../common/header_with_sidebar.jsp"/>
+<jsp:include page="../common/header_with_sidebar.jsp"/>
 
 	<br>
 	<br>
@@ -52,52 +56,36 @@ thead * {
 	<br>
    <div id="pdfDiv" class="content" style="padding:10px; background-color: white; color: black; margin:auto; padding:40px;" align="center">
 		<div class="innerContnent">
+		<br>
 			<div id="schoolName" style="text-align: center;">
-				<h1>쿨한대학교 등록금 납부 영수증</h1>
+				<h1>쿨한대학교 재학 증명서</h1>
 			</div>
-			<br>
-	<br>
-	<br>
-			<div id="studentNo">
+			<div id="studentNo" align="left" style="margin-left:20px;">
 				<span>학생 번호 : </span> <span>${loginStudent.studentId}</span>
 			</div>
-			<div id="studentName">
+			<br>
+			<div id="studentName" align="left" style="margin-left:20px;">
 				<span>이름 : </span> <span>${loginStudent.studentName}</span>
 			</div>
-			<div>
-				<span>학과 : </span> <span>컴퓨터 공학과</span>
+			<br>
+			<div id="studentSsn" align="left" style="margin-left:20px;">
+				<span>주민등록번호 : </span> <span>${loginStudent.studentSsn}</span>
 			</div>
-			<table style="margin: 150px 0" border="1">
-				<thead>
-					<tr>
-						<td colspan="4">등록금</td>
-						<td>금액</td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td colspan="4">수업료 (A)</td>
-						<td>4,200,000</td>
-					</tr>
-					<tr>
-						<td colspan="4">감면액 (B)</td>
-						<td>1,700,000</td>
-					</tr>
-					<tr>
-						<th colspan="4">합계 (A - B)</th>
-						<td>2,500,000</td>
-					</tr>
-				</tbody>
-			</table>
 			<br>
 			<br>
-			<div id="date" style="text-align:center;">
-				<h3>위와 같이 등록을 필하였음을 확인합니다.</h3>
+			<div class="center">
+				<span>학과 (전공) : </span>
+				<span>컴퓨터 공학</span>
+			</div>
+			<br>
+			<br>
+			<br>
+			<div style="margin:180px 0">
+				<span style="font-size: 35px; line-height: 2;"> &nbsp; 위 사람은 <fmt:formatDate value="${now}" pattern="yyyy년 MM월 dd일"/> 현재 본교에 재학중임을 증명합니다. </span>
+			</div>
+			<div align="center">
 				<h3><fmt:formatDate value="${now}" pattern="yyyy년 MM월 dd일"/></h3>
 			</div>
-			<br>
-	<br>
-	<br>
 			<div id="signature" style="display:flex; justify-content: flex-end;" >
 			<div style="width:280px"> </div>
 				<div style="height: 150px;  margin: 0 15px">
@@ -130,7 +118,7 @@ thead * {
             const pdfWidth = pdf.internal.pageSize.getWidth();
             const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
             pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-            pdf.save('${loginStudent.studentName} 등록금 납부 영수증.pdf');
+            pdf.save('${loginStudent.studentName} 재학증명서.pdf');
         }
     </script>
 	

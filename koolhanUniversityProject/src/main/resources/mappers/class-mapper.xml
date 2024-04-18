@@ -25,6 +25,18 @@
 		<result column="class_time" property="classTime"/>
 	</resultMap>
 	
+	<resultMap id="ClassNoticeResult" type="ClassNotice">
+		<result column="class_notice_no" property="classNoticeNo"/>
+		<result column="ref_class_no" property="refClassNo"/>
+		<result column="cn_writer" property="cnWriter"/>
+		<result column="cn_title" property="cnTitle"/>
+		<result column="cn_content" property="cnContent"/>
+		<result column="cn_date" property="cnDate"/>
+		<result column="cn_origin_name" property="cnOriginName"/>
+		<result column="cn_change_name" property="cnChangeName"/>
+		<result column="cn_status" property="cnStatus"/>
+		<result column="cn_couont" property="cnCount"/>
+	</resultMap>
 	
 	<insert id="insertClass">
 		insert
@@ -76,4 +88,29 @@
 			   		 )
 </select>
 
+<select id="selectListCount" resultType="_int">
+	select 
+	       count(*)
+	  from class_notice
+	 where cn_status = 'Y'
+	   and ref_class_no = #{classNum}
+</select>
+	
+<select id="selectClassNoticeList" resultMap="ClassNoticeResult">
+	select 
+	        ref_class_no
+	      , class_notice_no
+	      , cn_title
+	      , cn_date
+	      , cn_count
+	      , cn_writer
+	   from class_notice
+	  where cn_status ='Y'
+	    and ref_class_no = #{classNum}
+	  order
+	     by cn_date desc
+</select>	
+	
+	
+	
 </mapper>

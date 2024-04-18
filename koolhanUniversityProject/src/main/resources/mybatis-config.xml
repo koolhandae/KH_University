@@ -23,6 +23,7 @@
 		<typeAlias type="com.kh.khu.student.model.vo.Presence" alias="Presence"/>
 		<typeAlias type="com.kh.khu.tuition.model.vo.Tuition" alias="Tuition"/>
 		<typeAlias type="com.kh.khu.tuition.model.vo.TuitionPayment" alias="TuitionPayment"/>
+		<typeAlias type="com.kh.khu.classroom.model.vo.Course" alias="Course"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="/mappers/board-mapper.xml"/>

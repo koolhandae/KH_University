@@ -1,5 +1,7 @@
 package com.kh.khu.classroom.model.vo;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,5 +25,5 @@ public class ClassNotice {
 	private String cnOriginName;
 	private String cnChangeName;
 	private String cnStatus;
-	
+	private int cnCount;
 }

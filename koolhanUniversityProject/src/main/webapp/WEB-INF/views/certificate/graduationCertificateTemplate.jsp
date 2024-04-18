@@ -53,7 +53,7 @@ thead * {
 
 	<br>
 	<br>
-<div align="center">
+	<div align="center">
 	<button onclick="printPDF();" class="btn btn-primary">pdf다운로드</button>
 	</div>
 	<br>
@@ -66,7 +66,7 @@ thead * {
 				<h1>쿨한대학교 졸업 증명서</h1>
 			</div>
 			<div id="studentNo" align="left" style="margin-left:20px;">
-				<span>학생 번호 : </span> <span>${loginStudent.studentNo}</span>
+				<span>학생 번호 : </span> <span>${loginStudent.studentId}</span>
 			</div>
 			<br>
 			<div id="studentName" align="left" style="margin-left:20px;">
@@ -93,7 +93,7 @@ thead * {
 				<span>${loginStudent.gradDate}</span>
 			</div>
 			<br>
-			<div style="margin:180px 0">
+			<div style="margin:120px 0">
 				<span style="font-size: 35px; line-height: 2;"> &nbsp; 학점인정 등에 관한 법률 제9조와 학칙 제 47조의 <br>2 규정에 의하여 위의 사실을 증명함</span>
 			</div>
 			<div align="center">
@@ -117,6 +117,7 @@ thead * {
 	<br>
 	<br>
 	<br>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
 	<script>
         async function printPDF() {
             const { jsPDF } = window.jspdf;
@@ -130,7 +131,7 @@ thead * {
             const pdfWidth = pdf.internal.pageSize.getWidth();
             const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
             pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-            pdf.save('download.pdf');
+            pdf.save('${loginStudent.studentName} 졸업증명서.pdf');
         }
     </script>
 	

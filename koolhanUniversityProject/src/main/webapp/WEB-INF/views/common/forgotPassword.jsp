@@ -34,6 +34,11 @@
 	<script src="https://www.google.com/recaptcha/api.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+	<!-- sweetalert2 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet">
+	
+	
 
 <title>Insert title here</title>
 <style>
@@ -126,12 +131,18 @@
 </head>
 <body class="bg-gradient-primary">
 
-		<c:if test="${ not empty alertMsg }">
-			<script>
-				alert("${ alertMsg }");
-				<c:remove var="alertMsg" scope="session"/>
-			</script>
-		</c:if>
+	<c:if test="${not empty alertMsg}">
+		<script>
+			$(function(){
+		    	Swal.fire({
+		    		icon: '${alertMsg.icon}',
+		    		title: '${alertMsg.title}',
+		    		text: '${alertMsg.text}',
+		    	})
+			});
+	    </script>
+	    <c:remove var="alertMsg" scope="session" />
+	</c:if>
 	
     <div class="container" style="min-width: 800px;">
 
@@ -213,8 +224,12 @@
 	    	console.log(chkmember);
 	    	
 	        if($("#InputEmail").val() === ""){
-	            alert("이메일을 입력해주세요!");
-	            
+	        	
+	        	 Swal.fire({
+	                 icon: 'error',
+	                 text: '이메일을 입력해주세요!'
+	             });
+	        	
 	        } else {    
 
 	            if(chkmember === "s"){
@@ -227,7 +242,12 @@
 	                        if(result != ""){
 	                            rechapcha(result.smail);    
 	                        } else {
-	                            alert("해당 메일로 등록된 정보가 없습니다! 재입력해주세요!");
+	                        	
+	                        	Swal.fire({
+	           	                 icon: 'error',
+	           	                 text: '해당 메일로 등록된 정보가 없습니다! 재입력해주세요!'
+	           	             	});
+	                        	
 	                            $("#InputEmail").val("");
 	                        }
 	                    },
@@ -244,8 +264,13 @@
 	                        if(result != ""){
 	                            rechapcha(result.mmail);    
 	                        } else {
-	                            alert("해당 메일로 등록된 정보가 없습니다! 재입력해주세요!");
-	                            $("#InputEmail").val("");
+	                        	
+	                        	Swal.fire({
+		           	                 icon: 'error',
+		           	                 text: '해당 메일로 등록된 정보가 없습니다! 재입력해주세요!'
+		           	            });
+		                        	
+		                        $("#InputEmail").val("");
 	                        }
 	                    },
 	                    error:function(){
@@ -282,6 +307,7 @@
          	                	url:"sendmail.do",
          	                	data:{email : $("#InputEmail").val()},
          	                	success:function(result){
+         	                		
                                     const memberId = result.userId;
                                     const checkNum = result.checkNum;
 
@@ -293,7 +319,12 @@
 	                        captcha = 0;
 	                		break;
 	                    case 1:
-	                        alert("자동 가입 방지 봇을 확인 한뒤 진행 해 주세요.");
+	                    	
+	                    	Swal.fire({
+	           	                 icon: 'error',
+	           	                 text: '자동 가입 방지 봇을 확인 한뒤 진행 해 주세요.',
+	           	            });
+
 	                        break;
 	                    default:
 	                        alert("자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다. [Error bot Code : " + Number(data) + "]");

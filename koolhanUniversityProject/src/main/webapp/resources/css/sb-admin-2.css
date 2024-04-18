@@ -11285,4 +11285,5 @@ body.sidebar-toggled footer.sticky-footer {
   margin: auto;
   padding: 3% 3%;
   background-color: white;
+  max-width: 1300px;
 }
