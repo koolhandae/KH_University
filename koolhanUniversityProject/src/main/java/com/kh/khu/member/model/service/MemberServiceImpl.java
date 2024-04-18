@@ -17,7 +17,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public Member loginMember(Member m) {
-		System.out.println("service" + m);
+		// System.out.println("service" + m);
 		return mDao.loginMember(sqlSession, m);
 	}
 
@@ -34,6 +34,16 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int changemPwd(String memberId, String encPwd) {
 		return mDao.changemPwd(sqlSession, memberId, encPwd);
+	}
+
+	@Override
+	public String selectMemberId(Member m) {
+		return mDao.selectMemberId(sqlSession, m);
+	}
+
+	@Override
+	public int verifyEmail(String email) {
+		return mDao.verifyEmail(sqlSession, email);
 	}
 	
 

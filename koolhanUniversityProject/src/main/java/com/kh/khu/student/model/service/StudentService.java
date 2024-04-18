@@ -1,5 +1,7 @@
 package com.kh.khu.student.model.service;
 
+import com.kh.khu.student.model.vo.Absence;
+import com.kh.khu.student.model.vo.Presence;
 import java.util.ArrayList;
 
 import com.kh.khu.classroom.model.vo.ClassNotice;
@@ -10,6 +12,8 @@ import com.kh.khu.student.model.vo.Student;
 public interface StudentService {
 
 	Student loginStudent(Student s);
+
+	int insertTakeOff(Absence a);
 	
 	Student selectChkStudent(String email);
 	
@@ -36,4 +40,12 @@ public interface StudentService {
 	// 이전 수강내역 조회
 	ArrayList<Course> selectCourseHistory(int studentNo);
 
+	
+	int selectTakeOff(Absence a);
+	
+	int insertReturnSchool(Presence p);
+	
+	int insertStudent(Student s);
+	
+	String selectStudentId(Student s);
 }

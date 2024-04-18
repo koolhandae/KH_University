@@ -84,8 +84,7 @@
 				<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 					<!-- Sidebar - Brand -->
-					<a class="sidebar-brand d-flex align-items-center justify-content-center" style="height: 150px"
-						href="/khu">
+					<a class="sidebar-brand d-flex align-items-center justify-content-center" style="height: 150px" href="/khu">
 						<div class="sidebar-brand-icon">
 							<img style="width:100px;" src="resources/images/logo.png" alt="">
 						</div>
@@ -132,7 +131,8 @@
 								<a class="collapse-item" href="#">나의 캘린더</a>
 								<a class="collapse-item" href="#">등록금 납부 조회</a>
 								<a class="collapse-item" href="#">학점 / 성적 조회</a>
-								<a class="collapse-item" href="#">휴 · 복학 신청</a>
+								<a class="collapse-item" href="takeOff.do">휴 · 복학 신청</a>
+								<a class="collapse-item" href="takeOffSelect.do">휴 · 복학 신청 조회</a>
 								<a class="collapse-item" href="#">증명서 발급</a>
 							</div>
 						</div>
@@ -150,8 +150,8 @@
 						</a>
 						<div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionSidebar">
 							<div class="bg-white py-2 collapse-inner rounded">
-								<a class="collapse-item" href="insert.stu">학생 등록</a>
-								<a class="collapse-item" href="insert.me">교직원 등록</a>
+								<a class="collapse-item" href="insertForm.stu">학생 등록</a>
+								<a class="collapse-item" href="insertForm.me">교직원 등록</a>
 							</div>
 						</div>
 					</li>

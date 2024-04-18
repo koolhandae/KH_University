@@ -10,6 +10,8 @@ import com.kh.khu.classroom.model.vo.ClassNotice;
 import com.kh.khu.classroom.model.vo.Course;
 import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.student.model.dao.StudentDao;
+import com.kh.khu.student.model.vo.Absence;
+import com.kh.khu.student.model.vo.Presence;
 import com.kh.khu.student.model.vo.Student;
 
 @Service
@@ -24,7 +26,7 @@ public class StudentServiceImpl implements StudentService{
 	/*학생 로그인*/
 	@Override
 	public Student loginStudent(Student s) {
-		System.out.println("service" + s);
+//		System.out.println("service" + s);
 		return sDao.loginStudent(sqlSession, s);
 	}
 	
@@ -32,6 +34,11 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public Student selectChkStudent(String email) {
 		return sDao.selectChkStudent(sqlSession, email);
+	}
+	
+	@Override
+	public int insertTakeOff(Absence a) {
+		return sDao.insertTakeOff(sqlSession, a);
 	}
 	
 	/*학생 비밀번호 찾기*/
@@ -85,6 +92,26 @@ public class StudentServiceImpl implements StudentService{
 	public Course selectClassPlan(int classNum) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int selectTakeOff(Absence a) {
+		return sDao.selectTakeOff(sqlSession, a);
+	}
+
+	@Override
+	public int insertReturnSchool(Presence p) {
+		return sDao.insertReturnSchool(sqlSession, p);
+	}
+	
+	
+	public int insertStudent(Student s) {
+		return sDao.insertStudent(sqlSession, s);
+	}
+
+	@Override
+	public String selectStudentId(Student s) {
+		return sDao.selectStudentId(sqlSession, s);
 	}
 
 

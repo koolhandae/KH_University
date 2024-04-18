@@ -8,11 +8,11 @@
 		<result column="member_pwd" property="memberPwd"/>
 		<result column="member_name" property="memberName"/>
 		<result column="member_ssn" property="memberSsn"/>
-		<result column="m_phone" property="mPhone"/>
-		<result column="m_email" property="mEmail"/>
-		<result column="m_address" property="mAddress"/>
-		<result column="m_type" property="mType"/>
-		<result column="m_status" property="mStatus"/>
+		<result column="m_phone" property="mePhone"/>
+		<result column="m_email" property="meEmail"/>
+		<result column="m_address" property="meAddress"/>
+		<result column="m_type" property="meType"/>
+		<result column="m_status" property="meStatus"/>
 	</resultMap>
 	
 	<select id="loginMember" resultMap="memberResult">
@@ -48,16 +48,23 @@
 		values
 		     (
 		       seq_mno.nextval
-		     , to_char(sysdate, 'yyMMdd') || floor(dbms_random.value(10000,99999))
+		     , 'pr'||to_char(seq_user_no.nextval, 'FM0000')
 		     , #{memberPwd}
 		     , #{memberName}
 		     , #{memberSsn}
-		     , #{mPhone}
-		     , #{mEmail}
-		     , #{mAddress}
-		     , #{mType}
+		     , #{mePhone}
+		     , #{meEmail}
+		     , #{meAddress}
+		     , #{meType}
 		     )
 	</insert>
+	
+	<select id="selectMemberId" resultType="String">
+		select
+		       member_id
+		  from member
+		 where m_email = #{meEmail}     
+	</select>
 	
 	<select id="selectChkMember" resultMap="memberResult">
 		select 
@@ -72,6 +79,12 @@
 	     where member_id = #{memberId}
 	</update>
 	
+	<select id="verifyEmail" resultType="_int">
+		select
+		       count(*)
+		  from member
+		 where m_email = #{email}      
+	</select>
 	
 	
 </mapper>

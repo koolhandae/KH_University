@@ -6,8 +6,11 @@ import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.khu.student.model.vo.Absence;
+import com.kh.khu.student.model.vo.Presence;
 import com.kh.khu.classroom.model.vo.ClassNotice;
 import com.kh.khu.classroom.model.vo.Course;
 import com.kh.khu.common.model.vo.PageInfo;
@@ -18,7 +21,7 @@ public class StudentDao {
 	
 	/* 학생 로그인 */
 	public Student loginStudent(SqlSession sqlSession, Student s) {
-		System.out.println("dao" + s);
+		// System.out.println("dao" + s);
 		return sqlSession.selectOne("studentMapper.loginStudent", s);
 	}
 	
@@ -66,5 +69,21 @@ public class StudentDao {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
 		return (ArrayList)sqlSession.selectList("classMapper.selectClassNoticeList", classNum, rowBounds);
+	}
+	
+	public int selectTakeOff(SqlSessionTemplate sqlSession, Absence a) {
+		return sqlSession.selectOne("studentMapper.selectTakeOff", a);
+	}
+	
+	public int insertReturnSchool(SqlSessionTemplate sqlSession, Presence p) {
+		return sqlSession.insert("studentMapper.insertReturnSchool", p);
+	}
+
+	public int insertStudent(SqlSessionTemplate sqlSession, Student s) {
+		return sqlSession.insert("studentMapper.insertStudent", s);
+	}
+	
+	public String selectStudentId(SqlSessionTemplate sqlSession, Student s) {
+		return sqlSession.selectOne("studentMapper.selectStudentId", s);
 	}
 }
