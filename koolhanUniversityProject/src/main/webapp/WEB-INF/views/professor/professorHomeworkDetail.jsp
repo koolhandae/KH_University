@@ -116,7 +116,7 @@
     </div>
     <div style="padding: 15px;" id="HomeworkLiDiv">
         <ul style="height: 66px; margin: 0;" >
-            <li class="homework_li_class" style="background-color: white;">과제 등록</li>
+            <li class="homework_li_class" style="background-color: white;" onclick="location.href = 'professorPJEnrollForm.do'">과제 등록</li>
             <li class="homework_li_class" style="background-color: #1c4587; color: white; margin-right: 0.5px;">과제 현황</li>
         </ul>
         

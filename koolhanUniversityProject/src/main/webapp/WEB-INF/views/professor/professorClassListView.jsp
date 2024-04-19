@@ -61,7 +61,13 @@
         background-color: #1c4587;
         color: white;
     }
-
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.35rem;
+    justify-content: center;
+}
     
 </style>
 </head>
@@ -89,16 +95,23 @@
 
         </div>
 
-
+            <script>
+            	$(function(){
+            		$(".updateButton").click(function(){
+            			location.href = 'classDetail.co?cno=' + $(this).siblings(".cno").val();
+            		})
+            	})
+            </script>
 
         <div id="contentDiv" class="bg-white">
+        <input type="hidden" id="userId "value="${loginUser.memberId}">
             <div>
                 <h3>강의 목록</h3>
             </div>
         
 
             <div class="form-group">
-                <table class="table" >
+                <table class="table" id="classList">
                     <thead>
                         <tr>
                             <th>강의번호</th>
@@ -110,43 +123,64 @@
                             <th>관리</th>
                         </tr>
                     </thead>
-                    
                     <tbody>
-                        <tr>
-                            <td>11</td>
-                            <td>2024</td>
-                            <td>2학년</td>
-                            <td>2학기</td>
-                            <td>강좌명</td>
-                            <td>전공</td>
-                            <td>
-                                <button class="btn btn-warning" data-toggle="modal" data-target="#staticBackdrop">수정</button>
-                                <button class="btn btn-danger">삭제</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>11</td>
-                            <td>2024</td>
-                            <td>2학년</td>
-                            <td>2학기</td>
-                            <td>강좌명</td>
-                            <td>전공</td>
-                            <td>
-                                <button class="btn btn-warning">수정</button>
-                                <button class="btn btn-danger">삭제</button>
-                            </td>
-                        </tr>
+                         <c:forEach var="c" items="${list}"> 
+	                        <tr>
+	                            <td>${ c.classNum }</td>
+	                            <td>${c.enrollDate}</td>
+	                            <td>${c.classGrade }</td>
+	                            <td>${c.classSemester }</td>
+	                            <td>${c.className }</td>
+	                            <td>${c.classTypeName }</td>
+	                            <td>
+                         			<input type="hidden" class="cno" id="hiddenClassNo"name="classNo" value="${c.classNo }">
+	                                <button class="btn btn-warning updateButton" >상세보기</button>
+	                            </td>
+	                        </tr>
+                         </c:forEach>
                     </tbody>
 
 
                 </table>
             </div>
+            <div id="pagingArea">
+                <ul class="pagination">
+                	
+	                	<c:choose>
+	                		<c:when test="${ pi.currentPage eq 1 }">
+		                    	<li class="page-item disabled"><a class="page-link" href="">이전</a></li>
+	                    							<!-- disabled 이전버튼 비활성화 -->
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<li class="page-item"><a class="page-link" href="classList.bo?cpage=${ pi.currentPage - 1 }">이전</a></li>
+	                    	</c:otherwise>
+	                    </c:choose>	
+                    
+                    
+                    
+                    	<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }"> <!-- 일반for문처럼 사용가능함 -->
+                    		<li class="page-item"><a class="page-link" href="classList.bo?cpage=${ p }">${ p }</a></li>
+	                    </c:forEach>
+	                    
+	                    <c:choose>
+	                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+	                    		<li class="page-item disabled"><a class="page-link" href="">다음</a></li>
+               				</c:when>
+               				<c:otherwise>
+               					<li class="page-item"><a class="page-link" href="classList.bo?cpage=${ pi.currentPage + 1 }">다음</a></li>
+               				</c:otherwise>
+               			</c:choose>
+                </ul>
+            </div>
+
+            
         </div>
 
                 
-                <!-- Modal -->
+                <!-- 
+                 Modal
                 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"> <!-- 대형모달 설정 -->
+                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">  대형모달 설정 
                     <div class="modal-content">
                         <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">강의 수정</h5>
@@ -159,17 +193,17 @@
                                 <div class="form-group">
                                     
                                     <label for="lectureNo">강의번호 :</label>
-                                    <input type="text" class="form-control" id="lectureNo" name="lectureNo" placeholder="숫자만 입력해주세요" required><br>
+                                    <input type="text" class="form-control" id="lectureNo" name="classNum" placeholder="숫자만 입력해주세요" value="${c.classNum }" required><br>
                                     
                                     <label for="lectureNm"> &nbsp;강의이름 :</label>
-                                    <input type="text" class="form-control" id="lectureNm" name="lectureNm" placeholder="강의명을 입력해주세요" required><br>
+                                    <input type="text" class="form-control" id="lectureNm" name="className" placeholder="강의명을 입력해주세요" value="${c.className }" required><br>
                                     
                 
                                     <table>
                                         <tr>
                                             <td >
                                                 <label for="student_Grade"> &nbsp;대상학년 :</label>
-                                                <select name="student_Grade" id="student_Grade" class="form-control dropdown">
+                                                <select name="classGrade" id="student_Grade" class="form-control dropdown">
                                                     <option value="">1학년</option>
                                                     <option value="">2학년</option>
                                                     <option value="">3학년</option>
@@ -178,7 +212,7 @@
                                             </td> 
                                             <td >
                                                 <label for="lectureSemester"> &nbsp;강의학기 :</label>
-                                                <select name="lectureSemester" id="lectureSemester" class="form-control">
+                                                <select name="classSemester" id="lectureSemester" class="form-control">
                                                     <option value="">1학기</option>
                                                     <option value="">2학기</option>
                                                     <option value="">여름계절학기</option>
@@ -189,33 +223,33 @@
                                         <tr>
                                             <td>
                                                 <label for="lectureRoom"> &nbsp;강의실 :</label>
-                                                <input type="text" class="form-control" id="lectureRoom" name="lectureRoom" placeholder="예) 000관 000호" required><br>
+                                                <input type="text" class="form-control" id="classRoom" name="lectureRoom" placeholder="예) 000관 000호" value="${c.classRoom }" required><br>
                                             </td>
                 
                                             <td>
                                                 <label for="lectureTime"> &nbsp;강의시간 :</label>
-                                                <input type="text" class="form-control" id="lectureTime" name="lectureTime" placeholder="예) 수 1,2,3" required><br>
+                                                <input type="text" class="form-control" id="lectureTime" name="classTime" placeholder="예) 수 1,2,3" value="${c.classTime }" required><br>
                                             </td>
                                         </tr> 
                                     </table>
                                     
                                     
                                     <label for="lectureGrade"> &nbsp;학점 :</label>
-                                    <input type="text" class="form-control" id="lectureGrade" name="lectureGrade" maxlength="1" placeholder="예) 1" onchange="onlyNumber();"><br>
+                                    <input type="text" class="form-control" id="lectureGrade" name="classScore" maxlength="1" placeholder="예) 1" value="${c.classScore }" onchange="onlyNumber();"><br>
                                     
                                     <label for="lectureType"> &nbsp;구분 :</label><br>
                                     <select name="lectureType" id="lectureType" class="form-control">
-                                        <option value="">전공</option>
-                                        <option value="">교양</option>
-                                        <option value="">전공기초</option>
-                                        <option value="">기타</option>
+				                        <option value="C1" >전공</option>
+				                        <option value="C2" >교양</option>
+				                        <option value="C3" >전공기초</option>
+				                        <option value="C4" >기타</option>
                                     </select><br>
                 
                                     <label for="headCount"> &nbsp;수강정원 :</label>
-                                    <input type="text" class="form-control" id="headCount" name="headCount" placeholder="숫자만 입력해주세요" maxlength="3" onchange="onlyNumber2();" required><br>
+                                    <input type="text" class="form-control" id="headCount" name="classPeople" placeholder="숫자만 입력해주세요" maxlength="3" onchange="onlyNumber2();" required><br>
                                    
                                     <label for="etc"> &nbsp;기타사항 :</label>
-                                    <input type="text" class="form-control" id="etc" name="etc" placeholder="기타사항을 입력해주세요" required><br>
+                                    <input type="text" class="form-control" id="etc" name="classEtc" placeholder="기타사항을 입력해주세요" required><br>
                 
                                     <label for="fileUpload"> &nbsp;강의계획서 업로드 : </label>
                                     <input type="file" id="fileUpload" name="fileUpload" accept=".pdf, .hwp, .docx, .doc"><br>
@@ -238,6 +272,7 @@
                     </div>
                     </div>
                 </div>
+                 -->
 
 
             <script>
@@ -258,8 +293,28 @@
                            $("#headCount").val(newVal);
                         }
                     }
-            
+                    
+                    
     
+            </script>
+
+            <script>
+/*
+            $(function(){
+            		$.ajax({
+        				url:"classList.co",
+        				date:{
+        					memberId:$("#userId").val()
+        				},
+        				success:function(list){
+        					console.log("lsit" + list);
+        					
+        				},error:function(){
+        					
+        				}
+        			})
+            	})
+            	*/
             </script>
 
 
