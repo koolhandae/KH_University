@@ -21,11 +21,11 @@ public class MemberDao {
 		return sqlSession.insert("memberMapper.insertMember", m);
 	}
 	
-	public Member selectChkMember(SqlSession sqlSession, String email) {
+	public Member selectChkMember(SqlSessionTemplate sqlSession, String email) {
 		return sqlSession.selectOne("memberMapper.selectChkMember", email);
 	}
 	
-	public int changemPwd(SqlSession sqlSession, String memberId, String encPwd) {
+	public int changemPwd(SqlSessionTemplate sqlSession, String memberId, String encPwd) {
 		//System.out.println("encPwd : " + encPwd);
 		 	Map<String, String> parameters = new HashMap();
 		    parameters.put("memberId", memberId);

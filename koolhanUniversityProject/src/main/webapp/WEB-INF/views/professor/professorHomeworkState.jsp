@@ -102,6 +102,10 @@
         vertical-align: baseline;
         /* line-height: 10px; */
     }
+    .pagination{
+    	display:flex;
+    	justify-content: center;
+    }
 
 </style>
 </head>
@@ -109,15 +113,7 @@
    <jsp:include page="../common/header_with_sidebar.jsp"/>
    <jsp:include page="../common/datePickerNsummernote.jsp"/>
    <div class="content">
-    <button id="confirmAlert">알림창</button>
-    <script>
-    $("#confirmAlert").click(function () {
-        Swal.fire({
-      icon: 'success',
-      title: 'Alert가 실행되었습니다.',
-      text: '이곳은 내용이 나타나는 곳입니다.',
-    })
-              });
+
           
         </script>
         <div id="topdiv"class="bg-white">
@@ -177,51 +173,62 @@
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td>자바의 기초</td>
-                                    <td>ㅇㅇㅇㅇㅇ과제</td>
-                                    <td>2024-05-02</td>
-                                    <td>
-                                        <button type="button" class="btn btn-outline-primary ">상세보기</button>
-                                    </td>
-                                </tr>
+                            	<c:forEach var="p" items="${list }">
+	                                <tr>
+	                                    <td>${p.pjClassName }</td>
+	                                    <td>${p.pjTitle }</td>
+	                                    <td>${p.pjDeadline }</td>
+	                                    <td>
+		                                	<input type="hidden" name="pjNo" value="${p.pjNo }" class="pno" id="hiddenpjNo">
+	                                        <button type="button" class="btn btn-outline-primary projectDetailGoGo">상세보기</button>
+	                                    </td>
+	                                </tr>
+                                </c:forEach>
+                                <script>
+                                	$(function(){
+                                		$(".projectDetailGoGo").click(function(){
+                                			location.href='professorProjectDetail.do?pno=' + $(this).siblings(".pno").val();
+                                		})
+                                	})
+                                </script>
                             </tbody>
                         </table>
                         
-                        <!-- <label for="content"> &nbsp;내용 </label>
-                        <div id="summernote" name="editordata" class="form-control summernote" style="resize:none; height: auto;">
-                            <p>
-                                <h1>ㅇㅇ</h1> <br>
-                                ㅇ<br>
-                                ㅇ<br>
-                                ㅇ<br>
-                                ㅇ<br>
-                                ㅇ<br>
-                                ㅇ<br>
-                                ㅇ<br>
-                                ㅇ<br>
-                                ㅇ<br>
-                                ㅇ<br>
-                                ㅇ<br>
-                                ㅇ<br>
-                                ㅇ<br>
-                                ㅇ<br>
-                                ㅇ<br>
-                                ㅇ<br>
-                                ㅇ<br>
-                                ㅇ<br>
-                                ㅇ<br>
-                                ㅇ<br>
-                            </p>
-                        </div> -->
-                        <!-- <textarea id="summernote" name="editordata" cols="30" rows="10" class="form-control summernote" style="resize:none;" readonly> </textarea> -->
-                       
-    
+                        
     
                     </div>
-                    <br>
             </div>
             
+            <div id="pagingArea">
+                <ul class="pagination">
+                	
+	                	<c:choose>
+	                		<c:when test="${ pi.currentPage eq 1 }">
+		                    	<li class="page-item disabled"><a class="page-link" href="">이전</a></li>
+	                    							<!-- disabled 이전버튼 비활성화 -->
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<li class="page-item"><a class="page-link" href="professorPJStateList.do?cpage=${ pi.currentPage - 1 }">이전</a></li>
+	                    	</c:otherwise>
+	                    </c:choose>	
+                    
+                    
+                    
+                    	<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }"> <!-- 일반for문처럼 사용가능함 -->
+                    		<li class="page-item"><a class="page-link" href="professorPJStateList.do?cpage=${ p }">${ p }</a></li>
+	                    </c:forEach>
+	                    
+	                    <c:choose>
+	                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+	                    		<li class="page-item disabled"><a class="page-link" href="">다음</a></li>
+               				</c:when>
+               				<c:otherwise>
+               					<li class="page-item"><a class="page-link" href="professorPJStateList.do?cpage=${ pi.currentPage + 1 }">다음</a></li>
+               				</c:otherwise>
+               			</c:choose>
+                </ul>
+            </div>
+            <br>
         </div>
         
         
@@ -259,18 +266,19 @@
 			})
 			
 			
-			$.ajax({
-				url:"projectAllSelectAjax.do",
-				date:{
-					memberId:$("#userId").val()
-				},
-				success:function(list){
-					console.log("lsit" + list);
+			
+			// $.ajax({
+			// 	url:"projectAllSelectAjax.do",
+			// 	date:{
+			// 		memberId:$("#userId").val()
+			// 	},
+			// 	success:function(list){
+			// 		console.log("lsit" + list);
 					
-				},error:function(){
+			// 	},error:function(){
 					
-				}
-			})
+			// 	}
+			// })
         });
 	</script>
 

@@ -2,6 +2,7 @@ package com.kh.khu.project.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.project.model.vo.Project;
 
 public interface ProjectService {
@@ -27,6 +28,13 @@ public interface ProjectService {
 	// 과제 삭제
 	int deleteProject(Project pj);
 	
+
+	// 교수용 과제 리스트 페이지
+	int selectProfessorProjectListCount(String memberId);
+	ArrayList<Project> selectProfessorProjectList(PageInfo pi, String memberId);
+	
+	// 교수용 과제 상세조회 페이지
+	Project selectProfessorProjectDetail(int pjNo);
 	
 	
 }

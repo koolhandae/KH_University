@@ -26,4 +26,6 @@ public class ClassNotice {
 	private String cnChangeName;
 	private String cnStatus;
 	private int cnCount;
+	private String memberName;
+	private String className;
 }

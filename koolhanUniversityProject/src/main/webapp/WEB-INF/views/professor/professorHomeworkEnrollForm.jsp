@@ -103,15 +103,6 @@
    <jsp:include page="../common/header_with_sidebar.jsp"/>
    <jsp:include page="../common/datePickerNsummernote.jsp"/>
    <div class="content">
-    <button id="confirmAlert">알림창</button>
-    <script>
-    $("#confirmAlert").click(function () {
-        Swal.fire({
-      icon: 'success',
-      title: 'Alert가 실행되었습니다.',
-      text: '이곳은 내용이 나타나는 곳입니다.',
-    })
-              });
           
         </script>
         <div id="topdiv"class="bg-white">
