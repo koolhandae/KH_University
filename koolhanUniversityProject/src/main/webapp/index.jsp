@@ -36,33 +36,53 @@
 
 
 
-				<!-- 김도현 -->
-				<jsp:forward page="WEB-INF/views/main.jsp" />
-				<%-- <jsp:forward page="WEB-INF/views/student/studentClassPage.jsp" /> --%>
-				<%-- <jsp:forward page="WEB-INF/views/student/studentBeforeClassPage.jsp" /> --%>
-				<%-- <jsp:forward page="WEB-INF/views/student/studentScorePage.jsp" /> --%>
-				<%-- <jsp:forward page="WEB-INF/views/student/studentClassDetail.jsp" /> --%>
-				<%-- <jsp:forward page="WEB-INF/views/student/studentClassNoticeDetail.jsp" /> --%>
-				<%-- <jsp:forward page="WEB-INF/views/student/studentClassBoardDetail.jsp" /> --%>
-				<%-- <jsp:forward page="WEB-INF/views/student/studentBoardInsertForm.jsp" /> --%>
-				<%-- <jsp:forward page="WEB-INF/views/common/forgotPassword.jsp" /> --%>
-				<%-- <jsp:forward page="WEB-INF/views/student/studentBoardInsertForm.jsp" /> --%>
-				<%-- <jsp:forward page="WEB-INF/views/common/findPassword.jsp" /> --%>
+		<!-- 김도현 -->
+		<jsp:forward page="WEB-INF/views/main.jsp" />
+		<%-- <jsp:forward page="WEB-INF/views/student/studentClassPage.jsp" /> --%>
+		<%-- <jsp:forward page="WEB-INF/views/student/studentBeforeClassPage.jsp" /> --%>
+		<%-- <jsp:forward page="WEB-INF/views/student/studentScorePage.jsp" /> --%>
+		<%-- <jsp:forward page="WEB-INF/views/student/studentClassDetail.jsp" /> --%>
+		<%-- <jsp:forward page="WEB-INF/views/student/studentClassNoticeDetail.jsp" /> --%>
+		<%-- <jsp:forward page="WEB-INF/views/student/studentClassBoardDetail.jsp" /> --%>
+		<%-- <jsp:forward page="WEB-INF/views/student/studentBoardInsertForm.jsp" /> --%>
+		<%-- <jsp:forward page="WEB-INF/views/common/forgotPassword.jsp" /> --%>
+		<%-- <jsp:forward page="WEB-INF/views/student/studentBoardInsertForm.jsp" /> --%>
+		<%-- <jsp:forward page="WEB-INF/views/common/findPassword.jsp" /> --%>
 
 
 
 
-				<!-- 어수지 -->
-				<%-- <jsp:forward page="WEB-INF/views/student/studentTuition.jsp" /> --%>
-				<%-- 학생 등록금 납부 내역 조회 --%>
-					<%-- <jsp:forward page="WEB-INF/views/student/studentTuitionBill.jsp" /> --%>
-					<%-- 학생 등록금 고지서 --%>
-						<%-- <jsp:forward page="WEB-INF/views/student/studentTuitionPay.jsp" /> --%>
-						<%-- 학생 등록금 결제 --%>
-							<%-- <jsp:forward page="WEB-INF/views/student/studentTakeOff.jsp" /> --%>
-							<%-- 학생 휴학 신청 --%>
-								<%-- <jsp:forward page="WEB-INF/views/student/studentReturnSchool.jsp" /> --%>
-								<%-- 학생 복학 신청 --%>
+		<!-- 어수지 -->
+<%--    <jsp:forward page="WEB-INF/views/student/studentTuition.jsp" /> --%>
+		<%-- 학생 등록금 납부 내역 조회 --%>
+<%-- 	<jsp:forward page="WEB-INF/views/student/studentTuitionBill.jsp" /> --%>
+		<%-- 학생 등록금 고지서 --%>
+<%-- 	<jsp:forward page="WEB-INF/views/student/studentTuitionPay.jsp" /> --%>
+		<%-- 학생 등록금 결제 --%>
+<%-- 	<jsp:forward page="WEB-INF/views/student/studentTakeOff.jsp" /> --%>
+		<%-- 학생 휴학 신청 --%>
+<%-- 	<jsp:forward page="WEB-INF/views/student/studentReturnSchool.jsp" /> --%>
+		<%-- 학생 복학 신청 --%>
+		
+		
+<%--    <jsp:forward page="WEB-INF/views/admin/adminUpdateForm.jsp" /> --%>
+		<%-- 교수 개인정보 수정 --%>		
+<%--    <jsp:forward page="WEB-INF/views/admin/adminTuitionMake.jsp" /> --%>
+		<%-- 관리자 등록금 고지서 발급 --%>
+<%--    <jsp:forward page="WEB-INF/views/admin/adminTuitionManage.jsp" /> --%>
+   		<%-- 관리자 등록금 조회 --%>
+<%-- 	<jsp:forward page="WEB-INF/views/admin/adminTakeOffSelect.jsp" /> --%>
+		<%-- 학생 휴학 신청서 조회 --%>
+<%-- 	<jsp:forward page="WEB-INF/views/admin/studentReturnSchool.jsp" /> --%>
+		<%-- 학생 복학 신청서 조회 --%>
+		
+		
+   		
+  <jsp:forward page="WEB-INF/views/common/busMapApi.jsp" />
+   		<%-- 지도 api --%>
+   <jsp:forward page="WEB-INF/views/common/busRealTime.jsp" />
+   		<%-- 실시간 버스 공공데이터 --%>
+		
 
 
 									<%-- <jsp:forward page="WEB-INF/views/admin/adminUpdateForm.jsp" /> --%>

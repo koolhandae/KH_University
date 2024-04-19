@@ -77,6 +77,10 @@ public class StudentDao {
 		return sqlSession.selectOne("studentMapper.selectTakeOff", a);
 	}
 	
+	public int insertTakeOff(SqlSessionTemplate sqlSession, Absence a) {
+		return sqlSession.insert("studentMapper.insertTakeOff", a);
+	}
+	
 	public int insertReturnSchool(SqlSessionTemplate sqlSession, Presence p) {
 		return sqlSession.insert("studentMapper.insertReturnSchool", p);
 	}

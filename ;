@@ -1,0 +1,16 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch sj8
+# Changes to be committed:
+#	modified:   koolhanUniversityProject/src/main/java/com/kh/khu/student/model/dao/StudentDao.java
+#	modified:   koolhanUniversityProject/src/main/java/com/kh/khu/tuition/controller/TuitionController.java
+#	modified:   koolhanUniversityProject/src/main/java/com/kh/khu/tuition/model/dao/TuitionDao.java
+#	modified:   koolhanUniversityProject/src/main/java/com/kh/khu/tuition/model/service/TuitionService.java
+#	modified:   koolhanUniversityProject/src/main/java/com/kh/khu/tuition/model/service/TuitionServiceImpl.java
+#	modified:   koolhanUniversityProject/src/main/java/com/kh/khu/tuition/model/vo/AdminTuitionMake.java
+#	modified:   koolhanUniversityProject/src/main/resources/mappers/tuition-mapper.xml
+#	modified:   koolhanUniversityProject/src/main/resources/mybatis-config.xml
+#	modified:   koolhanUniversityProject/src/main/webapp/WEB-INF/views/admin/adminTuitionMake.jsp
+#

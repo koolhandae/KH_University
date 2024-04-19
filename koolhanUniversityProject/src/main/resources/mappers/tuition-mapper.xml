@@ -18,6 +18,15 @@
 		<result column="tp_total_price" property="totalPrice"/>
 	</resultMap>
 	
+	<resultMap type="AdminTuitionMake" id="adminTuitionResult">
+		<result column="tt_no" property="ttNo" />
+		<result column="tb_due" property="tbDue" />
+		<result column="tb_date" property="tbDate" />
+		<result column="tb_price" property="tbPrice" />
+		<result column="total_price" property="totalPrice" />
+		<result column="tb_status" property="tbStatus" />
+	</resultMap>
+	
 
 	
 	<select id="tuitionBillForm" resultMap="tuitionResult">
@@ -53,13 +62,21 @@
 	  )
 	</insert>
 	
-<!-- 	<select id="tuitionMake.ad">
+ 	<select id="tuitionMakeForm" resultMap="adminTuitionResult">
 		SELECT
-			   s.student_id
+			   student_no
+		     , s.student_id
+		     , s.student_name
+		     , tt_no
+		     , tb.tb_price
+		     , t.scholarship
+		     , tb.total_price
+		     , tb.tb_due
 		  FROM student s
-		  JOIN tuition t using (student_no)
-		  JOIN tuition_bill tb using (tt_no)
-	</select> -->
+		  JOIN tuition t USING (student_no)
+		  JOIN tuition_bill tb USING (tt_no)
+		 WHERE s.student_id = #{ search }
+	</select>
 	
 	
 	
