@@ -29,6 +29,8 @@
 		<result column="class_time" property="classTime"/>
 		<result column="class_name" property="className"/>
 		<result column="class_score" property="classScore"/>
+		<result column="class_typename" property="classTypeName"/>
+		<result column="class_people" property="classPeople"/>
 	</resultMap>	
 		
 	<resultMap type="Absence" id="absenceResult">
@@ -173,20 +175,22 @@
 
 
 <select id="selectCourseList" resultMap="courseResult">
-	select
-	       course_no
-	     , class_num
-	     , class_grade
-	     , course_semester
-	     , course_year
-	     , class_name
-	     , class_room
-	     , class_time
-	     , class_score
-	  from course
-	  join class using (class_num)
-	 where student_id = #{studentId}
-	   and course_year = '2024'
+		select
+		       course_no
+		     , class_num
+		     , class_grade
+		     , course_semester
+		     , class_name
+		     , class_room
+		     , class_time
+		     , class_score
+	         , class_typename
+	         , class_people
+		  from course
+		  join class using (class_num)
+	      join class_type using (class_type)
+		 where student_id = #{studentId}
+		   and course_year = '2024'
 </select>
 
 <select id="searchCourse" resultMap="courseResult">
@@ -199,11 +203,22 @@
 	     , class_room
 	     , class_time
 	     , class_score
+         , class_typename
+         , class_people
 	  from course
 	  join class using (class_num)
+	  join class_type using (class_type)
 	 where course_year = 2024
        and class_num = #{courseNum}
 </select>
 
-	
+<select id="selectClassName" resultMap="courseResult">
+	select 
+	       class_name
+	  from course
+	  join class using (class_num)
+	 where course_status = 'Y'
+	   and class_num = #{classNum}
+</select>
+
 </mapper>

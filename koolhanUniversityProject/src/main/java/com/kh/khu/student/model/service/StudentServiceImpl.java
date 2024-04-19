@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.khu.classroom.model.vo.ClassNotice;
+import com.kh.khu.classroom.model.vo.Classroom;
 import com.kh.khu.classroom.model.vo.Course;
 import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.student.model.dao.StudentDao;
@@ -67,20 +68,22 @@ public class StudentServiceImpl implements StudentService{
 		return sDao.selectListCount(sqlSession, classNum);
 	}
 	
-	/* 학생 수강 강의 세부 조회 (공지사항)*/
+	/* 학생 수강 강의 세부 조회 (공지사항 리스트)*/
 	@Override
 	public ArrayList<ClassNotice> selectClassNoticeList(PageInfo pi, String classNum) {
 		return sDao.selectClassNoticeList(sqlSession, pi, classNum);
 	}
-
+	
+	/* 학생 수강 강의 세부 조회 (공지사항 디테일 조회수)*/
 	@Override
-	public int increaseCount(int classNoticeNo) {
-		return 0;
+	public int increaseCount(String cno) {
+		return sDao.increaseCount(sqlSession, cno);
 	}
-
+	
+	/* 학생 수강 강의 세부 조회 (공지사항 디테일뷰)*/
 	@Override
-	public ClassNotice selectClassNoticeDetail(int classNoticeNo) {
-		return null;
+	public ClassNotice selectClassNoticeDetail(String cno) {
+		return sDao.selectClassNoticeDetail(sqlSession, cno);
 	}
 
 	@Override
@@ -112,6 +115,17 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public String selectStudentId(Student s) {
 		return sDao.selectStudentId(sqlSession, s);
+	}
+	
+	// 학생 수강 강의계획서 조회
+	@Override
+	public Classroom selectCoursePlan(String classNum) {
+		return sDao.selectCoursePlan(sqlSession, classNum);
+	}
+
+	@Override
+	public Course selectClassName(String classNum) {
+		return sDao.selectClassName(sqlSession, classNum);
 	}
 
 

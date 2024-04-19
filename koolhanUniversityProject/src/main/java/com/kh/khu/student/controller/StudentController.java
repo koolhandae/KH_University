@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.kh.khu.classroom.model.vo.ClassDetail;
 import com.kh.khu.classroom.model.vo.ClassNotice;
+import com.kh.khu.classroom.model.vo.Classroom;
 import com.kh.khu.classroom.model.vo.Course;
 import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.common.template.Pagination;
@@ -84,11 +85,15 @@ public class StudentController {
 		
 		System.out.println("classNum = " + classNum);
 		
+		Course c = sService.selectClassName(classNum);
+		
+		String className = c.getClassName();
+
 		int listCount = sService.selectListCount(classNum);		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
 		ArrayList<ClassNotice> list = sService.selectClassNoticeList(pi, classNum);
 		
-		mv.addObject("pi", pi).addObject("list", list).addObject("classNum", classNum).setViewName("student/studentClassDetail");
+		mv.addObject("pi", pi).addObject("list", list).addObject("classNum", classNum).addObject("className",className).setViewName("student/studentClassDetail");
 		return mv;
 		
 	}
@@ -201,6 +206,35 @@ public class StudentController {
 			return "common/errorPage404";
 		}
 		
+	}
+	
+	@RequestMapping("noticeDetail.co")
+	public String searchDetailClass(String cno, Model model) {
+		int noticeCount = sService.increaseCount(cno);
+		
+		System.out.println("noticeCount" + noticeCount);
+		
+		if(noticeCount>0) {
+			ClassNotice cd  = sService.selectClassNoticeDetail(cno);
+			model.addAttribute("cd", cd);
+			
+			return "student/studentClassNoticeDetail";
+		}else {
+			model.addAttribute("errorMsg", "수강 공지사항 세부조회에 실패하셨습니다.");
+			return "common/errorPage404";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="classPlan.co", produces="application/json; charset=utf-8")
+	public Classroom selectCoursePlan(String classNum){
+		
+		Classroom c = sService.selectCoursePlan(classNum);
+		
+		System.out.println("classPlan=" + c);
+	
+		return c;
+
 	}
 	
 }

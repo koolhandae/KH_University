@@ -27,5 +27,7 @@ public class Course {
 	private String classTitle;
 	private String classScore;
 	private String classTime;
+	private String classPeople;
+	private String classTypeName;
 	
 }
