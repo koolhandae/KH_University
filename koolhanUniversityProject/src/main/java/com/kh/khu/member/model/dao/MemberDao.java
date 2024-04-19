@@ -8,7 +8,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.khu.member.model.vo.Member;
-import com.kh.khu.student.model.vo.Student;
 
 @Repository
 public class MemberDao {
@@ -41,5 +40,9 @@ public class MemberDao {
 	
 	public int verifyEmail(SqlSessionTemplate sqlSession, String email) {
 		return sqlSession.selectOne("memberMapper.verifyEmail", email);
+	}
+	
+	public int updateAddress(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateAddress",m);
 	}
 }

@@ -122,7 +122,7 @@ public class HomeController {
 	public ResponseEntity<Map<String, Object>> sendmail(String email, String userId, HttpSession session) {
 				
 			Map<String, Object> resultMap = new HashMap();
-			// System.out.println(email);
+			 // System.out.println(email);
 			 System.out.println("sendmailcontroll" + userId);
 
 				//난수의 범위 111111 ~ 999999 (6자리 난수)

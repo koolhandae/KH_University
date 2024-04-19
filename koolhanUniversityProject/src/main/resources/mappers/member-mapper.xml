@@ -86,5 +86,10 @@
 		 where m_email = #{email}      
 	</select>
 	
-	
+	<update id="updateAddress">
+		update member
+		   set m_address = #{meAddress}
+		 where member_id = #{memberId}
+	</update>
+		
 </mapper>

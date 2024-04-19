@@ -227,7 +227,6 @@ public class StudentController {
 	@ResponseBody
 	@RequestMapping("updateAddress.stu")
 	public HashMap<String, Object> updateAddress(Address a, String studentId, HttpSession session) {
-		System.out.println("자바왔냐");
 		String newAddress = AddressString.AddressMake(a);
 		Student s = new Student();
 		s.setStudentId(studentId);

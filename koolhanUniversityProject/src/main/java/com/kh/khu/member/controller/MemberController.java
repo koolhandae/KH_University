@@ -2,8 +2,6 @@ package com.kh.khu.member.controller;
 
 import java.util.HashMap;
 
-import java.util.HashMap;
-
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -68,8 +66,6 @@ public class MemberController {
    
          Student loginStudent  = sService.loginStudent(s);
          
-         System.out.println("membercontroleer = " + loginStudent);
-         
          if(loginStudent != null && bcryptPasswordEncoder.matches(s.getStudentPwd(), loginStudent.getStudentPwd())){
             // 로그인성공
         	 session.setAttribute("loginStudent", loginStudent);
@@ -88,10 +84,6 @@ public class MemberController {
          m.setMemberPwd(userPwd);
          
          Member loginUser = mService.loginMember(m);
-         
-         //System.out.println(loginUser);
-         
-
          
          if(loginUser != null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
             // 로그인 성공
@@ -177,6 +169,27 @@ public class MemberController {
 		int result = mService.verifyEmail(email);
 		
 		return result == 0 ? "NNNNY" : "NNNNN";
+	}
+	
+	@ResponseBody
+	@RequestMapping("updateAddress.stu")
+	public HashMap<String, Object> updateAddress(Address a, String memberId, HttpSession session) {
+		String newAddress = AddressString.AddressMake(a);
+		Member m = new Member();
+		m.setMemberId(memberId);
+		m.setMeAddress(newAddress);
+		int result = mService.updateAddress(m);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		if(result > 0) {
+			session.removeAttribute("loginUser");
+			session.setAttribute("loginUser", );
+			map.put("title", "주소 변경 성공");
+			map.put("text", "성공적으로 주소를 변경했습니다.");
+			map.put("icon", "success");
+			map.put("newAddress", m.getMeAddress());
+		}
+		
+		return map;
 	}
 
 }

@@ -149,7 +149,10 @@
 	                				   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
 	                					   $.ajax({
 	                    	                	url:"sendmail.do",
-	                    	                	data:{email : $("#InputEmail").val()},
+	                    	                	data:{
+	                    	                		email : '${loginStudent.stEmail}',
+	                    	                		userId : '${loginStudent.studentId}'	
+	                    	                	},
 	                    	                	success:function(result){
 	                    	                		Swal.fire(
 	                    	                		        '이메일 발송 성공',
