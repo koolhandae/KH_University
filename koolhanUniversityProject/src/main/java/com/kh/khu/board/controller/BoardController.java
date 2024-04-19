@@ -100,7 +100,7 @@ public class BoardController {
 	
 	@RequestMapping("update.bo")
 	public ModelAndView updateBoard(Board b, MultipartFile reupfile, HttpSession session, ModelAndView mv) {
-		System.out.println(session.getServletContext().getRealPath(b.getChangeName()));
+		//System.out.println(session.getServletContext().getRealPath(b.getChangeName()));
 		if(!reupfile.getOriginalFilename().equals("")){
 			new File(session.getServletContext().getRealPath(b.getChangeName())).delete();
 			String changeName = SaveFile.saveFile(reupfile, session);

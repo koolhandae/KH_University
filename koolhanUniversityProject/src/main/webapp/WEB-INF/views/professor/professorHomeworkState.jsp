@@ -136,7 +136,7 @@
         </div>
         <div style="padding: 15px;" id="HomeworkLiDiv">
             <ul style="height: 66px; margin: 0;" >
-                <li class="homework_li_class" style="background-color: white;">과제 등록</li>
+                <li class="homework_li_class" style="background-color: white;" onclick="location.href = 'professorPJEnrollForm.do'">과제 등록</li>
                 <li class="homework_li_class" style="background-color: #1c4587; color: white; margin-right: 0.5px;">과제 현황</li>
             </ul>
             
@@ -150,11 +150,7 @@
                         
                         <label for="lectureSelect">강의 선택 </label>
                         <select name="lectureSelect" id="lectureSelect" class="form-control ">
-                            <option>강의 선택하기</option>
-                            <option>자바기초</option>
-                            <option>컴퓨터프로그래밍</option>
-                            <option>이산수학</option>
-                            <option>공학수학1</option>
+
                         </select>
 
                         <br>
@@ -164,12 +160,6 @@
                             <tr>
                                 <td>
                                     <input type="text" id="datepicker" class="form-control">
-                                </td>
-                                <td id="wave">
-                                    ~
-                                </td>
-                                <td>
-                                    <input type="text" id="datepicker2" class="form-control">
                                 </td>
                             </tr>
                         </table>
@@ -191,15 +181,6 @@
                                     <td>자바의 기초</td>
                                     <td>ㅇㅇㅇㅇㅇ과제</td>
                                     <td>2024-05-02</td>
-                                    <td>
-                                        <button type="button" class="btn btn-outline-primary ">상세보기</button>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>이산수학</td>
-                                    <td>ㅇㅇㅇㅇㅇ과제</td>
-                                    <td>2024-05-05</td>
                                     <td>
                                         <button type="button" class="btn btn-outline-primary ">상세보기</button>
                                     </td>
@@ -247,7 +228,51 @@
         <!-- <div style="padding: 15px;"></div>
 
         <div class="bg-white">ㅇㅅㅇ</div> -->
-
+	<input type="hidden" id="userId" value="${loginUser.memberId}">
+	<!-- select option에 들어가는 값 -->
+	<script>
+		$(function() {
+			$.ajax({
+				url:"classSelectAjax.do",
+				data:{memberId:$("#userId").val()},
+			    success:function(list){
+			    	console.log(list);
+			    	
+			    	let value = "<option>" + "강의를 선택해주세요." +  "</option>"
+			    			  + "<option>" + "전체보기" +  "</option>";
+			    	
+			    	if(list != ""){
+                        for(let i in list){
+                            value += "<option>" + list[i].className+"</option>"
+                        }
+                    }else{
+                    	value="";
+			    		value += "<option>" + "개설된 강좌가 없습니다."+"</option>"
+			    	}
+                    
+			    	
+			    	$("#lectureSelect").html(value);
+			    	
+			    },error:function(){
+			    	console.log("ajax다 터져서왓다고요")
+			    }
+			})
+			
+			
+			$.ajax({
+				url:"projectAllSelectAjax.do",
+				date:{
+					memberId:$("#userId").val()
+				},
+				success:function(list){
+					console.log("lsit" + list);
+					
+				},error:function(){
+					
+				}
+			})
+        });
+	</script>
 
 <script>
 

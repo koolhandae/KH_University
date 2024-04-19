@@ -37,6 +37,7 @@
 		<mapper resource="/mappers/scholarships-mapper.xml"/>
 		<mapper resource="/mappers/student-mapper.xml"/>
 		<mapper resource="/mappers/tuition-mapper.xml"/>
+		<mapper resource="/mappers/project-mapper.xml"/>
 	</mappers>
 
 </configuration>

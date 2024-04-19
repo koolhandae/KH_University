@@ -16,7 +16,7 @@ public interface ProjectService {
 	ArrayList<Project> selectMissProjectList(Project pj);
 	
 	// 과제 리스트 조회
-	ArrayList<Project> selectProjectList();
+	ArrayList<Project> selectProjectList(String memberId);
 	
 	// 과제 게시판 등록
 	int insertProject(Project pj);

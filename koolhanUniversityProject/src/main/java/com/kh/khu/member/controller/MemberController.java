@@ -1,5 +1,7 @@
 package com.kh.khu.member.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +19,14 @@ import com.kh.khu.student.model.vo.Student;
 @Controller
 public class MemberController {
 
-   @Autowired
-   private MemberServiceImpl mService;
-   
-   @Autowired
-   private StudentServiceImpl sService;
-   
-   @Autowired
-   private BCryptPasswordEncoder bcryptPasswordEncoder;
+@Autowired
+private MemberServiceImpl mService;
+
+@Autowired
+private StudentServiceImpl sService;
+
+@Autowired
+private BCryptPasswordEncoder bcryptPasswordEncoder;
    
    // 임시 로그인 메소드
    /*
@@ -41,50 +43,54 @@ public class MemberController {
    }
    */
 
-   @RequestMapping("login.me")
-   public String loginMember(String userId, String userPwd, HttpSession session, Model model) {
-      
-      String encPwd = bcryptPasswordEncoder.encode(userPwd);
-      System.out.println(encPwd);
-      
-      if(userId.startsWith("kh")) {
-         
-         Student s = new Student();
-         s.setStudentId(userId);
-         s.setStudentPwd(userPwd);
-   
-         Student loginStudent  = sService.loginStudent(s);
-         
-         //System.out.println(loginStudent);
-         
-         if(loginStudent != null && bcryptPasswordEncoder.matches(s.getStudentPwd(), loginStudent.getStudentPwd())){
-            // 로그인성공
-            session.setAttribute("loginStudent", loginStudent);
-            session.setAttribute("alertMsg", "로그인에 성공하셨습니다!");
-            
-            return "redirect:/mainPage.me";
-         }
-         
-      }else {
-         Member m = new Member();
-         m.setMemberId(userId);
-         m.setMemberPwd(userPwd);
-         
-         Member loginUser = mService.loginMember(m);
-         
-         //System.out.println(loginUser);
-         
-         if(loginUser != null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
-            // 로그인 성공
-            session.setAttribute("loginUser", loginUser);         
-            session.setAttribute("alertMsg", "로그인에 성공하셨습니다!");   
-            return "redirect:/mainPage.me";      
-         }
-      }
-       session.setAttribute("alertMsg", "아이디 또는 비밀번호가 올바르지 않습니다.");
-       return "redirect:/"; 
-      
-   }
+@RequestMapping("login.me")
+public String loginMember(String userId, String userPwd, HttpSession session, Model model) {
+	
+	String encPwd = bcryptPasswordEncoder.encode(userPwd);
+	System.out.println(encPwd);
+	
+	if(userId.startsWith("kh")) {
+		
+		Student s = new Student();
+		s.setStudentId(userId);
+		s.setStudentPwd(userPwd);
+
+		Student loginStudent  = sService.loginStudent(s);
+		
+		System.out.println(loginStudent);
+		
+		if(loginStudent != null && bcryptPasswordEncoder.matches(s.getStudentPwd(), loginStudent.getStudentPwd())){
+			// 로그인성공
+			session.setAttribute("loginStudent", loginStudent);
+			session.setAttribute("alertMsg", "로그인에 성공하셨습니다!");
+			
+			return "redirect:/mainPage.me";
+		}
+		
+	}else {
+		Member m = new Member();
+		m.setMemberId(userId);
+		m.setMemberPwd(userPwd);
+		
+		Member loginUser = mService.loginMember(m);
+		
+		//System.out.println(loginUser);
+		
+		if(loginUser != null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
+			// 로그인 성공
+            session.setAttribute("loginUser", loginUser);  
+            HashMap<String, Object> alertMsg = new HashMap<String, Object>();
+	         alertMsg.put("icon", "success");
+	         alertMsg.put("title", "성공!");
+	         alertMsg.put("text", "로그인에 성공하셨습니다!");
+	         session.setAttribute("alertMsg", alertMsg);   
+			return "redirect:/mainPage.me";		
+		}
+	}
+	 session.setAttribute("alertMsg", "아이디 또는 비밀번호가 올바르지 않습니다.");
+	 return "redirect:/"; 
+	
+}
    
    @RequestMapping("logout.me")
    public String logoutMember(HttpSession session) {

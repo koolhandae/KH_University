@@ -1,7 +1,5 @@
 package com.kh.khu.classroom.model.vo;
 
-import java.sql.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +18,7 @@ public class Classroom {
 	private int profNo;
 	private String className;
 	private String classType;
+	private int classNo;			// seq로 자동생성되는 classNo;
 	private int classScore;
 	private String classSemester; 	//수강학기
 	private String classGrade; 		// 대상학년
@@ -31,4 +30,6 @@ public class Classroom {
 	private String changeName;		// 강의계획서 첨부파일 바뀐이름
 	private String enrollDate;		// 강의년도
 	
+	private String classTypeName;	// 전공필수 이런 타입네임
+	private String classStatus;		// 강의삭제여부
 }

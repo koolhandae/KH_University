@@ -26,7 +26,7 @@
 
     
 		<!-- 김도현 -->
- 		<jsp:forward page="WEB-INF/views/main.jsp" /> 
+				<jsp:forward page="WEB-INF/views/main.jsp" />
 <%-- 		<jsp:forward page="WEB-INF/views/student/studentClassPage.jsp" /> --%>
 <%-- 		<jsp:forward page="WEB-INF/views/student/studentBeforeClassPage.jsp" /> --%>
 <%-- 		<jsp:forward page="WEB-INF/views/student/studentScorePage.jsp" /> --%>
@@ -61,9 +61,9 @@
 <%--    <jsp:forward page="WEB-INF/views/admin/adminTuitionManage.jsp" /> --%>
    		<%-- 관리자 등록금 조회 --%>
    		
-  <jsp:forward page="WEB-INF/views/common/busMapApi.jsp" />
+<%--  <jsp:forward page="WEB-INF/views/common/busMapApi.jsp" />
    		<%-- 지도 api --%>
-   <jsp:forward page="WEB-INF/views/common/busRealTime.jsp" />
+<%--   <jsp:forward page="WEB-INF/views/common/busRealTime.jsp" />
    		<%-- 실시간 버스 공공데이터 --%>
 		
 
@@ -75,7 +75,7 @@
 	<%--<jsp:forward page="WEB-INF/views/professor/professorClassEnrollForm.jsp"/> --%>
 	<%-- <jsp:forward page="WEB-INF/views/professor/professorClassListView.jsp"/> --%>
 	<%-- <jsp:forward page="WEB-INF/views/professor/professorHomeworkEnrollForm.jsp"/> --%>
-	<%-- <jsp:forward page="WEB-INF/views/professor/professorHomeworkState.jsp"/> --%>
+	<%--<jsp:forward page="WEB-INF/views/professor/professorHomeworkState.jsp"/> --%>
 	<%-- <jsp:forward page="WEB-INF/views/professor/professorHomeworkDetail.jsp"/>  --%>
 	<%--  <jsp:forward page="WEB-INF/views/professor/professorPointList.jsp" /> --%>
 	<%-- <jsp:forward page="WEB-INF/views/professor/professorPointStudentList.jsp" /> --%>
