@@ -216,6 +216,8 @@ public class ClassController {
 		}else {
 			model.addAttribute("errorMsg", "수강 자유게시판 세부조회에 실패하셨습니다.");
 			return "common/errorPage404";
+		}
+	}
 	@RequestMapping(value="classDetail.co")
 	public String selectClassDetail(int cno,Model model ) {
 		// cno라는 키값을 가져왔음
