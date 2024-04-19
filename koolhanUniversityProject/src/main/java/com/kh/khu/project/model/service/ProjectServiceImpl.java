@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.project.model.dao.ProjectDao;
 import com.kh.khu.project.model.vo.Project;
+import com.kh.khu.project.model.vo.StudentProject;
 
 @Service
 public class ProjectServiceImpl implements ProjectService{
@@ -68,6 +69,11 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	public Project selectProfessorProjectDetail(int pjNo) {
 		return pDao.selectProfessorProjectDetail(sqlSession, pjNo);
+	}
+
+	@Override
+	public ArrayList<StudentProject> selectStudentProject(String classNum, String studentId) {
+		return pDao.selectStudentProject(sqlSession, classNum, studentId);
 	}
 
 

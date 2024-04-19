@@ -199,8 +199,9 @@
    <jsp:include page="../common/header_with_sidebar.jsp"/>
    <div class="content">
         <input type="hidden" value="${ classNum }" id="classNum">
+        <input type="hidden" id="studentId" name="studentId" value="${ loginStudent.studentId }">
         <div class="title-area">
-           <div id="title" onclick='history.back();'">나의 수강 조회</div>
+           <div id="title" onclick="location.href='showCourse.st'">나의 수강 조회</div>
            
          <div id="mid-title">나의강의실</div>
          <div>></div>
@@ -291,68 +292,6 @@
          </div>
       </div>
 
-      <!-- 과제게시판 클릭시 화면 -->   
-      <!--
-         <div class="project-area">
-            <div id="ing-project">
-               <img width="80" height="80" src="https://img.icons8.com/material-outlined/96/FCA819/no-entry.png" alt="no-entry"/>
-               <span>미완료 과제 1건</span>
-            </div>
-            <div id="miss-project">
-               <img width="100" height="100" src="https://img.icons8.com/sf-regular/100/BB0505/cancel.png" alt="cancel"/>
-               <span style="padding-bottom: 10px";>누락된 과제 0건</span>
-            </div>
-            <div id="done-project">
-               <img width="75" height="75" src="https://img.icons8.com/metro/80/64A11F/checked.png" alt="checked"/>
-               <span>제출완료 0건</span>
-            </div>
-         </div>
-            <table id="boardList" class="table" align="center">
-               <thead>
-                  <tr>
-                     <th>번호</th>
-                     <th>제목</th>
-                     <th>첨부파일</th>
-                     <th>진행상황</th>
-                     <th>제출</th>
-                     <th>마감일</th>
-                  </tr>
-               </thead>
-               <form action="">
-                  <tbody>
-                     <tr>
-                        <td>1</td>
-                        <td>중간과제:자바산술연산</td>
-                        <td>
-                           <label class="input-file-button" for="input-file">
-                              upload-file
-                           </label>
-                           <input type="file" id="input-file" style="display:none">
-                        </td>
-                        <td>진행중</td>
-                        <td id="project-btn">
-                           <img width="30" height="30" src="https://img.icons8.com/fluency-systems-regular/30/1C4587/nui2.png" alt="nui2"/>
-                        </td>
-                        <td>2024.04.05 오후 11:59</td>
-                     </tr>
-                  </tbody>
-               </form>
-            </table>
-            <div id="img-notice">
-               <span>* 첨부파일 제출시 제목은 "학번_과제 제목" 형식 으로 제출바랍니다</span>
-            </div>
-         </div>
-      </div>
-   </div>
-   -->  
-
-	<!-- 과제 제출시 첨부파일 이름 담기 -->
-   <script>
-      $("#input-file").change(function(){
-         var fileName = $("#input-file").val();
-         $(".input-file-button").text(fileName);
-      })
-   </script>
 
    <!-- 강의실 네비게이터 클릭시 색변환  -->
    <script>
@@ -386,12 +325,23 @@
           location.href = "board.co?classNum=" + classNum;
    	})
    	</script>
+   	
+   	<!-- 과제게시판 클릭시 이동 -->
+   	<script>
+   	$(document).on("click","#project",function(){ 		
+          var classNum = $("#classNum").val(); // classNum 값을 가져옴
+          var studentId = $("#studentId").val();
+          
+          console.log("이놈시키");
+          location.href = "project.st?classNum=" + classNum + "&stuId=" + studentId;
+   	})
+   	</script>
    
    <!-- 강의계획서 div로 이동 -->
    <script>
 	   	$(document).ready(function(){
    			$("#classPlan").click(function(){
-  				const classNum = $(".content").find("#classNum").val();  			
+  				var classNum = $(".content").find("#classNum").val();  			
    				console.log(classNum); 			
    			 $.ajax({
    				 url:"classPlan.co",

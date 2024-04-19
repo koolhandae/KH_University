@@ -21,6 +21,7 @@ import com.kh.khu.common.template.Pagination;
 import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.project.model.service.ProjectService;
 import com.kh.khu.project.model.vo.Project;
+import com.kh.khu.project.model.vo.StudentProject;
 
 @Controller
 public class ProjectController {
@@ -107,6 +108,13 @@ public class ProjectController {
 		return new Gson().toJson(list);
 	}
 	
+	@RequestMapping(value="project.st")
+	public String selectProjectList(@RequestParam(value="classNum") String classNum, 
+									@RequestParam(value="stuId") String studentId) {
+		ArrayList<StudentProject> spList = pService.selectStudentProject(classNum, studentId);
+		
+		return "student/studentHomeworkView";
+	}
 	
 	
 	

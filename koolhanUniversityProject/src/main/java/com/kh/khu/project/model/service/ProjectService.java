@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.project.model.vo.Project;
+import com.kh.khu.project.model.vo.StudentProject;
 
 public interface ProjectService {
 
@@ -36,5 +37,7 @@ public interface ProjectService {
 	// 교수용 과제 상세조회 페이지
 	Project selectProfessorProjectDetail(int pjNo);
 	
+	// 학생용 과제 상세페이지
+	ArrayList<StudentProject> selectStudentProject(String classNum, String studentId);
 	
 }

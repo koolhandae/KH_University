@@ -61,7 +61,7 @@ public class StudentController {
 	@RequestMapping(value="selectCourse.st", produces="application/json; charset=utf-8")
 	public ArrayList<Course>  selectCourseList(String studentId) {
 
-	System.out.println(studentId);	
+	System.out.println("이거오ㅓㅐ안되냐" + studentId);	
 	
 	ArrayList<Course> list = sService.selectCourseList(studentId);
 	

@@ -214,7 +214,7 @@
    <div class="content">
    		<input type="hidden" id="classNum" value="${classNum}">
    		<div class="title-area">
-           <div id="title">나의 수강 조회</div>
+           <div id="title" onclick="location.href='showCourse.st'">나의 수강 조회</div>
            
            <a>
               <!--<i class="fa-solid fa-house"></i>-->

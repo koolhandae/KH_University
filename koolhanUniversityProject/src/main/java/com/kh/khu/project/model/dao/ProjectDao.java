@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.project.model.vo.Project;
+import com.kh.khu.project.model.vo.StudentProject;
 
 @Repository
 public class ProjectDao {
@@ -40,4 +41,8 @@ public class ProjectDao {
 		return sqlSession.selectOne("projectMapper.selectProfessorProjectDetail",pjNo);
 	}
 	
+	public ArrayList<StudentProject> selectStudentProject(SqlSessionTemplate sqlSession, String classNum, String studentId) {
+		return sqlSession.selectStudentProject("projectMapper.selectStudentProject", studentId);
+	}
+	  
 }
