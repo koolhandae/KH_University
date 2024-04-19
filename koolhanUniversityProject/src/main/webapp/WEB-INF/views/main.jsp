@@ -125,12 +125,12 @@
 											<form class="user" action="login.me" method="post" id="loginForm">
 												<div class="form-group">
 													<input type="text" name="userId"
-														class="form-control form-control-user" id="userId"
+														class="form-control form-control-user hit_enter" id="userId"
 														aria-describedby="emailHelp" placeholder="학번을 입력해주세요" required>
 												</div>
 												<div class="form-group">
 													<input type="password" name="userPwd"
-														class="form-control form-control-user" id="userPwd"
+														class="form-control form-control-user hit_enter" id="userPwd"
 														placeholder="비밀번호를 입력해주세요" required>
 												</div>
 												<div class="form-group" style="display: flex;">
@@ -229,6 +229,14 @@
 					document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
 				}
 
+				$(document).ready(function() {
+				    $('.hit_enter').keypress(function(e) {
+				        if (e.which == 13) { 
+				            $('#login-btn').click(); 
+				        }
+				    });
+				});
+				
 
 			</script>
 

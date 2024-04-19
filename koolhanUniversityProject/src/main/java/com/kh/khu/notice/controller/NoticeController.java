@@ -7,8 +7,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.khu.common.model.vo.PageInfo;
@@ -62,6 +65,12 @@ public class NoticeController {
 	public ModelAndView selectNotice(int nno, ModelAndView mv) {
 		mv.addObject("n",nService.selectNotice(nno)).setViewName("admin/noticeDetailView");
 		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="mainList.no", produces="application/json; charset=utf-8")
+	public ArrayList<Notice> selectMainList() {
+		return nService.selectMainList();
 	}
 	
 }

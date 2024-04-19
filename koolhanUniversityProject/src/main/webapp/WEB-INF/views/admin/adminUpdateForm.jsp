@@ -15,18 +15,18 @@
                     <label for="studentName"> 이름 :</label>
                     <input type="text" class="form-control" id="memberName" name="memberName" value="${loginUser.memberName}" readonly><br>
 
-                    <label for="memberId"> 교직원 번호 :</label>
+                    <label for="memberId"> 교직원 ID :</label>
                     <input type="text" class="form-control" id="memberId" name="userId" value="${loginUser.memberId}" readonly><br>
                     
                     <label for="email"> &nbsp;  이메일 :</label>
-                    <input type="email" class="form-control" id="email" name="email" readonly value="${loginUser.stEmail}">
+                    <input type="email" class="form-control" id="email" name="email" readonly value="${loginUser.meEmail}">
                     <br>
                     
                     <label for="phone"> &nbsp;  전화번호 :</label>
-                    <input type="text" class="form-control" id="phone" name="mePhone" placeholder="전화번호를 입력하세요(- 포함)" value="${loginUser.stPhone }"><br>
+                    <input type="text" class="form-control" id="phone" name="mePhone" placeholder="전화번호를 입력하세요(- 포함)" value="${loginUser.mePhone }"><br>
 
                     <label for="address"> &nbsp;  주소 : (주소 변경은 아래 입력창을 클릭하세요 ) <i class="fa-solid fa-arrow-down"></i></label>
-	                    <input onclick="execDaumPostcode();" type="text" class="form-control" id="address" name="stAddress" value="${loginUser.stAddress}" readonly>
+	                    <input onclick="execDaumPostcode();" type="text" class="form-control" id="address" name="stAddress" value="${loginUser.meAddress}" readonly>
 	                
                     
 						<div id="wrap" style="display:none;border:1px solid;width:500px;height:470px;margin:5px 0;position:relative">
@@ -150,7 +150,7 @@
 	                					   $.ajax({
 	                    	                	url:"sendmail.do",
 	                    	                	data:{
-	                    	                		email : '${loginUser.stEmail}',
+	                    	                		email : '${loginUser.meEmail}',
 	                    	                		userId : '${loginUser.memberId}'	
 	                    	                	},
 	                    	                	success:function(result){

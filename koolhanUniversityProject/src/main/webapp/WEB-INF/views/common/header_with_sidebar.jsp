@@ -81,7 +81,7 @@
 
 			<!-- Sidebar - Brand -->
 			<a class="sidebar-brand d-flex align-items-center justify-content-center" style="height: 150px"
-				href="/khu">
+				href="mainPage.me">
 				<div class="sidebar-brand-icon">
 					<img style="width:100px;" src="resources/images/logo.png" alt="">
 				</div>
@@ -90,9 +90,16 @@
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
 
-					<a class="sidebar-brand d-flex align-items-center justify-content-center" href="/khu">
+					<a class="sidebar-brand d-flex align-items-center justify-content-center" href="mainPage.me">
 						<div class="sidebar-brand-text mx-3">KH University<sup></sup></div>
 					</a>
+					<!-- Nav Item - Charts -->
+						<li class="nav-item">
+							<a class="nav-link" href="mypage.go">
+								<i class="fa-solid fa-user"></i>
+								<span>회원 정보 조회</span></a>
+						</li>
+					
 					<c:if test="${ not empty loginStudent }">
 						<!-- Divider -->
 						<hr class="sidebar-divider">
@@ -113,77 +120,79 @@
 								</div>
 							</div>
 						</li>
+						<!-- Nav Item - Utilities Collapse Menu -->
+						<li class="nav-item">
+							<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+								aria-expanded="true" aria-controls="collapseTwo">
+								<i class="fa-solid fa-id-card"></i>
+								<span>마이페이지</span>
+							</a>
+							<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+								data-parent="#accordionSidebar">
+								<div class="bg-white py-2 collapse-inner rounded">
+									<a class="collapse-item" href="update.stu">개인 정보 수정</a>
+									<a class="collapse-item" href="#">나의 캘린더</a>
+									<a class="collapse-item" href="tuitionBill.do">등록금 납부 신청</a>
+									<a class="collapse-item" href="">등록금 납부 내역 조회</a>
+									<a class="collapse-item" href="#">학점 / 성적 조회</a>
+									<a class="collapse-item" href="takeOff.do">휴 · 복학 신청</a>
+									<a class="collapse-item" href="takeOffSelect.do">휴 · 복학 신청 조회</a>
+									<a class="collapse-item" href="certificate.issue">증명서 발급</a>
+								</div>
+							</div>
+						</li>
 					</c:if>
-					<!-- Nav Item - Utilities Collapse Menu -->
-					<li class="nav-item">
-						<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-							aria-expanded="true" aria-controls="collapseTwo">
-							<i class="fa-solid fa-id-card"></i>
-							<span>마이페이지</span>
-						</a>
-						<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-							data-parent="#accordionSidebar">
-							<div class="bg-white py-2 collapse-inner rounded">
-								<a class="collapse-item" href="update.stu">개인 정보 수정</a>
-								<a class="collapse-item" href="#">나의 캘린더</a>
-								<a class="collapse-item" href="tuitionBill.do">등록금 납부 신청</a>
-								<a class="collapse-item" href="">등록금 납부 내역 조회</a>
-								<a class="collapse-item" href="#">학점 / 성적 조회</a>
-								<a class="collapse-item" href="takeOff.do">휴 · 복학 신청</a>
-								<a class="collapse-item" href="takeOffSelect.do">휴 · 복학 신청 조회</a>
-								<a class="collapse-item" href="ertificate.issue">증명서 발급</a>
+
+			<c:if test="${ not empty loginUser and loginUser.meType eq 'A' }">
+				<!-- Divider -->
+				<hr class="sidebar-divider">
+	
+						<!-- Nav Item - Pages Collapse Menu -->
+						<li class="nav-item">
+							<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse2"
+								aria-expanded="true" aria-controls="collapse2">
+								<i class="fa-solid fa-address-book"></i>
+								<span>교직원 / 학생 등록</span>
+							</a>
+							<div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionSidebar">
+								<div class="bg-white py-2 collapse-inner rounded">
+									<a class="collapse-item" href="insertForm.stu">학생 등록</a>
+									<a class="collapse-item" href="insertForm.me">교직원 등록</a>
+								</div>
 							</div>
+						</li>
+	
+						<!-- Nav Item - Charts -->
+						<li class="nav-item">
+							<a class="nav-link" href="insertForm.no">
+								<i class="fa-solid fa-bullhorn"></i>
+								<span>공지사항 등록</span></a>
+						</li>
+						
+						<!-- Nav Item - Charts -->
+						<li class="nav-item">
+							<a class="nav-link" href="tuitionMake.ad">
+								<i class="fa-solid fa-bullhorn"></i>
+								<span>등록금 고지서 발급</span></a>
+						</li>	
+	
+				<!-- Nav Item - Pages Collapse Menu -->
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+						aria-expanded="true" aria-controls="collapsePages">
+						<i class="fa-solid fa-chart-line"></i>
+						<span>통계</span>
+					</a>
+					<div id="collapsePages" class="collapse" aria-labelledby="headingPages"
+						data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<a class="collapse-item" href="#">학생 통계</a>
+							<a class="collapse-item" href="#">교직원 통계</a>
 						</div>
-					</li>
-
-			<!-- Divider -->
-			<hr class="sidebar-divider">
-
-					<!-- Nav Item - Pages Collapse Menu -->
-					<li class="nav-item">
-						<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse2"
-							aria-expanded="true" aria-controls="collapse2">
-							<i class="fa-solid fa-address-book"></i>
-							<span>교직원 / 학생 등록</span>
-						</a>
-						<div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionSidebar">
-							<div class="bg-white py-2 collapse-inner rounded">
-								<a class="collapse-item" href="insertForm.stu">학생 등록</a>
-								<a class="collapse-item" href="insertForm.me">교직원 등록</a>
-							</div>
-						</div>
-					</li>
-
-					<!-- Nav Item - Charts -->
-					<li class="nav-item">
-						<a class="nav-link" href="insertForm.no">
-							<i class="fa-solid fa-bullhorn"></i>
-							<span>공지사항 등록</span></a>
-					</li>
-					
-					<!-- Nav Item - Charts -->
-					<li class="nav-item">
-						<a class="nav-link" href="tuitionMake.ad">
-							<i class="fa-solid fa-bullhorn"></i>
-							<span>등록금 고지서 발급</span></a>
-					</li>	
-
-			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-					aria-expanded="true" aria-controls="collapsePages">
-					<i class="fa-solid fa-chart-line"></i>
-					<span>통계</span>
-				</a>
-				<div id="collapsePages" class="collapse" aria-labelledby="headingPages"
-					data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" href="#">학생 통계</a>
-						<a class="collapse-item" href="#">교직원 통계</a>
 					</div>
-				</div>
-			</li>
-
+				</li>
+			</c:if>
+		  <c:if test="${ not empty loginUser and loginUser.meType eq 'P' }">
           <!-- Divider -->
           <hr class="sidebar-divider d-none d-md-block">
           
@@ -223,6 +232,7 @@
                   <i class="fa-solid fa-file-pen"></i>
                   <span>성적 등록</span></a>
           </li>
+		  </c:if>
           
           <!-- Divider -->
           <hr class="sidebar-divider">
@@ -307,7 +317,7 @@
 						class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
 						<div class="input-group">
 							<input type="text" class="form-control bg-light border-0 small"
-								placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+								placeholder="궁금한걸 검색하세요! ⌕ " aria-label="Search" aria-describedby="basic-addon2">
 							<div class="input-group-append">
 								<button class="btn btn-primary" type="button">
 									<i class="fas fa-search fa-sm"></i>
@@ -498,23 +508,23 @@
 								<!-- Dropdown - User Information -->
 								<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 									aria-labelledby="userDropdown">
-									<a class="dropdown-item" href="#"> <!-- 여기에 마이페이지 링크 걸기-->
+									<a class="dropdown-item" href="mypage.go"> <!-- 여기에 마이페이지 링크 걸기-->
 										<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-										마이페이지로간다
+										마이페이지
 									</a>
-									<a class="dropdown-item" href="#">
+									<a class="dropdown-item updateInfo" href="#">
 										<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-										세팅? 뭔가 세팅하던 다른곳으로 갈 수 있다.
+										회원 정보 수정
 									</a>
-									<a class="dropdown-item" href="#">
-										<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-										마찬가지로 다른 무엇인가 넣을 수 있다.
-									</a>
+<!-- 									<a class="dropdown-item" href="#"> -->
+<!-- 										<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> -->
+<!-- 										마찬가지로 다른 무엇인가 넣을 수 있다. -->
+<!-- 									</a> -->
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="#" data-toggle="modal"
 										data-target="#logoutModal">
 										<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-										로그아웃 모달로 연결된다
+										로그아웃
 									</a>
 								</div>
 							</li>
@@ -542,8 +552,7 @@
 									<span aria-hidden="true">×</span>
 								</button>
 							</div>
-							<div class="modal-body">Select "Logout" below if you are ready to end your current
-								session.</div>
+							<div class="modal-body">아래 로그아웃 버튼을 누르면 로그아웃 됩니다.</div>
 							<div class="modal-footer">
 								<button class="btn btn-secondary" type="button"
 									data-dismiss="modal">Cancel</button>
@@ -566,7 +575,21 @@
 				<!-- Core plugin JavaScript-->
 				<script src="resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-
+			<script>
+            	$(function(){
+            		let type = '${loginUser.meType}';
+            		$(".updateInfo").click(function(){
+            			switch(type){
+            			case "" : 
+            				location.href="update.stu";
+            				break;
+           				default: 
+           					location.href="update.me";
+           					break;
+            			}
+            		})
+            	})
+            </script>
 
 
 </body>

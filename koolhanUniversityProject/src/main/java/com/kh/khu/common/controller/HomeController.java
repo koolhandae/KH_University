@@ -258,4 +258,9 @@ public class HomeController {
 		
 		return mv;
 	}
+	
+	@RequestMapping("mypage.go")
+	public String goMypage() {
+		return "common/mypage";
+	}
 }

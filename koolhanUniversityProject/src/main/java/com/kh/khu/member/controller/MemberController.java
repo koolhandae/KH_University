@@ -54,12 +54,10 @@ public class MemberController {
    public String loginMember(String userId, String userPwd, HttpSession session, Model model) {
       
       String encPwd = bcryptPasswordEncoder.encode(userPwd);
-      System.out.println(encPwd);
       
       HashMap<String, Object> alertMsg = new HashMap<String, Object>();
       
       if(userId.startsWith("kh")) {
-         
          Student s = new Student();
          s.setStudentId(userId);
          s.setStudentPwd(userPwd);
@@ -172,7 +170,7 @@ public class MemberController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("updateAddress.stu")
+	@RequestMapping("updateAddress.me")
 	public HashMap<String, Object> updateAddress(Address a, String memberId, HttpSession session) {
 		String newAddress = AddressString.AddressMake(a);
 		Member m = new Member();
@@ -182,14 +180,18 @@ public class MemberController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		if(result > 0) {
 			session.removeAttribute("loginUser");
-			session.setAttribute("loginUser", );
+			session.setAttribute("loginUser",mService.loginMember(m));
 			map.put("title", "주소 변경 성공");
 			map.put("text", "성공적으로 주소를 변경했습니다.");
 			map.put("icon", "success");
 			map.put("newAddress", m.getMeAddress());
 		}
-		
 		return map;
+	}
+	
+	@RequestMapping("update.me")
+	public String updateAdminForm() {
+		return "admin/adminUpdateForm";
 	}
 
 }
