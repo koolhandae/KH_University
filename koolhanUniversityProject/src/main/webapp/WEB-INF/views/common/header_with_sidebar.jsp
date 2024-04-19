@@ -269,7 +269,7 @@
 							<div class="bg-white py-2 collapse-inner rounded">
 								<a class="collapse-item" href="list.no">공지사항</a>
 								<a class="collapse-item" href="#">학사일정</a>
-								<a class="collapse-item" href="#">셔틀버스 안내</a>
+								<a class="collapse-item" href="busApiForm.do">셔틀버스 안내</a>
 								<a class="collapse-item" href="#">관련 취업 정보</a>
 							</div>
 						</div>

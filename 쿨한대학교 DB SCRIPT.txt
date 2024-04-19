@@ -223,7 +223,7 @@ COMMENT ON COLUMN REPLY.R_STATUS IS '댓글 상태';
 
 CREATE SEQUENCE SEQ_RNO NOCACHE;
 
--------------- 등록금 고지서
+-------------- 등록금
 CREATE
  TABLE TUITION
      (
