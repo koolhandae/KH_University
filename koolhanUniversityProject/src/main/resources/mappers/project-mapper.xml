@@ -43,6 +43,43 @@
 	   where p.pj_professor = #{memberId}
 	</select>
 	
+	<select id="selectProfessorProjectListCount" resultType="_int">
+		select
+		 	   count(*)
+		  from project
+		 where pj_professor = (
+		 				select member_id
+			         	from member
+			         	where m_type = 'P' and member_id = #{memberId}
+                        and m_status = 'Y'
+		 				 )
+	
+	</select>
+	
+	<select id="selectProfessorProjectList" resultMap="projectResult">
+		select *
+		  from project
+		 where pj_professor = (
+		 					select member_id
+		 					  from member
+		 					  where m_type = 'P'
+		 					    and member_id =#{memberId}
+		 					)
+		   and pj_class_name in (
+		   						 select class_name
+		   						 from class
+		   						 where class_status = 'Y'
+		   						)
+		 
+	</select>
+	
+	<select id="selectProfessorProjectDetail" resultMap="projectResult">
+		select *
+		  from project
+		 where pj_no = #{pjNo}
+	
+	</select>
+	
 	
 	
 	

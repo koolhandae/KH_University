@@ -51,7 +51,6 @@ public class ClassController {
 
 	@RequestMapping(value="classList.bo")
 	public ModelAndView classList(@RequestParam(value="cpage", defaultValue="1")int currentPage,ModelAndView mv,HttpSession session) {
-		// ,produces="application/json; charset=utf-8"
 		//cpage에 아무것도 안줬을때는 1을 준다
 		//classList.co?cpage=2를 주면 sysout에 2가 찍히고
 		//classList.co 이렇게 아무것도 안주면 defaultValue인 1이 찍힘
@@ -114,7 +113,7 @@ public class ClassController {
 	         alertMsg.put("title", "성공!");
 	         alertMsg.put("text", "성공적으로 강의 등록이 완료되었습니다");
 	         session.setAttribute("alertMsg", alertMsg);
-			 return "professor/professorClassListView";
+			 return "redirect:classList.bo";
 		}else {
 			//실패
 			model.addAttribute("errorMsg","게시글 등록 실패");

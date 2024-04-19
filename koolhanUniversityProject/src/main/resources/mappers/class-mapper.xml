@@ -89,6 +89,7 @@
 			         from member
 			         where m_type = 'P' and member_id = #{memberId}
 			   		 )
+	  and class_status = 'Y'
 	</select>
 	
 	
