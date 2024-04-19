@@ -62,6 +62,12 @@
         background-color: #1c4587;
         color: white;
     }
+    .btns{
+        padding-bottom: 20px;
+    }
+    .pagination{
+    	justify-content: center;
+    }
     </style>
 </head>
 <body>
@@ -89,12 +95,14 @@
 
         <div id="contentDiv" class="bg-white">
             <div>
-                <h3>수강생 리스트 | <span>강의명</span></h3>
+
+                <h3>수강생 리스트 | <span>강의명 : ${gd.className }</span></h3>
+
             </div>
             <div style="float: right; padding-right: 100px; padding-bottom: 10px;">
                 <button class="btn btn-primary">등록</button>
                 <button class="btn btn-danger">취소</button>
-                <button class="btn btn-secondary">목록가기</button>
+                <button type="button" class="btn btn-secondary" onclick="location.href='professorGDEnroll.do'">목록가기</button>
             </div>
         
 
@@ -116,55 +124,67 @@
                     </thead>
                     
                     <tbody>
-                        <tr>
-                            <td>1236532</td>
-                            <td>컴퓨터공학과</td>
-                            <td>김뫄뫄</td>
-                            <td>2학년</td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <span></span>
-                            </td>
-                            <td><span>A+</span></td>
-                        </tr>
-                        <tr>
-                            <td>1236532</td>
-                            <td>컴퓨터공학과</td>
-                            <td>김뫄뫄</td>
-                            <td>2학년</td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                            <td>
-                                <span></span>
-                            </td>
-                            <td><span>A+</span></td>
-                        </tr>
+                    	<c:forEach var="g" items="${list }">
+	                        <tr>
+	                            <td>${ g.studentId }</td>
+	                            <td>컴퓨터공학과</td>
+	                            <td>${ g.studentName }</td>
+	                            <td>${ g.studentHak }학년</td>
+	                            <input type="hidden" value="${g.studentNo }">
+	                            <td>
+	                                <input type="text" class="form-control gradeInput${ g.studentNo }" maxlength="2">
+	                            </td>
+	                            <td>
+	                                <input type="text" class="form-control gradeInput${ g.studentNo }" maxlength="2">
+	                            </td>
+	                            <td>
+	                                <input type="text" class="form-control gradeInput${ g.studentNo }" maxlength="2">
+	                            </td>
+	                            <td>
+	                                <input type="text" class="form-control gradeInput${ g.studentNo }" maxlength="2">
+	                            </td>
+	                            <td>
+	                                <span class="studentNo" value="${g.studentNo }"></span>
+	                            </td>
+	                            <td><span>A+</span></td>
+	                        </tr>
+                        </c:forEach>
                     </tbody>
 
 
                 </table>
             </div>
+                    <div class="btns" align="center">
+			<div id="pagingArea">
+                <ul class="pagination">
+	                	<c:choose>
+	                		<c:when test="${ pi.currentPage eq 1 }">
+		                    	<li class="page-item disabled"><a class="page-link" href="">이전</a></li>
+	                    							<!-- disabled 이전버튼 비활성화 -->
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<li class="page-item"><a class="page-link" href="professorGradeStuList.co?gno=${ gd.classNo }&cpage=${ pi.currentPage - 1 }">이전</a></li>
+	                    	</c:otherwise>
+	                    </c:choose>	
+                    
+                    
+                    
+                    	<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }"> <!-- 일반for문처럼 사용가능함 -->
+                    		<li class="page-item"><a class="page-link" href="professorGradeStuList.co?gno=${ gd.classNo }&cpage=${p}">${ p }</a></li>
+	                    </c:forEach>
+	                    
+	                    <c:choose>
+	                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+	                    		<li class="page-item disabled"><a class="page-link" href="">다음</a></li>
+               				</c:when>
+               				<c:otherwise>
+               					<li class="page-item"><a class="page-link" href="professorGradeStuList.co?gno=${ gd.classNo }&cpage=${ pi.currentPage + 1 }">다음</a></li>
+               				</c:otherwise>
+               			</c:choose>
+                </ul>
+            </div>
+         </div>
+            <br>
         </div>
 
     </div>

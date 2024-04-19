@@ -1,9 +1,12 @@
 package com.kh.khu.grade.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.grade.model.dao.GradeDao;
 import com.kh.khu.grade.model.vo.Grade;
 
@@ -18,6 +21,25 @@ public class GradeServiceImpl implements GradeService{
 	@Override
 	public Grade selectStudentGrade(Grade g) {
 		return null;
+	}
+
+
+
+	@Override
+	public int selectGradeStuCount(int classNo) {
+		return gDao.selectGradeStuCount(sqlSession, classNo);
+	}
+
+	@Override
+	public ArrayList<Grade> selectGradeStuList(PageInfo pi, int classNo) {
+		return gDao.selectGradeStuList(sqlSession, classNo);
+	}
+
+
+
+	@Override
+	public Grade selectGradeDetail(int classNo) {
+		return gDao.selectGradeDetail(sqlSession, classNo);
 	}
 	
 }

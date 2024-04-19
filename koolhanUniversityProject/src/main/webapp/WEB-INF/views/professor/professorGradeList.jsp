@@ -61,6 +61,13 @@
         background-color: #1c4587;
         color: white;
     }
+    .pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.35rem;
+    justify-content: center;
+	}
 
 
 </style>
@@ -84,6 +91,13 @@
         <div style="padding: 15px;">
 
         </div>
+        <script>
+            	$(function(){
+            		$(".stuList").click(function(){
+            			location.href = 'professorGradeStuList.co?gno=' + $(this).siblings(".gno").val();
+            		})
+            	})
+            </script>
 
 
         <div id="contentDiv" class="bg-white">
@@ -107,33 +121,56 @@
                     </thead>
                     
                     <tbody>
-                        <tr>
-                            <td>11</td>
-                            <td>2024</td>
-                            <td>2학년</td>
-                            <td>2학기</td>
-                            <td>강좌명</td>
-                            <td>전공</td>
-                            <td>
-                                <button class="btn btn-warning" data-toggle="modal" data-target="#staticBackdrop">수강생조회</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>11</td>
-                            <td>2024</td>
-                            <td>2학년</td>
-                            <td>2학기</td>
-                            <td>강좌명</td>
-                            <td>전공</td>
-                            <td>
-                                <button class="btn btn-warning" data-toggle="modal" data-target="#staticBackdrop">수강생조회</button>
-                            </td>
-                        </tr>
+                    	<c:forEach var="c" items="${list }">
+	                        <tr>
+	                            <td>${ c.classNum }</td>
+	                            <td>${c.enrollDate}</td>
+	                            <td>${c.classGrade }</td>
+	                            <td>${c.classSemester }</td>
+	                            <td>${c.className }</td>
+	                            <td>${c.classTypeName }</td>
+	                            <td>
+	                            	<input type="hidden" class="gno" id="hiddenClassNo"name="classNo" value="${c.classNo }">
+	                                <button class="btn btn-outline-primary stuList" data-toggle="modal" data-target="#staticBackdrop">수강생조회</button>
+	                            </td>
+	                        </tr>
+                        </c:forEach>
                     </tbody>
 
 
                 </table>
             </div>
+            
+            <div id="pagingArea">
+                <ul class="pagination">
+                	
+	                	<c:choose>
+	                		<c:when test="${ pi.currentPage eq 1 }">
+		                    	<li class="page-item disabled"><a class="page-link" href="">이전</a></li>
+	                    							<!-- disabled 이전버튼 비활성화 -->
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<li class="page-item"><a class="page-link" href="professorGDEnroll.do?cpage=${ pi.currentPage - 1 }">이전</a></li>
+	                    	</c:otherwise>
+	                    </c:choose>	
+                    
+                    
+                    
+                    	<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }"> <!-- 일반for문처럼 사용가능함 -->
+                    		<li class="page-item"><a class="page-link" href="professorGDEnroll.do?cpage=${ p }">${ p }</a></li>
+	                    </c:forEach>
+	                    
+	                    <c:choose>
+	                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+	                    		<li class="page-item disabled"><a class="page-link" href="">다음</a></li>
+               				</c:when>
+               				<c:otherwise>
+               					<li class="page-item"><a class="page-link" href="professorGDEnroll.do?cpage=${ pi.currentPage + 1 }">다음</a></li>
+               				</c:otherwise>
+               			</c:choose>
+                </ul>
+            </div>
+            <br>
         </div>
 
 

@@ -251,4 +251,33 @@ public class ClassController {
 		}
 	}
 	
+	@RequestMapping(value="professorGDEnroll.do")
+	public ModelAndView selectClassList(@RequestParam(value="cpage", defaultValue="1")int currentPage,ModelAndView mv,HttpSession session) {
+		//cpage에 아무것도 안줬을때는 1을 준다
+				//classList.co?cpage=2를 주면 sysout에 2가 찍히고
+				//classList.co 이렇게 아무것도 안주면 defaultValue인 1이 찍힘
+				
+				
+				// 세션에서 loginUser 정보 가져오기
+			    Member loginUser = (Member)session.getAttribute("loginUser");
+			    
+			    // 세션에서 memberId 가져오기
+			    String memberId = loginUser.getMemberId();
+			    //System.out.println("class 멤버아이디조회" + memberId);
+			     
+				int listCount = cService.selectClassListCount(memberId); // 총게시글의 갯수
+
+
+				PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+				
+				//진짜로 목록조회
+				ArrayList<Classroom> list = cService.selectClassList(pi, memberId);
+				//System.out.println("list" + list);
+				mv.addObject("pi",pi)
+				  .addObject("list",list)
+				  .setViewName("professor/professorGradeList");
+				return mv;
+				
+	}
+	
 }
