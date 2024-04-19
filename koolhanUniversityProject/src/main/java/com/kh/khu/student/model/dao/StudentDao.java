@@ -34,7 +34,7 @@ public class StudentDao {
 	
 	/*학생 비밀번호 찾기*/
 	public int changePwd(SqlSessionTemplate sqlSession, String memberId, String encPwd) {
-		System.out.println("encPwd : " + encPwd);
+		// System.out.println("encPwd : " + encPwd);
 		 	Map<String, String> parameters = new HashMap();
 		    parameters.put("memberId", memberId);
 		    parameters.put("userPwd", encPwd);
@@ -87,6 +87,13 @@ public class StudentDao {
 	
 	public String selectStudentId(SqlSessionTemplate sqlSession, Student s) {
 		return sqlSession.selectOne("studentMapper.selectStudentId", s);
+	}
+	public int verifyEmail(SqlSessionTemplate sqlSession, String email) {
+		return sqlSession.selectOne("studentMapper.verifyEmail", email);
+	}
+	
+	public int updateAddress(SqlSessionTemplate sqlSession, Student s) {
+		return sqlSession.update("studentMapper.updateAddress", s);
 	}
 	
 	/* 학생 수강 강의 세부 조회 (공지사항 디테일 조회수)*/

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.project.model.dao.ProjectDao;
 import com.kh.khu.project.model.vo.Project;
 
@@ -34,13 +35,14 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
-	public ArrayList<Project> selectProjectList() {
-		return null;
+	public ArrayList<Project> selectProjectList(String memberId) {
+		return pDao.selectProjectList(sqlSession, memberId);
 	}
 
 	@Override
 	public int insertProject(Project pj) {
-		return 0;
+		System.out.println("project Service"+pj);
+		return pDao.insertProject(sqlSession, pj);
 	}
 
 	@Override
@@ -52,5 +54,22 @@ public class ProjectServiceImpl implements ProjectService{
 	public int deleteProject(Project pj) {
 		return 0;
 	}
+
+	@Override
+	public int selectProfessorProjectListCount(String memberId) {
+		return pDao.selectProfessorProjectListCount(sqlSession, memberId);
+	}
+
+	@Override
+	public ArrayList<Project> selectProfessorProjectList(PageInfo pi, String memberId) {
+		return pDao.selectProfessorProjectList(sqlSession,pi, memberId);
+	}
+
+	@Override
+	public Project selectProfessorProjectDetail(int pjNo) {
+		return pDao.selectProfessorProjectDetail(sqlSession, pjNo);
+	}
+
+
 
 }

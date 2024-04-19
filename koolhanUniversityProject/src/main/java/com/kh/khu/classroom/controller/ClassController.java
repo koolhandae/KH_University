@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.startup.ClassLoaderFactory.Repository;
@@ -29,6 +30,7 @@ import com.kh.khu.classroom.model.vo.Classroom;
 import com.kh.khu.classroom.model.vo.Course;
 import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.common.template.Pagination;
+import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.project.model.vo.Project;
 import com.kh.khu.student.model.service.StudentService;
 
@@ -38,6 +40,9 @@ public class ClassController {
 	@Autowired
 	private ClassServiceImpl cService;
 	
+    @Autowired
+    private HttpServletRequest request;
+	
 	@RequestMapping("classEnroll.co")
 	public String classEnrollForm() {
 		return "professor/professorClassEnrollForm";
@@ -46,11 +51,48 @@ public class ClassController {
 	@Autowired
 	private StudentService sService;
 	
+//	@RequestMapping("classList.bo")
+//	public String classListReal() {
+//		return "professor/professorClassListView";
+//	}
+	
+
+	@RequestMapping(value="classList.bo")
+	public ModelAndView classList(@RequestParam(value="cpage", defaultValue="1")int currentPage,ModelAndView mv,HttpSession session) {
+		//cpage에 아무것도 안줬을때는 1을 준다
+		//classList.co?cpage=2를 주면 sysout에 2가 찍히고
+		//classList.co 이렇게 아무것도 안주면 defaultValue인 1이 찍힘
+		
+		
+		// 세션에서 loginUser 정보 가져오기
+	    Member loginUser = (Member)session.getAttribute("loginUser");
+	    
+	    // 세션에서 memberId 가져오기
+	    String memberId = loginUser.getMemberId();
+	    //System.out.println("class 멤버아이디조회" + memberId);
+	     
+		int listCount = cService.selectClassListCount(memberId); // 총게시글의 갯수
+
+
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		//진짜로 목록조회
+		ArrayList<Classroom> list = cService.selectClassList(pi, memberId);
+		//System.out.println("list" + list);
+		mv.addObject("pi",pi)
+		  .addObject("list",list)
+		  .setViewName("professor/professorClassListView");
+		return mv;
+		
+		//		return new Gson().toJson(list);
+		
+	}
+	
 	@RequestMapping("insertClass.do")
 	public String insertClass(int profNo, Classroom c, MultipartFile fileupload,HttpSession session,Model model) {
-		System.out.println("class c"+c);
-		System.out.println("class fileupload"+fileupload);
-		System.out.println("class memberNo"+profNo);
+		//System.out.println("class c"+c);
+		//System.out.println("class fileupload"+fileupload);
+		//System.out.println("class memberNo"+profNo);
 		
 		c.setProfNo(profNo);
 		
@@ -79,7 +121,7 @@ public class ClassController {
 	         alertMsg.put("title", "성공!");
 	         alertMsg.put("text", "성공적으로 강의 등록이 완료되었습니다");
 	         session.setAttribute("alertMsg", alertMsg);
-			 return "professor/professorClassListView";
+			 return "redirect:classList.bo";
 		}else {
 			//실패
 			model.addAttribute("errorMsg","게시글 등록 실패");
@@ -130,9 +172,9 @@ public class ClassController {
 	@ResponseBody
 	@RequestMapping(value="classSelectAjax.do",produces="application/json; charset=utf-8")
 	public String classSelectAjaxMethod(String memberId) {
-		System.out.println("memberId" + memberId);
+		//System.out.println("memberId" + memberId);
 		ArrayList<Classroom> list = cService.classSelect(memberId);
-		System.out.println("list" + list);
+		//System.out.println("project list select list" + list);
 		
 		return new Gson().toJson(list);
 	}
@@ -174,6 +216,83 @@ public class ClassController {
 		}else {
 			model.addAttribute("errorMsg", "수강 자유게시판 세부조회에 실패하셨습니다.");
 			return "common/errorPage404";
+	@RequestMapping(value="classDetail.co")
+	public String selectClassDetail(int cno,Model model ) {
+		// cno라는 키값을 가져왔음
+		// cno에는 상세조회하고자 하는 해당 게시글 번호가 담겨있음
+		Classroom c = cService.selectClassDetail(cno);
+		model.addAttribute("c",c);
+		return "professor/professorClassDetailView";
+		
+	}
+	
+	@RequestMapping("classDelete.co")
+	public String deleteClass(int cno, String filePath, HttpSession session, Model model) {
+		int result = cService.delectClass(cno);
+		
+		if(result>0) { //삭제성공
+			
+			if(!filePath.equals("")) {//파일이 있을경우
+				new File(session.getServletContext().getRealPath(filePath)).delete();
+			}
+			HashMap<String, Object> alertMsg = new HashMap<String, Object>();
+            alertMsg.put("icon", "success");
+            alertMsg.put("title", "완료!");
+            alertMsg.put("text", "성공적으로 강의가 삭제되었습니다!");
+            session.setAttribute("alertMsg", alertMsg);
+            return "redirect:classList.bo"; 
+		}else {
+			// 삭제실패
+			HashMap<String, Object> alertMsg = new HashMap<String, Object>();
+            alertMsg.put("icon", "error");
+            alertMsg.put("title", "실패");
+            alertMsg.put("text", "강의 삭제가 실패했습니다. 다시 시도해주세요.");
+            session.setAttribute("alertMsg", alertMsg);
+            return "professor/professorClassDetailView";
+		}
+		
+	}
+	
+	@RequestMapping("classUpdateForm.co")
+	public String classUpdateForm(int cno, Model model ) {
+		model.addAttribute("c",cService.selectClassDetail(cno));
+		return "professor/professorClassUpdateForm";
+	}
+	
+	@RequestMapping("professorUpdateClass.do")
+	public String professorUpdateClass(Classroom c, MultipartFile reFileupload, HttpSession session, Model model ) {
+		
+		//새로 넘어온 첨부파일이 있을 경우
+		if(reFileupload != null && !reFileupload.getOriginalFilename().equals("")) {
+			if(c.getOriginName()!=null) {
+				new File(session.getServletContext().getRealPath(c.getChangeName())).delete();
+			}
+			
+			// 새로 넘어온 첨부파일 서버에 업로드 시키기
+			String changeName = SaveFile(reFileupload,session);
+			
+			c.setOriginName(reFileupload.getOriginalFilename());
+			c.setChangeName("resources/classPlanFile/" + changeName);
+			
+		}
+		int result = cService.professorClassUpdate(c);
+		
+		if(result>0) {
+			HashMap<String, Object> alertMsg = new HashMap<String, Object>();
+	         alertMsg.put("icon", "success");
+	         alertMsg.put("title", "성공!");
+	         alertMsg.put("text", "성공적으로 강의 수정이 완료되었습니다");
+	         session.setAttribute("alertMsg", alertMsg);
+	         
+	         return "redirect:classDetail.co?cno=" + c.getClassNo();
+		}else { // 수정 실패 => 에러페이지
+			HashMap<String, Object> alertMsg = new HashMap<String, Object>();
+	         alertMsg.put("icon", "error");
+	         alertMsg.put("title", "실패");
+	         alertMsg.put("text", "오류가 발생했습니다. 다시 시도해주세요.");
+	         session.setAttribute("alertMsg", alertMsg);
+			return "common/errorPage404";
+			
 		}
 	}
 	

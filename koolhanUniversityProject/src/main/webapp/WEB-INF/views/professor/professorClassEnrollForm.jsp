@@ -148,10 +148,10 @@
                     
                     <label for="lectureType"> &nbsp;구분 :</label><br>
                     <select name="classType" id="lectureType" class="form-control">
-                        <option value="C1" >전공</option>
-                        <option value="C2" >교양</option>
-                        <option value="C3" >전공기초</option>
-                        <option value="C4" >기타</option>
+                        <option value="C1" >전공필수</option>
+                        <option value="C2" >전공선택</option>
+                        <option value="C3" >교양필수</option>
+                        <option value="C4" >교양선택</option>
                     </select><br>
 
                     <label for="headCount"> &nbsp;수강정원 :</label>

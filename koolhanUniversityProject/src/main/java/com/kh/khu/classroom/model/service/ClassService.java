@@ -18,6 +18,20 @@ public interface ClassService {
 	
 	// 교수용 강의 리스트 조회
 	ArrayList<Classroom> classSelect(String memberId);
+	
+	// 교수용 강의 리스트 페이지 
+	int selectClassListCount(String memberId);
+	ArrayList<Classroom> selectClassList(PageInfo pi,String memberId);
+	
+	// 교수용 강의 상세조회 페이지
+	Classroom selectClassDetail(int classNo);
+	
+	// 교수용 강의 삭제
+	int delectClass(int classNo);
+	
+	// 교수용 강의 수정
+	int professorClassUpdate(Classroom c);
+
 
 
 	// 강의실 자유게시판 글 개수

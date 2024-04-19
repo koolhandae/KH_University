@@ -1,24 +1,33 @@
 package com.kh.khu.certificate;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.nio.charset.StandardCharsets;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.itextpdf.html2pdf.HtmlConverter;
 
 @Controller
 public class CertificateController {
 	
 	@RequestMapping("grad.certificate")
-	public String pdfPrint() {
+	public String gradCertificate() {
 		return "certificate/graduationCertificateTemplate";
+	}
+	
+	@RequestMapping("transcript.certificate")
+	public String transcript () {
+		return "certificate/transcriptTemplate";
+	}
+	@RequestMapping("tuition.notice")
+	public String tuitionNotice () {
+		return "certificate/tuitionPaymentNotice";
+	}
+	@RequestMapping("tuition.reciept")
+	public String tuitionReciept () {
+		return "certificate/proofOfPayment";
+	}
+	@RequestMapping("attending.certificate")
+	public String attendingCertificate () {
+		return "certificate/attendingCertificate";
 	}
 	
 }

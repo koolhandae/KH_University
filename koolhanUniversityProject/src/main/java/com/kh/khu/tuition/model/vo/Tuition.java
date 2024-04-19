@@ -16,9 +16,9 @@ public class Tuition {
 
 	private int ttNo;
 	private int studentNo;
-	private int stuGrade;
 	private String termNo;
 	private int tuition;
 	private int scholarship;
+	private String studentId;
 	
 }

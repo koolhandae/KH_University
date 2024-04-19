@@ -10,7 +10,7 @@
 		<result column="student_ssn" property="studentSsn"/>
 		<result column="s_phone" property="stPhone"/>
 		<result column="s_email" property="stEmail"/>
-		<result column="a_address" property="stAddress"/>
+		<result column="s_address" property="stAddress"/>
 		<result column="s_status" property="stStatus"/>
 		<result column="enroll_date" property="enrollDate"/>
 		<result column="absence_date" property="absenceDate"/>
@@ -172,6 +172,13 @@
 		  from student
 		 where s_email = #{stEmail}     
 	</select>
+	
+		<select id="verifyEmail" resultType="_int">
+		select
+		       count(*)
+		  from student
+		 where s_email = #{email}      
+	</select>
 
 
 <select id="selectCourseList" resultMap="courseResult">
@@ -221,4 +228,10 @@
 	   and class_num = #{classNum}
 </select>
 
+<update id="updateAddress">
+	update student
+	   set s_address = #{stAddress}
+	 where student_id = #{studentId}
+</update>
+	
 </mapper>

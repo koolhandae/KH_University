@@ -26,7 +26,6 @@
         overflow: hidden;
     }
     div{
-        /* border: solid 1px red; */
         display: block;
         box-sizing: border-box;
     }
@@ -55,7 +54,7 @@
         padding-bottom: 30px;
         padding-left: 100px
     }
-    th,td {
+    #footerTable>* {
         text-align: center !important;
         width: 275px;
     }
@@ -90,7 +89,11 @@
     #footerDiv{
         padding:  50px 100px 50px 100px;
     }
-
+    #SMcontentDiv{
+        border: 1px solid #d1d3e2;
+        border-radius: 0.35rem;
+        padding: 1rem 1rem;
+    }
     </style>
 </head>
 <body>
@@ -116,7 +119,7 @@
     </div>
     <div style="padding: 15px;" id="HomeworkLiDiv">
         <ul style="height: 66px; margin: 0;" >
-            <li class="homework_li_class" style="background-color: white;">과제 등록</li>
+            <li class="homework_li_class" style="background-color: white;" onclick="location.href = 'professorPJEnrollForm.do'">과제 등록</li>
             <li class="homework_li_class" style="background-color: #1c4587; color: white; margin-right: 0.5px;">과제 현황</li>
         </ul>
         
@@ -131,25 +134,17 @@
                 <div class="form-group">
                     
                     <label for="lectureSelect">강의 명 </label>
-                    <input type="text" class="form-control" id="lectureSelect" name="lectureSelect" required><br>
-
-                    <br>
+                    <span class="form-control" id="lectureSelect" name="pjClassName">${p.pjClassName }</span><br>
 
                     <label for="lectureTitle">제목 </label>
-                    <input type="text" class="form-control" id="lectureTitle" name="lectureTitle" required><br>
+                    <span class="form-control" id="lectureTitle" name="pjTitle">${ p.pjTitle }</span><br>
                 
                     
                     <label for="lectureNm"> &nbsp;마감기한 :</label>
                     <table>
                         <tr>
                             <td>
-                                <input type="text" id="datepicker" class="form-control">
-                            </td>
-                            <td id="wave">
-                                ~
-                            </td>
-                            <td>
-                                <input type="text" id="datepicker2" class="form-control">
+                            	<span class="form-control" id="lectureTitle" name="pjDeadline">${ p.pjDeadline }</span><br>
                             </td>
                         </tr>
                     </table>
@@ -158,8 +153,16 @@
 
                     
                     <label for="content"> &nbsp;내용 </label>
-                    <textarea id="summernote" name="editordata" cols="30" rows="10" class="form-control summernote" style="resize:none;"> </textarea>
-                   
+                     <!-- <textarea id="summernote" name="editordata" cols="30" rows="10" class="form-control summernote" style="resize:none;" readonly></textarea>
+                   	  -->
+
+                    <div id="SMcontentDiv">
+                        <span id="SMcontentSpan">${p.pjContent}</span>
+                    </div>
+                   <script>
+                   		//이건 수정할때 쓰는거임 ㅠ
+                   		//$('#summernote').summernote('pasteHTML', '${p.pjContent}');
+                   </script>
 
 
                 </div>

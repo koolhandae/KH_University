@@ -57,7 +57,7 @@
     #boardList td{
         padding-left: 30px;
         pointer-events: none;
-    }
+    }  
 
     #boardList{
         width: 900px;
@@ -68,7 +68,8 @@
 		border-bottom: 1px;
 		border-color: rgb(75,75,75);
 	}
-
+	
+	
 
 </style>
 </head>
@@ -76,16 +77,23 @@
    <jsp:include page="../common/header_with_sidebar.jsp"/>
 	<div class="content">
 		<div class="innerOuter">
-			<div class="tuitionBtn" align="center";>
+		<!-- 	<div class="tuitionBtn" align="center";>
 				<button class="selectTuitionbtn btn">등록금 내역 조회</button>
-				<button class="paymentTuition btn" id="">등록금 납부 고지서</button>
-			</div>
+				<button class="paymentTuition btn" >등록금 납부 고지서</button>
+			</div> -->
+			<div class="tuitionBtn" align="center";>
+		   		<a class="btn btn-primary btn-lg"  href="tuitionBill.do" roll="button" style="background-color:rgb(48, 76, 121)">등록금 납부 고지서</a>
+		   		   <span style="margin-left: 40px; margin-right: 40px;"></span>
+		   		<a class="btn btn-primary btn-lg"  href="#" roll="button" style="background-color:rgb(48, 76, 121)">등록금 내역 조회</a>  	
+		    </div>
 			<br><br><br>
-			<h1 style="margin-left: 40px; font-weight:900; color: rgb(75,75,75);">등록금 고지서</h1>
-			<h5 style="margin-left: 45px;">2024년도 1학기</h5>
+			<h1 style="margin-left: 290px; font-weight:900; color: rgb(75,75,75);">등록금 고지서</h1>
+			<h5 style="margin-left: 290px;">2024년도 1학기</h5>
             <hr>
 			<br>
 			<br>
+		<form action="tuitionPayForm.do">
+			<input type="hidden" name="studentId" value="${ loginStudent.studentId }">
 			<table id="boardList" class="table table-hover" align="center">
 				<tr>
 					<th>학부(과)</th>
@@ -94,21 +102,23 @@
 
 				<tr>
 					<th>학번</th>
-					<td>2402020</td>
+					<td>${ loginStudent.studentId }</td>
 					<th>성명</th>
-					<td>김뫄뫄</td>
+					<td>${ loginStudent.studentName }</td>
 				</tr>
 
                 <tr>
 					<th>등록금</th>
-					<td colspan="3">4,000,000</td>
+					<td>4000000</td>
+					<th>학기</th>
+					<td>3학년 1학기</td>
 				</tr>
 
 				<tr>
-					<th>납입 금액</th>
-					<td>2,500,000</td>
+					<th>납부 금액</th>
+					<td>2500000</td>
 					<th>장학금</th>
-					<td>1,500,000</td>
+					<td>${ list.scholarship }</td>
 				</tr>
 
 				<tr>
@@ -122,6 +132,7 @@
 			<div class="billBtn" style="display: flex">
 				<button class="btn btn-xs" id="btn">납부하기</button>
 			</div>
+		</form>
 		</div>
 	</div>
 	<jsp:include page="../common/footer.jsp"/>

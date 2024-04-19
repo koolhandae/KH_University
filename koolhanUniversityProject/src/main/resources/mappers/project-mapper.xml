@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="projectMapper">
+	<resultMap id="projectResult" type="project">
+		<result column="pj_no" property="pjNo"/>
+		<result column="pj_class_name" property="pjClassName"/>
+		<result column="pj_title" property="pjTitle"/>
+		<result column="pj_content" property="pjContent"/>
+		<result column="pj_deadline" property="pjDeadline"/>
+		<result column="pj_professor" property="pjProfessor"/>
+		<result column="member_no" property="memberNo"/>
+		<result column="member_id" property="memberId"/>
+		<result column="member_pwd" property="memberPwd"/>
+		<result column="member_name" property="memberName"/>
+	</resultMap>
+	
+	<insert id="insertProject">
+		insert
+		  into project
+		  	 (
+		  	   pj_no
+		  	 , pj_class_name
+		  	 , pj_title
+		  	 , pj_content
+		  	 , pj_deadline
+		  	 , pj_professor
+		  	 )
+		values
+			(
+			  seq_pj.nextval
+			, #{pjClassName}
+			, #{pjTitle}
+			, #{pjContent}
+			, #{pjDeadline}
+			, #{pjProfessor}
+			)
+	</insert>
+	
+	<select id="selectProjectList" resultMap="projectResult">
+	  SELECT pj_no, pj_class_name, pj_title, pj_content, pj_deadline, pj_professor, member_name
+		FROM project p
+		JOIN member m ON p.pj_professor = m.member_id
+	   where p.pj_professor = #{memberId}
+	</select>
+	
+	<select id="selectProfessorProjectListCount" resultType="_int">
+		select
+		 	   count(*)
+		  from project
+		 where pj_professor = (
+		 				select member_id
+			         	from member
+			         	where m_type = 'P' and member_id = #{memberId}
+                        and m_status = 'Y'
+		 				 )
+	
+	</select>
+	
+	<select id="selectProfessorProjectList" resultMap="projectResult">
+		select *
+		  from project
+		 where pj_professor = (
+		 					select member_id
+		 					  from member
+		 					  where m_type = 'P'
+		 					    and member_id =#{memberId}
+		 					)
+		   and pj_class_name in (
+		   						 select class_name
+		   						 from class
+		   						 where class_status = 'Y'
+		   						)
+		 
+	</select>
+	
+	<select id="selectProfessorProjectDetail" resultMap="projectResult">
+		select *
+		  from project
+		 where pj_no = #{pjNo}
+	
+	</select>
+	
+	
+	
+	
+	
+</mapper>

@@ -17,7 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.khu.common.model.vo.Address;
 import com.kh.khu.common.template.AddressString;
@@ -150,6 +153,20 @@ public class StudentController {
 		return mv;
 	}
 	
+	@ResponseBody
+	@RequestMapping("verifyEmail.stu")
+	public String verifyEmail(String email) {
+		int result = sService.verifyEmail(email);
+		
+		return result == 0 ? "NNNNY" : "NNNNN";
+	}
+	
+	@RequestMapping("certificate.issue")
+	public String connectCertificateIssuePage() {
+		return "student/certificateIssuingPage";
+	}
+	
+	
 	@RequestMapping("takeOff.do")
 	public String takeOffForm(HttpSession session) {
 		
@@ -205,7 +222,33 @@ public class StudentController {
 			model.addAttribute("errorMsg", "복학 신청서 등록 실패!");
 			return "common/errorPage404";
 		}
+	}
+	
+	@RequestMapping("update.stu")
+	public String updateStudentForm() {
+		return "student/studentUpdateForm";
+	}
+	
+	@ResponseBody
+	@RequestMapping("updateAddress.stu")
+	public HashMap<String, Object> updateAddress(Address a, String studentId, HttpSession session) {
+		System.out.println("자바왔냐");
+		String newAddress = AddressString.AddressMake(a);
+		Student s = new Student();
+		s.setStudentId(studentId);
+		s.setStAddress(newAddress);
+		int result = sService.updateAddress(s);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		if(result > 0) {
+			session.removeAttribute("loginStudent");
+			session.setAttribute("loginStudent", sService.loginStudent(s));
+			map.put("title", "주소 변경 성공");
+			map.put("text", "성공적으로 주소를 변경했습니다.");
+			map.put("icon", "success");
+			map.put("newAddress", s.getStAddress());
+		}
 		
+		return map;
 	}
 	
 	@RequestMapping("noticeDetail.co")

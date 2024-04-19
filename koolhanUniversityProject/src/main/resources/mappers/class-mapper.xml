@@ -17,7 +17,9 @@
 		<result column="origin_name" property="originName"/>
 		<result column="change_name" property="changeName"/>
 		<result column="enroll_date" property="enrollDate"/>
+		<result column="class_typeName" property="classTypeName"/>
 		<result column="class_no" property="classNo"/>
+		<result column="class_status" property="classStatus"/>
 		<result column="member_name" property="memberName"/>
 	</resultMap>
 	
@@ -92,7 +94,7 @@
 		     ,#{classEtc}
 		     ,#{originName}
 		     ,#{changeName}
-		     ,to_char(SYSDATE, 'YYYY')
+		     ,TO_CHAR(SYSDATE,'YYYY')
 		     )
 	</insert>
 	
@@ -105,7 +107,73 @@
 			         from member
 			         where m_type = 'P' and member_id = #{memberId}
 			   		 )
+	  and class_status = 'Y'
 	</select>
+	
+	
+	<select id="selectClassListCount" resultType="_int">
+		select
+		 	   count(*)
+		  from class
+		 where prof_no = (
+		 				select member_no
+			         	from member
+			         	where m_type = 'P' and member_id = #{memberId}
+		 				 )
+	</select>
+	
+	<select id="selectClassList" resultMap="classResult">
+		select 
+			   c.class_num
+			 , c.enroll_date
+			 , c.class_grade
+			 , c.class_semester
+			 , c.class_name
+			 , t.class_typename
+			 , c.class_no
+	      from class c
+	      join class_type t on c.class_type = t.class_type
+	     where c.class_status = 'Y'
+	       and c.prof_no =(
+		 					select member_no
+			        	 	from member
+			         		where m_type = 'P' and member_id = #{memberId}
+		 				   )
+	</select>
+	
+	<select id="selectClassDetail" resultMap="classResult">
+	select *
+	  from class c
+	  join class_type t on c.class_type = t.class_type
+	where c.class_no = #{classNo}
+		</select>
+	
+	<update id="delectClass">
+	 update class 
+	    set 
+	    	class_status = 'N'
+	  where class_no = #{classNo}
+	</update>
+	
+	<update id="professorClassUpdate">
+		   update
+			      class
+		      set class_num = #{classNum}
+			    , class_name = #{className}
+			    , class_type = #{classType}
+			    , class_score = #{classScore}
+			    , class_semester = #{classSemester}
+			    , class_grade = #{classGrade}
+			    , class_room = #{classRoom}
+			    , class_time = #{classTime}
+			    , class_people = #{classPeople}
+			    , class_etc = #{classEtc}
+			    , origin_name = #{originName}
+			    , change_name = #{changeName}
+			    , enroll_date = TO_CHAR(SYSDATE,'YYYY')
+		    where class_no = #{classNo}
+		    
+	</update>
 	
 	<select id="selectListCount" resultType="_int">
 		select 

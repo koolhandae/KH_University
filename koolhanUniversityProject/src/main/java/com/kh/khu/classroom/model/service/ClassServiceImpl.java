@@ -32,6 +32,28 @@ public class ClassServiceImpl implements ClassService{
 	public ArrayList<Classroom> classSelect(String memberId) {
 		return cDao.classSelect(sqlSession,memberId);
 	}
+	@Override
+	public int selectClassListCount(String memberId) {
+		return cDao.selectClassListCount(sqlSession,memberId);
+	}
+	@Override
+	public ArrayList<Classroom> selectClassList(PageInfo pi, String memberId) {
+		return cDao.selectClassList(sqlSession, pi, memberId);
+	}
+	
+	@Override
+	public Classroom selectClassDetail(int classNo) {
+		return cDao.selectClassDetail(sqlSession, classNo);
+	}
+	
+	@Override
+	public int delectClass(int classNo) {
+		return cDao.delectClass(sqlSession, classNo);
+	}
+	@Override
+	public int professorClassUpdate(Classroom c) {
+		return cDao.professorClassUpdate(sqlSession, c);
+	}
 
 	@Override
 	public int selectBoardListCount(String classNum) {
