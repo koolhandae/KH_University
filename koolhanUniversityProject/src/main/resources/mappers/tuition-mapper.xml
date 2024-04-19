@@ -5,10 +5,10 @@
 	<resultMap type="Tuition" id="tuitionResult">
 		<result column="tt_no" property="ttNo"/>
 		<result column="student_no" property="studentNo"/>
-		<result column="stu_grade" property="stuGrade"/>
 		<result column="term_no" property="termNo"/>
 		<result column="tuition" property="tuition"/>
 		<result column="scholarship" property="scholarship"/>
+		<result column="student_id" property="studentId"/>	
 	</resultMap>
 	
 	<resultMap type="TuitionPayment" id="tuitionPaymentResult">
@@ -17,4 +17,52 @@
 		<result column="tp_date" property="tpDate"/>
 		<result column="tp_total_price" property="totalPrice"/>
 	</resultMap>
+	
+
+	
+	<select id="tuitionBillForm" resultMap="tuitionResult">
+		SELECT 
+		       t.tt_no
+		     , t.student_no
+		     , t.term_no
+		     , t.tuition
+		     , t.scholarship
+		     , tp.tp_no
+		     , tp.tp_date
+		     , tp.tp_total_price
+		FROM tuition t
+		JOIN tuition_payment tp on (t.tt_no = tp.tt_no)
+		WHERE t.STUDENT_ID = #{studentId}
+	</select>
+	
+	<insert id="insertTuitionPay">
+    insert 
+      into tuition_payment
+	  (
+	    tp_no
+	  , tt_no
+	  , tp_date
+	  , tp_total_price
+	  )
+	  values
+	  (
+	    seq_tpno.nextVAL
+	  , #{ttNo}
+	  , SYSDATE
+	  , #{totalPrice}
+	  )
+	</insert>
+	
+<!-- 	<select id="tuitionMake.ad">
+		SELECT
+			   s.student_id
+		  FROM student s
+		  JOIN tuition t using (student_no)
+		  JOIN tuition_bill tb using (tt_no)
+	</select> -->
+	
+	
+	
+	
+	
 </mapper>

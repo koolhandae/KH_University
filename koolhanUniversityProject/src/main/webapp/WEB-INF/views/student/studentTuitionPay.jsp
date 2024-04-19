@@ -32,23 +32,32 @@
   .billBtn>button{
       margin: auto;
     }
+    
+  hr{
+  	  width: 1000px;
+    }
+  
+  h3{
+  	margin-left: 290px;
+  }
 </style>
 </head>
 <body>
    <jsp:include page="../common/header_with_sidebar.jsp"/>
    <div class="content">
    <div class="innerOuter">
-   	  <h1 style="margin-left: 40px; font-weight:900; color: rgb(75,75,75);">등록금 납부</h1>
+   	  <h1 style="margin-left: 290px; font-weight:900; color: rgb(75,75,75);">등록금 납부</h1>
    	  <hr><br>
    	  	
+   	  <form action="tuitionPay.do">
    		<h3>학생 정보</h3>
-   		<table id="boardList" class="selectTuition table" style="width: 900px;">
+   		<table id="boardList" class="selectTuition table" style="width: 900px;" align="center">
    			
         <tr>
           <th>이름</th>
-          <td>김뫄뫄</td>
+          <td>${ loginStudent.studentName }</td>
           <th>학번</th>
-          <td>2401010</td>
+          <td>${ loginStudent.studentId }</td>
         </tr>
         <tr>
           <th>학부(과)</th>
@@ -57,7 +66,7 @@
    		</table>
    	  <br>
       <h3>등록금 납입 정보</h3>
-      <table id="boardList" class="selectTuition table" style="width: 900px; border-bottom: 1px solid rgb(230, 230, 230);">
+      <table id="boardList" class="selectTuition table" style="width: 900px; border-bottom: 1px solid rgb(230, 230, 230);" align="center">
         <tr>
           <th>등록금</th>
           <td>4,000,000</td>
@@ -71,12 +80,12 @@
       </table>
       <br>
       <h3>납입 방식</h3>
-      <table id="boardList" class="selectTuition table" style="width: 900px;">
+      <table id="boardList" class="selectTuition table" style="width: 900px;" align="center">
         <tr>
           <td>
-            <input type="radio" name="radioBtn" id=""> 카카오페이
-            <input type="radio" name="radioBtn" id=""> 토스페이
-            <input type="radio" name="radioBtn" id=""> 무통장입금
+            <input type="radio" name="radioBtn" value="kakao"> 카카오페이
+            <input type="radio" name="radioBtn" value="toss"> 토스페이
+            <input type="radio" name="radioBtn" value="moo"> 무통장입금
           </td>
         </tr>
       </table>
@@ -84,6 +93,7 @@
       <div class="billBtn" style="display: flex">
         <button class="btn btn-xs" id="btn">결제하기</button>
       </div>
+     </form>
    </div>  
    </div>
    <jsp:include page="../common/footer.jsp"/>

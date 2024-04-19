@@ -1,6 +1,5 @@
 package com.kh.khu.project.model.vo;
 
-import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,15 +15,12 @@ import lombok.ToString;
 
 public class Project {
 
-	private int refStudentNo;
-	private int refClassNo;
-	private String projectTitle;
-	private String projectContent;
-	private String projectType;
-	private String pjOriginName;
-	private String pjChangeName;
-	private String pjUploadDate;
-	private Date pjDueDate;
-	private String pjStatus;
+	private int pjNo; 		//SEQ 순서
+	private String pjClassName; 	// 강의명
+	private String pjTitle; // 과제 제목
+	private String pjContent; //과제 내용
+	private String pjDeadline; // 과제 마감일
+	private String pjProfessor; // 과제 내준 교수
+
 	
 }

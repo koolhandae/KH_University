@@ -131,22 +131,21 @@
         <div style="padding: 15px;" id="HomeworkLiDiv">
             <ul style="height: 66px; margin: 0;" >
                 <li class="homework_li_class" style="background-color: #1c4587; color: white; margin-right: 0.5px;">과제 등록</li>
-                <li class="homework_li_class" style="background-color: white;">과제 현황</li>
+                <li class="homework_li_class" style="background-color: white;" onclick="location.href = 'professorPJStateList.do'" >과제 현황</li>
             </ul>
-            
+
         </div>
 
         <div id="contentDiv" class="bg-white">
             <div>
                 <h3>과제 등록</h3>
     
-                <form action="classEnrollForm.do" method="post" id="enrollForm">
                     <div class="form-group">
                         
                      
-                        
+                        <input type="hidden" value="${loginUser.memberId }" id="pjProfessor"name="pjProfessor">
                         <label for="lectureSelect">강의 선택 </label>
-						<select name="lectureSelect" id="lectureSelect" class="form-control">
+						<select name="pjClassName" id="lectureSelect" class="form-control">
 						    <option></option>
 						</select>
 						<br>
@@ -154,14 +153,14 @@
                        
 
                         <label for="lectureTitle">제목 </label>
-                        <input type="text" class="form-control" id="lectureTitle" name="lectureTitle" required><br>
+                        <input type="text" class="form-control" id="lectureTitle" name="pjTitle" required><br>
                     
                         
                         <label for="lectureNm"> &nbsp;마감기한 :</label>
                         <table>
                             <tr>
                                 <td>
-                                    <input type="date" id="datepicker" class="form-control">
+                                    <input type="date" id="datepicker" name="pjDeadline" class="form-control">
                                 </td>
                             </tr>
                         </table>
@@ -170,17 +169,16 @@
     
                         
                         <label for="content"> &nbsp;내용 </label>
-                        <textarea id="summernote" name="editordata"  class="form-control summernote" style="resize:none;"> </textarea>
-                       
+                        <textarea id="summernote" name="pjContent"  class="form-control summernote" style="resize:none;"> </textarea>
+                       <!-- 원래값 name="editordata" -->
     
     
                     </div>
                     <br>
                     <div class="btns" align="center">
-                        <button id="enrollBtn" type="submit" class="btn btn-primary">등록</button>
+                        <button id="enrollBtn" type="button" class="btn btn-primary" onclick="submit()">등록</button>
                         <!-- <button type="reset" class="btn btn-danger">취소</button> -->
                     </div>
-                </form>
             </div>
             
    	
@@ -249,6 +247,54 @@
 
                 });
         });
+   </script>
+   
+   
+   <script>
+   	  // 등록버튼 눌렀을때 submit의 함수
+      function submit(){
+
+        //강의명, 마감기한, 제목 가져오기
+        let pjClassName = $('#lectureSelect').val()
+        let pjDeadline = $('#datepicker').val()
+        let pjTitle =$('#lectureTitle').val()
+        let pjContent=$('#summernote').summernote('code')
+        let pjProfessor=$('#pjProfessor').val()
+
+        console.log($('#summernote').summernote('code'))
+        console.log(pjClassName);
+        console.log(pjDeadline);
+        console.log(pjTitle);
+
+        $.ajax({
+				url:"professorProjectEnrollForm.do",
+				data:{pjClassName:pjClassName
+                    , pjDeadline:pjDeadline
+                    , pjTitle:pjTitle
+                    , pjContent:pjContent
+                    , pjProfessor:pjProfessor},
+			    success:function(result){
+					if (result > 0) {
+                        // 성공적으로 처리된 경우
+                        location.href = "professorPJenrollSuccess.do"; // 페이지 리디렉션
+                    } else {
+                        // 처리 실패 또는 조건에 맞지 않는 경우
+                        console.log("게시글 등록 실패");
+                        // 필요한 에러 처리를 진행할 수 있습니다.
+                    }
+			    },error:function(){
+			    	console.log("ajax다 터져서왓다고요")
+			    }
+			})
+        
+
+
+
+
+        
+
+        
+      }
    </script>
 
 

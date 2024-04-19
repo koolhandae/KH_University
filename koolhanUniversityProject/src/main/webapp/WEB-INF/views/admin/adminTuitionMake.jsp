@@ -56,12 +56,10 @@
 
     #boardList td{
         padding-left: 30px;
-        pointer-events: none;
     }  
 
     #boardList{
         width: 900px;
-        pointer-events: none;
     }
 
 	#borderList>tr{
@@ -69,6 +67,19 @@
 		border-color: rgb(75,75,75);
 	}
 	
+	 .searchArea{
+        float: right;
+        padding-right: 100px;
+    }
+    
+    .searchArea {
+        display: inline-block;
+        margin-right: 200px;
+    }
+	
+	hr{
+		width: 1000px;
+	}
 	
 
 </style>
@@ -77,22 +88,19 @@
    <jsp:include page="../common/header_with_sidebar.jsp"/>
 	<div class="content">
 		<div class="innerOuter">
-		<!-- 	<div class="tuitionBtn" align="center";>
-				<button class="selectTuitionbtn btn">등록금 내역 조회</button>
-				<button class="paymentTuition btn" >등록금 납부 고지서</button>
-			</div> -->
-			<div class="tuitionBtn" align="center";>
-		   		<a class="btn btn-primary btn-lg"  href="tuitionBill.do" roll="button" style="background-color:rgb(48, 76, 121)">등록금 납부 고지서</a>
-		   		   <span style="margin-left: 40px; margin-right: 40px;"></span>
-		   		<a class="btn btn-primary btn-lg"  href="#" roll="button" style="background-color:rgb(48, 76, 121)">등록금 내역 조회</a>  	
-		    </div>
-			<br><br><br>
-			<h1 style="margin-left: 290px; font-weight:900; color: rgb(75,75,75);">등록금 고지서</h1>
+
+			<h1 style="margin-left: 290px; font-weight:900; color: rgb(75,75,75);">등록금 고지서 발급</h1>
 			<h5 style="margin-left: 290px;">2024년도 1학기</h5>
             <hr>
 			<br>
 			<br>
-		<form action="tuitionPayForm.do">
+
+        <div class="searchArea">
+            <input type="text" name="search" id="search" placeholder="전체 또는 학번을 입력해주세요">
+            <button class="btn" id="btn">검색</button>
+        </div>
+			<br><br>
+		<form action="tuitionMake.ad">
 			<input type="hidden" name="studentId" value="${ loginStudent.studentId }">
 			<table id="boardList" class="table table-hover" align="center">
 				<tr>
@@ -102,35 +110,48 @@
 
 				<tr>
 					<th>학번</th>
-					<td>${ loginStudent.studentId }</td>
+					<td>
+						<div>kh240102</div>
+					</td>
 					<th>성명</th>
-					<td>${ loginStudent.studentName }</td>
+					<td>
+						<div>김뫄뫄</div>
+					</td>
 				</tr>
 
                 <tr>
 					<th>등록금</th>
-					<td>4000000</td>
+					<td>
+						<input type="number" name="tbPrice">
+					</td>
 					<th>학기</th>
 					<td>3학년 1학기</td>
 				</tr>
 
 				<tr>
 					<th>납부 금액</th>
-					<td>2500000</td>
+					<td>
+						<input type="number" name="totalPrice">
+					</td>
 					<th>장학금</th>
-					<td>${ list.scholarship }</td>
+					<td>
+						1500000
+					</td>
 				</tr>
 
 				<tr>
 					<th>납부기간</th>
-					<td colspan="3" align="center">24.04.11 (목) ~ 24.05.02 (목)</td>
+					<td colspan="3" align="right">
+						<input type="date" name="tbDue" value="tbDue">
+						까지 납부
+					</td>
 				</tr>
 			</table>
 
 			<br>
 
 			<div class="billBtn" style="display: flex">
-				<button class="btn btn-xs" id="btn">납부하기</button>
+				<button class="btn btn-xs" id="btn">고지서 생성</button>
 			</div>
 		</form>
 		</div>
