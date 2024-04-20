@@ -71,6 +71,10 @@ public class StudentDao {
 		return (ArrayList)sqlSession.selectList("classMapper.selectClassNoticeList", classNum, rowBounds);
 	}
 	
+	public int insertTakeOff(SqlSessionTemplate sqlSession, Absence a) {
+	      return sqlSession.insert("studentMapper.insertTakeOff", a);
+	   }
+	
 	public int selectTakeOff(SqlSessionTemplate sqlSession, Absence a) {
 		return sqlSession.selectOne("studentMapper.selectTakeOff", a);
 	}
