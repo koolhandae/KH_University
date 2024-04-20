@@ -45,6 +45,11 @@ public class MemberServiceImpl implements MemberService{
 	public int verifyEmail(String email) {
 		return mDao.verifyEmail(sqlSession, email);
 	}
+
+	@Override
+	public int updateAddress(Member m) {
+		return mDao.updateAddress(sqlSession, m);
+	}
 	
 
 	

@@ -48,4 +48,9 @@ public class NoticeServiceImpl implements NoticeService{
 		return 0;
 	}
 
+	@Override
+	public ArrayList<Notice> selectMainList() {
+		return nDao.selectMainList(sqlSession);
+	}
+
 }

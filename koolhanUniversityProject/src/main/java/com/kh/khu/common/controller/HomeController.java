@@ -61,6 +61,45 @@ public class HomeController {
 		return "common/mmain";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="shuttleBus.do", produces="text/xml; charset=utf-8")
+	public String BusRealTime() throws IOException { 
+		
+		
+		String url="http://apis.data.go.kr/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList";
+		url += "?serviceKey=" + "JIkT3%2BUOMXlT8X3XWzwz5XxB%2FwhH3Z8Z7wKvvM1XSqlMlvY2UGJbQXGF%2F69KXoiOOQ9N7Q%2Fo2aVJHbcB8wNznA%3D%3D";
+		url += "&cityCode=25";          
+		url += "&routeId=DJB30300052";
+		url += "&numOfRows=10";
+		url += "&pageNo=1";
+		url += "&_type=xml";
+		
+		// System.out.println(url);
+		
+		URL requestUrl = new URL(url);
+		HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection();
+		urlConnection.setRequestMethod("GET");
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+		
+		String responseText = "";
+		String line;
+		while((line = br.readLine()) != null) {
+			responseText += line;
+		}
+		
+		br.close();
+		urlConnection.disconnect();
+		
+		return responseText;
+
+	}
+	
+	@RequestMapping(value="busApiForm.do")
+	public String busApi(HttpSession session) {
+		return "common/busMapApi";
+	}
+	
 	
 	@ResponseBody
 	@RequestMapping(value="VerifyRecaptcha", method = RequestMethod.POST)
@@ -122,7 +161,7 @@ public class HomeController {
 	public ResponseEntity<Map<String, Object>> sendmail(String email, String userId, HttpSession session) {
 				
 			Map<String, Object> resultMap = new HashMap();
-			// System.out.println(email);
+			 // System.out.println(email);
 			 System.out.println("sendmailcontroll" + userId);
 
 				//난수의 범위 111111 ~ 999999 (6자리 난수)
@@ -257,5 +296,10 @@ public class HomeController {
 		
 		
 		return mv;
+	}
+	
+	@RequestMapping("mypage.go")
+	public String goMypage() {
+		return "common/mypage";
 	}
 }

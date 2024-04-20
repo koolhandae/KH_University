@@ -18,5 +18,7 @@ public interface MemberService {
 	String selectMemberId(Member m);
 	
 	int verifyEmail(String email);
+	
+	int updateAddress(Member m);
 
 }

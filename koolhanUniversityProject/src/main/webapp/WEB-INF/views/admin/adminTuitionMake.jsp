@@ -69,12 +69,11 @@
 	
 	 .searchArea{
         float: right;
-        padding-right: 100px;
+        padding-right: 150px;
     }
     
     .searchArea {
         display: inline-block;
-        margin-right: 200px;
     }
 	
 	hr{
@@ -100,7 +99,8 @@
             <button class="btn" id="btn">검색</button>
         </div>
 			<br><br>
-		<form action="tuitionMake.ad">
+<!-- 		<form action="tuitionMakeSelect.ad"> -->
+			<input type="hidden" name="search" value="${ search.val() }">
 			<input type="hidden" name="studentId" value="${ loginStudent.studentId }">
 			<table id="boardList" class="table table-hover" align="center">
 				<tr>
@@ -111,18 +111,18 @@
 				<tr>
 					<th>학번</th>
 					<td>
-						<div>kh240102</div>
+						<div id="studentId">${ atList.studentId }</div>
 					</td>
 					<th>성명</th>
 					<td>
-						<div>김뫄뫄</div>
+						<div id="studentName">${ atList.studentName }</div>
 					</td>
 				</tr>
 
                 <tr>
 					<th>등록금</th>
 					<td>
-						<input type="number" name="tbPrice">
+						<input type="number" name="tbPrice" min="0">
 					</td>
 					<th>학기</th>
 					<td>3학년 1학기</td>
@@ -131,11 +131,11 @@
 				<tr>
 					<th>납부 금액</th>
 					<td>
-						<input type="number" name="totalPrice">
+						<input type="number" name="totalPrice" min="0">
 					</td>
 					<th>장학금</th>
-					<td>
-						1500000
+					<td id="scholarship" name="scholarship">
+						${ atList.scholarship }
 					</td>
 				</tr>
 
@@ -153,8 +153,31 @@
 			<div class="billBtn" style="display: flex">
 				<button class="btn btn-xs" id="btn">고지서 생성</button>
 			</div>
-		</form>
+<!-- 		</form> -->
 		</div>
+		
+		<script>
+			$(function(){
+				$("#search").click(function(){
+					$.ajax({
+						url:"tuitionMake.ad",
+						data:{
+ 							id:${"#studentId"}.val(),
+							name:${"#studentName"}.val(),
+							price:${"#tbPrice"}.val(),
+							scholarship:${"#scholarship"}.val()
+							date:${"#tbDue"}.val()
+						}, success:function(result){
+							console.log("ajax : " + result);
+						}, error:function(){
+							console.log("ajax통신 실패!");
+						}
+					})
+				})
+			})
+			
+		</script>
+		
 	</div>
 	<jsp:include page="../common/footer.jsp"/>
 </body>

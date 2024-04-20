@@ -5,6 +5,7 @@ import com.kh.khu.student.model.vo.Presence;
 import java.util.ArrayList;
 
 import com.kh.khu.classroom.model.vo.ClassNotice;
+import com.kh.khu.classroom.model.vo.Classroom;
 import com.kh.khu.classroom.model.vo.Course;
 import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.student.model.vo.Student;
@@ -26,6 +27,7 @@ public interface StudentService {
 	Course searchCourse(String courseValue);
 
 	// 강의 공지사항 게시판 조회
+	Course selectClassName(String classNum);
 	int selectListCount(String classNum);
 
 	ArrayList<ClassNotice> selectClassNoticeList(PageInfo pi, String classNum);
@@ -34,10 +36,9 @@ public interface StudentService {
 	Course selectClassPlan(int classNum);
 
 	// 강의 세부 공지사항 조회
-	int increaseCount(int classNoticeNo);
-
-	ClassNotice selectClassNoticeDetail(int classNoticeNo);
-
+	int increaseCount(String cno);
+	ClassNotice selectClassNoticeDetail(String cno);
+	
 	// 이전 수강내역 조회
 	ArrayList<Course> selectCourseHistory(int studentNo);
 
@@ -48,6 +49,10 @@ public interface StudentService {
 	int insertStudent(Student s);
 
 	String selectStudentId(Student s);
+	
+	// 학생 수강 강의계획서 조회
+	Classroom selectCoursePlan(String classNum);
+	
 
 	int verifyEmail(String email);
 

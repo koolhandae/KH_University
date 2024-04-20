@@ -61,4 +61,15 @@
 		   and notice_no = #{noticeNo}
 	</select>
 	
+	<select id="selectMainList" resultMap="noticeResult">
+		select
+			   notice_no
+		     , notice_title
+		     , to_char(create_date, 'MM/dd(dy)', 'NLS_DATE_LANGUAGE=KOREAN') create_date
+		  from notice
+		 where n_status = 'Y'
+           and rownum &lt; 6
+		 order 
+		    by notice_no desc
+	</select>
 </mapper>

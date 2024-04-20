@@ -6,11 +6,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,11 +25,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.kh.khu.classroom.model.service.ClassService;
 import com.kh.khu.classroom.model.service.ClassServiceImpl;
+import com.kh.khu.classroom.model.vo.ClassBoard;
 import com.kh.khu.classroom.model.vo.Classroom;
+import com.kh.khu.classroom.model.vo.Course;
 import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.common.template.Pagination;
 import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.project.model.vo.Project;
+import com.kh.khu.student.model.service.StudentService;
 
 @Controller
 public class ClassController {
@@ -42,6 +48,8 @@ public class ClassController {
 		return "professor/professorClassEnrollForm";
 	}
 	
+	@Autowired
+	private StudentService sService;
 	
 //	@RequestMapping("classList.bo")
 //	public String classListReal() {
@@ -171,6 +179,45 @@ public class ClassController {
 		return new Gson().toJson(list);
 	}
 	
+	// 강의실 자유게시판 리스트 조회
+	
+	@ResponseBody
+	@RequestMapping(value="board.co", produces="application/json; charset=utf-8")
+	public ModelAndView selectBoardListCounst(@RequestParam(value="bpage", defaultValue="1")int currentPage, String classNum, ModelAndView mv) {
+		
+		Map<String, Object> response = new HashMap();
+		
+		System.out.println("boardList" + classNum);
+		
+		Course c = sService.selectClassName(classNum);
+		String className = c.getClassName();
+		
+		int boardCount = cService.selectBoardListCount(classNum);
+		
+		PageInfo pi = Pagination.getPageInfo(boardCount, currentPage, 5, 5);
+		ArrayList<ClassBoard> list = cService.selectClassBoardList(pi, classNum);
+		
+		mv.addObject("pi", pi).addObject("list", list).addObject("classNum", classNum).addObject("className", className).setViewName("student/studentClassBoardList");
+		return mv;
+	}
+	
+	@RequestMapping(value="boardDetail.co")
+	public String selectClassBoardDetail(String bno, String classNum, Model model) {
+		int boardCount = cService.classBoardCount(bno);
+		
+		if(boardCount > 0) {
+			ClassBoard cb = cService.selectClassDetailBoard(bno);
+			model.addAttribute("cb", cb);
+			model.addAttribute("classNum", classNum);
+			
+			System.out.println("자유게시판" + cb);
+			return "student/studentClassBoardDetail";
+			
+		}else {
+			model.addAttribute("errorMsg", "수강 자유게시판 세부조회에 실패하셨습니다.");
+			return "common/errorPage404";
+		}
+	}
 	@RequestMapping(value="classDetail.co")
 	public String selectClassDetail(int cno,Model model ) {
 		// cno라는 키값을 가져왔음

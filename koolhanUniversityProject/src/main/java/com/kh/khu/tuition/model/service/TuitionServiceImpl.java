@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.khu.tuition.model.dao.TuitionDao;
+import com.kh.khu.tuition.model.vo.AdminTuitionMake;
 import com.kh.khu.tuition.model.vo.Tuition;
 
 @Service
@@ -28,6 +29,13 @@ public class TuitionServiceImpl implements TuitionService{
 	@Override
 	public ArrayList<Tuition> tuitionBillForm(Tuition t) {
 		return tDao.tuitionBillForm(sqlSession, t);
+	}
+
+
+	@Override
+	public ArrayList<AdminTuitionMake> tuitionMakeForm(AdminTuitionMake at) {
+		System.out.println(at);
+		return tDao.tuitionMakeForm(sqlSession, at);
 	}
 	
 }

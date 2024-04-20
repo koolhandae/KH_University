@@ -8,7 +8,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.khu.member.model.vo.Member;
-import com.kh.khu.student.model.vo.Student;
 
 @Repository
 public class MemberDao {
@@ -22,11 +21,11 @@ public class MemberDao {
 		return sqlSession.insert("memberMapper.insertMember", m);
 	}
 	
-	public Member selectChkMember(SqlSession sqlSession, String email) {
+	public Member selectChkMember(SqlSessionTemplate sqlSession, String email) {
 		return sqlSession.selectOne("memberMapper.selectChkMember", email);
 	}
 	
-	public int changemPwd(SqlSession sqlSession, String memberId, String encPwd) {
+	public int changemPwd(SqlSessionTemplate sqlSession, String memberId, String encPwd) {
 		//System.out.println("encPwd : " + encPwd);
 		 	Map<String, String> parameters = new HashMap();
 		    parameters.put("memberId", memberId);
@@ -41,5 +40,9 @@ public class MemberDao {
 	
 	public int verifyEmail(SqlSessionTemplate sqlSession, String email) {
 		return sqlSession.selectOne("memberMapper.verifyEmail", email);
+	}
+	
+	public int updateAddress(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateAddress",m);
 	}
 }

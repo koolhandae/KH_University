@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.khu.tuition.model.service.TuitionService;
+import com.kh.khu.tuition.model.vo.AdminTuitionMake;
 import com.kh.khu.tuition.model.vo.Tuition;
 
 
@@ -50,8 +51,16 @@ public class TuitionController {
 	}
 	
 	@RequestMapping("tuitionMake.ad")
-	public String tuitionMakeForm(HttpSession session) {
+	public String tuitionMakeForm(HttpSession session, AdminTuitionMake at) {
+		ArrayList<AdminTuitionMake> atList = tService.tuitionMakeForm(at);
+		
 		return "admin/adminTuitionMake";
 	}
+	
+	/*
+	 * @RequestMapping("tuitionMakeInsert.ad") public String
+	 * selectTuitionMake(AdminTuitionMake at, Model model, HttpSession session) {
+	 * int result = tService. }
+	 */
 	
 }

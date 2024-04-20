@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://kit.fontawesome.com/12b80a3a82.js" crossorigin="anonymous"></script>
 <style>
  .content{
       padding: 50px;
@@ -188,19 +187,16 @@
     background-color: #1c4587 !important;
     color: white !important;
   }
- #title:hover{
-   cursor: pointer;
- }
 
 </style>
-
 </head>
 <body>
    <jsp:include page="../common/header_with_sidebar.jsp"/>
+   
    <div class="content">
-        <input type="hidden" value="${ classNum }" id="classNum">
+       <input type="hidden" value="${ classNum }" id="classNum">
         <div class="title-area">
-           <div id="title" onclick='history.back();'">나의 수강 조회</div>
+           <div id="title">나의 수강 조회</div>
            
          <div id="mid-title">나의강의실</div>
          <div>></div>
@@ -211,71 +207,75 @@
          <div id="lecture-mid-title">강의실</div>
       </div>
       <div class="lecture-navigator">
-         <div id="notice" class="lec-nav-item" style="background-color: #1c4587; color: white;">공지사항</div>
+         <div id="notice" class="lec-nav-item">공지사항</div>
          <div id="classPlan" class="lec-nav-item">강의계획서</div>
-         <div id="board" class="lec-nav-item">자유게시판</div>
+         <div id="board" class="lec-nav-item" style="background-color: #1c4587; color: white;">자유게시판</div>
          <div id="project" class="lec-nav-item">과제게시판</div>
       </div>
       
       <div class="lList-area">
-
-
-         <div id="notice-area">
-            <!-- 공지사항 게시판 클릭시 화면-->
-            
-            <div class="list-title" style="margin-bottom: 20px;">공지사항</div>
-            <table id="boardList" class="table table-hover" align="center">
-               <thead>
-                  <tr>
-                     <th>글번호</th>
-                     <th>제목</th>
-                     <th>작성일</th>
-                     <th>조회수</th>
-                  </tr>
-               </thead>
-               <tbody>
-               <c:choose>
-	               	<c:when test="${ empty list }">
-					  <tr>
-					  	<td colspan="4">존재하는 공지사항이 없습니다.</td>
-					  </tr>           
-	                </c:when>
-	               	<c:otherwise>
-			            <c:forEach var="n" items="${ list }">
-			                  <tr>
-			                     <td class="cno">${ n.classNoticeNo }</td>
-			                     <td>${ n.cnTitle }</td>
-			                     <td>${ n.cnDate}</td>
-			                     <td>${ n.cnCount }</td>
-			                  </tr>
-			             </c:forEach>
-	                 </c:otherwise>
-                </c:choose>
-               </tbody>
-            </table>
-            
-		     <script>
-			    $(document).ready(function(){
-			      $("#boardList>tbody>tr>td").click(function(){
-			    	 console.log($(this).closest("tr").find(".cno").text());
-			    	 
-			         location.href='noticeDetail.co?classNum=${classNum}&cno=' + $(this).closest("tr").find(".cno").text();
-			      });
-			    })
-		  	 </script>
-
-       		<div id="pagingArea">
+	      <div id="notice-area">
+	      	<div class="list-main-title">
+		      <div class="list-title" style="margin-bottom: 20px;">자유게시판</div>
+		      <div>
+		      	<button type="button" class="btn btn-outline-secondary btn-sm">글쓰기</button>
+		      </div>
+	        </div>
+	            <table id="boardList" class="table table-hover" align="center">
+	               <thead>
+	                  <tr>
+	                     <th>글번호</th>
+	                     <th>제목</th>
+	                     <th>작성일</th>
+	                     <th>작성자</th>
+	                     <th>조회수</th>
+	                  </tr>
+	               </thead>
+	               <tbody>
+	               <c:choose>
+	               	 <c:when test="${ empty list }">
+	               	 	<tr>
+	               	 		<td colspan="5">존재하는 게시판이 없습니다.</td>
+	               	 	</tr>
+	               	 </c:when>
+	               	 <c:otherwise>
+	               	 <c:forEach var="l" items="${ list }">	               	 
+	                  <tr>
+	                  	 <input type="hidden">
+	                     <td class="bno">${l.classBoardNo}</td>
+	                     <td>${l.cbTitle}</td>
+	                     <td>${l.cbDate}</td>
+	                     <td>${l.studentName}</td>
+	                     <td>${l.cbCount}</td>
+	                  </tr>
+	               	 </c:forEach>
+	               	 </c:otherwise>
+	               </c:choose>
+	               </tbody>
+	            </table>
+	        
+	     <script>
+		    $(document).ready(function(){
+		      $("#boardList>tbody>tr>td").click(function(){  
+		    	  console.log($(this).closest("tr").find(".bno").text());
+		    	  
+		         location.href='boardDetail.co?classNum=${classNum}&bno=' + $(this).closest("tr").find(".bno").text();
+		      });
+		    })
+	  	 </script>    
+	            
+      	  <div id="pagingArea">
                 <ul class="pagination d-flex justify-content-center flex-wrap pagination-rounded-flat pagination-success">
                		<c:choose>
                			<c:when test="${ pi.currentPage eq 1 }">
                     		<li class="page-item disabled"><a class="page-link" href=""><i class="fa fa-angle-left"></i></a></li>
                     	</c:when>
                     	<c:otherwise>
-                    		<li class="page-item"><a class="page-link" href="notice.co?classNum=${ classNum }&cpage=${ pi.currentPage - 1 }">&laquo;</a></li>	                    		
+                    		<li class="page-item"><a class="page-link" href="board.co?classNum=${ classNum }&bpage=${ pi.currentPage - 1 }">&laquo;</a></li>	                    		
                     	</c:otherwise>
                     </c:choose>
 	                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }"  >
-                    		<li class="page-item"><a class="page-link" href="notice.co?classNum=${ classNum }&cpage=${ p }">${ p }</a></li>
+                    		<li class="page-item"><a class="page-link" href="board.co?classNum=${ classNum }&bpage=${ p }">${ p }</a></li>
                     	</c:forEach>
                     	
                     <c:choose>	
@@ -283,70 +283,15 @@
 	                   		<li class="page-item disabled"><a class="page-link" href=""><i class="fa fa-angle-right"></i></a></li>
 	                    </c:when>
 	                    <c:otherwise>
-	                   		<li class="page-item"><a class="page-link" href="notice.co?classNum=${ classNum }&cpage=${ pi.currentPage + 1 }">&raquo;</a></li>
+	                   		<li class="page-item"><a class="page-link" href="board.co?classNum=${ classNum }&bpage=${ pi.currentPage + 1 }">&raquo;</a></li>
 	                    </c:otherwise>
                 	</c:choose>
                 </ul>
-            </div>
-         </div>
-      </div>
-
-      <!-- 과제게시판 클릭시 화면 -->   
-      <!--
-         <div class="project-area">
-            <div id="ing-project">
-               <img width="80" height="80" src="https://img.icons8.com/material-outlined/96/FCA819/no-entry.png" alt="no-entry"/>
-               <span>미완료 과제 1건</span>
-            </div>
-            <div id="miss-project">
-               <img width="100" height="100" src="https://img.icons8.com/sf-regular/100/BB0505/cancel.png" alt="cancel"/>
-               <span style="padding-bottom: 10px";>누락된 과제 0건</span>
-            </div>
-            <div id="done-project">
-               <img width="75" height="75" src="https://img.icons8.com/metro/80/64A11F/checked.png" alt="checked"/>
-               <span>제출완료 0건</span>
-            </div>
-         </div>
-            <table id="boardList" class="table" align="center">
-               <thead>
-                  <tr>
-                     <th>번호</th>
-                     <th>제목</th>
-                     <th>첨부파일</th>
-                     <th>진행상황</th>
-                     <th>제출</th>
-                     <th>마감일</th>
-                  </tr>
-               </thead>
-               <form action="">
-                  <tbody>
-                     <tr>
-                        <td>1</td>
-                        <td>중간과제:자바산술연산</td>
-                        <td>
-                           <label class="input-file-button" for="input-file">
-                              upload-file
-                           </label>
-                           <input type="file" id="input-file" style="display:none">
-                        </td>
-                        <td>진행중</td>
-                        <td id="project-btn">
-                           <img width="30" height="30" src="https://img.icons8.com/fluency-systems-regular/30/1C4587/nui2.png" alt="nui2"/>
-                        </td>
-                        <td>2024.04.05 오후 11:59</td>
-                     </tr>
-                  </tbody>
-               </form>
-            </table>
-            <div id="img-notice">
-               <span>* 첨부파일 제출시 제목은 "학번_과제 제목" 형식 으로 제출바랍니다</span>
-            </div>
-         </div>
-      </div>
-   </div>
-   -->  
-
-	<!-- 과제 제출시 첨부파일 이름 담기 -->
+          </div>
+	   </div>
+	   </div>
+	</div>
+   	<!-- 과제 제출시 첨부파일 이름 담기 -->
    <script>
       $("#input-file").change(function(){
          var fileName = $("#input-file").val();
@@ -368,31 +313,14 @@
       })
    </script>
    
-		
-   <!-- 다시 공지사항으로 이동 -->
-   <script>
-      $(document).ready(function(){
-         $("#notice").click(function(){
-            var classNum = $("#classNum").val(); // classNum 값을 가져옴
-            location.href = "notice.co?classNum=" + classNum;
-         })
-      })
-   </script>
-   
-   	<!-- 자유게시판 클릭시 이동 -->
-   	<script>
-   	$(document).on("click","#board",function(){ 		
-          var classNum = $("#classNum").val(); // classNum 값을 가져옴
-          location.href = "board.co?classNum=" + classNum;
-   	})
-   	</script>
    
    <!-- 강의계획서 div로 이동 -->
    <script>
 	   	$(document).ready(function(){
    			$("#classPlan").click(function(){
   				const classNum = $(".content").find("#classNum").val();  			
-   				console.log(classNum); 			
+   				console.log(classNum); 		
+
    			 $.ajax({
    				 url:"classPlan.co",
    				 data:{classNum:classNum},
@@ -405,42 +333,35 @@
 					 var changeName = c.changeName;
 					 
 					 
-					 value += "<div class='list-title' style='margin-bottom: 20px;'>강의계획서</div>" +
-				                 "<table id='planList' class='table' align='center'>" +
-				                 "<thead>" +
-				                 "<tr>" +
-				                 "<th>학점</th>" +
-				                 "<th>강의실</th>" +
-				                 "<th>강의시간</th>" +
-				                 "<th>대표교수</th>" +
-				                 "<th>강의계획서</th>" +
-				                 "</tr>" +
-				                 "</thead>" +
-				                 "<tbody>" +
-				                 "<tr>" +
-				                 "<td>" + c.classScore + "</td>" +
-				                 "<td>" + c.classRoom + "</td>" +
-				                 "<td>" + c.classTime + "</td>" +
-				                 "<td>" + c.memberName + "</td>";
-			
-						        if (changeName) {
-						            value += "<td>" +
-						                     "<a href='" + changeName + "' download='" + originName + "' id='planFile'>" +
-						                     "<img width='30' height='30' src='https://img.icons8.com/pastel-glyph/128/737373/search--v2.png'>" +
-						                     "</a>" +
-						                     "</td>";
-						        } else {
-						            value += "<td>X</td>";
-						        }
-					
-						        value += "</tr>" +
-						                 "</tbody>" +
-						                 "</table>" +
-						                 "</div>";
+					 value += "<div class='list-title' style='margin-bottom: 20px;''>강의계획서</div>"
+							     + "<table id='planList' class='table' align='center'>" +
+						              "<thead>" +
+						                 "<tr>" +
+						                     "<th>학점</th>" +
+						                     "<th>강의실</th>" +
+						                     "<th>강의시간</th>" +
+						                     "<th>대표교수</th>" + 
+						                     "<th>강의계획서</th>" +
+						                 "</tr>" +
+						               "</thead>" +
+						               "<tbody>" +
+						                  "<tr>" +
+						                     "<td>" + c.classScore + "</td>" +
+						                     "<td>" + c.classRoom + "</td>" +
+						                     "<td>" + c.classTime + "</td>" +
+						                     "<td>" + c.memberName + "</td>" +
+						                  	 "<td>" + 
+						                     	"<a href='" + changeName + "' download='" + originName + "'>" + 
+						                           "<img width='30' height='30' src='https://img.icons8.com/pastel-glyph/128/737373/search--v2.png'>" +
+						                        "</a>" +
+						                     "</td>" +
+						                  "</tr>" +
+						               "</tbody>" +
+						            "</table>" +
+						         "</div>" 
    					 
    					 $("#notice-area").html(value);
-						      
-   					 
+					 
    				 }, error:function(){
    					 console.log("ajax통신실패");
    				 }
@@ -448,8 +369,17 @@
    			})
    		})
    </script>
-	
-
+   
+   	
+    <!-- 다시 공지사항으로 이동 -->
+	<script>
+      $(document).ready(function(){
+         $("#notice").click(function(){
+            var classNum = $("#classNum").val(); // classNum 값을 가져옴
+            location.href = "notice.co?classNum=" + classNum;
+         })
+      })
+   </script>
    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

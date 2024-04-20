@@ -29,7 +29,7 @@ public class Classroom {
 	private String originName;		// 강의계획서 업로드 첨부파일 원래이름
 	private String changeName;		// 강의계획서 첨부파일 바뀐이름
 	private String enrollDate;		// 강의년도
-	
+	private String memberName;
 	private String classTypeName;	// 전공필수 이런 타입네임
 	private String classStatus;		// 강의삭제여부
 }

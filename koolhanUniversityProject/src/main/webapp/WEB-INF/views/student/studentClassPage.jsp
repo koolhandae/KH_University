@@ -100,12 +100,14 @@
                <thead style="height: 40px;  color: #858796;">
                   <tr>
                      <th>강의번호</th>
+                     <th>유형</th>
+                     <th>학점</th>
                      <th>학년</th>
                      <th>학기</th>
                      <th>강의명</th>
                      <th>강의실</th>
                      <th>강의시간</th>
-                     <th>학점</th>
+                     <th>수강인원</th>
                      <th>강의실 입장</th>
                    </tr>
                </thead>
@@ -137,18 +139,20 @@
 					
 					let courseValue = list[c].classNum;
 					let className = list[c].className;
-					
+
 					course += `<option value='' disabled selected hidden>강의명을 선택하세요</option>
 		                       <option value=\${courseValue}>\${className}</option>`
 		                   
 					value += "<tr class='detail'>"
 						  + "<td>" + list[c].classNum +"</td>"
+						  + "<td>" + list[c].classTypeName +"</td>"
+						  + "<td>" + list[c].classScore +"</td>"
 						  + "<td>" + list[c].classGrade + "</td>"
 						  + "<td>" + list[c].courseSemester +"학기</td>"
 						  + "<td>" + list[c].className +"</td>"
 						  + "<td>" + list[c].classRoom +"</td>"
 						  + "<td>" + list[c].classTime +"</td>"
-						  + "<td>" + list[c].classScore +"</td>"
+						  + "<td>" + list[c].classPeople +"</td>"
 						  + "<td><button type='button' class='btn btn-primary' style='margin: 3px; background-color: #1c4587; border: none;' >"
 						      + "상세보기" + "</button>"
 		                      + "</td>"
@@ -180,12 +184,14 @@
 						
 						value += "<tr class='detail'>"
 							  + "<td>" + course.classNum +"</td>"
+							  + "<td>" + course.classTypeName +"</td>"
+							  + "<td>" + course.classScore +"</td>"
 							  + "<td>" + course.classGrade + "</td>"
 							  + "<td>" + course.courseSemester +"학기</td>"
 							  + "<td>" + course.className +"</td>"
 							  + "<td>" + course.classRoom +"</td>"
 							  + "<td>" + course.classTime +"</td>"
-							  + "<td>" + course.classScore +"</td>"
+							  + "<td>" + course.classPeople +"</td>"
 							  + "<td><button type='button' class='btn btn-primary detail' style='margin: 3px; background-color: #1c4587; border: none;' >"
 							      + "상세보기" + "</button>"
 			                      + "</td>"
@@ -200,31 +206,7 @@
 			});
 		});
 		
-		/*
-		window.classDetail = function(cpage){		
-			console.log($("#boardList tbody td:eq(0)").text());
-			var classNum = $("#boardList tbody td:eq(0)").text();
-			
-			$.ajax({
-				url:"notice.co",
-				data:{classNum:classNum,
-					  cpage:cpage},
-				success:function(result){
-					console.log("ajax통신성공");
-					
-					console.log(result.list);
-					console.log(result.pi);
-					
-					
-				}, error:function(){
-					console.log("ajax통신실패");
-				}
-			});
-		}
-		*/
-		
-		
-		
+
 	});
 	
 	$(document).on("click", ".detail", function(){
