@@ -21,8 +21,23 @@ public class TuitionDao {
 		return (ArrayList)sqlSession.selectList("tuitionMapper.tuitionBillForm", t);
 	}
 	
-	public ArrayList<AdminTuitionMake> tuitionMakeForm(SqlSessionTemplate sqlSession, AdminTuitionMake at) {
-		return (ArrayList)sqlSession.selectList("tuitionMapper.tuitionMakeForm", at);
+	public ArrayList<AdminTuitionMake> tuitionMakeForm(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("tuitionMapper.tuitionMakeForm");
+	}
+	
+	public int insertTuitionMake(SqlSessionTemplate sqlSession) {
+		// todo: 화면에서 입력받은 등록금 데이터를 db 에 insert 
+		return 0;
+	}
+	
+	public AdminTuitionMake latestTution() {
+		// todo: 다음번 등록금 데이터를 정확성있게 가져온다
+		return null;
+	}
+
+	public void deleteAllTuitionStudent() {
+		// TODO delete table 쿼리를 만든다
+		
 	}
 
 }

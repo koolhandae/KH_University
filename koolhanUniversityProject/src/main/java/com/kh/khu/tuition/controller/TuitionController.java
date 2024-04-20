@@ -52,9 +52,33 @@ public class TuitionController {
 	
 	@RequestMapping("tuitionMake.ad")
 	public String tuitionMakeForm(HttpSession session, AdminTuitionMake at) {
-		ArrayList<AdminTuitionMake> atList = tService.tuitionMakeForm(at);
+		// 특정 년도의 학기의 등록금 정보를 저장 (화면에서 넘긴 값을 db 에 저장)
+		//int result = tService.insertTuitionMake();
+		// 저장된 연도의 데이터를 화면에 보낸다
+		//ArrayList<AdminTuitionMake> atList = tService.tuitionMakeForm();
 		
 		return "admin/adminTuitionMake";
+	}
+	
+	@RequestMapping("tuitionIssu.ad")
+	public String tuitionIssueForm(HttpSession session) {
+		// 가장 최신 학기의 등록금 데이터를 화면에 ReadOnly 로 출력한다 
+		AdminTuitionMake t = tService.latestTuition();
+		
+		return "admin/adminTuitionIssue";
+	}
+	
+	// todo: readOnly 로 사용된 등록금 정보를 화면에서 받아온다
+	@RequestMapping("tuitionMakeStudent.ad")
+	public String tuitionMakeStudent(HttpSession session, AdminTuitionMake t) {
+		
+		String studens = tService.makeTuitionStudent(t);
+		return "";
+	}
+	
+	@RequestMapping("takeOffSelect.ad")
+	public String takeOffSelect(HttpSession session) {
+		return "admin/takeOffSelect";
 	}
 	
 	/*

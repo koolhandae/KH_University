@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="tuitionMapper">
 
-	<resultMap type="Tuition" id="tuitionResult">
+	<resultMap type="TuitionStudent" id="tuitionResult">
 		<result column="tt_no" property="ttNo"/>
 		<result column="student_no" property="studentNo"/>
-		<result column="term_no" property="termNo"/>
+		<result column="ts_year" property="termNo"/>
 		<result column="tuition" property="tuition"/>
 		<result column="scholarship" property="scholarship"/>
 		<result column="student_id" property="studentId"/>	
@@ -15,16 +15,26 @@
 		<result column="tp_no" property="tpNo"/>
 		<result column="tt_no" property="refTuitionNo"/>
 		<result column="tp_date" property="tpDate"/>
-		<result column="tp_total_price" property="totalPrice"/>
 	</resultMap>
 	
-	<resultMap type="AdminTuitionMake" id="adminTuitionResult">
+<!-- 	<resultMap type="AdminTuitionMake" id="adminTuitionResult">
 		<result column="tt_no" property="ttNo" />
-		<result column="tb_due" property="tbDue" />
+		<result column="tb_open" property="tbOpen" />
+		<result column="tb_close" property="tbClose" />
 		<result column="tb_date" property="tbDate" />
 		<result column="tb_price" property="tbPrice" />
 		<result column="total_price" property="totalPrice" />
 		<result column="tb_status" property="tbStatus" />
+	</resultMap> -->
+	
+	<resultMap type="AdminTuitionMake" id="adminTuitionResult">
+		<result column="tt_no"></result>
+		<result column="tb_opne"></result>
+		<result column="tb_close"></result>
+		<result column="tb_insert"></result>
+		<result column="tb_update"></result>
+		<result column="tb_price"></result>
+		<result column="tb_semester"></result>
 	</resultMap>
 	
 
@@ -33,13 +43,12 @@
 		SELECT 
 		       t.tt_no
 		     , t.student_no
-		     , t.term_no
+		     , t.ts_year
 		     , t.tuition
 		     , t.scholarship
 		     , tp.tp_no
 		     , tp.tp_date
-		     , tp.tp_total_price
-		FROM tuition t
+		FROM tuition_student t
 		JOIN tuition_payment tp on (t.tt_no = tp.tt_no)
 		WHERE t.STUDENT_ID = #{studentId}
 	</select>
@@ -51,18 +60,16 @@
 	    tp_no
 	  , tt_no
 	  , tp_date
-	  , tp_total_price
 	  )
 	  values
 	  (
 	    seq_tpno.nextVAL
 	  , #{ttNo}
 	  , SYSDATE
-	  , #{totalPrice}
 	  )
 	</insert>
 	
- 	<select id="tuitionMakeForm" resultMap="adminTuitionResult">
+<!--  	<select id="tuitionMakeForm" resultMap="adminTuitionResult">
 		SELECT
 			   student_no
 		     , s.student_id
@@ -70,12 +77,24 @@
 		     , tt_no
 		     , tb.tb_price
 		     , t.scholarship
-		     , tb.total_price
-		     , tb.tb_due
+		     , tb.tb_open
+		     , tb.tb_close	     
 		  FROM student s
-		  JOIN tuition t USING (student_no)
+		  JOIN tuition_student t USING (student_no)
 		  JOIN tuition_bill tb USING (tt_no)
-		 WHERE s.student_id = #{ search }
+		  WHERE s.student_id = #{ search }
+	</select> -->
+	
+	 	<select id="tuitionMakeForm" resultMap="adminTuitionResult">
+		SELECT
+			 tt_no
+		     , tb.tb_open
+		     , tb.tb_close
+		     , tb_insert
+		     , tb_update
+		     , tb_price
+		     , tb_semester	     
+		  FROM tuition_bill t
 	</select>
 	
 	

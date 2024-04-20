@@ -118,5 +118,10 @@ public class StudentDao {
 	public Course selectClassName(SqlSessionTemplate sqlSession, String classNum) {
 		return sqlSession.selectOne("studentMapper.selectClassName", classNum);
 	}
+
+	public void insertTakeOffStudent() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
