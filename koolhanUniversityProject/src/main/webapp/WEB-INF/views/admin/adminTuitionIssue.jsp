@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@ taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core" %>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Insert title here</title>
-    <style>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+ <style>
       #btn {
         border: 2px solid rgb(48, 76, 121);
         color: rgb(48, 76, 121);
@@ -67,35 +67,43 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         border-color: rgb(75, 75, 75);
       }
 
-      .searchArea {
-        float: right;
-        padding-right: 150px;
+      #search {
+      	height: 35px;
       }
 
-      .searchArea {
+      .searchArea, .generateBtn {
         display: inline-block;
+        float: right;
+      }
+      
+      .generateBtn{
+        padding-right: 10px;
+        
+      }
+
+      .searchArea{
+        padding-right: 150px;
       }
 
       hr {
         width: 1000px;
       }
     </style>
-  </head>
-  <body>
-    <jsp:include page="../common/header_with_sidebar.jsp" />
-    <div class="content">
+</head>
+<body>
+   <jsp:include page="../common/header_with_sidebar.jsp"/>
+   <div class="content">
       <div class="innerOuter">
-        <h1
-          style="margin-left: 290px; font-weight: 900; color: rgb(75, 75, 75)"
-        >
-          등록금 고지서 생성
+
+        <h1 style="margin-left: 150px; font-weight: 900; color: rgb(75, 75, 75)">
+          등록금 고지서 발급
         </h1>
-        <h5 style="margin-left: 290px">2024년도 1학기</h5>
+        <h5 style="margin-left: 150px">2024년도 1학기</h5>
         <hr />
         <br />
         <br />
 
-        <!-- 		<form action="tuitionMakeSelect.ad"> -->
+        <!-- <form action="tuitionMakeSelect.ad"> -->
         <input type="hidden" name="search" value="" />
         <input
           type="hidden"
@@ -137,55 +145,36 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
         <br />
 
-        <div class="billBtn" style="display: flex">
-          <button class="btn btn-xs" id="btn">생성하기</button>
-        </div>
-        <!-- 		</form> -->
+        <!-- </form> -->
         <br />
+        <hr>
+        <br>
         <div class="searchArea">
           <input type="text" name="search" id="search" placeholder="전체 또는 학번을 입력해주세요"/>
           <button class="btn" id="btn">검색</button>
+        </div>
+        <div class="generateBtn">
+        	<button class="btn generateBtn" id="btn">등록금 납부 대상 생성</button>
         </div>
         <br><br>
         <table id="boardList" class="table" align="center" width="700px">
           <tr>
             <th>고지서 번호</th>
-            <th>연도</th>
-            <th>학기</th>
+            <th>학번</th>
+            <th>등록금</th>
+            <th>장학금</th>
           </tr>
 
           <tr>
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
           </tr>
         </table>
-      </div>
-      <%-- innerOuter 끝 --%>
 
-      <!-- 	
-		<script>
-			$(function(){
-				$("#search").click(function(){
-					$.ajax({
-						url:"tuitionMake.ad",
-						data:{
- 							id:${"#studentId"}.val(),
-							name:${"#studentName"}.val(),
-							price:${"#tbPrice"}.val(),
-							scholarship:${"#scholarship"}.val()
-							date:${"#tbDue"}.val()
-						}, success:function(result){
-							console.log("ajax : " + result);
-						}, error:function(){
-							console.log("ajax통신 실패!");
-						}
-					})
-				})
-			})
-			
-		</script> -->
-    </div>
-    <jsp:include page="../common/footer.jsp" />
-  </body>
+      </div>
+   </div>
+   <jsp:include page="../common/footer.jsp"/>
+</body>
 </html>

@@ -103,6 +103,11 @@
         </tr>
         
         <tr>
+			<th>주소</th>
+			<td colspan="2">서울시 어딘가</td>    
+        </tr>
+        
+        <tr>
           <th>기간</th>
           <td id="takeOffDay" colspan="3">
           	<select name="preSemester">

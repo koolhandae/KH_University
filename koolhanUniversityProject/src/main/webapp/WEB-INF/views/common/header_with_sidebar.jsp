@@ -173,8 +173,22 @@
 						<li class="nav-item">
 							<a class="nav-link" href="tuitionMake.ad">
 								<i class="fa-solid fa-bullhorn"></i>
+								<span>등록금 고지서 생성</span></a>
+						</li>	
+						
+						<!-- Nav Item - Charts -->
+						<li class="nav-item">
+							<a class="nav-link" href="tuitionIssu.ad">
+								<i class="fa-solid fa-bullhorn"></i>
 								<span>등록금 고지서 발급</span></a>
 						</li>	
+						
+						<!-- Nav Item - Charts -->
+						<li class="nav-item">
+							<a class="nav-link" href="admintakeOffSelect.do">
+								<i class="fa-solid fa-bullhorn"></i>
+								<span>휴학 신청서 조회</span></a>
+						</li>
 	
 				<!-- Nav Item - Pages Collapse Menu -->
 				<li class="nav-item">
