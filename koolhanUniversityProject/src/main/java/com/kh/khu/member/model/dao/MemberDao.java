@@ -45,4 +45,14 @@ public class MemberDao {
 	public int updateAddress(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updateAddress",m);
 	}
+
+	public void getReturnStudent() {
+		// TODO 새로만들어진 복학신청자 데이터를 가져옵니다 
+		
+	}
+
+	public void getTakeOffStudent() {
+		// TODO 새로만들어진 복학 신청자 데이터를 가져옵니다 
+		
+	}
 }

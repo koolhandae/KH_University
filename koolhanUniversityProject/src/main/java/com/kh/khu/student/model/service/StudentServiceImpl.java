@@ -137,4 +137,31 @@ public class StudentServiceImpl implements StudentService {
 		return sDao.updateAddress(sqlSession, s);
 	}
 
+	@Override
+	public int insertTakeOffStudent() {
+		// DB 테이블에 데이터가 있는지 확인한다 
+		// 있으면 바로 리턴하고 화면에서 등록버튼을 없앤다 
+		
+		// 없으면 데이터를 넣을 수 있게 
+		// TODO 화면에 입력된 데이터를 데이터베이스에 넣는다
+		
+		
+		
+		//sDao.insertTakeOffStudent();
+		
+		return 0;
+	}
+
+	@Override
+	public int getDo() {
+		// TODO DB 데이터가 있는지 유무만 확인해서 리턴 데이터 있으면 1, 없으면 0
+		return 0;
+	}
+
+	@Override
+	public int insertReturnStudent() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

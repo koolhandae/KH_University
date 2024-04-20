@@ -193,5 +193,34 @@ public class MemberController {
 	public String updateAdminForm() {
 		return "admin/adminUpdateForm";
 	}
+	
+	@RequestMapping("adminReturnSchool.me")
+	public String adminReturnSchool() {
+		// todo 복학 신청자 리스트를 가져와서 승인 버튼으로 승인할 수 있게 해준다 
+		mService.getReturnStudent();
+		
+		return "admin/adminReturnShcoolSelect";
+	}
+	
+	@RequestMapping("adminReturnSchoolForm.me")
+	public String adminReturnSchoolForm() {
+		// todo 복학 신청자 리스트를 가져와서 승인 버튼으로 승인할 수 있게 해준다 
+		mService.setReturnStudent();
+		
+		return "admin/adminReturnShcoolSelect";
+	}
 
+	@RequestMapping("admintakeOffSelect.me")
+	public String adminTakeOff() {
+		mService.getTakeOffStudent();
+		
+		return "admin/adminTakeOffSelect";
+	}
+	
+	@RequestMapping("admintakeOffSelectForm.me")
+	public String adminTakeOffForm() {
+		mService.setTakeOffStudent();
+		
+		return "admin/adminTakeOffSelect";
+	}
 }

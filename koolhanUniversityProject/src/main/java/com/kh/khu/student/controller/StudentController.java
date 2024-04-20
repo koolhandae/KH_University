@@ -166,27 +166,39 @@ public class StudentController {
 		return "student/certificateIssuingPage";
 	}
 	
-	
 	@RequestMapping("takeOff.do")
 	public String takeOffForm(HttpSession session) {
+		// 화면상에 버튼처리를 할 수 있는 서비스
+		//int result = sService.getDo();
 		
-//		Student s = (Student)session.getAttribute("loginStudent");
-//		System.out.println(s);
-		 return "student/studentTakeOff";
+		return "student/studentTakeOff";
 	}
 	
-	@RequestMapping("insertTakeOff.do")
-	public String insertTakeOff(Absence a, Model model, HttpSession session) {
-		//System.out.println(a);
-		int list = sService.insertTakeOff(a);
+	// 휴학생 데이터를 넣는다 (DB 까지)
+	@RequestMapping("takeOffForm.do")
+	public String takeOffFormMake(HttpSession session) {
+		int result = sService.insertTakeOffStudent();
 		
-		if(list > 0) {
-			session.setAttribute("alertMsg", "휴학 신청서 등록 완료");
-			return "redirect:/";
-		}else {
-			model.addAttribute("errorMsg", "휴학 신청서 등록 실패!");
-			return "common/errorPage404";
-		}
+		return "student/studentTakeOff";
+	}
+	
+	
+	@RequestMapping("returnSchool.do")
+	public String returnSchoolForm(HttpSession session) {
+		// 화면상에 버튼처리를 할 수 있는 서비스
+		// 휴학생만 데이터를 보일 수 있게 한다 
+		//int result = sService.getDo();
+		
+		return "student/studentReturnSchool";
+	}
+	
+	// 복학 신청 데이터를 넣는다
+	@RequestMapping("returnSchoolForm.do")
+	public String insertReturnSchool(Presence p, Model model , HttpSession session) {
+		int result = sService.insertReturnStudent();
+		
+		return "student/studentReturnSchool";
+
 	}
 	
 	
@@ -205,24 +217,7 @@ public class StudentController {
 		
 	}
 	
-	@RequestMapping("returnSchool.do")
-	public String returnSchoolForm(HttpSession session) {
-		return "student/studentReturnSchool";
-	}
-	
-	@RequestMapping("insertReturnSchool.do")
-	public String insertReturnSchool(Presence p, Model model , HttpSession session) {
-			
-		int list = sService.insertReturnSchool(p);
-		
-		if(list > 0) {
-			session.setAttribute("alertMsg", "복학 신청서 등록 완료");
-			return "redirect:/";
-		}else {
-			model.addAttribute("errorMsg", "복학 신청서 등록 실패!");
-			return "common/errorPage404";
-		}
-	}
+
 	
 	@RequestMapping("update.stu")
 	public String updateStudentForm() {

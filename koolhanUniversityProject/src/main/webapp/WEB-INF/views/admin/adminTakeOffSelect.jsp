@@ -32,14 +32,15 @@
    	<div class="innerOuter">
    	
    		<div class="tuitionBtn" align="center";>
-   		<a class="btn btn-primary btn-lg"  href="takeOff.do" roll="button" style="background-color:rgb(48, 76, 121)">휴학 신청</a>
+   		<a class="btn btn-primary btn-lg"  href="#" roll="button" style="background-color:rgb(48, 76, 121)">휴학 신청</a>
    		   <span style="margin-left: 40px; margin-right: 40px;"></span>
-   		<a class="btn btn-primary btn-lg"  href="turnSchool.do" roll="button" style="background-color:rgb(48, 76, 121)">복학 신청</a>  
+   		<a class="btn btn-primary btn-lg"  href="#" roll="button" style="background-color:rgb(48, 76, 121)">복학 신청</a>  
     </div>
       <br><br><br>
    	
    		<h2 style="margin-left: 290px; font-weight:900; color: rgb(75,75,75);">휴학 신청 처리</h2>
    		<hr><br>
+   		
    		
    		<table id="boardList" class="selectTuition table" style="width: 900px; margin: auto;">
    			<thead>

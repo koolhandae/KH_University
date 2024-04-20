@@ -21,4 +21,11 @@ public interface MemberService {
 	
 	int updateAddress(Member m);
 
+	public void getReturnStudent();
+	
+	public void getTakeOffStudent();
+	
+	public void setReturnStudent();
+
+	public void setTakeOffStudent();
 }

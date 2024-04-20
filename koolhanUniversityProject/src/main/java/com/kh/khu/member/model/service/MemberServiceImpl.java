@@ -50,6 +50,33 @@ public class MemberServiceImpl implements MemberService{
 	public int updateAddress(Member m) {
 		return mDao.updateAddress(sqlSession, m);
 	}
+
+	@Override
+	public void getReturnStudent() {
+		// todo: 만들어야 하는 쿼리는 복학 신청자 테이블을 조회 합니다 이걸 화면에 보여줍니다
+		mDao.getReturnStudent();
+		
+	}
+
+	@Override
+	public void getTakeOffStudent() {
+		// TODO 만들어야 하는 쿼리는 휴학 신청자 테이블을 조회합니다 이걸 화면에 보여줍니다 
+		mDao.getTakeOffStudent();
+	}
+
+	@Override
+	public void setReturnStudent() {
+		// TODO 스튜던트의 상태데이터를 UPDATE 합니다 
+		
+		// TODO 복학 신청 등록 데이터를 UPdate 합니다 
+	}
+
+	@Override
+	public void setTakeOffStudent() {
+		// TODO 스튜던트의 상태데이터를 UPDATE 합니다 
+		
+		// TODO 휴학 신청 등록 데이터를 UPdate 합니다 
+	}
 	
 
 	

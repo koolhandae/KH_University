@@ -11,6 +11,12 @@ public interface TuitionService {
 	
 	ArrayList<Tuition> tuitionBillForm(Tuition t);
 	
-	ArrayList<AdminTuitionMake> tuitionMakeForm(AdminTuitionMake at);
+	ArrayList<AdminTuitionMake> tuitionMakeForm();
+	
+	int insertTuitionMake();
+
+	AdminTuitionMake latestTuition();
+
+	String makeTuitionStudent(AdminTuitionMake t);
 
 }
