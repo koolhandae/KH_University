@@ -1,6 +1,7 @@
 package com.kh.khu.member.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,7 +21,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.khu.common.model.vo.Address;
 import com.kh.khu.common.template.AddressString;
 import com.kh.khu.member.model.service.MemberServiceImpl;
+import com.kh.khu.member.model.vo.AdminTuition;
 import com.kh.khu.member.model.vo.Member;
+import com.kh.khu.member.model.vo.MemberAbsence;
 import com.kh.khu.student.model.service.StudentServiceImpl;
 import com.kh.khu.student.model.vo.Student;
 
@@ -211,16 +215,31 @@ public class MemberController {
 	}
 
 	@RequestMapping("admintakeOffSelect.me")
-	public String adminTakeOff() {
-		mService.getTakeOffStudent();
+	public String adminTakeOff(Model model) {
+		List<MemberAbsence> list = mService.getTakeOffStudent();
+		
+		model.addAttribute("list", list);
 		
 		return "admin/adminTakeOffSelect";
 	}
 	
 	@RequestMapping("admintakeOffSelectForm.me")
-	public String adminTakeOffForm() {
-		mService.setTakeOffStudent();
+	public String adminTakeOffForm(Model model, String absId) {
+		int result = mService.setTakeOffStudent(absId);
+		
+		List<MemberAbsence> list = mService.getTakeOffStudent();
+		model.addAttribute("list", list);
 		
 		return "admin/adminTakeOffSelect";
 	}
+	
+	@RequestMapping("tuitionMakeSelect.ad")
+	public String adminTuitionMake(Model model, AdminTuition tuition) {
+		List<AdminTuition> list = mService.insertAdminTuition(tuition);
+		
+		model.addAttribute("list", list);
+		return "admin/adminTuitionMake";
+	}
+	
+	
 }

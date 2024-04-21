@@ -1,6 +1,10 @@
 package com.kh.khu.member.model.service;
 
+import java.util.List;
+
+import com.kh.khu.member.model.vo.AdminTuition;
 import com.kh.khu.member.model.vo.Member;
+import com.kh.khu.member.model.vo.MemberAbsence;
 
 public interface MemberService {
 	
@@ -23,9 +27,11 @@ public interface MemberService {
 
 	public void getReturnStudent();
 	
-	public void getTakeOffStudent();
+	public List<MemberAbsence> getTakeOffStudent();
 	
 	public void setReturnStudent();
 
-	public void setTakeOffStudent();
+	public int setTakeOffStudent(String absId);
+	
+	public List<AdminTuition> insertAdminTuition(AdminTuition tuition);
 }

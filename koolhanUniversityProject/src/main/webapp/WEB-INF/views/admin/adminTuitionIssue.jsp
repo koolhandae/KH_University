@@ -95,22 +95,16 @@
    <div class="content">
       <div class="innerOuter">
 
-        <h1 style="margin-left: 150px; font-weight: 900; color: rgb(75, 75, 75)">
+        <h1 style="margin-left: 200px; font-weight: 900; color: rgb(75, 75, 75)">
           등록금 고지서 발급
         </h1>
-        <h5 style="margin-left: 150px">2024년도 1학기</h5>
+        <h5 style="margin-left: 200px">2024년도 1학기</h5>
         <hr />
         <br />
         <br />
 
         <!-- <form action="tuitionMakeSelect.ad"> -->
-        <input type="hidden" name="search" value="" />
-        <input
-          type="hidden"
-          name="studentId"
-          value="${ loginStudent.studentId }"
-        />
-        <table id="boardList" class="table table-hover" align="center">
+        <table id="boardList" class="table" align="center">
           <tr>
             <th>학부(과)</th>
             <td colspan="3">컴퓨터공학과</td>
@@ -119,26 +113,21 @@
           <tr>
             <th>등록금</th>
             <td colspan="3">
-              <input type="number" name="tbPrice" min="0" />
+              ${ tuition.tbPrice } 
             </td>
           </tr>
           <tr>
             <th>연도</th>
             <td>2024</td>
             <th>학기</th>
-            <td>1</td>
+            <td>${ tuition.tbSemester } </td>
           </tr>
       
 
           <tr>
             <th>납부기간</th>
-            <td align="right">
-              <input type="date" name="" value="" />
-              부터
-            </td>
-            <td colspan="2">
-              <input type="date" name="tbDue" value="tbDue" />
-              까지 납부
+            <td align="center" colspan="3">
+              ${ tuition.tbOpen } ~ ${ tuition.tbClose }
             </td>
           </tr>
         </table>
@@ -154,7 +143,7 @@
           <button class="btn" id="btn">검색</button>
         </div>
         <div class="generateBtn">
-        	<button class="btn generateBtn" id="btn">등록금 납부 대상 생성</button>
+        	<a href="tuitionMakeStudent.ad" >등록금 납부 대상 발급 및 조회</a>
         </div>
         <br><br>
         <table id="boardList" class="table" align="center" width="700px">
@@ -165,12 +154,16 @@
             <th>장학금</th>
           </tr>
 
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+	 	 <c:forEach var="item" items="${list}">
+			   		  <tr align="center">
+			   		  	<td>${item.ttNo}</td>
+			   		  	<td>${item.studentId}</td>
+			   		  	<td>${item.tuition} </td>
+			   		  	<td>${item.scholarShip}</td>
+			   		  </tr>
+			   		 
+	     </c:forEach>
+    
         </table>
 
       </div>

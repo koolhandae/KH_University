@@ -36,19 +36,34 @@
 	<resultMap type="Absence" id="absenceResult">
 		<result column="abs_no" property="absNo"/>
 		<result column="abs_id" property="absId"/>
+		<result column="abs_start" property="absStart"/>	
+		<result column="abs_end" property="absEnd"/>	
 		<result column="abs_semester" property="absSemester"/>	
-		<result column="abs_grade" property="absGrade"/>	
 		<result column="abs_sort" property="absSort"/>	
-		<result column="abs_status" property="absStatus"/>	
+		<result column="abs_insert" property="absInsert"/>	
+		<result column="abs_update" property="absUpdate"/>	
 	</resultMap>
 	
 	<resultMap type="Presence" id="presenceResult">
 		<result column="pre_no" property="preNo"/>
 		<result column="pre_id" property="preId"/>
+		<result column="pre_year" property="preYear"/>	
 		<result column="pre_semester" property="preSemester"/>	
-		<result column="pre_grade" property="preGrade"/>	
-		<result column="pre_status" property="preStatus"/>	
+		<result column="tb_status" property="tbStatus"/>	
 	</resultMap>
+
+ 	<resultMap type="AbsenceStudentResult" id="absenceStudentResult">
+ 		<result column="student_no" property="studentNo" /> 
+		<result column="abs_no" property="absNo"/> 
+		<result column="abs_id" property="absId"/> 
+		<result column="abs_start" property="absStart"/> 
+		<result column="abs_end" property="absEnd"/> 
+		<result column="abs_semester" property="absSemester"/> 
+		<result column="tb_status" property="tbStatus"/> 
+		<result column="abs_sort" property="absSort"/> 
+		<result column="abs_insert" property="absInsert"/> 
+		<result column="abs_update" property="absUpdate"/>   
+	</resultMap> 
 
 <select id="loginStudent" resultMap="studentResult">
 	select 
@@ -74,17 +89,25 @@
 	  (
 	    abs_no
 	  , abs_id
+	  , abs_start
+	  , abs_end
 	  , abs_semester
-	  , abs_grade
 	  , abs_sort
+	  , abs_status
+	  , abs_insert
+	  , abs_update
 	  )
 	  values
 	  (	
 	  	#{absNo}
 	  , #{absId}
+	  , #{absStart}
+	  , #{absEnd}
 	  , #{absSemester}
-	  , #{absGrade}
 	  , #{absSort}
+	  , #{absStatus}
+	  , sysdate
+	  , sysdate
 	  )
 </insert>
 
@@ -96,6 +119,7 @@
 	  , pre_id
 	  , pre_semester
 	  , pre_grade
+
 	  )
 	  values
 	  (
@@ -115,6 +139,24 @@
 	  from absence
 	  join student on (student_no = abs_no)
 	 where s_status = 'Y'	  
+</select>
+
+<select id="selectTakeOffStudent" resultMap="absenceStudentResult">
+	select
+	       student_no
+	     , abs_no
+	     , abs_id
+	     , abs_start
+	     , abs_end
+	     , abs_semester
+	     , tb_status
+	     , abs_sort
+	     , abs_insert
+	     , abs_update
+	  from absence
+	  join student on (student_no = abs_no)
+	 where s_status = 'Y'	  
+	 and abs_id = #{absId}
 </select>
 
 	<!-- 누구껀지확인부탁! 동석, 도현, 수지 아님 혹시 연뎡..? 하하

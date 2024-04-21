@@ -15,6 +15,26 @@
 		<result column="m_status" property="meStatus"/>
 	</resultMap>
 	
+	 <resultMap type="MemberAbsence" id="memberAbsence">
+		<result column="abs_no" property="absNo"/> 
+		<result column="abs_id" property="absId"/> 
+		<result column="abs_start" property="absStart"/> 
+		<result column="abs_end" property="absEnd"/> 
+		<result column="abs_semester" property="absSemester"/> 
+		<result column="tb_status" property="tbStatus"/> 
+		<result column="abs_sort" property="absSort"/> 
+		<result column="abs_insert" property="absInsert"/> 
+		<result column="abs_update" property="absUpdate"/>   
+	</resultMap> 
+	
+	<resultMap type="AdminTuition" id="adminTuition">
+		<result column="tb_price" property="tbPrice"></result>
+		<result column="tb_open" property="startDate"></result>
+		<result column="tb_close" property="endDate"></result>
+		<result column="tb_semester" property="semester"></result>
+	</resultMap>
+	
+	
 	<select id="loginMember" resultMap="memberResult">
 		select
 		       member_no
@@ -91,5 +111,56 @@
 		   set m_address = #{meAddress}
 		 where member_id = #{memberId}
 	</update>
+	
+	<select id="selectAbsenceStudent" resultMap="memberAbsence">
+		select
+	     abs_no
+	     , abs_id
+	     , abs_start
+	     , abs_end
+	     , abs_semester
+	     , tb_status
+	     , abs_sort
+	     , abs_insert
+	     , abs_update
+	  	from absence
+	</select>
+	
+	<update id="updateAbsenceStudent">
+		update student
+	    set s_status = 'H'
+	    where student_id = #{absId}
+	</update>
+	
+	<update id="updateAbsenceStudentSucess">
+		update absence
+	    set tb_status = 'Y'
+	    where abs_id = #{absId}
+	</update>
+	
+	<insert id="insertAdminTuition">
+		insert into tuition_bill(
+		    TT_NO 
+		    , TB_OPEN
+		    , TB_CLOSE
+		    , TB_PRICE
+		    , TB_SEMESTER 
+		    , TB_INSERT 
+		    , TB_UPDATE 
+		    )
+		    values(
+		    SEQ_TTNO.nextVal
+		    , #{startDate}
+		    , #{endDate}
+		    , #{tbPrice}
+		    , #{semester}
+		    , sysdate
+		    , sysdate
+		    )
+	</insert>
+	
+	<select id="selectAdminTuition" resultMap="adminTuition">
+		select * from tuition_bill
+	</select>
 		
 </mapper>

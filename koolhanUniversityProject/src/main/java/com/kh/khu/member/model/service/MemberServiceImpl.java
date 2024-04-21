@@ -1,11 +1,15 @@
 package com.kh.khu.member.model.service;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.khu.member.model.dao.MemberDao;
+import com.kh.khu.member.model.vo.AdminTuition;
 import com.kh.khu.member.model.vo.Member;
+import com.kh.khu.member.model.vo.MemberAbsence;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -59,9 +63,11 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void getTakeOffStudent() {
+	public List<MemberAbsence> getTakeOffStudent() {
 		// TODO 만들어야 하는 쿼리는 휴학 신청자 테이블을 조회합니다 이걸 화면에 보여줍니다 
-		mDao.getTakeOffStudent();
+		List<MemberAbsence> list = mDao.getTakeOffStudent(sqlSession);
+		
+		return list;
 	}
 
 	@Override
@@ -72,10 +78,23 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void setTakeOffStudent() {
+	public int setTakeOffStudent(String absId) {
 		// TODO 스튜던트의 상태데이터를 UPDATE 합니다 
-		
+		int result = mDao.changeStudentStatus(sqlSession, absId);
 		// TODO 휴학 신청 등록 데이터를 UPdate 합니다 
+		result = mDao.changeTakeOffStudent(sqlSession, absId);
+		return result;
+	}
+
+	@Override
+	public List<AdminTuition> insertAdminTuition(AdminTuition tuition) {
+		// TODO Auto-generated method stub
+		int result = mDao.insertAdminTuition(sqlSession, tuition);
+		//if()
+		
+		List<AdminTuition> list = mDao.selectAdminTuition(sqlSession);
+		
+		return list;
 	}
 	
 

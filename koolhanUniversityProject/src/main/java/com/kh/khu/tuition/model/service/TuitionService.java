@@ -1,9 +1,11 @@
 package com.kh.khu.tuition.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kh.khu.tuition.model.vo.AdminTuitionMake;
 import com.kh.khu.tuition.model.vo.Tuition;
+import com.kh.khu.tuition.model.vo.TuitionStudentMake;
 
 public interface TuitionService {
 	
@@ -12,11 +14,9 @@ public interface TuitionService {
 	ArrayList<Tuition> tuitionBillForm(Tuition t);
 	
 	ArrayList<AdminTuitionMake> tuitionMakeForm();
-	
-	int insertTuitionMake();
 
 	AdminTuitionMake latestTuition();
 
-	String makeTuitionStudent(AdminTuitionMake t);
+	List<TuitionStudentMake> makeTuitionStudent();
 
 }

@@ -65,17 +65,18 @@
 		<%-- 학생 복학 신청 --%>
 		
 		
+		
 <%--    <jsp:forward page="WEB-INF/views/admin/adminUpdateForm.jsp" /> --%>
 		<%-- 교수 개인정보 수정 --%>		
 <%--    <jsp:forward page="WEB-INF/views/admin/adminTuitionMake.jsp" /> --%>
 		<%-- 관리자 등록금 고지서 생성 --%>
-<%-- 		<jsp:forward page="WEB-INF/views/admin/adminTuitionIssue.jsp" /> --%>
+<%-- 	<jsp:forward page="WEB-INF/views/admin/adminTuitionIssue.jsp" /> --%>
 		<%-- 관리자 등록금 고지서 발급 --%>
-<%--    <jsp:forward page="WEB-INF/views/admin/adminTuitionManage.jsp" /> --%>
-   		<%-- 관리자 등록금 조회 --%>
+<%-- 	<jsp:forward page="WEB-INF/views/admin/adminTuitionManage.jsp" /> --%>
+	<%-- 관리자 등록금 조회 --%>
 <%-- 	<jsp:forward page="WEB-INF/views/admin/adminTakeOffSelect.jsp" /> --%>
 		<%-- 학생 휴학 신청서 조회 --%>
-	<jsp:forward page="WEB-INF/views/admin/adminReturnShcoolSelect.jsp" />
+<%-- 	<jsp:forward page="WEB-INF/views/admin/adminReturnShcoolSelect.jsp" /> --%>
 		<%-- 학생 복학 신청서 조회 --%>
 		
 		

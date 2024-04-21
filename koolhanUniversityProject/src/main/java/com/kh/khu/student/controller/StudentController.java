@@ -35,8 +35,10 @@ import com.kh.khu.classroom.model.vo.Classroom;
 import com.kh.khu.classroom.model.vo.Course;
 import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.common.template.Pagination;
+import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.student.model.service.StudentService;
 import com.kh.khu.student.model.vo.Absence;
+import com.kh.khu.student.model.vo.AbsenceStudent;
 import com.kh.khu.student.model.vo.Presence;
 import com.kh.khu.student.model.vo.Student;
 import com.kh.khu.student.model.service.StudentServiceImpl;
@@ -167,17 +169,22 @@ public class StudentController {
 	}
 	
 	@RequestMapping("takeOff.do")
-	public String takeOffForm(HttpSession session) {
+	public String takeOffForm(HttpSession session, Model model) {
 		// 화면상에 버튼처리를 할 수 있는 서비스
-		//int result = sService.getDo();
+		Student student = (Student)session.getAttribute("loginStudent");
+		int result = sService.getDo(student.getStudentId());
+		
+		model.addAttribute("result", result);
 		
 		return "student/studentTakeOff";
 	}
 	
 	// 휴학생 데이터를 넣는다 (DB 까지)
 	@RequestMapping("takeOffForm.do")
-	public String takeOffFormMake(HttpSession session) {
-		int result = sService.insertTakeOffStudent();
+	public String takeOffFormMake(HttpSession session, Model model, AbsenceStudent student) {
+		int result = sService.insertTakeOffStudent(student);
+		
+		model.addAttribute("result", result);
 		
 		return "student/studentTakeOff";
 	}
@@ -196,6 +203,8 @@ public class StudentController {
 	@RequestMapping("returnSchoolForm.do")
 	public String insertReturnSchool(Presence p, Model model , HttpSession session) {
 		int result = sService.insertReturnStudent();
+		
+		
 		
 		return "student/studentReturnSchool";
 

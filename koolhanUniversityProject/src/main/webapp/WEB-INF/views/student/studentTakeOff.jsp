@@ -62,7 +62,7 @@
    		<h2 style="margin-left: 290px; font-weight:900; color: rgb(75,75,75);">휴학 신청서</h2>
    		<hr><br>
 	
-	<form action="insertTakeOff.do">
+	<form action="takeOffForm.do">
 	  
       <input type="hidden" name="absNo" value="${ loginStudent.studentNo }">
       <input type="hidden" name="absId" value="${ loginStudent.studentId }">
@@ -77,7 +77,10 @@
 
         <tr>
           <th>학년</th>
-          <td>3</td>
+          <td>3
+          	<input type="hidden" name="absStart" value="3" />
+          	<input type="hidden" name="absEnd" value="3" />
+          </td>
           <th>성명</th>
           <td>${ loginStudent.studentName }</td>
         </tr>

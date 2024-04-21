@@ -10,6 +10,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.khu.student.model.vo.Absence;
+import com.kh.khu.student.model.vo.AbsenceStudent;
+import com.kh.khu.student.model.vo.AbsenceStudentResult;
 import com.kh.khu.student.model.vo.Presence;
 import com.kh.khu.classroom.model.vo.ClassDetail;
 import com.kh.khu.classroom.model.vo.ClassNotice;
@@ -73,15 +75,11 @@ public class StudentDao {
 		return (ArrayList)sqlSession.selectList("classMapper.selectClassNoticeList", classNum, rowBounds);
 	}
 	
-	public int insertTakeOff(SqlSessionTemplate sqlSession, Absence a) {
-	      return sqlSession.insert("studentMapper.insertTakeOff", a);
-	   }
-	
 	public int selectTakeOff(SqlSessionTemplate sqlSession, Absence a) {
 		return sqlSession.selectOne("studentMapper.selectTakeOff", a);
 	}
 	
-	public int insertTakeOff(SqlSessionTemplate sqlSession, Absence a) {
+	public int insertTakeOff(SqlSessionTemplate sqlSession, AbsenceStudent a) {
 		return sqlSession.insert("studentMapper.insertTakeOff", a);
 	}
 	
@@ -126,6 +124,10 @@ public class StudentDao {
 	public void insertTakeOffStudent() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public AbsenceStudentResult selectTakeOffStudent(SqlSessionTemplate sqlSession, String studentId) {
+		return sqlSession.selectOne("studentMapper.selectTakeOffStudent", studentId);
 	}
 	
 }

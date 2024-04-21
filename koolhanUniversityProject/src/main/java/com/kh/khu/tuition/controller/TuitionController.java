@@ -1,6 +1,7 @@
 package com.kh.khu.tuition.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.khu.tuition.model.service.TuitionService;
 import com.kh.khu.tuition.model.vo.AdminTuitionMake;
 import com.kh.khu.tuition.model.vo.Tuition;
+import com.kh.khu.tuition.model.vo.TuitionStudentMake;
 
 
 @Controller
@@ -61,19 +63,27 @@ public class TuitionController {
 	}
 	
 	@RequestMapping("tuitionIssu.ad")
-	public String tuitionIssueForm(HttpSession session) {
+	public String tuitionIssueForm(HttpSession session, Model model) {
 		// 가장 최신 학기의 등록금 데이터를 화면에 ReadOnly 로 출력한다 
 		AdminTuitionMake t = tService.latestTuition();
+		
+		model.addAttribute("tuition", t);
 		
 		return "admin/adminTuitionIssue";
 	}
 	
 	// todo: readOnly 로 사용된 등록금 정보를 화면에서 받아온다
 	@RequestMapping("tuitionMakeStudent.ad")
-	public String tuitionMakeStudent(HttpSession session, AdminTuitionMake t) {
+	public String tuitionMakeStudent(HttpSession session, Model model) {
 		
-		String studens = tService.makeTuitionStudent(t);
-		return "";
+		List<TuitionStudentMake> studens = tService.makeTuitionStudent();
+		
+		model.addAttribute("list", studens);
+		
+		AdminTuitionMake t = tService.latestTuition();
+		model.addAttribute("tuition", t);
+		
+		return "admin/adminTuitionIssue";
 	}
 	
 	@RequestMapping("takeOffSelect.ad")

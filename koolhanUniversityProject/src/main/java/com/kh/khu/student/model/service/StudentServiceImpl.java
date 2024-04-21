@@ -12,6 +12,8 @@ import com.kh.khu.classroom.model.vo.Course;
 import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.student.model.dao.StudentDao;
 import com.kh.khu.student.model.vo.Absence;
+import com.kh.khu.student.model.vo.AbsenceStudent;
+import com.kh.khu.student.model.vo.AbsenceStudentResult;
 import com.kh.khu.student.model.vo.Presence;
 import com.kh.khu.student.model.vo.Student;
 
@@ -36,10 +38,10 @@ public class StudentServiceImpl implements StudentService {
 		return sDao.selectChkStudent(sqlSession, email);
 	}
 
-	@Override
-	public int insertTakeOff(Absence a) {
-		return sDao.insertTakeOff(sqlSession, a);
-	}
+//	@Override
+//	public int insertTakeOff(Absence a) {
+//		return sDao.insertTakeOff(sqlSession, a);
+//	}
 
 	/* 학생 비밀번호 찾기 */
 	@Override
@@ -138,28 +140,34 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public int insertTakeOffStudent() {
-		// DB 테이블에 데이터가 있는지 확인한다 
-		// 있으면 바로 리턴하고 화면에서 등록버튼을 없앤다 
-		
+	public int insertTakeOffStudent(AbsenceStudent s) {
 		// 없으면 데이터를 넣을 수 있게 
 		// TODO 화면에 입력된 데이터를 데이터베이스에 넣는다
-		
-		
-		
-		//sDao.insertTakeOffStudent();
-		
-		return 0;
+		// 승인: Y, 처리중: I, 반려: N
+		s.setAbsStatus("I");
+		return sDao.insertTakeOff(sqlSession, s);
 	}
 
 	@Override
-	public int getDo() {
+	public int getDo(String studentId) {
+		// DB 테이블에 데이터가 있는지 확인한다 
+		// 있으면 바로 리턴하고 화면에서 등록버튼을 없앤다 
+		AbsenceStudentResult result = sDao.selectTakeOffStudent(sqlSession, studentId);
+		if(result == null)
+			return 0;
+		
 		// TODO DB 데이터가 있는지 유무만 확인해서 리턴 데이터 있으면 1, 없으면 0
-		return 0;
+		return 1;
 	}
 
 	@Override
 	public int insertReturnStudent() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int insertTakeOff(Absence a) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
