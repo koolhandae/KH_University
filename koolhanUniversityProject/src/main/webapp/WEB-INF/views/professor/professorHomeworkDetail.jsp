@@ -169,8 +169,11 @@
                 <br>
         </div>
         <br>
-
+	<div class="btns" align="center">
+    <button type="button" class="btn btn-secondary" onclick="location.href='professorPJStateList.do'">목록으로</button>
+   	</div>
     </div>
+    
 
 
     <br><br>

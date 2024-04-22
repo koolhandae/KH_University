@@ -242,7 +242,7 @@
           
           <!-- Nav Item - Charts -->
           <li class="nav-item">
-              <a class="nav-link" href="charts.html">
+              <a class="nav-link" href="professorGDEnroll.do">
                   <i class="fa-solid fa-file-pen"></i>
                   <span>성적 등록</span></a>
           </li>

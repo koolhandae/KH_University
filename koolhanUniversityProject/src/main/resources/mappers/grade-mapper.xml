@@ -7,6 +7,115 @@
 		<result column="student_no" property="studentNo"/>
 		<result column="grade" property="grade"/>
 		<result column="term_no" property="termNo"/>
+		<result column="mid_point" property="midPoint"/>
+		<result column="fin_point" property="finPoint"/>
+		<result column="project_point" property="projectPoint"/>
+		<result column="atten_point" property="attenPoint"/>
+		<result column="total_point" property="totalPoint"/>
+		<result column="student_id" property="studentId"/> 
+		<result column="student_name" property="studentName"/>
+		<result column="student_hak" property="studentHak"/>
+		<result column="class_name" property="className"/>
 	</resultMap>
+	
+	
+	<select id="selectGradeStuCount" resultType="_int">
+			select count(*)
+		from class c
+		join course co on c.class_num = co.class_num
+		join student s on s.student_id = co.student_id
+		where c.class_no = #{classNo}
+		  and course_status = 'Y'
+	
+	
+	</select>
+	
+	 
+	<select id="selectGradeDetail" resultMap="gradeResult">
+		<!-- select s.student_id
+		     , c.class_num
+		     , c.class_name
+		     , c.class_semester
+		     , EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM s.ENROLL_DATE) + 1 AS 학년
+		     , prof_no
+		     , s.student_name
+		     , c.class_no
+		from class c
+		join course co on c.class_num = co.class_num
+		join student s on s.student_id = co.student_id
+		where c.class_no = #{classNo}
+		  and course_status = 'Y'-->
+		  select class_name
+		  	   , class_no
+			from class
+		   where class_no = #{classNo}
+	</select>
+	 
+	
+	
+	<select id="selectGradeStuList" resultMap="gradeResult">
+		select s.student_id
+		     , c.class_num
+		     , c.class_name
+		     , c.class_semester
+		     , EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM s.ENROLL_DATE) + 1 AS student_hak
+		     , prof_no
+		     , s.student_name
+		     , c.class_no
+		     , s.student_no
+		from class c
+		join course co on c.class_num = co.class_num
+		join student s on s.student_id = co.student_id
+		where c.class_no = #{classNo}
+		  and course_status = 'Y'
+	</select>
+	
+	<insert id="insertGradeStudent">
+		insert
+		  into grade
+		  	 ( 
+		  	   class_no
+		  	 , student_no
+		  	 , grade
+		  	 , term_no
+		  	 , mid_point
+		  	 , fin_point
+		  	 , project_point
+		  	 , atten_point
+		  	 , total_point
+		  	 )
+		values
+			(
+			  #{classNo}
+			, #{studentNo}
+			, #{grade}
+			, (SELECT CLASS_SEMESTER FROM class WHERE class_no = #{classNo})
+			, #{midPoint}
+			, #{finPoint}
+			, #{projectPoint}
+			, #{attenPoint}
+			, #{totalPoint}
+			)
+	
+	</insert>
+	
+	<select id="selectProfessorInputStudent" resultMap="gradeResult">
+		select *
+		from grade
+		where class_no = #{classNo}
+	</select>
+	
+	<update id="updateGradeStudent">
+		   update
+			      grade
+		      set mid_point = #{midPoint}
+			    , fin_point = #{finPoint}
+			    , project_point = #{projectPoint}
+			    , atten_point = #{attenPoint}
+			    , total_point = #{totalPoint}
+			    , grade = #{grade}
+		    where student_no = #{studentNo}
+	</update>
+	
 	
 </mapper>
