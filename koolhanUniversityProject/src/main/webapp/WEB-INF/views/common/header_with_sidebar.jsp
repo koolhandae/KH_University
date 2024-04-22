@@ -28,7 +28,9 @@
 			<!-- sweetalert2 -->
 			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
 			<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet">
-
+			
+			<!-- sockjs -->
+			<!-- <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script> -->
 <style>
 	/* 폰트 */
 	@font-face {

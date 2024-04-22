@@ -115,6 +115,7 @@
 			    , total_point = #{totalPoint}
 			    , grade = #{grade}
 		    where student_no = #{studentNo}
+		      and class_no = #{classNo}
 	</update>
 	
 	
