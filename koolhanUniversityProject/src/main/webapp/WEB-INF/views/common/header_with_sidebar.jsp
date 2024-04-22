@@ -244,7 +244,7 @@
           
           <!-- Nav Item - Charts -->
           <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="list.bo">
                   <i class="fa-solid fa-users"></i>
                   <span>커뮤니티 게시판</span></a>
           </li>

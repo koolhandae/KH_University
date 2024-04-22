@@ -50,7 +50,7 @@
         <div class="innerOuter" style="padding:5% 10%;">
             <h2>커뮤니티 게시판</h2>
             <br>
-            	<c:if test="${not empty loginUser}">
+            	<c:if test="${not empty loginStudent}">
            			<a class="btn btn-secondary btn-sm" style="float:right" href="enrollForm.bo">글쓰기</a>
 	            </c:if>
             <br></br>
