@@ -76,15 +76,18 @@
       font-size: small;
       margin-right: 18px;
    } 
+    #title:hover{
+   	  cursor: pointer;
+   }
 
 </style>
 </head>
 <body>
    <jsp:include page="../common/header_with_sidebar.jsp"/>
    <div class="content">
-   	  <input type="hidden" id="studentId" name="studentId" value="${ loginStudent.studentId }">
+   	  <input type="hidden" id="studentNo" name="studentNo" value="${ loginStudent.studentNo }">
       <div class="title-area">
-         <div id="title">나의 수강 조회</div>
+         <div id="title" onclick="location.href='showCourse.st'">나의 수강 조회</div>
          <div id="mid-title">강의관리 > 나의수강조회 </div>
       </div>
       <div class="lecture-area">
@@ -126,7 +129,7 @@
 	$(function(){
 		$.ajax({
 			url:"selectCourse.st",
-			data:{studentId:$("#studentId").val()},
+			data:{studentNo:$("#studentNo").val()},
 			success:function(list){
 
 				let course = "";
@@ -137,7 +140,7 @@
 				
 				for(let c in list){
 					
-					let courseValue = list[c].classNum;
+					let courseValue = list[c].classNo;
 					let className = list[c].className;
 
 					course += `<option value='' disabled selected hidden>강의명을 선택하세요</option>
@@ -171,12 +174,14 @@
 		
 		$(".form-select").change(function(){
 			var selectedValue = $(this).val();
+			var studentNo = $("#studentNo").val();
 			console.log(selectedValue);
 			
 			$("#searchCourse").click(function(){
 				$.ajax({
 					url:"searchCourse.st",
-					data:{courseValue:selectedValue},
+					data:{courseValue:selectedValue,
+						  studentNo:studentNo},
 					success:function(course){
 						console.log("ajax성공");
 						

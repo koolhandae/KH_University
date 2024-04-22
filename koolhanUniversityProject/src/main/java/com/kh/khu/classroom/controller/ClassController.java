@@ -155,10 +155,11 @@ public class ClassController {
 			fileupload.transferTo(new File(savePath+changeName));
 			//이 경로에 (savePath) changeName 바뀐이름으로 저장해줘
 			// 우리 로컬에 바뀐이름이 저장됨
-		} catch (IllegalStateException | IOException e) {
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		
 		return changeName;
 		
@@ -176,6 +177,8 @@ public class ClassController {
 		ArrayList<Classroom> list = cService.classSelect(memberId);
 		//System.out.println("project list select list" + list);
 		
+		System.out.println(list);
+		
 		return new Gson().toJson(list);
 	}
 	
@@ -183,30 +186,38 @@ public class ClassController {
 	
 	@ResponseBody
 	@RequestMapping(value="board.co", produces="application/json; charset=utf-8")
-	public ModelAndView selectBoardListCounst(@RequestParam(value="bpage", defaultValue="1")int currentPage, String classNum, ModelAndView mv) {
+	public ModelAndView selectBoardListCounst(@RequestParam(value="bpage", defaultValue="1")int currentPage, 
+			                                  ModelAndView mv, HttpSession session) {
+		
+		String classNum = (String)session.getAttribute("classNum");
 		
 		Map<String, Object> response = new HashMap();
 		
-		System.out.println("boardList" + classNum);
+		//System.out.println("boardList" + classNum);
 		
-		Course c = sService.selectClassName(classNum);
-		String className = c.getClassName();
+		ArrayList<Course> c = sService.selectClassName(classNum);
+		String className = c.get(0).getClassName();
 		
 		int boardCount = cService.selectBoardListCount(classNum);
 		
 		PageInfo pi = Pagination.getPageInfo(boardCount, currentPage, 5, 5);
 		ArrayList<ClassBoard> list = cService.selectClassBoardList(pi, classNum);
-		
-		mv.addObject("pi", pi).addObject("list", list).addObject("classNum", classNum).addObject("className", className).setViewName("student/studentClassBoardList");
+			
+		mv.addObject("pi", pi).addObject("list", list).addObject("className", className).setViewName("student/studentClassBoardList");
 		return mv;
 	}
 	
 	@RequestMapping(value="boardDetail.co")
-	public String selectClassBoardDetail(String bno, String classNum, Model model) {
-		int boardCount = cService.classBoardCount(bno);
+	public String selectClassBoardDetail(@RequestParam(value="bno")String bno, 
+			                             @RequestParam(value="classNum")String classNum, Model model) {
+		
+		System.out.println(bno);
+		System.out.println(classNum);
+		
+		int boardCount = cService.classBoardCount(bno, classNum);
 		
 		if(boardCount > 0) {
-			ClassBoard cb = cService.selectClassDetailBoard(bno);
+			ClassBoard cb = cService.selectClassDetailBoard(bno, classNum);
 			model.addAttribute("cb", cb);
 			model.addAttribute("classNum", classNum);
 			

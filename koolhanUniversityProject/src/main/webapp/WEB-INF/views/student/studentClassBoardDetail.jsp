@@ -322,17 +322,7 @@
       })
    </script>
    
-    <!-- 다시 공지사항으로 이동 -->
-   <script>
-      $(document).ready(function(){
-         $("#notice").click(function(){
-            var classNum = $("#classNum").val(); // classNum 값을 가져옴
-            location.href = "notice.co?classNum=" + classNum;
-         })
-      })
-   </script>
-   
-   
+      
    <script>
 	$("#board").click(function(){
 		var classNum = $("#classNum").val();
@@ -347,6 +337,96 @@
    })
 
    </script>
+   
+    <!-- 다시 공지사항으로 이동 -->
+   <script>
+      $(document).ready(function(){
+         $("#notice").click(function(){
+            var classNum = $("#classNum").val(); // classNum 값을 가져옴
+            location.href = "notice.co?classNum=" + classNum;
+         })
+      })
+   </script>
+   
+   	<!-- 자유게시판 클릭시 이동 -->
+   	<script>
+   	$(document).on("click","#board",function(){ 		
+          location.href = "board.co";
+   	})
+   	</script>
+   	
+   	<!-- 과제게시판 클릭시 이동 -->
+   	<script>
+   	$(document).on("click","#project",function(){ 		
+          console.log("되냐?")
+          location.href = "project.st";
+   	})
+   	</script>
+   
+   <!-- 강의계획서 div로 이동 -->
+   <script>
+	   	$(document).ready(function(){
+   			$("#classPlan").click(function(){
+  				var classNum = $(".content").find("#classNum").val();  	
+  				
+   				console.log(classNum); 			
+   			 $.ajax({
+   				 url:"classPlan.co",
+   				 data:{classNum:classNum},
+   				 success:function(c){ 
+   					 console.log("ajax통신성공");
+					 var c = c;
+					 var value ="";
+					 
+					 var originName = c.originName;
+					 var changeName = c.changeName;
+					 
+					 
+					 value += "<div class='list-title' style='margin-bottom: 20px;'>강의계획서</div>" +
+				                 "<table id='planList' class='table' align='center'>" +
+				                 "<thead>" +
+				                 "<tr>" +
+				                 "<th>학점</th>" +
+				                 "<th>강의실</th>" +
+				                 "<th>강의시간</th>" +
+				                 "<th>대표교수</th>" +
+				                 "<th>강의계획서</th>" +
+				                 "</tr>" +
+				                 "</thead>" +
+				                 "<tbody>" +
+				                 "<tr>" +
+				                 "<td>" + c.classScore + "</td>" +
+				                 "<td>" + c.classRoom + "</td>" +
+				                 "<td>" + c.classTime + "</td>" +
+				                 "<td>" + c.memberName + "</td>";
+			
+						        if (changeName) {
+						            value += "<td>" +
+						                     "<a href='" + changeName + "' download='" + originName + "' id='planFile'>" +
+						                     "<img width='30' height='30' src='https://img.icons8.com/pastel-glyph/128/737373/search--v2.png'>" +
+						                     "</a>" +
+						                     "</td>";
+						        } else {
+						            value += "<td>X</td>";
+						        }
+					
+						        value += "</tr>" +
+						                 "</tbody>" +
+						                 "</table>" +
+						                 "</div>";
+   					 
+   					 $("#notice-area").html(value);
+						      
+   					 
+   				 }, error:function(){
+   					 console.log("ajax통신실패");
+   				 }
+   			 });
+   			})
+   		})
+   </script>
+	
+
    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

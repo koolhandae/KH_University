@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <!-- date타입객체 변환을 윙한 taglib -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -140,16 +142,17 @@
 	      font-weight: 600;
 	   }
 	   #ing-project, #miss-project, #done-project{
-	    display: flex;
-	    flex-direction: column;
-	    flex-wrap: wrap;
-	    align-content: space-around;
-	    justify-content: space-evenly;
-	    align-items: center;
+	     display: flex;
+	     flex-direction: column;
+	     flex-wrap: wrap;
+	     align-content: space-around;
+	     justify-content: space-evenly;
+	     align-items: center;
 	   }
-	   #ing-project:hover, #miss-project:hover, #done-project:hover{
-	   	cursor: pointer;
+	   	#ing-project:hover, #miss-project:hover, #done-project:hover{
+	      cursor: pointer;
 	   }
+
 	   .project-btn, .projectShow-btn{
 	      box-sizing: border-box;
 	      padding-top: 8px;
@@ -166,7 +169,8 @@
 	      border-radius: 4px;
 	      cursor: pointer;
 	      width:300px;
-	    margin-top: -5px;
+	      margin-top: -5px;
+	      height:30px;
 	   }
 	   #img-notice{
 	      color: rgb(233, 0, 0);
@@ -198,14 +202,15 @@
 	   padding-left: 100px;
 	   padding-right: 100px;
 	 }
-	 #ing-project{
-		border: 4px solid #777777;
-	 }
+	 #done-project{
+		  border: 4px solid rgb(104 163 36);
+	   }
 	 
 </style>
 </head>
 <body>
 <jsp:include page="../common/header_with_sidebar.jsp"/>
+
     <c:if test="${not empty alertMsg}">
 				<script>
 					$(function () {
@@ -229,7 +234,7 @@
 			<div id="fin-title">나의수강조회</div>
         </div>
 		<div class="lecture-area">
-			<div id="lecture-main-title">${className}</div>
+			<div id="lecture-main-title">${spList[0].pjClassName}</div>
 			<div id="lecture-mid-title">강의실</div>
 		</div>
 		<div class="lecture-navigator">
@@ -267,14 +272,14 @@
 							<th>과제안내</th>
 							<th>첨부파일</th>
 							<th>진행상황</th>
-							<th>제출</th>
+							<th>제출일</th>
 							<th>마감일</th>
 						</tr>
 					</thead>
 					<tbody>
 					<c:choose>
 						<c:when test="${ empty spList }">
-							<tr colspan="7" style="text-align: center !important;">
+							<tr style="text-align: center !important;">
 								<td colspan="7" style="text-align: center !important;">등록된 과제가 없습니다</td>
 							</tr>
 						</c:when>
@@ -288,15 +293,10 @@
 									<img width='30' height='30' src='https://img.icons8.com/pastel-glyph/128/737373/search--v2.png'>
 								</td>
 								<td>
-									<label class="input-file-button" for="input-file-${sp.rnum}">
-										upload-file
-									<input type="file" class="input-file" id="input-file-${sp.rnum}" style="display:none">
-									</label>
+									<a href="${sp.stpChangeName}" download="${sp.stpOriginName}" style="color: gray;">${sp.stpOriginName}</a>
 								</td>
-								<td style="color: rgb(252 168 25); font-weight: 800;">진행중</td>
-								<td id="project-btn" class="project-btn">
-									<img width="30" height="30" src="https://img.icons8.com/fluency-systems-regular/30/1C4587/nui2.png" alt="nui2"/>
-								</td>
+								<td style="color: rgb(104 163 36); font-weight: 800;">제출완료</td>
+								<td><fmt:formatDate value="${sp.submitTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td>${sp.pjDeadline}</td>
 							</tr>
 						</c:forEach>
@@ -306,13 +306,14 @@
 					
 				</table>
 				<div id="img-notice">
-					<span>* 첨부파일 제출시 제목은 "학번_과제 제목" 형식 으로 제출바랍니다</span>
+					<span>* 과제에 대한 개별 성적은 따로 올려드리지 않습니다</span>
 				</div>
 			</div>
         	<br>
         </div>
    </div>
 
+   
    <script>
    	$(document).ready(function(){
  		  $(".projectShow-btn").click(function(){
@@ -324,7 +325,7 @@
    	})
    </script>
    
-   <!-- 누락과제 페이지로 이동 -->
+     <!-- 누락과제 페이지로 이동 -->
    <script>
    $(document).ready(function(){
        $("#miss-project").click(function(){
@@ -351,105 +352,6 @@
    			})
    		})
    </script>
-    
-
-	<!--  과제 제출시 첨부파일 이름 담기-->
-   <script>
- 	$(document).ready(function(){
- 		
-
-	   $(document).on("change", ".input-file", function(){
-		    // 파일 값 얻어오기
-		     var files = $(this).prop('files');
-		    
-		    console.log("files" + files);
-		    console.log($(".project-btn")[0]);
-		    
-		    // 갖고갈 데이터값 
-		    var pjno = $(this).closest("tr").find(".stp_pj_no").val();
-		    var inputFile = files[0]; 
-		    
-		    console.log(inputFile);
-		    console.log(files[0].name);
-
-		    console.log("files[0].name: " + files[0].name);
-		    console.log("Text inside label found using closest(): " + $(this).closest("label").text());
-
-		    // 등록시 파일 이름 변경
-	    	$(this).closest("label").text(files[0].name);
-	    	
-		    
-	    	$(document).on("click", ".project-btn", function() {    
-		    	
-			    if(inputFile != null || inputFile != ""){
-			    		console.log("첨부성공");
-			    		
-			    		var formData = new FormData();
-			    		
-			    		// 파일 및 값 담아서 가져감
-				        //ajax로 파일 처리시 formData 사용
-				        formData.append("file", inputFile);
-				        formData.append("pjno", pjno);
-			    			
-				    
-				        $.ajax({
-				            url: "enrollProject.st",
-				            type: "POST",
-				            data: formData,
-				            processData: false,
-				            contentType: false,
-				            success: function(response){
-
-				            	if(response != null){
-				            		 location.href = "projectDoneView.st";
-				       				       
-									}else {
-				                	
-					                	Swal.fire({
-					 			            icon: 'warning',
-					 			            text: "과제 제출에 실패하셨습니다!" 
-				 			        	});
-									}
-				            	
-				            },
-				            error: function(){
-				                console.log("ajax실패");
-
-				            }
-				        });
-			    } else {		       
-			        Swal.fire({
-			            icon: 'warning',
-			            text: '첨부파일 등록은 필수입니다. 첨부파일을 업로드해주세요' 
-			        });
-			    }
-			    		   
-		    });
-		});
- 	})
-
-   </script> 
-
-	<script>
-		$(document).on("click", ".project-btn", function() {  
-		    
-			// 동적으로 선택한 버튼의 형제요소인 inputFile을 가져옴 
-		    var inputFile = $(this).closest("tr").find(".input-file");
-
-		    // Check if any file is selected
-		    if (inputFile.val() == "") {
-
-				console.log("없다");
-				 Swal.fire({
-			            icon: 'warning',
-			            text: '첨부파일 등록은 필수입니다. 첨부파일을 업로드해주세요' 
-			        });
-			}else{
-				console.log("있다");
-			}
-	})
-
-	</script>
 	
 	<!-- 다시 공지사항으로 이동 -->
    <script>
@@ -540,7 +442,6 @@
    </script>
 	
 
-   
 <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

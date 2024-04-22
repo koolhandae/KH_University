@@ -42,6 +42,8 @@
 		<result column="cn_count" property="cnCount"/>
 		<result column="member_name" property="memberName"/>
 		<result column="class_name" property="className"/>
+		<result column="class_num" property="classNum"/>
+		<result column="rnum" property="rNum"/>
 	</resultMap>
 	
 		<resultMap id="ClassBoardResult" type="ClassBoard">
@@ -178,41 +180,84 @@
 	<select id="selectListCount" resultType="_int">
 		select 
 		       count(*)
-		  from class_notice
+		  from class_notice cn
+          join class c on (c.class_no = cn.ref_class_no)
 		 where cn_status = 'Y'
-		   and ref_class_no = #{classNum}
+		   and c.class_num = #{classNum}
 	</select>
 		
 	<select id="selectClassNoticeList" resultMap="ClassNoticeResult">
-			select 
-		        ref_class_no
-		      , class_notice_no
-		      , cn_title
-		      , cn_date
-		      , cn_count
-		      , cn_writer
-	          , class_name
-		   from class_notice cn
-	       join class c on c.class_num = cn.ref_class_no
-           join course co on co.class_num = cn.ref_class_no
-		  where cn_status ='Y'
-		    and ref_class_no = #{classNum}
-		    and course_status = 'Y'
-		  order
-		     by cn_date desc
+		select 
+			    class_notice_no,
+			    cn_title,
+			    cn_date,
+			    cn_count,
+			    cn_writer,
+			    class_name
+			from (
+			    select 
+			        rownum as class_notice_no,
+			        cn_title,
+			        cn_date,
+			        cn_count,
+			        cn_writer,
+			        class_name
+			    from (
+			        select 
+			            cn.cn_title,
+			            cn.cn_date,
+			            cn.cn_count,
+			            cn.cn_writer,
+			            c.class_name
+			        from 
+			            class_notice cn
+			        join 
+			            class c ON c.class_no = cn.ref_class_no
+			        join 
+			            course co ON co.class_no = cn.ref_class_no
+			        where 
+			            cn_status ='Y'
+			            and c.class_num = #{classNum}
+			            and course_status = 'Y'
+			        order by 
+			            class_notice_no desc
+			    )
+			)
+
 	</select>	
 	
 	<update id="increaseCount">
-		update
-		       class_notice
-		   set cn_count = cn_count + 1
-		 where class_notice_no = #{cno}
-		   and cn_status = 'Y'
-	</update>
+	   update class_notice
+			set cn_count = cn_count + 1
+			where class_notice_no = (
+			    select class_notice_no
+			    from (
+			        select rownum as rnum,
+			               class_notice_no,
+			               cn_count
+			        from (
+			            select 
+			                class_notice_no,
+			                cn_count
+			            from class_notice cn
+			            join class c on c.class_no = cn.ref_class_no
+			            join course co on co.class_no = cn.ref_class_no
+			            where cn_status ='Y'
+			            and c.class_num = ${classNum}
+			            and course_status = 'Y'
+			            order by class_notice_no desc
+			        )
+			    )
+			    where rnum = ${cno}
+			)
+</update>
+
+
 	
 	<select id="selectClassNoticeDetail" resultMap="ClassNoticeResult">
 		select 
 		       class_notice_no
+		     , class_num
 		     , cn_title
 		     , cn_content
 		     , cn_date
@@ -223,9 +268,34 @@
 	         , class_name
 		  from class_notice
 		  join member on(cn_writer = member_no)
-	      join class on(ref_class_no = class_num)
-		 where class_notice_no = #{cno}
-		   and cn_status = 'Y'
+	      join class on(ref_class_no = class_no)
+		 where  class_notice_no = (
+			    select class_notice_no
+			    from (
+			        select rownum as rnum,
+			                 class_notice_no
+                             , cn_title
+                             , cn_content
+                             , cn_date
+                             , cn_count
+                             , cn_change_name
+                             , cn_origin_name
+                             , class_name
+			        from (
+			            select 
+			                *
+			            from class_notice cn
+			            join class c on c.class_no = cn.ref_class_no
+			            join course co on co.class_no = cn.ref_class_no
+			            where cn_status ='Y'
+			            and c.class_num = #{classNum}
+			            and course_status = 'Y'
+			            order by class_notice_no desc
+			        )
+			    )
+			    where rnum = #{cno}
+			)
+            and cn_status = 'Y'
 	</select>		
 		
 	<select id="selectCoursePlan" resultMap="classResult">
@@ -242,44 +312,81 @@
 		  from class
 		  join member on(prof_no = member_no)
 		 where class_num = #{classNum}
-		   and enroll_date = 2024
+		   and  SUBSTR(enroll_date, 1, 4) = '2024'
 	</select>	
 	
 	<select id="selectBoardListCount" resultType="_int">
 		select 
 		       count(*)
 		  from class_board
+		  join class on (class_no = ref_class_no)
 		 where cb_status = 'Y'
-		   and ref_class_no = #{classNum}
+		   and class_num = #{classNum}
 	</select>
 	
 	<select id="selectClassBoardList" resultMap="ClassBoardResult">
 		select 
-		       class_board_no
-		     , cb_title
-		     , cb_date
-		     , student_name
-		     , cb_count
-		     , class_name
-		  from class_board
-		  join student on (cb_writer = student_no)
-		  join class on (class_num = ref_class_no)
-		 where cb_status = 'Y'
-		   and ref_class_no = #{classNum}
-		 order 
-		    by class_board_no desc
+			       class_board_no
+			     , cb_title
+			     , cb_date
+			     , student_name
+			     , cb_count
+			     , class_name
+			from (
+			    select 
+			        rownum as class_board_no,
+			       cb_title
+			     , cb_date
+			     , student_name
+			     , cb_count
+			     , class_name
+			    from (
+			        select 
+			               cb_title
+					     , cb_date
+					     , student_name
+					     , cb_count
+					     , class_name
+					  from class_board
+					  join student on (cb_writer = student_no)
+					  join class on (class_no = ref_class_no)
+					 where cb_status = 'Y'
+					   and class_num = ${classNum}
+					 order 
+					    by class_board_no desc
+			    )
+			)
 	</select>
 	
 	<select id="classBoardCount">
 		update class_board
-		   set cb_count = cb_count + 1
-		 where class_board_no = #{bno}
-		   and cb_status = 'Y'
+        set cb_count = cb_count + 1
+        where class_board_no = (
+            select class_board_no
+            from (
+                select rownum as rnum,
+                       class_board_no,
+                       cb_count
+                from (
+                    select 
+                        class_board_no,
+                        cb_count
+                     from class_board
+                     join student on (cb_writer = student_no)
+                     join class on (class_no = ref_class_no)
+                    where cb_status = 'Y'
+                      and class_num = ${classNum}
+                    order 
+                       by class_board_no desc
+                )
+            )
+            where rnum = ${bno}
+        )
 	</select>
 	
 	<select id="selectClassDetailBoard" resultMap="ClassBoardResult">
 		select 
-		       class_board_no
+		      class_board_no
 		     , student_name
 		     , cb_title
 		     , cb_content
@@ -288,8 +395,34 @@
 		     , cb_count
 		     , cb_date
 		  from class_board
-		  join student on (student_no = cb_writer)
-		 where cb_status = 'Y'
-		   and class_board_no = #{bno}
+		  join student on(cb_writer = student_no)
+	      join class on(ref_class_no = class_no)
+		 where  class_board_no = (
+			    select class_board_no
+			    from (
+			        select rownum as rnum,
+                           class_board_no
+                         , student_name
+                         , cb_title
+                         , cb_content
+                         , cb_origin_name
+                         , cb_change_name
+                         , cb_count
+                         , cb_date
+			        from (
+			            select 
+                               *
+                         from class_board
+                         join student on (cb_writer = student_no)
+                         join class on (class_no = ref_class_no)
+                        where cb_status = 'Y'
+                          and class_num = ${classNum}
+                        order 
+                           by class_board_no desc
+                        )
+			    )
+			    where rnum = ${bno}
+			)
+            and cb_status = 'Y'
 	</select>
 </mapper>

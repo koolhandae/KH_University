@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.khu.classroom.model.vo.Course;
 import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.project.model.dao.ProjectDao;
 import com.kh.khu.project.model.vo.Project;
@@ -72,9 +73,58 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
-	public ArrayList<StudentProject> selectStudentProject(String classNum, String studentId) {
-		return pDao.selectStudentProject(sqlSession, classNum, studentId);
+	public ArrayList<Course> selectCourseStudent(String classNo) {
+		return pDao.selectCourseStudent(sqlSession, classNo);
 	}
+	
+	@Override
+	public int insertStuProjectTable(int sno, String classNo) {
+		return pDao.insertStuProjectTable(sqlSession, sno, classNo);
+	}
+
+	@Override
+	public ArrayList<StudentProject> selectStudentProject(String classNum, int studentNo) {
+		return pDao.selectStudentProject(sqlSession, classNum, studentNo);
+	}
+
+	@Override
+	public int ingProjectCount(String classNum, int studentNo) {
+		return pDao.ingProjectCount(sqlSession, classNum, studentNo);
+	}
+
+	@Override
+	public int missProjectCount(String classNum, int studentNo) {
+		return pDao.missProjectCount(sqlSession, classNum, studentNo);
+	}
+
+	@Override
+	public int doneProjectCount(String classNum, int studentNo) {
+		return pDao.doneProjectCount(sqlSession, classNum, studentNo);
+	}
+
+	@Override
+	public Project projectViewStudent(String pjNo) {
+		return pDao.projectViewStudent(sqlSession, pjNo);
+	}
+
+	@Override
+	public int enrollProjectStudent(StudentProject sp) {
+		return pDao.enrollProjectStudent(sqlSession, sp);
+	}
+
+	@Override
+	public ArrayList<StudentProject> selectStudentDoneProject(int studentNo, String classNum) {
+		return pDao.selectStudentDoneProject(sqlSession, studentNo, classNum);
+	}
+
+	@Override
+	public ArrayList<StudentProject> selectStudentNoneProject(int studentNo, String classNum) {
+		return pDao.selectStudentNoneProject(sqlSession, studentNo, classNum);
+	}
+
+
+	
+
 
 
 

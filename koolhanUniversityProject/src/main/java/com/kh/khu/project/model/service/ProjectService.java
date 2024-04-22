@@ -2,6 +2,7 @@ package com.kh.khu.project.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.khu.classroom.model.vo.Course;
 import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.project.model.vo.Project;
 import com.kh.khu.project.model.vo.StudentProject;
@@ -37,7 +38,29 @@ public interface ProjectService {
 	// 교수용 과제 상세조회 페이지
 	Project selectProfessorProjectDetail(int pjNo);
 	
+	// 교수 과제 등록시 테이블 인서트위한 학생번호 조회
+	//Project selectProjectNo();
+	//int pjNo = Project.
+	ArrayList<Course> selectCourseStudent(String classNo);
+	int insertStuProjectTable(int sno, String classNo);
+	
 	// 학생용 과제 상세페이지
-	ArrayList<StudentProject> selectStudentProject(String classNum, String studentId);
+	ArrayList<StudentProject> selectStudentProject(String classNum, int studentNo);
+	int ingProjectCount(String classNum, int studentNo);
+	int missProjectCount(String classNum, int studentNo);
+	int doneProjectCount(String classNum, int studentNo);
+	
+	// 학생용 과제 내용 조회 페이지
+	Project projectViewStudent(String pjno);
+	
+	// 학생 과제 등록
+	int enrollProjectStudent(StudentProject sp);
+	
+	// 과제등록 완료페이지 조회
+	ArrayList<StudentProject> selectStudentDoneProject(int studentNo, String classNum);
+	
+	// 과제등록 누락페이지 조회
+	ArrayList<StudentProject> selectStudentNoneProject(int studentNo, String classNum);
+	
 	
 }

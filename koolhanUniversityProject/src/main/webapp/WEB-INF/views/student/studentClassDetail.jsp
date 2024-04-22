@@ -199,7 +199,7 @@
    <jsp:include page="../common/header_with_sidebar.jsp"/>
    <div class="content">
         <input type="hidden" value="${ classNum }" id="classNum">
-        <input type="hidden" id="studentId" name="studentId" value="${ loginStudent.studentId }">
+        <input type="hidden" id="studentNo" name="studentNo" value="${ loginStudent.studentNo }">
         <div class="title-area">
            <div id="title" onclick="location.href='showCourse.st'">나의 수강 조회</div>
            
@@ -267,6 +267,7 @@
 
        		<div id="pagingArea">
                 <ul class="pagination d-flex justify-content-center flex-wrap pagination-rounded-flat pagination-success">
+               	 <c:if test="${ not empty list }">
                		<c:choose>
                			<c:when test="${ pi.currentPage eq 1 }">
                     		<li class="page-item disabled"><a class="page-link" href=""><i class="fa fa-angle-left"></i></a></li>
@@ -287,6 +288,7 @@
 	                   		<li class="page-item"><a class="page-link" href="notice.co?classNum=${ classNum }&cpage=${ pi.currentPage + 1 }">&raquo;</a></li>
 	                    </c:otherwise>
                 	</c:choose>
+                 </c:if>
                 </ul>
             </div>
          </div>
@@ -321,19 +323,15 @@
    	<!-- 자유게시판 클릭시 이동 -->
    	<script>
    	$(document).on("click","#board",function(){ 		
-          var classNum = $("#classNum").val(); // classNum 값을 가져옴
-          location.href = "board.co?classNum=" + classNum;
+          location.href = "board.co";
    	})
    	</script>
    	
    	<!-- 과제게시판 클릭시 이동 -->
    	<script>
    	$(document).on("click","#project",function(){ 		
-          var classNum = $("#classNum").val(); // classNum 값을 가져옴
-          var studentId = $("#studentId").val();
-          
-          console.log("이놈시키");
-          location.href = "project.st?classNum=" + classNum + "&stuId=" + studentId;
+          console.log("되냐?")
+          location.href = "project.st";
    	})
    	</script>
    
@@ -341,7 +339,8 @@
    <script>
 	   	$(document).ready(function(){
    			$("#classPlan").click(function(){
-  				var classNum = $(".content").find("#classNum").val();  			
+  				var classNum = $(".content").find("#classNum").val();  	
+  				
    				console.log(classNum); 			
    			 $.ajax({
    				 url:"classPlan.co",

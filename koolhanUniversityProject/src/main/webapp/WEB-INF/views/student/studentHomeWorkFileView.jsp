@@ -104,31 +104,21 @@
     <div id="topdiv"class="bg-white">
 
         <div id="h1Div">
-            <h1 style="font-weight: 900;">과제</h1>
+            <h1 style="font-weight: 900;">과제안내</h1>
         </div>
         <div id="liGroup">
             <ul>
-                <li>과제 </li>
-                <li><i class="fa-solid fa-chevron-right"></i></li>
-                <li> 과제 현황</li>
-                <li><i class="fa-solid fa-chevron-right"></i></li>
-                <li style="font-weight: bold;"> 과제 현황 상세보기 </li>
+                <li style="font-weight: bold;"> 과제 상세보기 </li>
             </ul>
         </div>
 
     </div>
-    <div style="padding: 15px;" id="HomeworkLiDiv">
-        <ul style="height: 66px; margin: 0;" >
-            <li class="homework_li_class" style="background-color: white;" onclick="location.href = 'professorPJEnrollForm.do'">과제 등록</li>
-            <li class="homework_li_class" style="background-color: #1c4587; color: white; margin-right: 0.5px;">과제 현황</li>
-        </ul>
-        
-    </div>
+
     
     
     <div id="contentDiv" class="bg-white">
         <div>
-            <h3>과제 현황 상세보기</h3>
+            <h3>과제 상세보기</h3>
 
  
                 <div class="form-group">
@@ -162,6 +152,12 @@
 
                 </div>
                 <br>
+                    <div style="padding: 15px;" id="HomeworkLiDiv">
+				        <ul style="height: 66px; margin: 0;" >
+				            <li class="homework_li_class" style="background-color: #1c4587; color: white; margin-right: 0.5px;" onclick="history.back();">과제 페이지로</li>
+				        </ul>    
+				    </div>
+				<br>    
         </div>
         <br>
     </div>
