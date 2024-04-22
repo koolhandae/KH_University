@@ -1,16 +1,26 @@
 package com.kh.khu.grade.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.kh.khu.classroom.model.service.ClassService;
 import com.kh.khu.classroom.model.service.ClassServiceImpl;
 import com.kh.khu.classroom.model.vo.Classroom;
@@ -53,6 +63,43 @@ public class GradeController {
 		
 		return mv;
 		
+	}
+	
+	@ResponseBody
+	@PostMapping("inputGradeAjax.do") // Ajax 요청의 URL
+    public String inputGradeAjax(@RequestBody ArrayList<Grade> gradesData) {
+        // gradesData에는 Ajax 요청으로 전송된 학생 성적 데이터가 자동으로 매핑됩니다.
+        // 이후 이 데이터를 원하는 대로 처리할 수 있습니다.
+		
+		//ArrayList<Grade> list = new ArrayList<Grade>();
+		//System.out.println(gradesData);
+		//for (Grade grade : gradesData) {
+            // 여기에 필요한 작업을 수행합니다.
+            // 예: 데이터베이스에 저장, 비즈니스 로직 수행 등
+			
+        	//System.out.println("컨트롤러"+ grade);
+        	int result =  gService.insertGradeStudent(gradesData);
+
+   			return new Gson().toJson(result);
+        		
+    }
+	
+	@ResponseBody
+	@PostMapping("updateGradeAjax.do")
+	public String updateGradeAjax(@RequestBody ArrayList<Grade> gradesData) {
+    	int result =  gService.updateGradeStudent(gradesData);
+
+		return new Gson().toJson(result);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="selectGradeAjax.do",produces="application/json; charset=utf-8")
+	public String selectProfessorInputStudent(@RequestParam("classNo")Integer classNo) {
+		//System.out.println("이거 타나?"+classNo);
+		ArrayList<Grade> list =  gService.selectProfessorInputStudent(classNo);
+		
+		return new Gson().toJson(list);
+	
 	}
 	
 }

@@ -1,6 +1,7 @@
 package com.kh.khu.grade.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,29 @@ public class GradeServiceImpl implements GradeService{
 	@Override
 	public Grade selectGradeDetail(int classNo) {
 		return gDao.selectGradeDetail(sqlSession, classNo);
+	}
+
+
+
+	@Override
+	public int insertGradeStudent(ArrayList<Grade> gradesData ) {
+		System.out.println("서비스"+ gradesData);
+		return gDao.insertGradeStudent(sqlSession, gradesData);
+	}
+
+
+	
+	
+	@Override
+	public ArrayList<Grade> selectProfessorInputStudent(int classNo) {
+		return gDao.selectProfessorInputStudent(sqlSession, classNo);
+	}
+
+
+
+	@Override
+	public int updateGradeStudent(ArrayList<Grade> gradesData) {
+		return gDao.updateGradeStudent(sqlSession,gradesData);
 	}
 	
 }
