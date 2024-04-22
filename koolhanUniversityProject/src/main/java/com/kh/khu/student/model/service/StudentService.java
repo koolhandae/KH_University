@@ -58,4 +58,11 @@ public interface StudentService {
 
 	// 학생용 주소 수정
 	int updateAddress(Student s);
+	
+	int updatePhone(Student s);
+	
+	int selectStudentListCount();
+	
+	ArrayList<Student> selectAllStudent(PageInfo pi);
+	
 }

@@ -92,4 +92,23 @@
 		 where member_id = #{memberId}
 	</update>
 		
+	<select id="selectAllMember" resultMap="memberResult">
+		select
+			   member_no
+			 , member_name
+			 , member_id
+			 , m_phone
+			 , m_status
+			 , m_type  
+		  from member
+		 order
+		    by member_no desc	   
+	</select>	
+	
+	<select id="selectMemberListCount" resultType="_int">
+		select
+			   count(*)
+		  from member
+	</select>
+		
 </mapper>

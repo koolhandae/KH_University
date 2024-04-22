@@ -1,5 +1,8 @@
 package com.kh.khu.member.model.service;
 
+import java.util.ArrayList;
+
+import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.member.model.vo.Member;
 
 public interface MemberService {
@@ -21,4 +24,7 @@ public interface MemberService {
 	
 	int updateAddress(Member m);
 
+	int selectMemberListCount();
+	
+	ArrayList<Member> selectAllMember(PageInfo mpi);
 }

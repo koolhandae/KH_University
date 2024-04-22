@@ -1,45 +1,34 @@
 package com.kh.khu.student.controller;
 
 import java.util.ArrayList;
-
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 import java.util.HashMap;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.khu.common.model.vo.Address;
-import com.kh.khu.common.template.AddressString;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.google.gson.Gson;
-import com.kh.khu.classroom.model.vo.ClassDetail;
 import com.kh.khu.classroom.model.vo.ClassNotice;
 import com.kh.khu.classroom.model.vo.Classroom;
 import com.kh.khu.classroom.model.vo.Course;
+import com.kh.khu.common.model.vo.Address;
 import com.kh.khu.common.model.vo.PageInfo;
+import com.kh.khu.common.template.AddressString;
 import com.kh.khu.common.template.Pagination;
 import com.kh.khu.student.model.service.StudentService;
 import com.kh.khu.student.model.vo.Absence;
 import com.kh.khu.student.model.vo.Presence;
-import com.kh.khu.student.model.vo.Student;
-import com.kh.khu.student.model.service.StudentServiceImpl;
 import com.kh.khu.student.model.vo.Student;
 
 @Controller
@@ -276,7 +265,47 @@ public class StudentController {
 		System.out.println("classPlan=" + c);
 	
 		return c;
+	}
+	
+	@ResponseBody
+	@RequestMapping("updatePhone.stu")
+	public String updatePhone(Student s, HttpSession session) {
+		int result = sService.updatePhone(s);
+		session.removeAttribute("loginStudent");
+		Student newSt = sService.loginStudent(s);
+		session.setAttribute("loginStudent", newSt);
+		return result > 0 ? "NNNNY" : "NNNNN";
+	}
+	@ResponseBody
+	@RequestMapping(value="userList.stu", produces="application/json; charset=utf-8")
+	public ResponseEntity<HashMap<String,Object>> selectStudentList(int cpage) {
+		int studentListCount = sService.selectStudentListCount();
+		PageInfo newSpi = Pagination.getPageInfo(studentListCount, cpage, 3, 2);
+		ArrayList<Student> sList = sService.selectAllStudent(newSpi);
+		for(Student s: sList) {
+			switch(s.getStStatus()) {
+			case "Y":
+				s.setStStatus("재학");
+				break;
+			case "N":
+				s.setStStatus("자퇴");
+				break;
+			case "H":
+				s.setStStatus("휴학");
+				break;
+			case "Z":
+				s.setStStatus("제적");
+				break;
+			case "J":
+				s.setStStatus("졸업");
+				break;
+			}
+		}
+		HashMap<String, Object> response = new HashMap<>();
+        response.put("sList", sList);
+        response.put("spi", newSpi);
 
+        return ResponseEntity.ok(response);
 	}
 	
 }

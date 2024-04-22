@@ -1,12 +1,14 @@
 package com.kh.khu.member.model.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.khu.common.model.vo.PageInfo;
+import com.kh.khu.common.template.Pagination;
 import com.kh.khu.member.model.vo.Member;
 
 @Repository
@@ -45,4 +47,13 @@ public class MemberDao {
 	public int updateAddress(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updateAddress",m);
 	}
+	
+	public ArrayList<Member> selectAllMember(SqlSessionTemplate sqlSession, PageInfo mpi){
+		return (ArrayList)sqlSession.selectList("memberMapper.selectAllMember", null, Pagination.getRowBounds(mpi));
+	}
+	
+	public int selectMemberListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("memberMapper.selectMemberListCount");
+	}
+	
 }

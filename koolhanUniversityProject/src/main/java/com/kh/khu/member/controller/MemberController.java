@@ -1,5 +1,6 @@
 package com.kh.khu.member.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.mail.internet.MimeMessage;
@@ -7,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.khu.common.model.vo.Address;
+import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.common.template.AddressString;
+import com.kh.khu.common.template.Pagination;
 import com.kh.khu.member.model.service.MemberServiceImpl;
 import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.student.model.service.StudentServiceImpl;
@@ -193,5 +197,30 @@ public class MemberController {
 	public String updateAdminForm() {
 		return "admin/adminUpdateForm";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="userList.me", produces="application/json; charset=utf-8")
+	public ResponseEntity<HashMap<String,Object>> selectStudentList(int cpage) {
+		int memberListCount = mService.selectMemberListCount();
+		PageInfo mpi = Pagination.getPageInfo(memberListCount, cpage, 3, 2);
+		ArrayList<Member> mList = mService.selectAllMember(mpi);
+		for(Member m : mList) {
+			if(m.getMeType().equals("A")) {
+				m.setMeType("교직원");
+			}else {
+				m.setMeType("교수");
+			}
+			if(m.getMeStatus().equals("Y")) {
+				m.setMeStatus("재직");
+			}else {
+				m.setMeStatus("퇴직");
+			}
+		}
+		HashMap<String, Object> response = new HashMap<>();
+        response.put("mList", mList);
+        response.put("mpi", mpi);
+        System.out.println("hello");
+        return ResponseEntity.ok(response);
+	} 
 
 }

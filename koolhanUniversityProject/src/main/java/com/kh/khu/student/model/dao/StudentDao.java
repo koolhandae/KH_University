@@ -5,17 +5,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.khu.student.model.vo.Absence;
 import com.kh.khu.student.model.vo.Presence;
-import com.kh.khu.classroom.model.vo.ClassDetail;
 import com.kh.khu.classroom.model.vo.ClassNotice;
 import com.kh.khu.classroom.model.vo.Classroom;
 import com.kh.khu.classroom.model.vo.Course;
 import com.kh.khu.common.model.vo.PageInfo;
+import com.kh.khu.common.template.Pagination;
+import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.student.model.vo.Student;
 
 @Repository
@@ -115,4 +115,15 @@ public class StudentDao {
 		return sqlSession.selectOne("studentMapper.selectClassName", classNum);
 	}
 	
+	public int updatePhone(SqlSessionTemplate sqlSession, Student s) {
+		return sqlSession.update("studentMapper.updatePhone", s);
+	}
+	
+	public ArrayList<Student> selectAllStudent(SqlSessionTemplate sqlSession, PageInfo spi){
+		return (ArrayList)sqlSession.selectList("studentMapper.selectAllStudent", null, Pagination.getRowBounds(spi));
+	}
+	
+	public int selectStudentListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("studentMapper.selectStudentListCount");
+	}
 }

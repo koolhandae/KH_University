@@ -21,10 +21,13 @@
                     <label for="email"> &nbsp;  이메일 :</label>
                     <input type="email" class="form-control" id="email" name="email" readonly value="${loginStudent.stEmail}">
                     <br>
-                    
+					
                     <label for="phone"> &nbsp;  전화번호 :</label>
-                    <input type="text" class="form-control" id="phone" name="stPhone" placeholder="전화번호를 입력하세요(- 포함)" value="${loginStudent.stPhone }"><br>
-
+					<div style="display: flex;"> 
+                    <input type="text" class="form-control" id="phone" name="stPhone" placeholder="전화번호를 입력하세요(- 포함)" value="${loginStudent.stPhone }">  &nbsp;
+                    <input id="changePhone" type="button" class="btn btn-primary" value="연락처 변경">
+					</div>                    
+					<br>
                     <label for="address"> &nbsp;  주소 : (주소 변경은 아래 입력창을 클릭하세요 ) <i class="fa-solid fa-arrow-down"></i></label>
 	                    <input onclick="execDaumPostcode();" type="text" class="form-control" id="address" name="stAddress" value="${loginStudent.stAddress}" readonly>
 	                
@@ -194,6 +197,62 @@
         	                		       'error'
         	                		      )
 	                			}
+	                		})
+	                	});
+	                	
+	                	$(function(){
+	                		$("#phone").focus(function(){
+								$(this).attr("placeholder","변경 전 전화번호 : ${loginStudent.stPhone }    새로운 전화번호를 입력하세요(- 포함)");
+								$(this).val("");
+	                		})
+	                	});
+	                	
+	                	$(function(){
+	                		$("#changePhone").click(function(){
+	                			Swal.fire({
+	                				   title: '연락처 변경',
+	                				   text: '연락처를 변경하시겠습니까?',
+	                				   icon: 'question',
+	                				   
+	                				   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+	                				   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+	                				   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+	                				   confirmButtonText: '승인', // confirm 버튼 텍스트 지정
+	                				   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+	                				   
+	                				   reverseButtons: false, // 버튼 순서 거꾸로
+	                				   
+	                				}).then(result => {
+	                				   // 만약 Promise리턴을 받으면,
+	                				   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
+	                					   $.ajax({
+	                    	                	url:"updatePhone.stu",
+	                    	                	data:{
+	                    	                		stPhone : $("#phone").val(),
+	                    	                		studentId : '${loginStudent.studentId}'	
+	                    	                	},
+	                    	                	success:function(result){
+	                    	                		if(result === "NNNNY"){
+		                    	                		Swal.fire(
+		                    	                		        '연락처 변경 성공',
+		                    	                		        '새롭게 입력하신 연락처로 변경 반영되었습니다.',
+		                    	                		        'success'
+		                    	                		      ).then(result=>{
+		                    	                				location.reload();	      
+		                    	                		      });
+	                    	                		}else{
+	                    	                			Swal.fire(
+	                       	                		         '연락처 변경 실패',
+	                       	                		         '연락처 변경에 실패했습니다.',
+	                       	                		       	 'error'
+	                       	                		          )
+	                    	                		}
+	                    	                	}, error:function(){
+	                    	                		console.log("ajax통신실패");
+	                    	                	}
+	                    	                });
+	                				   }
+	                				});	                			
 	                		})
 	                	})
 	                </script>

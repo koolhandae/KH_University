@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -27,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kh.khu.common.model.vo.PageInfo;
@@ -262,5 +262,52 @@ public class HomeController {
 	@RequestMapping("mypage.go")
 	public String goMypage() {
 		return "common/mypage";
+	}
+	
+	@RequestMapping("userList.go")
+	public ModelAndView selectAllUser( ModelAndView mv) {
+		
+		int studentListCount = sService.selectStudentListCount();
+		PageInfo spi = Pagination.getPageInfo(studentListCount, 1, 3, 2);
+		ArrayList<Student> sList = sService.selectAllStudent(spi);
+		for(Student s: sList) {
+			switch(s.getStStatus()) {
+			case "Y":
+				s.setStStatus("재학");
+				break;
+			case "N":
+				s.setStStatus("자퇴");
+				break;
+			case "H":
+				s.setStStatus("휴학");
+				break;
+			case "Z":
+				s.setStStatus("제적");
+				break;
+			case "J":
+				s.setStStatus("졸업");
+				break;
+			}
+		}
+		
+		int memberListCount = mService.selectMemberListCount();
+		PageInfo mpi = Pagination.getPageInfo(memberListCount, 1, 3, 2);
+		ArrayList<Member> mList = mService.selectAllMember(mpi);
+		for(Member m : mList) {
+			if(m.getMeType().equals("A")) {
+				m.setMeType("교직원");
+			}else {
+				m.setMeType("교수");
+			}
+			if(m.getMeStatus().equals("Y")) {
+				m.setMeStatus("재직");
+			}else {
+				m.setMeStatus("퇴직");
+			}
+		}
+		
+		
+		mv.addObject("sList", sList).addObject("mList", mList).addObject("spi", spi).addObject("mpi", mpi).setViewName("admin/userListView");
+		return mv;
 	}
 }

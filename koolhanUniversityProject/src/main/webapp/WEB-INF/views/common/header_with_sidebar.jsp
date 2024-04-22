@@ -30,6 +30,26 @@
 			<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet">
 
 <style>
+	.pagination {
+	justify-content: center;
+	}
+	
+	.pagination.pagination-rounded-flat .page-item .page-link, a {
+		border: none;
+		border-radius: 50px;
+	}
+	
+	.page-link:active {
+		background-color: #1c4587 !important;
+		color: white !important;
+	}
+	.active{
+	background-color: #1c4587 !important;
+	color: white !important;
+	}
+	li{
+		margin:3px
+	}
 	/* 폰트 */
 	@font-face {
 		font-family: 'KIMM_Bold';
@@ -99,6 +119,14 @@
 								<i class="fa-solid fa-user"></i>
 								<span>회원 정보 조회</span></a>
 						</li>
+					<c:if test="${loginUser.meType eq 'A' }">
+						<!-- Nav Item - Charts -->
+						<li class="nav-item">
+							<a class="nav-link" href="userList.go">
+								<i class="fa-solid fa-user"></i>
+								<span>전체 회원 정보 조회</span></a>
+						</li>
+					</c:if>
 					
 					<c:if test="${ not empty loginStudent }">
 						<!-- Divider -->

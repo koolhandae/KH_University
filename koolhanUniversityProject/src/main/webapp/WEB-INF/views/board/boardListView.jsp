@@ -89,20 +89,20 @@
 		
 			
             <div id="pagingArea">
-                <ul class="pagination">
+                <ul class="pagination d-flex justify-content-center flex-wrap pagination-rounded-flat pagination-success">
                 	<c:choose>
                 		<c:when test="${pi.currentPage eq 1 }">
-		                    <li class="page-item disabled"><a class="page-link" href="list.bo?cpage=${pi.currentPage - 1}">Previous</a></li>
+		                    <li class="page-item disabled"><a class="page-link" href="list.bo?cpage=${pi.currentPage - 1}"><i class="fa fa-angle-left"></i></a></li>
                 		</c:when>
                 		<c:otherwise>
-		                    <li class="page-item"><a class="page-link" href="list.bo?cpage=${pi.currentPage - 1}">Previous</a></li>
+		                    <li class="page-item"><a class="page-link" href="list.bo?cpage=${pi.currentPage - 1}">&laquo;</a></li>
                 		</c:otherwise>
                 	</c:choose>
                 	
 	            	<c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
 	            		<c:choose>
 		            		<c:when test="${pi.currentPage eq p}">
-	                    		<li class="page-item disabled"><a class="page-link" href="list.bo?cpage=${p}">${p}</a></li>
+	                    		<li class="page-item disabled"><a class="page-link active" href="list.bo?cpage=${p}">${p}</a></li>
 		            		</c:when>
 		            		
 		            		<c:otherwise>
@@ -113,10 +113,10 @@
 	            	
 	            	<c:choose>
                 		<c:when test="${pi.currentPage eq pi.maxPage }">
-	                    	<li class="page-item disabled"><a class="page-link" href="list.bo?cpage=${pi.currentPage + 1}">Next</a></li>
+	                    	<li class="page-item disabled"><a class="page-link" href="list.bo?cpage=${pi.currentPage + 1}"><i class="fa fa-angle-right"></i></a></li>
                 		</c:when>
                 		<c:otherwise>
-	                    	<li class="page-item"><a class="page-link" href="list.bo?cpage=${pi.currentPage + 1}">Next</a></li>
+	                    	<li class="page-item"><a class="page-link" href="list.bo?cpage=${pi.currentPage + 1}">&raquo;</a></li>
                 		</c:otherwise>
                 	</c:choose>
                 </ul>

@@ -137,4 +137,19 @@ public class StudentServiceImpl implements StudentService {
 		return sDao.updateAddress(sqlSession, s);
 	}
 
+	@Override
+	public int updatePhone(Student s) {
+		return sDao.updatePhone(sqlSession, s);
+	}
+
+	@Override
+	public ArrayList<Student> selectAllStudent(PageInfo spi) {
+		return sDao.selectAllStudent(sqlSession, spi);
+	}
+
+	@Override
+	public int selectStudentListCount() {
+		return sDao.selectStudentListCount(sqlSession);
+	}
+
 }
