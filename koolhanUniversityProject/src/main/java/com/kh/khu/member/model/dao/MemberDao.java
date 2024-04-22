@@ -2,6 +2,7 @@ package com.kh.khu.member.model.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -9,7 +10,9 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.common.template.Pagination;
+import com.kh.khu.member.model.vo.AdminTuition;
 import com.kh.khu.member.model.vo.Member;
+import com.kh.khu.member.model.vo.MemberAbsence;
 
 @Repository
 public class MemberDao {
@@ -56,4 +59,33 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.selectMemberListCount");
 	}
 	
+
+	public void getReturnStudent() {
+		// TODO 새로만들어진 복학신청자 데이터를 가져옵니다 
+	}
+
+	public List<MemberAbsence> getTakeOffStudent(SqlSessionTemplate sqlSession) {
+		// TODO 새로만들어진 복학 신청자 데이터를 가져옵니다 
+		return (ArrayList)sqlSession.selectList("memberMapper.selectAbsenceStudent");
+	}
+
+	public int changeStudentStatus(SqlSessionTemplate sqlSession, String absId) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("memberMapper.updateAbsenceStudent", absId);
+	}
+
+	public int changeTakeOffStudent(SqlSessionTemplate sqlSession, String absId) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("memberMapper.updateAbsenceStudentSucess", absId);
+	}
+
+	public int insertAdminTuition(SqlSessionTemplate sqlSession, AdminTuition tuition) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("memberMapper.insertAdminTuition", tuition);
+	}
+
+	public List<AdminTuition> selectAdminTuition(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("memberMapper.selectAdminTuition");
+	}
 }

@@ -28,7 +28,9 @@
 			<!-- sweetalert2 -->
 			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
 			<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet">
-
+			
+			<!-- sockjs -->
+			<!-- <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script> -->
 <style>
 	.pagination {
 	justify-content: center;
@@ -201,8 +203,22 @@
 						<li class="nav-item">
 							<a class="nav-link" href="tuitionMake.ad">
 								<i class="fa-solid fa-bullhorn"></i>
+								<span>등록금 고지서 생성</span></a>
+						</li>	
+						
+						<!-- Nav Item - Charts -->
+						<li class="nav-item">
+							<a class="nav-link" href="tuitionIssu.ad">
+								<i class="fa-solid fa-bullhorn"></i>
 								<span>등록금 고지서 발급</span></a>
 						</li>	
+						
+						<!-- Nav Item - Charts -->
+						<li class="nav-item">
+							<a class="nav-link" href="admintakeOffSelect.me">
+								<i class="fa-solid fa-bullhorn"></i>
+								<span>휴학 신청서 조회</span></a>
+						</li>
 	
 				<!-- Nav Item - Pages Collapse Menu -->
 				<li class="nav-item">
@@ -256,7 +272,7 @@
           
           <!-- Nav Item - Charts -->
           <li class="nav-item">
-              <a class="nav-link" href="charts.html">
+              <a class="nav-link" href="professorGDEnroll.do">
                   <i class="fa-solid fa-file-pen"></i>
                   <span>성적 등록</span></a>
           </li>
@@ -310,7 +326,7 @@
                   <div class="bg-white py-2 collapse-inner rounded">
                       <a class="collapse-item" href="list.no">공지사항</a>
                       <a class="collapse-item" href="#">학사일정</a>
-                      <a class="collapse-item" href="#">셔틀버스 안내</a>
+                      <a class="collapse-item" href="busApiForm.do">셔틀버스 안내</a>
                       <a class="collapse-item" href="#">관련 취업 정보</a>
                   </div>
               </div>

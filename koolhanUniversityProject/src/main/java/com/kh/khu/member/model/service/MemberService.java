@@ -3,7 +3,11 @@ package com.kh.khu.member.model.service;
 import java.util.ArrayList;
 
 import com.kh.khu.common.model.vo.PageInfo;
+import java.util.List;
+
+import com.kh.khu.member.model.vo.AdminTuition;
 import com.kh.khu.member.model.vo.Member;
+import com.kh.khu.member.model.vo.MemberAbsence;
 
 public interface MemberService {
 	
@@ -27,4 +31,13 @@ public interface MemberService {
 	int selectMemberListCount();
 	
 	ArrayList<Member> selectAllMember(PageInfo mpi);
+	public void getReturnStudent();
+	
+	public List<MemberAbsence> getTakeOffStudent();
+	
+	public void setReturnStudent();
+
+	public int setTakeOffStudent(String absId);
+	
+	public List<AdminTuition> insertAdminTuition(AdminTuition tuition);
 }

@@ -11,7 +11,7 @@
    <jsp:include page="../common/header_with_sidebar.jsp"/>
    <div class="content">
     
-    <!-- <h2 style="margin-left: 40px; font-weight:900; color: rgb(75,75,75);">버스 정보</h2>
+     <h2 style="margin-left: 40px; font-weight:900; color: rgb(75,75,75);">버스 정보</h2>
         <input type="button" value="조회" id="btn1">
         <div id="result1"></div>
       
@@ -62,7 +62,7 @@
             })
 
         </script>
- -->
+
    </div>
    <jsp:include page="../common/footer.jsp"/>
 </body>

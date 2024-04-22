@@ -68,8 +68,7 @@
 		border-bottom: 1px;
 		border-color: rgb(75,75,75);
 	}
-	
-	
+
 
 </style>
 </head>
@@ -109,16 +108,16 @@
 
                 <tr>
 					<th>등록금</th>
-					<td>4000000</td>
+					<td>4,000,000</td>
 					<th>학기</th>
 					<td>3학년 1학기</td>
 				</tr>
 
 				<tr>
 					<th>납부 금액</th>
-					<td>2500000</td>
+					<td>2,500,000</td>
 					<th>장학금</th>
-					<td>${ list.scholarship }</td>
+					<td>1,500,000</td>
 				</tr>
 
 				<tr>

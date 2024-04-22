@@ -49,16 +49,14 @@
 	   		</thead>
 	   		
 	   		<tbody>
-	   		  <c:forEach var="a" items="${ list }">
 		   		  <tr>
-		   		  	<td>${ a.absDate }</td>
-		   		  	<td>${ a.absSort }</td>
+		   		  	<td>sysdate</td>
+		   		  	<td>이유</td>
 		   		  	<td>2024년도 1학기</td>
-		   		  	<td>${ a.absSemester }</td>
+		   		  	<td>종료 연도, 학기</td>
 		   		  	<td id="takeOffSelect">조회</td>
 		   		  	<td>${ a.absStatus }</td>
 		   		  </tr>
-		   	 </c:forEach>
 	   		</tbody>
    		  </table>
    		</form>

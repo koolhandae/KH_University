@@ -1,6 +1,7 @@
 package com.kh.khu.student.model.service;
 
 import com.kh.khu.student.model.vo.Absence;
+import com.kh.khu.student.model.vo.AbsenceStudent;
 import com.kh.khu.student.model.vo.Presence;
 import java.util.ArrayList;
 
@@ -65,4 +66,9 @@ public interface StudentService {
 	
 	ArrayList<Student> selectAllStudent(PageInfo pi);
 	
+	int insertTakeOffStudent(AbsenceStudent s);
+
+	int getDo(String studentId);
+
+	int insertReturnStudent();
 }

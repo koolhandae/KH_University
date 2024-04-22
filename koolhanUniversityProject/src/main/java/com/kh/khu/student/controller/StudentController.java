@@ -26,8 +26,10 @@ import com.kh.khu.common.model.vo.Address;
 import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.common.template.AddressString;
 import com.kh.khu.common.template.Pagination;
+import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.student.model.service.StudentService;
 import com.kh.khu.student.model.vo.Absence;
+import com.kh.khu.student.model.vo.AbsenceStudent;
 import com.kh.khu.student.model.vo.Presence;
 import com.kh.khu.student.model.vo.Student;
 
@@ -155,27 +157,46 @@ public class StudentController {
 		return "student/certificateIssuingPage";
 	}
 	
-	
 	@RequestMapping("takeOff.do")
-	public String takeOffForm(HttpSession session) {
+	public String takeOffForm(HttpSession session, Model model) {
+		// 화면상에 버튼처리를 할 수 있는 서비스
+		Student student = (Student)session.getAttribute("loginStudent");
+		int result = sService.getDo(student.getStudentId());
 		
-//		Student s = (Student)session.getAttribute("loginStudent");
-//		System.out.println(s);
-		 return "student/studentTakeOff";
+		model.addAttribute("result", result);
+		
+		return "student/studentTakeOff";
 	}
 	
-	@RequestMapping("insertTakeOff.do")
-	public String insertTakeOff(Absence a, Model model, HttpSession session) {
-		//System.out.println(a);
-		int list = sService.insertTakeOff(a);
+	// 휴학생 데이터를 넣는다 (DB 까지)
+	@RequestMapping("takeOffForm.do")
+	public String takeOffFormMake(HttpSession session, Model model, AbsenceStudent student) {
+		int result = sService.insertTakeOffStudent(student);
 		
-		if(list > 0) {
-			session.setAttribute("alertMsg", "휴학 신청서 등록 완료");
-			return "redirect:/";
-		}else {
-			model.addAttribute("errorMsg", "휴학 신청서 등록 실패!");
-			return "common/errorPage404";
-		}
+		model.addAttribute("result", result);
+		
+		return "student/studentTakeOff";
+	}
+	
+	
+	@RequestMapping("returnSchool.do")
+	public String returnSchoolForm(HttpSession session) {
+		// 화면상에 버튼처리를 할 수 있는 서비스
+		// 휴학생만 데이터를 보일 수 있게 한다 
+		//int result = sService.getDo();
+		
+		return "student/studentReturnSchool";
+	}
+	
+	// 복학 신청 데이터를 넣는다
+	@RequestMapping("returnSchoolForm.do")
+	public String insertReturnSchool(Presence p, Model model , HttpSession session) {
+		int result = sService.insertReturnStudent();
+		
+		
+		
+		return "student/studentReturnSchool";
+
 	}
 	
 	
@@ -194,24 +215,7 @@ public class StudentController {
 		
 	}
 	
-	@RequestMapping("returnSchool.do")
-	public String returnSchoolForm(HttpSession session) {
-		return "student/studentReturnSchool";
-	}
-	
-	@RequestMapping("insertReturnSchool.do")
-	public String insertReturnSchool(Presence p, Model model , HttpSession session) {
-			
-		int list = sService.insertReturnSchool(p);
-		
-		if(list > 0) {
-			session.setAttribute("alertMsg", "복학 신청서 등록 완료");
-			return "redirect:/";
-		}else {
-			model.addAttribute("errorMsg", "복학 신청서 등록 실패!");
-			return "common/errorPage404";
-		}
-	}
+
 	
 	@RequestMapping("update.stu")
 	public String updateStudentForm() {

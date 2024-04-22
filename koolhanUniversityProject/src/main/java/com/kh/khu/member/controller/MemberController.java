@@ -2,6 +2,7 @@ package com.kh.khu.member.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,7 +25,9 @@ import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.common.template.AddressString;
 import com.kh.khu.common.template.Pagination;
 import com.kh.khu.member.model.service.MemberServiceImpl;
+import com.kh.khu.member.model.vo.AdminTuition;
 import com.kh.khu.member.model.vo.Member;
+import com.kh.khu.member.model.vo.MemberAbsence;
 import com.kh.khu.student.model.service.StudentServiceImpl;
 import com.kh.khu.student.model.vo.Student;
 
@@ -222,5 +226,48 @@ public class MemberController {
         System.out.println("hello");
         return ResponseEntity.ok(response);
 	} 
+	@RequestMapping("adminReturnSchool.me")
+	public String adminReturnSchool() {
+		// todo 복학 신청자 리스트를 가져와서 승인 버튼으로 승인할 수 있게 해준다 
+		mService.getReturnStudent();
+		
+		return "admin/adminReturnShcoolSelect";
+	}
+	
+	@RequestMapping("adminReturnSchoolForm.me")
+	public String adminReturnSchoolForm() {
+		// todo 복학 신청자 리스트를 가져와서 승인 버튼으로 승인할 수 있게 해준다 
+		mService.setReturnStudent();
+		
+		return "admin/adminReturnShcoolSelect";
+	}
 
+	@RequestMapping("admintakeOffSelect.me")
+	public String adminTakeOff(Model model) {
+		List<MemberAbsence> list = mService.getTakeOffStudent();
+		
+		model.addAttribute("list", list);
+		
+		return "admin/adminTakeOffSelect";
+	}
+	
+	@RequestMapping("admintakeOffSelectForm.me")
+	public String adminTakeOffForm(Model model, String absId) {
+		int result = mService.setTakeOffStudent(absId);
+		
+		List<MemberAbsence> list = mService.getTakeOffStudent();
+		model.addAttribute("list", list);
+		
+		return "admin/adminTakeOffSelect";
+	}
+	
+	@RequestMapping("tuitionMakeSelect.ad")
+	public String adminTuitionMake(Model model, AdminTuition tuition) {
+		List<AdminTuition> list = mService.insertAdminTuition(tuition);
+		
+		model.addAttribute("list", list);
+		return "admin/adminTuitionMake";
+	}
+	
+	
 }

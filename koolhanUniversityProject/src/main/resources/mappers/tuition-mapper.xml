@@ -2,13 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="tuitionMapper">
 
-	<resultMap type="Tuition" id="tuitionResult">
+	<resultMap type="TuitionStudent" id="tuitionResult">
+		<result column="tuition_no" property="tuitiontNo"/>
 		<result column="tt_no" property="ttNo"/>
 		<result column="student_no" property="studentNo"/>
-		<result column="term_no" property="termNo"/>
+		<result column="student_id" property="studentId"/>
 		<result column="tuition" property="tuition"/>
 		<result column="scholarship" property="scholarship"/>
-		<result column="student_id" property="studentId"/>	
+		<result column="ts_year" property="tsYear"/>
+		<result column="ts_semester" property="tsSemester"/>
+		<result column="ts_status" property="tsStatus"/>
 	</resultMap>
 	
 	<resultMap type="TuitionPayment" id="tuitionPaymentResult">
@@ -18,19 +21,53 @@
 		<result column="tp_total_price" property="totalPrice"/>
 	</resultMap>
 	
-
+<!-- 	<resultMap type="AdminTuitionMake" id="adminTuitionResult">
+		<result column="tt_no" property="ttNo" />
+		<result column="tb_open" property="tbOpen" />
+		<result column="tb_close" property="tbClose" />
+		<result column="tb_date" property="tbDate" />
+		<result column="tb_price" property="tbPrice" />
+		<result column="total_price" property="totalPrice" />
+		<result column="tb_status" property="tbStatus" />
+	</resultMap> -->
+	
+	<resultMap type="AdminTuitionMake" id="adminTuitionResult">
+		<result column="tt_no" property="ttNo"/>
+		<result column="tb_open" property="tbOpen"/>
+		<result column="tb_close" property="tbClose" />
+		<result column="tb_insert" property="tbInsert" />
+		<result column="tb_update" property="tbUpdate"/>
+		<result column="tb_price" property="tbPrice"/>
+		<result column="tb_semester" property="tbSemester"/>
+	</resultMap>
+	
+	<resultMap type="TuitionStudents" id="tuitionStudent">
+		<result column="student_no" property="studentNo"/>
+		<result column="student_id" property="studentId"/>
+		<result column="student_pwd" property="studentPwd"/>
+		<result column="student_name" property="studentName"/>
+		<result column="student_ssn" property="studentSsn"/>
+		<result column="s_phone" property="stPhone"/>
+		<result column="s_email" property="stEmail"/>
+		<result column="s_address" property="stAddress"/>
+		<result column="s_status" property="stStatus"/>
+		<result column="enroll_date" property="enrollDate"/>
+		<result column="absence_date" property="absenceDate"/>
+		<result column="grad_date" property="gradDate"/>
+	</resultMap>
+	
 	
 	<select id="tuitionBillForm" resultMap="tuitionResult">
 		SELECT 
-		       t.tt_no
+		       t.tuition_no
+		     , t.tt_no
 		     , t.student_no
-		     , t.term_no
+		     , t.student_id
 		     , t.tuition
 		     , t.scholarship
-		     , tp.tp_no
+		     , t.ts_year
 		     , tp.tp_date
-		     , tp.tp_total_price
-		FROM tuition t
+		FROM tuition_student t
 		JOIN tuition_payment tp on (t.tt_no = tp.tt_no)
 		WHERE t.STUDENT_ID = #{studentId}
 	</select>
@@ -42,27 +79,87 @@
 	    tp_no
 	  , tt_no
 	  , tp_date
-	  , tp_total_price
 	  )
 	  values
 	  (
 	    seq_tpno.nextVAL
 	  , #{ttNo}
 	  , SYSDATE
-	  , #{totalPrice}
 	  )
 	</insert>
 	
-<!-- 	<select id="tuitionMake.ad">
+<!--  	<select id="tuitionMakeForm" resultMap="adminTuitionResult">
 		SELECT
-			   s.student_id
+			   student_no
+		     , s.student_id
+		     , s.student_name
+		     , tt_no
+		     , tb.tb_price
+		     , t.scholarship
+		     , tb.tb_open
+		     , tb.tb_close	     
 		  FROM student s
-		  JOIN tuition t using (student_no)
-		  JOIN tuition_bill tb using (tt_no)
+		  JOIN tuition_student t USING (student_no)
+		  JOIN tuition_bill tb USING (tt_no)
+		  WHERE s.student_id = #{ search }
 	</select> -->
 	
+	 <select id="tuitionMakeForm" resultMap="adminTuitionResult">
+		SELECT
+			   tt_no
+		     , tb.tb_open
+		     , tb.tb_close
+		     , tb_insert
+		     , tb_update
+		     , tb_price
+		     , tb_semester	     
+		  FROM tuition_bill t
+	</select>
+	
+ 	<select id="latestTuition" resultMap="adminTuitionResult">
+ 	  <![CDATA[
+	    SELECT *
+	    FROM tuition_bill
+	    WHERE ROWNUM <= 1
+	    ORDER BY tb_insert DESC
+	  ]]>
+	</select> 
+	
+	<delete id="deleteTuitionStudent">
+		delete from tuition_student
+	
+	</delete>
 	
 	
+	<select id="selectAllTuitionStudent" resultMap="tuitionStudent">
+		select * from student
+		where s_status = 'Y'
+	</select>
 	
+	<insert id="insertTuitionStudents" parameterType="java.util.List">
+        INSERT INTO tuition_student (
+        	TUITION_NO
+        , TT_NO 
+        , STUDENT_NO 
+        , STUDENT_ID
+        , TUITION 
+        , SCHOLARSHIP 
+        , TS_YEAR 
+        , TS_SEMESTER 
+        , TS_STATUS 
+        )
+        VALUES
+        <foreach collection="list" item="tuitionStudentMake" separator=",">
+            (SEQ_TSNO.NEXTVAL
+            , #{tuitionStudentMake.ttNo}
+            , #{tuitionStudentMake.studentNo}
+            , #{tuitionStudentMake.studentId}
+            , #{tuitionStudentMake.tuition}
+            , #{tuitionStudentMake.scholarShip}
+            , #{tuitionStudentMake.tsYear}
+            , #{tuitionStudentMake.tsSemester}                                                        
+            , #{tuitionStudentMake.tsStatus})
+        </foreach>
+    </insert>
 	
 </mapper>

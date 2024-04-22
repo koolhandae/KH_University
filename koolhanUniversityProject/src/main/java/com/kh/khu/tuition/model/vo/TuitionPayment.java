@@ -13,9 +13,10 @@ import lombok.ToString;
 @ToString
 public class TuitionPayment {
 
-	private int tpNo;
-	private int refTuitionNo;
-	private String tpDate;
-	private int totalPrice;
+	private int preNo; // 복학생 번호
+	private String preId; // 학번
+	private String preYear; // 복학 연도
+	private String preSemester; // 복학 학기
+	private String tbStatus; // 학생 상태
 	
 }
