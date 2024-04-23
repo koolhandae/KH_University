@@ -63,12 +63,37 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
+	public ArrayList<Member> selectAllMemberType(PageInfo mpi, String meType) {
+		return mDao.selectAllMemberType(sqlSession, mpi, meType);
+	}
+	@Override
+	public ArrayList<Member> selectNameSearchAllMember(PageInfo mpi, String memberName){
+		return mDao.selectNameSearchAllMember(sqlSession, mpi, memberName);
+	}
+	
+	@Override
 	public int selectMemberListCount() {
 		return mDao.selectMemberListCount(sqlSession);
+	}
+	
+	@Override
+	public int selectMemberListCount(String meType) {
+		return mDao.selectMemberListCount(sqlSession, meType);
+	}
+	
+	@Override
+	public int selectNameSearchMemberListCount(String memberName) {
+		return mDao.selectNameSearchMemberListCount(sqlSession, memberName);
+	}
+	
+	@Override
+	public int selectNameSearchTypeMemberListCount(Member m) {
+		return mDao.selectNameSearchTypeMemberListCount(sqlSession, m);
+	}
+	
 	public void getReturnStudent() {
 		// todo: 만들어야 하는 쿼리는 복학 신청자 테이블을 조회 합니다 이걸 화면에 보여줍니다
 		mDao.getReturnStudent();
-		
 	}
 
 	@Override
@@ -104,6 +129,11 @@ public class MemberServiceImpl implements MemberService{
 		List<AdminTuition> list = mDao.selectAdminTuition(sqlSession);
 		
 		return list;
+	}
+
+	@Override
+	public ArrayList<Member> selectNameSearchTypeMember(PageInfo mpi, Member m) {
+		return mDao.selectNameSearchTypeMember(sqlSession, mpi, m);
 	}
 	
 

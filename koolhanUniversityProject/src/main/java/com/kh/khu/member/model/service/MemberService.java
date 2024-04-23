@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.kh.khu.common.model.vo.PageInfo;
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
+
 import com.kh.khu.member.model.vo.AdminTuition;
 import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.member.model.vo.MemberAbsence;
@@ -30,7 +32,20 @@ public interface MemberService {
 
 	int selectMemberListCount();
 	
+	int selectMemberListCount(String meType);
+	
+	int selectNameSearchMemberListCount(String memberName);
+	
+	int selectNameSearchTypeMemberListCount(Member m);
+	
 	ArrayList<Member> selectAllMember(PageInfo mpi);
+	
+	ArrayList<Member> selectAllMemberType(PageInfo mpi, String meType);
+
+	ArrayList<Member> selectNameSearchAllMember(PageInfo mpi, String memberName);
+	
+	ArrayList<Member> selectNameSearchTypeMember(PageInfo mpi, Member m);
+	
 	public void getReturnStudent();
 	
 	public List<MemberAbsence> getTakeOffStudent();

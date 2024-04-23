@@ -137,8 +137,33 @@ public class StudentDao {
 	public ArrayList<Student> selectAllStudent(SqlSessionTemplate sqlSession, PageInfo spi){
 		return (ArrayList)sqlSession.selectList("studentMapper.selectAllStudent", null, Pagination.getRowBounds(spi));
 	}
+
+	public ArrayList<Student> selectNameSearchAllStudent(SqlSessionTemplate sqlSession, PageInfo spi, String studentName){
+		return (ArrayList)sqlSession.selectList("studentMapper.selectNameSearchAllStudent", studentName, Pagination.getRowBounds(spi));
+	}
 	
+	public ArrayList<Student> selectStatusStudent(SqlSessionTemplate sqlSession, PageInfo spi, String stStatus){
+		return (ArrayList)sqlSession.selectList("studentMapper.selectStatusStudent", stStatus, Pagination.getRowBounds(spi));
+	}
+	
+	public ArrayList<Student> selectStatusNameSearchStudent(SqlSessionTemplate sqlSession, PageInfo spi, Student st){
+		return (ArrayList)sqlSession.selectList("studentMapper.selectStatusNameSearchStudent", st, Pagination.getRowBounds(spi));
+	}
+
 	public int selectStudentListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("studentMapper.selectStudentListCount");
 	}
+	
+	public int selectStudentListCount(SqlSessionTemplate sqlSession, String stStatus) {
+		return sqlSession.selectOne("studentMapper.selectStudentListCountType", stStatus);
+	}
+	
+	public int selectNameSearchStudentListCount(SqlSessionTemplate sqlSession, String studentName) {
+		return sqlSession.selectOne("studentMapper.selectNameSearchStudentListCount", studentName);
+	}
+	
+	public int selectStatusNameSearchStudentListCount(SqlSessionTemplate sqlSession, Student st) {
+		return sqlSession.selectOne("studentMapper.selectStatusNameSearchStudentListCount", st);
+	}
+	
 }

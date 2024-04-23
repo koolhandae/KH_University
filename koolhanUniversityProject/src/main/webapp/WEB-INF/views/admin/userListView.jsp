@@ -46,6 +46,14 @@
 #studentPaging li:hover, #memberPaging li:hover {
 	cursor: pointer;
 }
+
+[class$="-nav-item"]{
+	border : none; 
+}
+[class$="-navigator"]{
+	display: flex;
+	justify-content: space-around;
+}
 </style>
 </head>
 <body>
@@ -59,14 +67,31 @@
 			<div id="userOuter"
 				style="display: flex; justify-content: space-between;">
 				<div id="students">
-					<form id="studentSearchForm" method="get" align="center">
+					<div id="studentSearchForm"align="center">
 						<div class="text">
-							<input type="text" class="form-control" name="keyword"
+							<input type="text" id="studentSearchInput" class="form-control"
 								placeholder="검색할 학생의 이름을 입력하세요">
 						</div>
-						<button type="submit" class="searchBtn btn btn-secondary">검색</button>
-					</form>
+						<button type="button" class="searchBtn btn btn-secondary" onclick="loadStudentPage(1)">검색</button>
+						<input id="statusIdentifier" type="hidden" value="all"/>
+					</div>
+					
+					<div class="student-navigator">
+						<button id="allStudent" class="stu-nav-item btn" onclick="changeStudentStatus('all');"
+							style="background-color: #1c4587; color: white;">전체</button>
+						<button id="attendingStudent" class="stu-nav-item btn" onclick="changeStudentStatus('Y');">재학</button>
+						<button id="dropOut" class="stu-nav-item btn" onclick="changeStudentStatus('N');">자퇴</button>
+						<button id="absence" class="stu-nav-item btn" onclick="changeStudentStatus('H');">휴학</button>
+						<button id="expelled" class="stu-nav-item btn" onclick="changeStudentStatus('Z');">제적</button>
+						<button id="grad" class="stu-nav-item btn" onclick="changeStudentStatus('J');">졸업</button>
+					</div>
+					
 					<table id="studentList" class="table table-hover" align="center">
+					<div style="display:flex; justify-content: space-between;">
+						<div id="studentSearchName" align="left" style="margin-right:20px"></div>
+						<div id="studentSearchCount" align="right" style="margin-right:20px"></div>
+					</div>
+					
 						<thead>
 							<tr>
 								<th>이름</th>
@@ -91,15 +116,7 @@
 					<div id="pagingArea">
 						<ul id="studentPaging"
 							class="pagination d-flex justify-content-center flex-wrap pagination-rounded-flat pagination-success">
-							<c:choose>
-								<c:when test="${spi.currentPage eq 1 }">
-								</c:when>
-								<c:otherwise>
-									<li class="page-item"><a class="page-link"
-										onclick="loadStudentPage('${spi.currentPage - 1}')">&laquo;</a></li>
-								</c:otherwise>
-							</c:choose>
-
+							<li class="page-item disabled"><a class="page-link">&laquo;</a></li>
 							<c:forEach var="sp" begin="${spi.startPage}" end="${spi.endPage}">
 								<c:choose>
 									<c:when test="${spi.currentPage eq sp}">
@@ -113,30 +130,34 @@
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
-
-							<c:choose>
-								<c:when test="${spi.currentPage eq spi.maxPage }">
-									<li class="page-item disabled"><a class="page-link"><i
-											class="fa fa-angle-right"></i></a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="page-item"><a class="page-link"
-										onclick="loadStudentPage('${spi.currentPage + 1}')">&raquo;</a></li>
-								</c:otherwise>
-							</c:choose>
+							<c:if test="${spi.currentPage ne spi.maxPage }">
+								<li class="page-item"><a class="page-link" onclick="loadStudentPage('${spi.currentPage + 1}')">&raquo;</a></li>
+							</c:if>
 						</ul>
 					</div>
 				</div>
 
 				<div id="members">
-					<form id="memberSearchForm" action="" style="display: flex;">
+					<div id="memberSearchForm" style="display: flex;">
 						<div class="text">
-							<input type="text" class="form-control" name="keyword"
+							<input type="text" class="form-control" id="memberSearchInput"
 								placeholder="검색할 교직원의 이름을 입력하세요.">
 						</div>
-						<button type="submit" class="searchBtn btn btn-secondary">검색</button>
-					</form>
+						<button type="submit" class="searchBtn btn btn-secondary" onclick="loadMemberPage(1)">검색</button>
+					</div>
+					
+					<div class="member-navigator">
+						<button id="allMember" class="mem-nav-item btn"
+							style="background-color: #1c4587; color: white;" onclick="changeMemberStatus('all');">전체</button>
+						<button id="prof" class="mem-nav-item btn" onclick="changeMemberStatus('P');">교수</button>
+						<button id="admin" class="mem-nav-item btn" onclick="changeMemberStatus('A');">교직원</button>
+					</div>
+					<input id="positionIdentifier" type="hidden" value="all"/>
 					<table id="memberList" class="table table-hover" align="center">
+						<div style="display:flex; justify-content: space-between;">
+							<div id="memberSearchName" align="left" style="margin-right:20px"></div>
+							<div id="memberSearchCount" align="right" style="margin-right:20px"></div>
+						</div>
 						<thead>
 							<tr>
 								<th>이름</th>
@@ -163,14 +184,7 @@
 					<div id="pagingAreaMe">
 						<ul id="memberPaging"
 							class="pagination d-flex justify-content-center flex-wrap pagination-rounded-flat pagination-success">
-							<c:choose>
-								<c:when test="${mpi.currentPage eq 1 }">
-								</c:when>
-								<c:otherwise>
-									<li class="page-item"><a class="page-link" onclick="loadMemberPage('${mpi.currentPage + 1}')">&laquo;</a></li>
-								</c:otherwise>
-							</c:choose>
-
+							<li class="page-item disabled"><a class="page-link">&laquo;</a></li>
 							<c:forEach var="mp" begin="${mpi.startPage}" end="${mpi.endPage}">
 								<c:choose>
 									<c:when test="${mpi.currentPage eq mp}">
@@ -183,16 +197,7 @@
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
-
-							<c:choose>
-								<c:when test="${mpi.currentPage eq mpi.maxPage }">
-									<li class="page-item disabled"><a class="page-link"><i
-											class="fa fa-angle-right"></i></a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="page-item"><a class="page-link" onclick="loadMemberPage('${mpi.currentPage + 1}')">&raquo;</a></li>
-								</c:otherwise>
-							</c:choose>
+								<li class="page-item"><a class="page-link" onclick="loadMemberPage('${mpi.currentPage + 1}')">&raquo;</a></li>
 						</ul>
 					</div>
 				</div>
@@ -203,72 +208,80 @@
 	</div>
 
 	<script>
+	
+		function changeStudentStatus(status){
+			$("#studentSearchInput").empty;
+			$("#statusIdentifier").val(status);
+			loadStudentPage(1);
+		}
+
+		function changeMemberStatus(status){
+			$("#memberSearchInput").empty;
+			$("#positionIdentifier").val(status);
+			loadMemberPage(1);
+		}
+	
+	
    		function loadStudentPage(cpage){
    			$.ajax({
    				url:"userList.stu",
    				data:{
    					cpage: cpage,
+   					stStatus: $("#statusIdentifier").val(),
+   					studentName: $("#studentSearchInput").val(),
    				},
    				success:function(response){
-   				 	let studentTableValue = "";
-   				 	for(let s of response.sList){
-   				 		studentTableValue += "<tr>"
-   			                  +  "<td>" + s.studentName + "</td>"
-   			                  +  "<td>" + s.studentId + "</td>"
-   			                  +  "<td>" + s.stPhone + "</td>"
-   			                  +  "<td>" + s.stStatus + "</td>"
-   			                  +  "</tr>";
-   				 	}
-   				 	$("#studentList tbody").html(studentTableValue);
-   				 	
-   				 	let studentPagination = "";
-    	            let pageSize = 3;
-    	            let totalPage = response.spi.maxPage;
-    	            let currentGroup = Math.floor((response.spi.currentPage - 1) / pageSize);
-    	            let groupStart = currentGroup * pageSize + 1;
-    	            let groupEnd = Math.min(groupStart + pageSize - 1, totalPage);
-
-    	            if (groupStart > 1) {
-    	            	studentPagination += '<li class="page-item"><a class="page-link" onclick="loadStudentPage(' + (groupStart - 1) + ')">&laquo;</a></li>';
-    	            }
-
-    	            for (let i = groupStart; i <= groupEnd; i++) {
-    	                if (i === response.spi.currentPage) {
-    	                	studentPagination += '<li class="page-item active"><a class="page-link">' + i + '</a></li>';
-    	                } else {
-    	                	studentPagination += '<li class="page-item"><a class="page-link" onclick="loadStudentPage(' + i + ')">' + i + '</a></li>';
-    	                }
-    	            }
-
-    	            if (groupEnd < totalPage) {
-    	            	studentPagination += '<li class="page-item"><a class="page-link" onclick="loadStudentPage(' + (groupEnd + 1) + ')">&raquo;</a></li>';
-    	            }
-
-    	            $("#studentPaging").html(studentPagination);
-   				 	
-   				 	
-//    				 	let studentPagination = "";
-   				 	
-// 	   				if (response.spi.currentPage > 1) {
-// 	   					studentPagination += '<li class="page-item"><a class="page-link" onclick="loadStudentPage(' + (response.spi.currentPage - 1) + ')">&laquo;</a></li>';
-// 	   				} else {
-// 	   					studentPagination += '<li class="page-item disabled"><a class="page-link">&laquo;</a></li>';
-// 	   				}
-   				 	
-// 	   				for (let i = 1; i <= response.spi.maxPage; i++) {
-// 	   				    if (i === response.spi.currentPage) {
-// 	   				    	studentPagination += '<li class="page-item disable"><a class="page-link active" >' + i + '</a></li>';
-// 	   				    } else {
-// 	   				    	studentPagination += '<li class="page-item"><a class="page-link" onclick="loadStudentPage(' + i + ')">' + i + '</a></li>';
-// 	   				    }
-// 	   				}
-   				 	
-// 	   				if (response.spi.currentPage < response.spi.maxPage) {
-// 	   					studentPagination += '<li class="page-item"><a class="page-link" onclick="loadStudentPage(' + (response.spi.currentPage + 1) + ')">&raquo;</a></li>';
-// 	   				} else {
-// 	   					studentPagination += '<li class="page-item disabled"><a class="page-link">&raquo;</a></li>';
-// 	   				}
-// 	   				$("#studentPaging").html(studentPagination);
+   					if(response.sList.length === 0){
+   						$("#studentList tbody").html("<tr><td colspan='4'>조건에 부합하는 학생이 없습니다.</td></tr>");
+   						$("#studentPaging").empty(); 
+   						$("#studentSearchInput").val("");
+   						$("#studentSearchName").html("검색 : " + response.searchName);
+   						$("#studentSearchCount").html(response.listCount + "개의 검색결과");
+   					}else{
+   						
+	   				 	let studentTableValue = "";
+	   				 	for(let s of response.sList){
+	   				 		studentTableValue += "<tr>"
+	   			                  +  "<td>" + s.studentName + "</td>"
+	   			                  +  "<td>" + s.studentId + "</td>"
+	   			                  +  "<td>" + s.stPhone + "</td>"
+	   			                  +  "<td>" + s.stStatus + "</td>"
+	   			                  +  "</tr>";
+	   				 	}
+	   				 	$("#studentList tbody").html(studentTableValue);
+	   				 	
+	   				 	let studentPagination = "";
+	    	            let pageSize = 3;
+	    	            let totalPage = response.spi.maxPage;
+	    	            let currentGroup = Math.floor((response.spi.currentPage - 1) / pageSize);
+	    	            let groupStart = currentGroup * pageSize + 1;
+	    	            let groupEnd = Math.min(groupStart + pageSize - 1, totalPage);
+	
+	    	            if (response.spi.currentPage > 1) {
+	    	            	studentPagination += '<li class="page-item"><a class="page-link" onclick="loadStudentPage(' + (response.spi.currentPage - 1) + ')">&laquo;</a></li>';
+	    	            }else {
+	 	   					studentPagination += '<li class="page-item disabled"><a class="page-link">&laquo;</a></li>';
+	       				}
+	
+	    	            for (let i = groupStart; i <= groupEnd; i++) {
+	    	                if (i === response.spi.currentPage) {
+	    	                	studentPagination += '<li class="page-item"><a class="page-link active">' + i + '</a></li>';
+	    	                } else {
+	    	                	studentPagination += '<li class="page-item"><a class="page-link" onclick="loadStudentPage(' + i + ')">' + i + '</a></li>';
+	    	                }
+	    	            }
+	
+	    	            if (response.spi.currentPage < totalPage) {
+	    	            	studentPagination += '<li class="page-item"><a class="page-link" onclick="loadStudentPage(' + (response.spi.currentPage + 1) + ')">&raquo;</a></li>';
+	    	            }else {
+	 	   					studentPagination += '<li class="page-item disabled"><a class="page-link">&raquo;</a></li>';
+	       				}
+	
+	    	            $("#studentPaging").html(studentPagination);
+	    	            $("#studentSearchInput").val("");
+	    	            $("#studentSearchName").html("검색 : " + response.searchName);
+	    	            $("#studentSearchCount").html(response.listCount + "개 검색결과");
+   					}
    				},
    				error:function(){
    					console.log("ajax tongsinsilpae")
@@ -281,76 +294,91 @@
    				url:"userList.me",
    				data:{
    					cpage: cpage,
+   					meType: $("#positionIdentifier").val(),
+   					memberName: $("#memberSearchInput").val(),
    				},
    				success:function(response){
-   				 	let memberTableValue = "";
-   				 	for(let m of response.mList){
-   				 		memberTableValue += "<tr>"
-   			                  +  "<td>" + m.memberName + "</td>"
-   			                  +  "<td>" + m.memberId + "</td>"
-   			                  +  "<td>" + m.mePhone + "</td>"
-   			                  +  "<td>" + m.meStatus + "</td>"
-   			                  +  "<td>" + m.meType + "</td>"
-   			                  +  "</tr>";
-   				 	}
-   				 	$("#memberList tbody").html(memberTableValue);
+   					if(response.mList.length === 0){
+   						$("#memberList tbody").html("<tr><td colspan='5'>조건에 부합하는 교수 / 교직원이 없습니다.</td></tr>");
+   						$("#memberPaging").empty(); 
+   						$("#memberSearchInput").val("");
+   						$("#memberSearchName").html("검색 : " + response.searchName);
+   						$("#memberSearchCount").html(response.listCount + "개의 검색결과");
+   					}else{
+	   						
+	   					let memberTableValue = "";
+	   				 	for(let m of response.mList){
+	   				 		memberTableValue += "<tr>"
+	   			                  +  "<td>" + m.memberName + "</td>"
+	   			                  +  "<td>" + m.memberId + "</td>"
+	   			                  +  "<td>" + m.mePhone + "</td>"
+	   			                  +  "<td>" + m.meStatus + "</td>"
+	   			                  +  "<td>" + m.meType + "</td>"
+	   			                  +  "</tr>";
+	   				 	}
+	   				 	$("#memberList tbody").html(memberTableValue);
    				 	
-   				let memberPagination = "";
-   	            let pageSize = 3;
-   	            let totalPage = response.mpi.maxPage;
-   	            let currentGroup = Math.floor((response.mpi.currentPage - 1) / pageSize);
-   	            let groupStart = currentGroup * pageSize + 1;
-   	            let groupEnd = Math.min(groupStart + pageSize - 1, totalPage);
+		   				let memberPagination = "";
+		   	            let pageSize = 3;
+		   	            let totalPage = response.mpi.maxPage;
+		   	            let currentGroup = Math.floor((response.mpi.currentPage - 1) / pageSize);
+		   	            let groupStart = currentGroup * pageSize + 1;
+		   	            let groupEnd = Math.min(groupStart + pageSize - 1, totalPage);
 
-   	            if (groupStart > 1) {
-   	                memberPagination += '<li class="page-item"><a class="page-link" onclick="loadMemberPage(' + (groupStart - 1) + ')">&laquo;</a></li>';
-   	            }
-
-   	            for (let i = groupStart; i <= groupEnd; i++) {
-   	                if (i === response.mpi.currentPage) {
-   	                    memberPagination += '<li class="page-item active"><a class="page-link">' + i + '</a></li>';
-   	                } else {
-   	                    memberPagination += '<li class="page-item"><a class="page-link" onclick="loadMemberPage(' + i + ')">' + i + '</a></li>';
-   	                }
-   	            }
-
-   	            if (groupEnd < totalPage) {
-   	                memberPagination += '<li class="page-item"><a class="page-link" onclick="loadMemberPage(' + (groupEnd + 1) + ')">&raquo;</a></li>';
-   	            }
-
-   	            $("#memberPaging").html(memberPagination);
-   				 	
-   				 	
-   				 	
-//    				 	let memberPagination = "";
-   				 	
-// 	   				if (response.mpi.currentPage > 1) {
-// 	   					memberPagination += '<li class="page-item"><a class="page-link" onclick="loadMemberPage(' + (response.mpi.currentPage - 1) + ')">&laquo;</a></li>';
-// 	   				} else {
-// 	   					memberPagination += '<li class="page-item disabled"><a class="page-link">&laquo;</a></li>';
-// 	   				}
-   				 	
-// 	   				for (let i = 1; i <= response.mpi.maxPage; i++) {
-// 	   				    if (i === response.mpi.currentPage) {
-// 	   				    	memberPagination += '<li class="page-item disable"><a class="page-link active" >' + i + '</a></li>';
-// 	   				    } else {
-// 	   				    	memberPagination += '<li class="page-item"><a class="page-link" onclick="loadMemberPage(' + i + ')">' + i + '</a></li>';
-// 	   				    }
-// 	   				}
-   				 	
-// 	   				if (response.mpi.currentPage < response.mpi.maxPage) {
-// 	   					memberPagination += '<li class="page-item"><a class="page-link" onclick="loadMemberPage(' + (response.mpi.currentPage + 1) + ')">&raquo;</a></li>';
-// 	   				} else {
-// 	   					memberPagination += '<li class="page-item disabled"><a class="page-link">&raquo;</a></li>';
-// 	   				}
-// 	   				$("#memberPaging").html(memberPagination);
+		   	            if (response.mpi.currentPage > 1) {
+		   	                memberPagination += '<li class="page-item"><a class="page-link" onclick="loadMemberPage(' + (response.mpi.currentPage - 1) + ')">&laquo;</a></li>';
+		   	            }else{
+		   	            	memberPagination += '<li class="page-item disabled"><a class="page-link" >&laquo;</a></li>';
+		   	            }
+		
+		   	            for (let i = groupStart; i <= groupEnd; i++) {
+		   	                if (i === response.mpi.currentPage) {
+		   	                    memberPagination += '<li class="page-item"><a class="page-link active">' + i + '</a></li>';
+		   	                } else {
+		   	                    memberPagination += '<li class="page-item"><a class="page-link" onclick="loadMemberPage(' + i + ')">' + i + '</a></li>';
+		   	                }
+		   	            }
+		
+		   	            if (response.mpi.currentPage < totalPage) {
+		   	                memberPagination += '<li class="page-item"><a class="page-link" onclick="loadMemberPage(' + (response.mpi.currentPage + 1) + ')">&raquo;</a></li>';
+		   	            }else{
+		   	                memberPagination += '<li class="page-item disabled"><a class="page-link" >&raquo;</a></li>';
+		   	            	
+		   	            }
+		
+		   	            $("#memberPaging").html(memberPagination);
+		   	         	$("#memberSearchInput").val("");
+   						$("#memberSearchName").html("검색 : " + response.searchName);
+   						$("#memberSearchCount").html(response.listCount + "개의 검색결과");
+   					}
    				},
    				error:function(){
    					console.log("ajax tongsinsilpae")
    				},
    			})
    		}
-   </script>
+   		
+		$(".stu-nav-item").click(function() {
+			$(".stu-nav-item").not(this).css({
+				"background-color" : "white",
+				"color" : "black"
+			});
+			$(this).css({
+				"background-color" : "#1c4587",
+				"color" : "white"
+			})
+		});
+		$(".mem-nav-item").click(function() {
+			$(".mem-nav-item").not(this).css({
+				"background-color" : "white",
+				"color" : "black"
+			});
+			$(this).css({
+				"background-color" : "#1c4587",
+				"color" : "white"
+			})
+		});
+	</script>
 
 	<jsp:include page="../common/footer.jsp" />
 </body>

@@ -6,6 +6,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.student-navigator div, .member-navigator div {
+	border: 1px solid rgb(201, 201, 201);
+	background-color: white;
+	font-weight: 600;
+	color: gray;
+	text-align: center;
+	vertical-align: middle;
+	width: 100%;
+	margin: 1px;
+	line-height: 53px;
+	cursor: pointer;
+}
+.student-navigator, .member-navigator {
+	height: 55px;
+	display: flex;
+	margin-top: 15px;
+}
+</style>
 </head>
 <body>
 	<div id="students">
@@ -16,6 +35,13 @@
 			</div>
 			<button type="submit" class="searchBtn btn btn-secondary">검색</button>
 		</form>
+		<div class="student-navigator">
+			<div id="notice" class="lec-nav-item"
+				style="background-color: #1c4587; color: white;">공지사항</div>
+			<div id="classPlan" class="lec-nav-item">강의계획서</div>
+			<div id="board" class="lec-nav-item">자유게시판</div>
+			<div id="project" class="lec-nav-item">과제게시판</div>
+		</div>
 		<table id="studentList" class="table table-hover" align="center">
 			<thead>
 				<tr>

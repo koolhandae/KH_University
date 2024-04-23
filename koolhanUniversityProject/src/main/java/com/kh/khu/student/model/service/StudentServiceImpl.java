@@ -150,9 +150,41 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
+	public ArrayList<Student> selectNameSearchAllStudent(PageInfo pi, String studentName) {
+		return sDao.selectNameSearchAllStudent(sqlSession,pi,studentName);
+	}
+	
+	@Override
+	public ArrayList<Student> selectStatusStudent(PageInfo pi, String stStatus) {
+		return sDao.selectStatusStudent(sqlSession, pi, stStatus);
+	}
+
+	@Override
+	public ArrayList<Student> selectStatusNameSearchStudent(PageInfo pi, Student st) {
+		return sDao.selectStatusNameSearchStudent(sqlSession, pi, st);
+	}
+
+	@Override
 	public int selectStudentListCount() {
 		return sDao.selectStudentListCount(sqlSession);
 	}
+
+	@Override
+	public int selectStudentListCount(String stStatus) {
+		return sDao.selectStudentListCount(sqlSession, stStatus);
+	}
+
+	@Override
+	public int selectNameSearchStudentListCount(String studentName) {
+		return sDao.selectNameSearchStudentListCount(sqlSession, studentName);
+	}
+	
+	@Override
+	public int selectStatusNameSearchStudentListCount(Student st) {
+		return sDao.selectStatusNameSearchStudentListCount(sqlSession, st);
+	}
+	
+
 	public int insertTakeOffStudent(AbsenceStudent s) {
 		// 없으면 데이터를 넣을 수 있게 
 		// TODO 화면에 입력된 데이터를 데이터베이스에 넣는다
@@ -184,5 +216,10 @@ public class StudentServiceImpl implements StudentService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
+
+
+
 
 }

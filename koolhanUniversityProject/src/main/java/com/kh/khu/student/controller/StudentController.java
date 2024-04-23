@@ -280,14 +280,46 @@ public class StudentController {
 		session.setAttribute("loginStudent", newSt);
 		return result > 0 ? "NNNNY" : "NNNNN";
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="userList.stu", produces="application/json; charset=utf-8")
-	public ResponseEntity<HashMap<String,Object>> selectStudentList(int cpage) {
-		int studentListCount = sService.selectStudentListCount();
-		PageInfo newSpi = Pagination.getPageInfo(studentListCount, cpage, 3, 2);
-		ArrayList<Student> sList = sService.selectAllStudent(newSpi);
-		for(Student s: sList) {
-			switch(s.getStStatus()) {
+	public ResponseEntity<HashMap<String,Object>> selectStudentList(int cpage, Student st) {
+		int studentListCount = 0;
+		int pageLimit = 3;
+		int boardLimit = 2;
+		PageInfo newSpi;
+		ArrayList<Student> sList;
+		if(st.getStudentName().equals("")) {
+			switch(st.getStStatus()) {
+				case "all":
+					studentListCount = sService.selectStudentListCount();
+					newSpi = Pagination.getPageInfo(studentListCount, cpage, pageLimit, boardLimit);
+					sList = sService.selectAllStudent(newSpi);
+					break;
+				default:
+					studentListCount = sService.selectStudentListCount(st.getStStatus());
+					newSpi = Pagination.getPageInfo(studentListCount, cpage, pageLimit, boardLimit);
+					sList = sService.selectStatusStudent(newSpi, st.getStStatus());
+					break;
+			}
+		} 
+		else {
+			switch(st.getStStatus()) {
+			case "all":
+				studentListCount = sService.selectNameSearchStudentListCount(st.getStudentName());
+				newSpi = Pagination.getPageInfo(studentListCount, cpage, pageLimit, boardLimit);
+				sList = sService.selectNameSearchAllStudent(newSpi, st.getStudentName());
+				break;
+			default:
+				studentListCount = sService.selectStatusNameSearchStudentListCount(st);
+				newSpi = Pagination.getPageInfo(studentListCount, cpage, pageLimit, boardLimit);
+				sList = sService.selectStatusNameSearchStudent(newSpi, st);
+				break;
+			}
+		}
+		
+		for (Student s : sList) {
+			switch (s.getStStatus()) {
 			case "Y":
 				s.setStStatus("재학");
 				break;
@@ -308,7 +340,8 @@ public class StudentController {
 		HashMap<String, Object> response = new HashMap<>();
         response.put("sList", sList);
         response.put("spi", newSpi);
-
+        response.put("listCount", studentListCount);
+        response.put("searchName", st.getStudentName());
         return ResponseEntity.ok(response);
 	}
 	

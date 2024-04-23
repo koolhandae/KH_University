@@ -175,11 +175,78 @@
 		 order
 		    by member_no desc	   
 	</select>	
+
+	<select id="selectAllMemberType" resultMap="memberResult">
+		select
+			   member_no
+			 , member_name
+			 , member_id
+			 , m_phone
+			 , m_status
+			 , m_type  
+		  from member
+		 where m_type = #{meType}
+		 order
+		    by member_no desc	   
+	</select>	
+	
+	<select id="selectNameSearchAllMember" resultMap="memberResult">
+		select
+			   member_no
+			 , member_name
+			 , member_id
+			 , m_phone
+			 , m_status
+			 , m_type  
+		  from member
+		 where member_name like '%' || #{memberName} || '%'
+		 order
+		    by member_no desc	   
+	</select>	
+	
+	<select id="selectNameSearchTypeMember" resultMap="memberResult">
+		select
+			   member_no
+			 , member_name
+			 , member_id
+			 , m_phone
+			 , m_status
+			 , m_type  
+		  from member
+		 where m_type = #{meType}
+		   and member_name like '%' || #{memberName} || '%'
+		 order
+		    by member_no desc	   
+	</select>	
 	
 	<select id="selectMemberListCount" resultType="_int">
 		select
 			   count(*)
 		  from member
 	</select>
+
+	<select id="selectMemberListCountType" resultType="_int">
+		select
+			   count(*)
+		  from member
+		 where m_type = #{meType}
+	</select>
+
+	<select id="selectNameSearchMemberListCount" resultType="_int">
+		select
+			   count(*)
+		  from member
+		 where member_name like '%' || #{memberName} || '%'
+	</select>
+
+	<select id="selectNameSearchTypeMemberListCount" resultType="_int">
+		select
+			   count(*)
+		  from member
+		 where member_name like '%' || #{memberName} || '%'
+		   and m_type = #{meType}
+	</select>
+	
+	
 		
 </mapper>

@@ -64,8 +64,20 @@ public interface StudentService {
 	
 	int selectStudentListCount();
 	
-	ArrayList<Student> selectAllStudent(PageInfo pi);
+	int selectStudentListCount(String stStatus);
 	
+	int selectNameSearchStudentListCount(String studentName);
+	
+	int selectStatusNameSearchStudentListCount(Student st);
+
+	ArrayList<Student> selectAllStudent(PageInfo pi);
+
+	ArrayList<Student> selectNameSearchAllStudent(PageInfo pi, String studentName);
+
+	ArrayList<Student> selectStatusStudent(PageInfo pi, String stStatus);
+	
+	ArrayList<Student> selectStatusNameSearchStudent(PageInfo pi, Student st);
+
 	int insertTakeOffStudent(AbsenceStudent s);
 
 	int getDo(String studentId);

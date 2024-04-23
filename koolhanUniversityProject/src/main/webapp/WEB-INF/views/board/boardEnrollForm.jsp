@@ -34,7 +34,8 @@
                      </tr>
                      <tr>
                          <th><label for="writer">작성자</label></th>
-                         <td><input type="text" id="writer" class="form-control" value="${loginStudent.studentName}" name="boardWriter" readonly></td>
+                         <td><input type="text" id="writer" class="form-control" value="${loginStudent.studentName}"  readonly></td>
+                         <td><input type="hidden" id="writer" class="form-control" value="${loginStudent.studentNo}" name="boardWriter" readonly></td>
                      </tr>
                      <tr>
                          <th><label for="upfile">첨부파일</label></th>

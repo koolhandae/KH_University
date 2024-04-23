@@ -54,12 +54,35 @@ public class MemberDao {
 	public ArrayList<Member> selectAllMember(SqlSessionTemplate sqlSession, PageInfo mpi){
 		return (ArrayList)sqlSession.selectList("memberMapper.selectAllMember", null, Pagination.getRowBounds(mpi));
 	}
+
+	public ArrayList<Member> selectAllMemberType(SqlSessionTemplate sqlSession, PageInfo mpi, String meType){
+		return (ArrayList)sqlSession.selectList("memberMapper.selectAllMemberType", meType, Pagination.getRowBounds(mpi));
+	}
+	
+	public ArrayList<Member> selectNameSearchAllMember(SqlSessionTemplate sqlSession, PageInfo mpi, String memberName){
+		return (ArrayList)sqlSession.selectList("memberMapper.selectNameSearchAllMember", memberName, Pagination.getRowBounds(mpi));
+	}
+	
+	public ArrayList<Member> selectNameSearchTypeMember(SqlSessionTemplate sqlSession, PageInfo mpi, Member m){
+		return (ArrayList)sqlSession.selectList("memberMapper.selectNameSearchTypeMember", m, Pagination.getRowBounds(mpi));
+	}
 	
 	public int selectMemberListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("memberMapper.selectMemberListCount");
 	}
 	
-
+	public int selectMemberListCount(SqlSessionTemplate sqlSession, String meType) {
+		return sqlSession.selectOne("memberMapper.selectMemberListCountType", meType);
+	}
+	
+	public int selectNameSearchMemberListCount(SqlSessionTemplate sqlSession, String memberName) {
+		return sqlSession.selectOne("memberMapper.selectNameSearchMemberListCount", memberName);
+	}
+	
+	public int selectNameSearchTypeMemberListCount(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.selectNameSearchTypeMemberListCount", m);
+	}
+	
 	public void getReturnStudent() {
 		// TODO 새로만들어진 복학신청자 데이터를 가져옵니다 
 	}
