@@ -4,6 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -80,7 +83,7 @@
       </table>
       <br>
       <h3>납입 방식</h3>
-      <table id="boardList" class="selectTuition table" style="width: 900px;" align="center">
+<!--       <table id="boardList" class="selectTuition table" style="width: 900px;" align="center">
         <tr>
           <td>
             <input type="radio" name="radioBtn" value="kakao"> 카카오페이
@@ -89,11 +92,84 @@
           </td>
         </tr>
       </table>
-      <br><br>
+      <br><br> -->
       <div class="billBtn" style="display: flex">
-        <button class="btn btn-xs" id="btn">결제하기</button>
+        <button class="btn btn-xs" id="btn"  onclick="requestPay()">결제하기</button>
       </div>
      </form>
+     
+     <script>
+	     if(radioBtn == null){
+	         alert("결제방식을 선택해 주세요.");
+	         return;
+	       }
+	     
+	     var IMP = window.IMP; // 생략가능
+	     IMP.init('imp65641437');
+	     
+	  // IMP.request_pay(param, callback) 결제창 호출
+	     IMP.request_pay({
+	       pg: "html5_inicis.INIpayTest ",
+	       pay_method: "vbank",
+	       merchant_uid: "tpNo" + new Date().getTime(),   // 주문번호
+	       name: "쿨한대학교",
+	       amount: tuition,                         // 숫자 타입
+	       buyer_email: ${loginStudent.stEmail},
+	       buyer_name: ${loginStudent.studentName},
+	       buyer_tel: ${loginStudent.stPhone},
+	       buyer_addr: ${loginStudent.stAddress},
+	       vbank_due: "YYYYMMDD",
+	     },
+	    	 period: {
+			     from : "20240501",
+			     to : "20240508",
+	     },
+	     function (rsp) { // callback
+	       console.log(rsp);
+	       if ( rsp.success ) { //결제 성공시
+	         var msg = '등록금 납부가 완료 되었습니다.';
+	         var result = {
+	           "studentId" :[[${loginStudent.studentId}]], //회원번호
+	           "tuition": rsp.tuition, // 결제금액
+	           "payDay" : new Date().toISOString().slice(0, 10), //결제일
+	           "mpaytime" : "",
+	           "trainername":"",
+	         }
+	         console.log(result);
+
+	         $.ajax({
+	           url:'',
+	           type:'POST',
+	           contentType: 'application/json',
+	           data:JSON.stringify(result),
+	           success: function (res) {
+	             console.log(res);
+	             location.href=res;
+	           },
+	           error: function (err) {
+	             console.log(err);
+	           }
+	         }); //ajax
+	       } else {
+	           var msg = '결제 실패';
+	           msg += '\n에러내용 : ' + rsp.error_msg;
+	         }
+	       alert(msg);
+	     });
+	  	}
+	  
+	     //결제 데이터 전달
+	     var selectedPrice = element.querySelector("p").innerText;
+	     var priceElement = document.getElementById("selectedPrice").querySelector("span");
+	     priceElement.innerText = selectedPrice;
+
+	     var selectedProduct = element.querySelector("h5").innerText;
+	     var productElement = document.getElementById("selectedProduct").querySelector("span");
+	     productElement.innerText = selectedProduct;
+	   
+	     	
+	 </script>
+     
    </div>  
    </div>
    <jsp:include page="../common/footer.jsp"/>

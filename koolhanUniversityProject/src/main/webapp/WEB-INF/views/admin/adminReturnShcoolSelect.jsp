@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +42,8 @@
    		<h2 style="margin-left: 290px; font-weight:900; color: rgb(75,75,75);">복학 신청 처리</h2>
    		<hr><br>
    		
-   		
+   	  <form action="adminReturnSchoolForm.me" method="post">
+   	  <input type="hidden" name="preId" value="preId">
    		<table id="boardList" class="selectTuition table" style="width: 900px; margin: auto;">
    			<thead align="center">
 	   		  <tr>
@@ -54,22 +56,28 @@
 	   		</thead>
 	   		
 	   		<tbody align="center"> 
+	   		<c:forEach var="list" items="${list}">
 		   		  <tr>
-		   		  	<td>sysdate</td>
-		   		  	<td>학번 가져오기</td>
-		   		  	<td>2024년도</td>
-		   		  	<td>1학기</td>
 		   		  	<td>
-		   		  		<Select>
-		   		  			<option>승인</option>
-		   		  			<option>보류</option>
-		   		  			<option>불허</option>
+		   		  		<fmt:parseDate var="parsedDate" value="${ list.preInsert}" pattern="yyyy-MM-dd HH:mm:ss" />
+					    <fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd" />
+		   		  	</td>
+		   		  	<td>${ list.preId }</td>
+		   		  	<td>${ list.preYear }</td>
+		   		  	<td>${ list.preSemester }</td>
+		   		  	<td>
+		   		  		<Select name="tbStatus">
+		   		  			<option value="I">처리중</option>
+		   		  			<option value="Y">승인</option>
+		   		  			<option vlaue="N">반려</option>
 		   		  		</Select>
-		   		  		<button>확인</button>
+		   		  		<button type="submit">확인</button>
 		   		  	</td>
 		   		  </tr>
+		   </c:forEach>
 	   		</tbody>
    		  </table>
+   		</form>
    		  <br>
    	
    	</div>

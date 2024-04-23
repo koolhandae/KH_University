@@ -55,7 +55,7 @@
 		   		  	<td>2024년도 1학기</td>
 		   		  	<td>종료 연도, 학기</td>
 		   		  	<td id="takeOffSelect">조회</td>
-		   		  	<td>${ a.absStatus }</td>
+		   		  	<td>${ a.tbStatus }</td>
 		   		  </tr>
 	   		</tbody>
    		  </table>

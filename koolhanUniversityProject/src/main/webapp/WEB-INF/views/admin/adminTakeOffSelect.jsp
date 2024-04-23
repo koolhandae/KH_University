@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,21 +59,38 @@
 		   		
 		   		<tbody align="center"> 
 		   			  <c:forEach var="item" items="${list}">
+					  <input type="hidden" name="absId" value="${item.absId}" />
 			   		  <tr>
-			   		  	<td>${item.absInsert}</td>
-			   		  	<td>${item.absId}</td>
-			   		  	<td>${item.absSort} </td>
+ 			   		  <td>
+					   <fmt:parseDate var="parsedDate" value="${item.absInsert}" pattern="yyyy-MM-dd HH:mm:ss" />
+					   <fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd" />
+					  </td> 
+			   		    <td>
+						   ${item.absId}
+						</td>
+			   		  	<td>
+							<c:choose>
+						        <c:when test="${item.absSort eq 'a1'}">일반</c:when>
+						        <c:when test="${item.absSort eq 'a2'}">질병</c:when>
+						        <c:when test="${item.absSort eq 'a3'}">출산·육아</c:when>
+						        <c:when test="${item.absSort eq 'a4'}">군입대</c:when>
+						        <c:otherwise>기타</c:otherwise>
+						    </c:choose>		   		  	
+			   		  	</td>
 			   		  	<td>${item.absStart}</td>
 			   		  	<td>${item.absEnd}</td>
+		   		  		<td>
+						    <c:choose>
+						        <c:when test="${item.tbStatus eq 'I'}">처리중</c:when>
+						        <c:when test="${item.tbStatus eq 'Y'}">승인</c:when>
+						        <c:when test="${item.tbStatus eq 'N'}">반려</c:when>
+						        <c:otherwise>오류</c:otherwise>
+						    </c:choose>
+						</td>
 			   		  	<td>
-			   		  		${item.tbStatus}
-			   		  	</td>
-			   		  	<td>
-			   		  		<input type="hidden" name="absId" value="${item.absId}" />
 			   		  		<input type="submit" value="승인" >
 			   		  	</td>
 			   		  </tr>
-			   		 
 	            	</c:forEach>
 		   		</tbody>
 	   		  </table>
