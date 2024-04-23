@@ -45,6 +45,12 @@ public class ProjectController {
 		
 		int result = pService.insertProject(pj);
 		
+		/*
+		if(result>0) {
+			int result2 = pService.insertProjectAlarm(pj);
+		}
+		*/
+		
 		return result;
 		
 	}

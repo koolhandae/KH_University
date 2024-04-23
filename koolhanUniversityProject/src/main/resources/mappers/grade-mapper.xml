@@ -22,8 +22,8 @@
 	<select id="selectGradeStuCount" resultType="_int">
 			select count(*)
 		from class c
-		join course co on c.class_num = co.class_num
-		join student s on s.student_id = co.student_id
+		join course co on c.class_no = co.class_no
+		join student s on s.student_no = co.student_no
 		where c.class_no = #{classNo}
 		  and course_status = 'Y'
 	
@@ -53,6 +53,8 @@
 	 
 	
 	
+	
+	<!-- 
 	<select id="selectGradeStuList" resultMap="gradeResult">
 		select s.student_id
 		     , c.class_num
@@ -66,6 +68,22 @@
 		from class c
 		join course co on c.class_num = co.class_num
 		join student s on s.student_id = co.student_id
+		where c.class_no = #{classNo}
+		  and course_status = 'Y'
+	</select>
+	 -->
+	<select id="selectGradeStuList" resultMap="gradeResult">
+	select 	   s.student_id
+		     , c.class_name
+		     , c.class_semester
+		     , EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM s.ENROLL_DATE) + 1 AS student_hak
+		     , prof_no
+		     , s.student_name
+		     , c.class_no
+		     , s.student_no
+		from class c
+		join course co on c.class_no = co.class_no
+		join student s on s.student_no = co.student_no
 		where c.class_no = #{classNo}
 		  and course_status = 'Y'
 	</select>

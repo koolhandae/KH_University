@@ -35,6 +35,9 @@ public interface ProjectService {
 	
 	// 교수용 과제 상세조회 페이지
 	Project selectProfessorProjectDetail(int pjNo);
+
+	// 교수가 과제 등록시 알림테이블에 insert
+	// int insertProjectAlarm(Project pj);
 	
 	
 }

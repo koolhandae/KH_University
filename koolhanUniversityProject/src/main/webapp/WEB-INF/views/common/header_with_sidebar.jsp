@@ -30,7 +30,7 @@
 			<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet">
 			
 			<!-- sockjs -->
-			<!-- <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script> -->
+			<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <style>
 	/* 폰트 */
 	@font-face {
@@ -73,6 +73,8 @@
 				</script>
 				<c:remove var="alertMsg" scope="session" />
 			</c:if>
+
+
 
 
 	<!-- Page Wrapper -->
@@ -577,6 +579,28 @@
 						</div>
 					</div>
 				</div>
+				
+				
+				<script>
+			        var socket = new WebSocket("ws://localhost:8808/khu/echo");
+			
+			        socket.onopen = function(event) {
+			            console.log("WebSocket 연결 성공");
+			        };
+			
+			        socket.onmessage = function(event) {
+			            console.log("서버로부터 메시지 수신: " + event.data);
+			        };
+			
+			        socket.onclose = function(event) {
+			            console.log("WebSocket 연결 종료");
+			        };
+			
+			        // 필요에 따라 메시지를 서버로 전송할 수 있습니다.
+			        function sendMessage(message) {
+			            socket.send(message);
+			        }
+			    </script>
 
 
 				<!-- Bootstrap core JavaScript-->

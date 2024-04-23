@@ -40,4 +40,11 @@ public class ProjectDao {
 		return sqlSession.selectOne("projectMapper.selectProfessorProjectDetail",pjNo);
 	}
 	
+	/*
+	public int insertProjectAlarm(SqlSessionTemplate sqlSession, Project pj) {
+		return sqlSession.insert("projectMapper.insertProjectAlarm", pj);
+				//"projectMapper.selectProfessorProjectDetail",pjNo
+	}
+	*/
+	
 }

@@ -69,6 +69,13 @@ public class ProjectServiceImpl implements ProjectService{
 	public Project selectProfessorProjectDetail(int pjNo) {
 		return pDao.selectProfessorProjectDetail(sqlSession, pjNo);
 	}
+	
+	/*
+	@Override
+	public int insertProjectAlarm(Project pj) {
+		return pDao.insertProjectAlarm(sqlSession, pj);
+	}
+	*/
 
 
 
