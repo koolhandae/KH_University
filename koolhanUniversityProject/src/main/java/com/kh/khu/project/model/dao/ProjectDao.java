@@ -116,4 +116,12 @@ public class ProjectDao {
 		return (ArrayList)sqlSession.selectList("projectMapper.selectStudentNoneProject", parameters);
 	}
 	
+	public StudentProject projectFileView(SqlSessionTemplate sqlSession, int studentNo, String classNum, String pjno) {
+		Map<String, Object> parameters = new HashMap();
+		parameters.put("studentNo", studentNo);	
+		parameters.put("classNum", classNum);
+		parameters.put("pjno", pjno);
+		
+		return (StudentProject)sqlSession.selectOne("projectMapper.projectFileView", parameters);
+	}
 }

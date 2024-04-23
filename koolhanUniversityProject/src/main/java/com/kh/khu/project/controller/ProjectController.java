@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -62,19 +63,18 @@ public class ProjectController {
 		int result = pService.insertProject(pj);
 
 		System.out.println("왜안돼=" + pj);
-		//Project p = pService.selectProjectNo();
 		
-
+		
 		// insert시 학생프로젝트 테이블에(진행중 상태로)도 등록되게 끔 추가		
 			if(result>0) {
 				
-//				System.out.println("고유번호 와지나" + p);
-				
+				System.out.println("들어가니?");
+
 				ArrayList<Course> sList = pService.selectCourseStudent(classNo);
 				
-				ArrayList<String> studentNos = new ArrayList();
+				//ArrayList<String> studentNos = new ArrayList();
 				
-				// System.out.println("학생들조회" + sList);
+			    System.out.println("학생들조회" + sList);
 				
 				if(sList != null) {		
 					for(Course c : sList) {
@@ -84,7 +84,7 @@ public class ProjectController {
 						//String studentNo = Integer.toString(studentNoInt);
 						//studentNos.add(studentNo);
 	
-						int resultStu = pService.insertStuProjectTable(sno, classNo);
+						int resultstu = pService.insertStuProjectTable(sno, classNo);
 						}
 				}
 			}
@@ -248,7 +248,7 @@ public class ProjectController {
 			String changeName = currentTime + ranNum + ext;
 			
 			// 원하는 파일에 저장하기위해 업로드시키고자 하는 폴더의 물리적인 경로 알아내기
-			String savePath = session.getServletContext().getRealPath("/resources/projectFiles/");
+			String savePath = session.getServletContext().getRealPath("resources/projectFiles/");
 			      					// application scope             // webapp : / , uploadFiles 안에 넣어야하므로 뒤에 / 꼭 붙이기!
 		
 			try {
@@ -283,9 +283,13 @@ public class ProjectController {
 		System.out.println("갑자기 왜안되냐" + studentNo);
 
 		 ArrayList<StudentProject> spList = pService.selectStudentDoneProject(studentNo, classNum);
-         	System.out.println("sPLIST뭘까" + spList);
+         System.out.println("sPLIST뭘까" + spList);
+ 		int pjCount = pService.ingProjectCount(classNum, studentNo);
+ 		int pjCountMiss = pService.missProjectCount(classNum, studentNo);
+ 		int pjCountDone = pService.doneProjectCount(classNum, studentNo);
+         
 
-    		mv.addObject("spList", spList).setViewName("student/studentDoneProjectPage");
+    		mv.addObject("spList", spList).addObject("pjCount", pjCount).addObject("pjCountMiss", pjCountMiss).addObject("pjCountDone", pjCountDone).setViewName("student/studentDoneProjectPage");
     		return mv;
 	}
 	
@@ -301,9 +305,48 @@ public class ProjectController {
 		
 			ArrayList<StudentProject> spList = pService.selectStudentNoneProject(studentNo, classNum);
          	System.out.println("sPLIST뭘까 NONE" + spList);
+        	int pjCount = pService.ingProjectCount(classNum, studentNo);
+     		int pjCountMiss = pService.missProjectCount(classNum, studentNo);
+     		int pjCountDone = pService.doneProjectCount(classNum, studentNo);
          	
-         	mv.addObject("spList", spList).setViewName("student/studentNoneProjectPage");
+         	mv.addObject("spList", spList).addObject("pjCount", pjCount).addObject("pjCountMiss", pjCountMiss).addObject("pjCountDone", pjCountDone).setViewName("student/studentNoneProjectPage");
     		return mv;
 	}
+	
+	/*@RequestMapping("projectFile.st")
+	public String projectFileView(@RequestParam(value="pjno",defaultValue="1") String pjno, HttpSession session, Model model) {
+		String classNum = (String)session.getAttribute("classNum");
+		int studentNo = (Integer)session.getAttribute("studentNo");
+		System.out.println("pjno" + pjno);
+		
+		System.out.println("가져오나1" + classNum);
+		System.out.println("가져오나2" + studentNo);
+		
+		StudentProject sp = pService.projectFileView(studentNo, classNum, pjno);
+		
+		System.out.println("파일불러오니???" + sp);
+		String file = sp.getStpChangeName();
+		model.addAttribute("file", file);
+	
+	    return "student/projectFile";
+	*/
+	@ResponseBody
+	@RequestMapping("projectFile.st")
+	public String projectFileView(@RequestParam(value="pjno") String pjno, HttpSession session, Model model) {
+		String classNum = (String)session.getAttribute("classNum");
+		int studentNo = (Integer)session.getAttribute("studentNo");
+		System.out.println("pjno" + pjno);
+		
+		System.out.println("가져오나1" + classNum);
+		System.out.println("가져오나2" + studentNo);
+		
+		StudentProject sp = pService.projectFileView(studentNo, classNum, pjno);
+		
+		System.out.println("파일불러오니???" + sp);
+		String file = sp.getStpChangeName();
+	
+	    return file;
+	}
+	
 
 }

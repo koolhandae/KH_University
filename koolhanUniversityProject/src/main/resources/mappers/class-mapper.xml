@@ -425,4 +425,13 @@
 			)
             and cb_status = 'Y'
 	</select>
+	
+	<select id="classPlanView" resultMap="classResult">
+		select 
+		       origin_name
+		     , change_name
+		  from class
+		 where class_num = #{classNum}
+		   and  SUBSTR(enroll_date, 1, 4) = '2024'
+	</select>
 </mapper>

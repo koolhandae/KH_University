@@ -133,7 +133,7 @@
     
                     <div class="form-group">
                         
-                     	<input type="hidden" value="" id="classNo">
+                        <input type="hidden" value="" id="classNo">
                         <input type="hidden" value="${loginUser.memberId }" id="pjProfessor"name="pjProfessor">
                         <label for="lectureSelect">강의 선택 </label>
 						<select name="pjClassName" id="lectureSelect" class="form-control">
@@ -176,6 +176,7 @@
       
    </div>
 	
+
 	
 	<input type="hidden" id="userId" value="${loginUser.memberId}">
 	<!-- select option에 들어가는 값 -->
@@ -188,12 +189,10 @@
 			    	console.log(list);
 			    	
 			    	let value = "";
-			    	let classNo = list[0].classNo;
-			    	
-			    	
+
 			    	if(list != ""){
-                        for(let i in list){
-                            value += "<option>" + list[i].className+"</option>"
+                        for(let i in list){                       	
+                            value += "<option value='" + list[i].classNo + "'>" + list[i].className + "</option>";
     
                         }
                     }else{
@@ -210,10 +209,18 @@
 			    },error:function(){
 			    	console.log("ajax다 터져서왓다고요")
 			    }
-			})
+			});
+			
+			 // 선택됐을때 강의번호를 classNo에 숨겨서 담아옴
+			 $(document).on('change', '#lectureSelect', function() {
+		        let selectedOption = $(this).val();
+		       	 console.log(selectedOption);
+		       	 
+		        $("#classNo").val(selectedOption);
+			 });
         });
 	</script>
-
+	
 
 <script>
        $(function() {
@@ -250,11 +257,12 @@
       function submit(){
 
         //강의명, 마감기한, 제목 가져오기
-        let pjClassName = $('#lectureSelect').val()
+        let pjClassName = $('#lectureSelect option:selected').text()
         let pjDeadline = $('#datepicker').val()
         let pjTitle =$('#lectureTitle').val()
         let pjContent=$('#summernote').summernote('code')
         let pjProfessor=$('#pjProfessor').val()
+        
         let classNo=$('#classNo').val()
 
         console.log($('#summernote').summernote('code'))
@@ -262,7 +270,9 @@
         console.log(pjDeadline);
         console.log(pjTitle);
         console.log("이게되나?" + classNo);
-
+		
+        
+        
         $.ajax({
 				url:"professorProjectEnrollForm.do",
 				data:{pjClassName:pjClassName
@@ -284,14 +294,7 @@
 			    	console.log("ajax다 터져서왓다고요")
 			    }
 			})
-        
 
-
-
-
-        
-
-        
       }
    </script>
 

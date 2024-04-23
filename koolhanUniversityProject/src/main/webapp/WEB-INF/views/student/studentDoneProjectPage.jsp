@@ -204,8 +204,13 @@
 	 }
 	 #done-project{
 		  border: 4px solid rgb(104 163 36);
-	   }
-	 
+	 }
+	 #fileTag a{
+		text-decoration: none;
+	 }
+	 #fileTag:hover{
+		font-weight: 800;
+	 }
 </style>
 </head>
 <body>
@@ -225,7 +230,7 @@
 	</c:if>
 	
     <div class="content">
-     
+		<input type="hidden" value="${ classNum }" id="classNum">
         <div class="title-area">
 			<div id="title" onclick="location.href='showCourse.st'">나의 수강 조회</div>
 			
@@ -234,7 +239,7 @@
 			<div id="fin-title">나의수강조회</div>
         </div>
 		<div class="lecture-area">
-			<div id="lecture-main-title">${spList[0].pjClassName}</div>
+			<div id="lecture-main-title">${className}</div>
 			<div id="lecture-mid-title">강의실</div>
 		</div>
 		<div class="lecture-navigator">
@@ -292,8 +297,8 @@
 								<td class="projectShow-btn" id="projectShow-btn">
 									<img width='30' height='30' src='https://img.icons8.com/pastel-glyph/128/737373/search--v2.png'>
 								</td>
-								<td>
-									<a href="${sp.stpChangeName}" download="${sp.stpOriginName}" style="color: gray;">${sp.stpOriginName}</a>
+								<td id="fileTag" class="fileTag" style="text-decoration: none;">
+									<a style="color: gray;">${sp.stpOriginName}</a>
 								</td>
 								<td style="color: rgb(104 163 36); font-weight: 800;">제출완료</td>
 								<td><fmt:formatDate value="${sp.submitTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
@@ -308,6 +313,13 @@
 				<div id="img-notice">
 					<span>* 과제에 대한 개별 성적은 따로 올려드리지 않습니다</span>
 				</div>
+			
+				<br>
+				<div class="card-body" style="display: none;">
+				<!--<jsp:include page="projectFile.jsp"/>-->
+				<!-- <embed src="https://drive.google.com/viewerng/viewer?embedded=true&url=${sp.stpChangeName}" width="100%" height="700">  -->
+				<iframe src="${sp.stpChangeName}" style="width:100%; height:700px;"></iframe>
+				</div>
 			</div>
         	<br>
         </div>
@@ -317,13 +329,45 @@
    <script>
    	$(document).ready(function(){
  		  $(".projectShow-btn").click(function(){
-  		  var pjno = $(this).siblings("input[type='hidden']").val();
-  		   
+ 		  var pjno = $(this).siblings("input[type='hidden']").val();	   
   		  console.log(pjno);
  			  location.href='projectView.st?pjno=' + pjno;
  		  })
    	})
    </script>
+   
+    <script>
+   	$(document).ready(function(){   		
+   		var selectedPjno = null;
+   		$(document).on("click", ".fileTag", function(){
+   		  var pjno = $(this).siblings("input[type='hidden']").val(); 	
+
+   		 if (pjno !== selectedPjno) {
+	   		 $.ajax({
+	   			 url:"projectFile.st",
+	   			 data:{pjno:pjno},
+	   			 success:function(file){
+	   				 console.log("되냐고");
+	   				 console.log(file);
+	   				 console.log()
+	   				 value = "";
+	   				 
+	   				 value += "<iframe src='" +  file + "'style='width:100%; height:700px;'></iframe>"	   				 
+
+	   				$(".card-body").html(value);
+	   				$(".card-body").show();
+	   			    selectedPjno = pjno;
+	   			    
+	   			 }, error:function(){
+	   				 console.log("안되냐고");
+	   			 }
+	   		 })	 
+   		 }
+   		})
+   		 
+ 	   });
+   </script>
+   
    
      <!-- 누락과제 페이지로 이동 -->
    <script>
@@ -415,11 +459,9 @@
 				                 "<td>" + c.classTime + "</td>" +
 				                 "<td>" + c.memberName + "</td>";
 			
-						        if (changeName) {
-						            value += "<td>" +
-						                     "<a href='" + changeName + "' download='" + originName + "' id='planFile'>" +
+                             if (changeName) {
+						            value += "<td id='fileTag'>" +
 						                     "<img width='30' height='30' src='https://img.icons8.com/pastel-glyph/128/737373/search--v2.png'>" +
-						                     "</a>" +
 						                     "</td>";
 						        } else {
 						            value += "<td>X</td>";
@@ -428,7 +470,10 @@
 						        value += "</tr>" +
 						                 "</tbody>" +
 						                 "</table>" +
-						                 "</div>";
+						                 "</div>" +
+                                   "<br>" +
+                                   "<div class='card-body' style='display:none;'>" +
+                                   "<div>"
    					 
    					 $("#notice-area").html(value);
 						      
@@ -439,6 +484,34 @@
    			 });
    			})
    		})
+   </script>
+   
+   <script>
+   $(document).ready(function(){
+	   
+	   $(document).on("click", "#fileTag", function(){
+           var classNum = $(".content").find("#classNum").val();  	
+
+           $.ajax({
+   			 url:"classPlanView.st",
+   			 data:{classNum:classNum},
+   			 success:function(file){
+   				 console.log("되냐고");
+   				 console.log(file);
+   				 console.log()
+   				 value = "";
+   				 
+   				 value += "<iframe src='" +  file + "'style='width:100%; height:700px;'></iframe>"	   				 
+
+   				$(".card-body").html(value);
+   				$(".card-body").show();
+   			    
+   			 }, error:function(){
+   				 console.log("안되냐고");
+   			 }
+   		 })	 
+        })
+   })
    </script>
 	
 

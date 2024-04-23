@@ -122,6 +122,11 @@ public class ProjectServiceImpl implements ProjectService{
 		return pDao.selectStudentNoneProject(sqlSession, studentNo, classNum);
 	}
 
+	@Override
+	public StudentProject projectFileView(int studentNo, String classNum, String pjno) {
+		return pDao.projectFileView(sqlSession, studentNo, classNum, pjno);
+	}
+
 
 	
 

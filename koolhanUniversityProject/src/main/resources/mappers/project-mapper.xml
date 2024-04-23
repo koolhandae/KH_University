@@ -111,18 +111,18 @@
 		       stp_no
 		     , student_no
 		     , class_no
+		     , stp_pj_no
 		     , stp_status
 		     , submit_time
-		     , stp_pj_no
 		     )
 		values
 		     (
 		       seq_stp.nextval
 		     , #{sno}
 		     , #{classNo}
+		     , seq_pj.currval
 		     , default
 		     , null
-		     , seq_pj.currval
 		     )
 	</insert>
 	
@@ -238,5 +238,17 @@
 			   and stp_status = 'M'
 			 order
 			    by stp_no desc)a
+	</select>
+	
+	<select id="projectFileView" resultMap="stuProjectResult" >
+		select 
+		       stp_change_name
+		  from stu_project sp 
+		  join project on pj_no = stp_pj_no
+		  join class c on sp.class_no = c.class_no
+		 where student_no = #{studentNo}
+		   and class_num = #{classNum}
+		   and stp_status = 'D'
+		   and stp_pj_no = #{pjno}
 	</select>
 </mapper>

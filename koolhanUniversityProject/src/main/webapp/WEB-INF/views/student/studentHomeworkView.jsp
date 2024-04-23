@@ -220,7 +220,7 @@
 	</c:if>
 	
     <div class="content">
-     
+		<input type="hidden" value="${ classNum }" id="classNum">
         <div class="title-area">
 			<div id="title" onclick="location.href='showCourse.st'">나의 수강 조회</div>
 			
@@ -323,6 +323,7 @@
  		  })
    	})
    </script>
+   
    
    <!-- 누락과제 페이지로 이동 -->
    <script>
@@ -513,11 +514,9 @@
 				                 "<td>" + c.classTime + "</td>" +
 				                 "<td>" + c.memberName + "</td>";
 			
-						        if (changeName) {
-						            value += "<td>" +
-						                     "<a href='" + changeName + "' download='" + originName + "' id='planFile'>" +
+                             if (changeName) {
+						            value += "<td id='fileTag'>" +
 						                     "<img width='30' height='30' src='https://img.icons8.com/pastel-glyph/128/737373/search--v2.png'>" +
-						                     "</a>" +
 						                     "</td>";
 						        } else {
 						            value += "<td>X</td>";
@@ -526,7 +525,10 @@
 						        value += "</tr>" +
 						                 "</tbody>" +
 						                 "</table>" +
-						                 "</div>";
+						                 "</div>" +
+                                   "<br>" +
+                                   "<div class='card-body' style='display:none;'>" +
+                                   "<div>"
    					 
    					 $("#notice-area").html(value);
 						      
@@ -538,6 +540,35 @@
    			})
    		})
    </script>
+   
+   <script>
+   $(document).ready(function(){
+	   
+	   $(document).on("click", "#fileTag", function(){
+           var classNum = $(".content").find("#classNum").val();  	
+
+           $.ajax({
+   			 url:"classPlanView.st",
+   			 data:{classNum:classNum},
+   			 success:function(file){
+   				 console.log("되냐고");
+   				 console.log(file);
+   				 console.log()
+   				 value = "";
+   				 
+   				 value += "<iframe src='" +  file + "'style='width:100%; height:700px;'></iframe>"	   				 
+
+   				$(".card-body").html(value);
+   				$(".card-body").show();
+   			    
+   			 }, error:function(){
+   				 console.log("안되냐고");
+   			 }
+   		 })	 
+        })
+   })
+   </script>
+	
 	
 
    

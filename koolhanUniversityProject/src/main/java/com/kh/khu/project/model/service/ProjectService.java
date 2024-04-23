@@ -62,5 +62,5 @@ public interface ProjectService {
 	// 과제등록 누락페이지 조회
 	ArrayList<StudentProject> selectStudentNoneProject(int studentNo, String classNum);
 	
-	
+	StudentProject projectFileView(int studentNo, String classNum, String pjno);
 }

@@ -124,4 +124,8 @@ public class StudentDao {
 		return (ArrayList)sqlSession.selectList("studentMapper.selectClassName", classNum);
 	}
 	
+	public Classroom classPlanView(SqlSessionTemplate sqlSession, String classNum) {
+		return sqlSession.selectOne("classMapper.classPlanView", classNum);
+	}
+	
 }

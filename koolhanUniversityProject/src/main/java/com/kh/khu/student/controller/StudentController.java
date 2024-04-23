@@ -293,4 +293,16 @@ public class StudentController {
 
 	}
 	
+	@ResponseBody
+	@RequestMapping("classPlanView.st")
+	public String classPlanView(@RequestParam(value="classNum")String classNum) {
+		System.out.println("보여지나" + classNum);
+		Classroom c = sService.classPlanView(classNum);
+		
+		String fileName = c.getChangeName();
+		
+		System.out.println(fileName);
+		return fileName;
+	}
+	
 }

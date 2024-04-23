@@ -137,4 +137,9 @@ public class StudentServiceImpl implements StudentService {
 		return sDao.updateAddress(sqlSession, s);
 	}
 
+	@Override
+	public Classroom classPlanView(String classNum) {
+		return sDao.classPlanView(sqlSession, classNum);
+	}
+
 }
