@@ -161,7 +161,7 @@
 	   			$.ajax({
 	   				url:"insertReply.bo",
 	   				data: {
-	   					replyWriter: "${loginUser.userId}",
+	   					replyWriter: "${loginUser.studentNo}",
 	   					replyContent: $("#content").val(),
 	   					refBoardNo: ${b.boardNo}
 	   					},

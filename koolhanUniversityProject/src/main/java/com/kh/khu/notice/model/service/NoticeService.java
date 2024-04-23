@@ -23,4 +23,7 @@ public interface NoticeService {
 	
 	// 공지사항 삭제
 	int deleteNotice(Notice n);
+	
+	// 메인메뉴에 상위 5개 공지사항 가져오기
+	ArrayList<Notice> selectMainList();
 }

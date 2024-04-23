@@ -5,17 +5,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.khu.student.model.vo.Absence;
+import com.kh.khu.student.model.vo.AbsenceStudent;
+import com.kh.khu.student.model.vo.AbsenceStudentResult;
 import com.kh.khu.student.model.vo.Presence;
-import com.kh.khu.classroom.model.vo.ClassDetail;
 import com.kh.khu.classroom.model.vo.ClassNotice;
 import com.kh.khu.classroom.model.vo.Classroom;
 import com.kh.khu.classroom.model.vo.Course;
 import com.kh.khu.common.model.vo.PageInfo;
+import com.kh.khu.common.template.Pagination;
+import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.student.model.vo.Student;
 
 @Repository
@@ -78,6 +80,10 @@ public class StudentDao {
 		return sqlSession.selectOne("studentMapper.selectTakeOff", a);
 	}
 	
+	public int insertTakeOff(SqlSessionTemplate sqlSession, AbsenceStudent a) {
+		return sqlSession.insert("studentMapper.insertTakeOff", a);
+	}
+	
 	public int insertReturnSchool(SqlSessionTemplate sqlSession, Presence p) {
 		return sqlSession.insert("studentMapper.insertReturnSchool", p);
 	}
@@ -126,6 +132,51 @@ public class StudentDao {
 	
 	public Classroom classPlanView(SqlSessionTemplate sqlSession, String classNum) {
 		return sqlSession.selectOne("classMapper.classPlanView", classNum);
+	}
+
+	public void insertTakeOffStudent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public AbsenceStudentResult selectTakeOffStudent(SqlSessionTemplate sqlSession, String studentId) {
+		return sqlSession.selectOne("studentMapper.selectTakeOffStudent", studentId);
+	}
+	
+	public int updatePhone(SqlSessionTemplate sqlSession, Student s) {
+		return sqlSession.update("studentMapper.updatePhone", s);
+	}
+	
+	public ArrayList<Student> selectAllStudent(SqlSessionTemplate sqlSession, PageInfo spi){
+		return (ArrayList)sqlSession.selectList("studentMapper.selectAllStudent", null, Pagination.getRowBounds(spi));
+	}
+
+	public ArrayList<Student> selectNameSearchAllStudent(SqlSessionTemplate sqlSession, PageInfo spi, String studentName){
+		return (ArrayList)sqlSession.selectList("studentMapper.selectNameSearchAllStudent", studentName, Pagination.getRowBounds(spi));
+	}
+	
+	public ArrayList<Student> selectStatusStudent(SqlSessionTemplate sqlSession, PageInfo spi, String stStatus){
+		return (ArrayList)sqlSession.selectList("studentMapper.selectStatusStudent", stStatus, Pagination.getRowBounds(spi));
+	}
+	
+	public ArrayList<Student> selectStatusNameSearchStudent(SqlSessionTemplate sqlSession, PageInfo spi, Student st){
+		return (ArrayList)sqlSession.selectList("studentMapper.selectStatusNameSearchStudent", st, Pagination.getRowBounds(spi));
+	}
+
+	public int selectStudentListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("studentMapper.selectStudentListCount");
+	}
+	
+	public int selectStudentListCount(SqlSessionTemplate sqlSession, String stStatus) {
+		return sqlSession.selectOne("studentMapper.selectStudentListCountType", stStatus);
+	}
+	
+	public int selectNameSearchStudentListCount(SqlSessionTemplate sqlSession, String studentName) {
+		return sqlSession.selectOne("studentMapper.selectNameSearchStudentListCount", studentName);
+	}
+	
+	public int selectStatusNameSearchStudentListCount(SqlSessionTemplate sqlSession, Student st) {
+		return sqlSession.selectOne("studentMapper.selectStatusNameSearchStudentListCount", st);
 	}
 	
 }

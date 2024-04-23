@@ -1,6 +1,7 @@
 package com.kh.khu.student.model.service;
 
 import com.kh.khu.student.model.vo.Absence;
+import com.kh.khu.student.model.vo.AbsenceStudent;
 import com.kh.khu.student.model.vo.Presence;
 import java.util.ArrayList;
 
@@ -58,6 +59,30 @@ public interface StudentService {
 
 	// 학생용 주소 수정
 	int updateAddress(Student s);
+	
+	int updatePhone(Student s);
+	
+	int selectStudentListCount();
+	
+	int selectStudentListCount(String stStatus);
+	
+	int selectNameSearchStudentListCount(String studentName);
+	
+	int selectStatusNameSearchStudentListCount(Student st);
+
+	ArrayList<Student> selectAllStudent(PageInfo pi);
+
+	ArrayList<Student> selectNameSearchAllStudent(PageInfo pi, String studentName);
+
+	ArrayList<Student> selectStatusStudent(PageInfo pi, String stStatus);
+	
+	ArrayList<Student> selectStatusNameSearchStudent(PageInfo pi, Student st);
+
+	int insertTakeOffStudent(AbsenceStudent s);
+
+	int getDo(String studentId);
+
+	int insertReturnStudent();
 	
 	Classroom classPlanView(String classNum);
 }

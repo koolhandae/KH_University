@@ -1,45 +1,36 @@
 package com.kh.khu.student.controller;
 
 import java.util.ArrayList;
-
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 import java.util.HashMap;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.khu.common.model.vo.Address;
-import com.kh.khu.common.template.AddressString;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.google.gson.Gson;
-import com.kh.khu.classroom.model.vo.ClassDetail;
 import com.kh.khu.classroom.model.vo.ClassNotice;
 import com.kh.khu.classroom.model.vo.Classroom;
 import com.kh.khu.classroom.model.vo.Course;
+import com.kh.khu.common.model.vo.Address;
 import com.kh.khu.common.model.vo.PageInfo;
+import com.kh.khu.common.template.AddressString;
 import com.kh.khu.common.template.Pagination;
+import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.student.model.service.StudentService;
 import com.kh.khu.student.model.vo.Absence;
+import com.kh.khu.student.model.vo.AbsenceStudent;
 import com.kh.khu.student.model.vo.Presence;
-import com.kh.khu.student.model.vo.Student;
-import com.kh.khu.student.model.service.StudentServiceImpl;
 import com.kh.khu.student.model.vo.Student;
 
 @Controller
@@ -177,27 +168,46 @@ public class StudentController {
 		return "student/certificateIssuingPage";
 	}
 	
-	
 	@RequestMapping("takeOff.do")
-	public String takeOffForm(HttpSession session) {
+	public String takeOffForm(HttpSession session, Model model) {
+		// 화면상에 버튼처리를 할 수 있는 서비스
+		Student student = (Student)session.getAttribute("loginStudent");
+		int result = sService.getDo(student.getStudentId());
 		
-//		Student s = (Student)session.getAttribute("loginStudent");
-//		System.out.println(s);
-		 return "student/studentTakeOff";
+		model.addAttribute("result", result);
+		
+		return "student/studentTakeOff";
 	}
 	
-	@RequestMapping("insertTakeOff.do")
-	public String insertTakeOff(Absence a, Model model, HttpSession session) {
-		//System.out.println(a);
-		int list = sService.insertTakeOff(a);
+	// 휴학생 데이터를 넣는다 (DB 까지)
+	@RequestMapping("takeOffForm.do")
+	public String takeOffFormMake(HttpSession session, Model model, AbsenceStudent student) {
+		int result = sService.insertTakeOffStudent(student);
 		
-		if(list > 0) {
-			session.setAttribute("alertMsg", "휴학 신청서 등록 완료");
-			return "redirect:/";
-		}else {
-			model.addAttribute("errorMsg", "휴학 신청서 등록 실패!");
-			return "common/errorPage404";
-		}
+		model.addAttribute("result", result);
+		
+		return "student/studentTakeOff";
+	}
+	
+	
+	@RequestMapping("returnSchool.do")
+	public String returnSchoolForm(HttpSession session) {
+		// 화면상에 버튼처리를 할 수 있는 서비스
+		// 휴학생만 데이터를 보일 수 있게 한다 
+		//int result = sService.getDo();
+		
+		return "student/studentReturnSchool";
+	}
+	
+	// 복학 신청 데이터를 넣는다
+	@RequestMapping("returnSchoolForm.do")
+	public String insertReturnSchool(Presence p, Model model , HttpSession session) {
+		int result = sService.insertReturnStudent();
+		
+		
+		
+		return "student/studentReturnSchool";
+
 	}
 	
 	
@@ -216,24 +226,7 @@ public class StudentController {
 		
 	}
 	
-	@RequestMapping("returnSchool.do")
-	public String returnSchoolForm(HttpSession session) {
-		return "student/studentReturnSchool";
-	}
-	
-	@RequestMapping("insertReturnSchool.do")
-	public String insertReturnSchool(Presence p, Model model , HttpSession session) {
-			
-		int list = sService.insertReturnSchool(p);
-		
-		if(list > 0) {
-			session.setAttribute("alertMsg", "복학 신청서 등록 완료");
-			return "redirect:/";
-		}else {
-			model.addAttribute("errorMsg", "복학 신청서 등록 실패!");
-			return "common/errorPage404";
-		}
-	}
+
 	
 	@RequestMapping("update.stu")
 	public String updateStudentForm() {
@@ -243,7 +236,6 @@ public class StudentController {
 	@ResponseBody
 	@RequestMapping("updateAddress.stu")
 	public HashMap<String, Object> updateAddress(Address a, String studentId, HttpSession session) {
-		System.out.println("자바왔냐");
 		String newAddress = AddressString.AddressMake(a);
 		Student s = new Student();
 		s.setStudentId(studentId);
@@ -290,7 +282,80 @@ public class StudentController {
 		//System.out.println("classPlan=" + c);
 	
 		return c;
-
+	}
+	
+	@ResponseBody
+	@RequestMapping("updatePhone.stu")
+	public String updatePhone(Student s, HttpSession session) {
+		int result = sService.updatePhone(s);
+		session.removeAttribute("loginStudent");
+		Student newSt = sService.loginStudent(s);
+		session.setAttribute("loginStudent", newSt);
+		return result > 0 ? "NNNNY" : "NNNNN";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="userList.stu", produces="application/json; charset=utf-8")
+	public ResponseEntity<HashMap<String,Object>> selectStudentList(int cpage, Student st) {
+		int studentListCount = 0;
+		int pageLimit = 3;
+		int boardLimit = 2;
+		PageInfo newSpi;
+		ArrayList<Student> sList;
+		if(st.getStudentName().equals("")) {
+			switch(st.getStStatus()) {
+				case "all":
+					studentListCount = sService.selectStudentListCount();
+					newSpi = Pagination.getPageInfo(studentListCount, cpage, pageLimit, boardLimit);
+					sList = sService.selectAllStudent(newSpi);
+					break;
+				default:
+					studentListCount = sService.selectStudentListCount(st.getStStatus());
+					newSpi = Pagination.getPageInfo(studentListCount, cpage, pageLimit, boardLimit);
+					sList = sService.selectStatusStudent(newSpi, st.getStStatus());
+					break;
+			}
+		} 
+		else {
+			switch(st.getStStatus()) {
+			case "all":
+				studentListCount = sService.selectNameSearchStudentListCount(st.getStudentName());
+				newSpi = Pagination.getPageInfo(studentListCount, cpage, pageLimit, boardLimit);
+				sList = sService.selectNameSearchAllStudent(newSpi, st.getStudentName());
+				break;
+			default:
+				studentListCount = sService.selectStatusNameSearchStudentListCount(st);
+				newSpi = Pagination.getPageInfo(studentListCount, cpage, pageLimit, boardLimit);
+				sList = sService.selectStatusNameSearchStudent(newSpi, st);
+				break;
+			}
+		}
+		
+		for (Student s : sList) {
+			switch (s.getStStatus()) {
+			case "Y":
+				s.setStStatus("재학");
+				break;
+			case "N":
+				s.setStStatus("자퇴");
+				break;
+			case "H":
+				s.setStStatus("휴학");
+				break;
+			case "Z":
+				s.setStStatus("제적");
+				break;
+			case "J":
+				s.setStStatus("졸업");
+				break;
+			}
+		}
+		HashMap<String, Object> response = new HashMap<>();
+        response.put("sList", sList);
+        response.put("spi", newSpi);
+        response.put("listCount", studentListCount);
+        response.put("searchName", st.getStudentName());
+        return ResponseEntity.ok(response);
 	}
 	
 	@ResponseBody

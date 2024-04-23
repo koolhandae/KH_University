@@ -37,36 +37,51 @@
 	<resultMap type="Absence" id="absenceResult">
 		<result column="abs_no" property="absNo"/>
 		<result column="abs_id" property="absId"/>
+		<result column="abs_start" property="absStart"/>	
+		<result column="abs_end" property="absEnd"/>	
 		<result column="abs_semester" property="absSemester"/>	
-		<result column="abs_grade" property="absGrade"/>	
 		<result column="abs_sort" property="absSort"/>	
-		<result column="abs_status" property="absStatus"/>	
+		<result column="abs_insert" property="absInsert"/>	
+		<result column="abs_update" property="absUpdate"/>	
 	</resultMap>
 	
 	<resultMap type="Presence" id="presenceResult">
 		<result column="pre_no" property="preNo"/>
 		<result column="pre_id" property="preId"/>
+		<result column="pre_year" property="preYear"/>	
 		<result column="pre_semester" property="preSemester"/>	
-		<result column="pre_grade" property="preGrade"/>	
-		<result column="pre_status" property="preStatus"/>	
+		<result column="tb_status" property="tbStatus"/>	
 	</resultMap>
+
+ 	<resultMap type="AbsenceStudentResult" id="absenceStudentResult">
+ 		<result column="student_no" property="studentNo" /> 
+		<result column="abs_no" property="absNo"/> 
+		<result column="abs_id" property="absId"/> 
+		<result column="abs_start" property="absStart"/> 
+		<result column="abs_end" property="absEnd"/> 
+		<result column="abs_semester" property="absSemester"/> 
+		<result column="tb_status" property="tbStatus"/> 
+		<result column="abs_sort" property="absSort"/> 
+		<result column="abs_insert" property="absInsert"/> 
+		<result column="abs_update" property="absUpdate"/>   
+	</resultMap> 
 
 <select id="loginStudent" resultMap="studentResult">
 	select 
-       student_no
-     , student_id
-     , student_pwd
-     , student_name
-     , student_ssn
-     , s_phone
-     , s_email
-     , s_address
-     , enroll_date
-     , absence_date
-     , grad_date
-  from student
- where student_id = #{studentId}
-   and s_status = 'Y'
+	       student_no
+	     , student_id
+	     , student_pwd
+	     , student_name
+	     , student_ssn
+	     , s_phone
+	     , s_email
+	     , s_address
+	     , enroll_date
+	     , absence_date
+	     , grad_date
+	  from student
+	 where student_id = #{studentId}
+	   and s_status = 'Y'
 </select>
 
 <insert id="insertTakeOff">
@@ -75,17 +90,25 @@
 	  (
 	    abs_no
 	  , abs_id
+	  , abs_start
+	  , abs_end
 	  , abs_semester
-	  , abs_grade
 	  , abs_sort
+	  , abs_status
+	  , abs_insert
+	  , abs_update
 	  )
 	  values
 	  (	
 	  	#{absNo}
 	  , #{absId}
+	  , #{absStart}
+	  , #{absEnd}
 	  , #{absSemester}
-	  , #{absGrade}
 	  , #{absSort}
+	  , #{absStatus}
+	  , sysdate
+	  , sysdate
 	  )
 </insert>
 
@@ -97,6 +120,7 @@
 	  , pre_id
 	  , pre_semester
 	  , pre_grade
+
 	  )
 	  values
 	  (
@@ -116,6 +140,24 @@
 	  from absence
 	  join student on (student_no = abs_no)
 	 where s_status = 'Y'	  
+</select>
+
+<select id="selectTakeOffStudent" resultMap="absenceStudentResult">
+	select
+	       student_no
+	     , abs_no
+	     , abs_id
+	     , abs_start
+	     , abs_end
+	     , abs_semester
+	     , tb_status
+	     , abs_sort
+	     , abs_insert
+	     , abs_update
+	  from absence
+	  join student on (student_no = abs_no)
+	 where s_status = 'Y'	  
+	 and abs_id = #{absId}
 </select>
 
 	<!-- 누구껀지확인부탁! 동석, 도현, 수지 아님 혹시 연뎡..? 하하
@@ -182,7 +224,28 @@
 	</select>
 
 
-<select id="selectCourseList" resultMap="courseResult">
+	<select id="selectCourseList" resultMap="courseResult">
+			select
+			       course_no
+			     , class_no
+			     , class_grade
+			     , course_semester
+			     , class_name
+			     , class_room
+			     , class_time
+			     , class_score
+		         , class_typename
+		         , class_people
+		         , class_num
+		  from course
+			  join class using (class_no)
+		      join class_type using (class_type)
+			 where student_no = ${studentNo}
+			   and course_year = '2024'
+			   and class.class_status = 'Y'
+</select>
+	
+	<select id="searchCourse" resultMap="courseResult">
 		select
 		       course_no
 		     , class_no
@@ -195,49 +258,114 @@
 	         , class_typename
 	         , class_people
 	         , class_num
+	  from course
+		  join class using (class_no)
+		  join class_type using (class_type)
+		 where course_year = 2024
+	       and class_no = #{courseValue}
+       and student_no = #{studentNo}
+	</select>
+	
+	<select id="selectClassName" resultMap="courseResult">
+		select 
+		       class_name
 		  from course
 		  join class using (class_no)
-	      join class_type using (class_type)
-		 where student_no = ${studentNo}
-		   and course_year = '2024'
-		   and class.class_status = 'Y'
-</select>
+		 where course_status = 'Y'
+		   and class.class_num = #{classNum}
+	</select>
+	
+	<update id="updateAddress">
+		update student
+		   set s_address = #{stAddress}
+		 where student_id = #{studentId}
+	</update>
+	
+	<update id="updatePhone">
+		update student
+		set s_phone = #{stPhone}
+		where student_id = #{studentId}
+	</update>
+	
+	<select id="selectAllStudent" resultMap="studentResult">
+		select
+			   student_no
+			 , student_name
+			 , student_id
+			 , s_phone
+			 , s_status  
+		  from student
+		 order
+		    by student_no desc	   
+	</select>
+	
+	<select id="selectNameSearchAllStudent" resultMap="studentResult">
+		select
+			   student_no
+			 , student_name
+			 , student_id
+			 , s_phone
+			 , s_status  
+		  from student
+		 where student_name like '%' || #{studentName} || '%'
+		 order
+		    by student_no desc	   
+	</select>
+		
+	<select id="selectStatusStudent" resultMap="studentResult">
+		select
+			   student_no
+			 , student_name
+			 , student_id
+			 , s_phone
+			 , s_status  
+		  from student
+		 where s_status = #{stStatus}
+		 order
+		    by student_no desc	   
+	</select>
 
-<select id="searchCourse" resultMap="courseResult">
-	select
-	       course_no
-	     , class_no
-	     , class_grade
-	     , course_semester
-	     , class_name
-	     , class_room
-	     , class_time
-	     , class_score
-         , class_typename
-         , class_people
-         , class_num
-	  from course
-	  join class using (class_no)
-	  join class_type using (class_type)
-	 where course_year = 2024
-       and class_no = #{courseValue}
-       and student_no = #{studentNo}
-</select>
+	<select id="selectStatusNameSearchStudent" resultMap="studentResult">
+		select
+			   student_no
+			 , student_name
+			 , student_id
+			 , s_phone
+			 , s_status  
+		  from student
+		 where s_status = #{stStatus}
+		   and student_name like '%' || #{studentName} || '%'
+		 order
+		    by student_no desc	   
+	</select>
 
-<select id="selectClassName" resultMap="courseResult">
-	select 
-	       class_name
-	  from course
-	  join class using (class_no)
-	 where course_status = 'Y'
-	   and class.class_num = #{classNum}
-</select>
+	<select id="selectStudentListCount" resultType="_int">
+		select
+			   count(*)
+		  from student
+	</select>
 
-<update id="updateAddress">
-	update student
-	   set s_address = #{stAddress}
-	 where student_id = #{studentId}
-</update>
+	<select id="selectStudentListCountType" resultType="_int">
+		select
+			   count(*)
+		  from student
+		 where s_status = #{stStatus}
+	</select>
+
+	<select id="selectNameSearchStudentListCount" resultType="_int">
+		select
+			   count(*)
+		  from student
+		 where student_name like '%' || #{studentName} || '%'
+	</select>
+
+	<select id="selectStatusNameSearchStudentListCount" resultType="_int">
+		select
+			   count(*)
+		  from student
+		 where student_name like '%' || #{studentName} || '%'
+		   and s_status = #{stStatus}
+	</select>
 
 
 <!-- 과제등록시 인서트를 위한 번호 조회 -->
@@ -250,5 +378,5 @@
 	
 	
 	
-	
+
 </mapper>

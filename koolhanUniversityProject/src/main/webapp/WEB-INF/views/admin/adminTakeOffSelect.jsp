@@ -23,6 +23,7 @@
 	hr{
       width: 1000px;
     }
+    
 	
 </style>
 </head>
@@ -32,42 +33,54 @@
    	<div class="innerOuter">
    	
    		<div class="tuitionBtn" align="center";>
-   		<a class="btn btn-primary btn-lg"  href="takeOff.do" roll="button" style="background-color:rgb(48, 76, 121)">휴학 신청</a>
+   		<a class="btn btn-primary btn-lg"  href="admintakeOffSelect.me" roll="button" style="background-color:rgb(48, 76, 121)">휴학 신청</a>
    		   <span style="margin-left: 40px; margin-right: 40px;"></span>
-   		<a class="btn btn-primary btn-lg"  href="turnSchool.do" roll="button" style="background-color:rgb(48, 76, 121)">복학 신청</a>  
+   		<a class="btn btn-primary btn-lg"  href="adminReturnSchool.me" roll="button" style="background-color:rgb(48, 76, 121)">복학 신청</a>  
     </div>
       <br><br><br>
    	
    		<h2 style="margin-left: 290px; font-weight:900; color: rgb(75,75,75);">휴학 신청 처리</h2>
    		<hr><br>
    		
-   		<table id="boardList" class="selectTuition table" style="width: 900px; margin: auto;">
-   			<thead>
-	   		  <tr>
-	   		  	<th>신청일자</th>
-	   		  	<th>신청자 학번</th>
-	   		  	<th>구분</th>
-	   		  	<th>시작학기</th>
-	   		  	<th>종료학기</th>
-	   		  	<th>신청서 확인</th>
-	   		  </tr>
-	   		</thead>
-	   		
-	   		<tbody> 
-	   		  <c:forEach var="a" items="${ list }">
+   		<form action="admintakeOffSelectForm.me" method="post">
+	   		<table id="boardList" class="selectTuition table" style="width: 900px; margin: auto;">
+	   			<thead align="center">
 		   		  <tr>
-		   		  	<td>${ a.absDate }</td>
-		   		  	<td>${ a.absNo }</td>
-		   		  	<td>${ a.absSort }</td>
-		   		  	<td>2024년도 1학기</td>
-		   		  	<td>${ a.absSemester }</td>
-		   		  	<td id="takeOffSelect" location href="">조회</td>
+		   		  	<th>신청일자</th>
+		   		  	<th>학번</th>
+		   		  	<th>구분</th>
+		   		  	<th>시작학기</th>
+		   		  	<th>종료학기</th>
+		   		  	<th>신청상태</th>
+		   		  	<th>처리</th>
 		   		  </tr>
-		   		  </c:forEach>
-	   		</tbody>
-   		  </table>
+		   		</thead>
+		   		
+		   		<tbody align="center"> 
+		   			  <c:forEach var="item" items="${list}">
+			   		  <tr>
+			   		  	<td>${item.absInsert}</td>
+			   		  	<td>${item.absId}</td>
+			   		  	<td>${item.absSort} </td>
+			   		  	<td>${item.absStart}</td>
+			   		  	<td>${item.absEnd}</td>
+			   		  	<td>
+			   		  		${item.tbStatus}
+			   		  	</td>
+			   		  	<td>
+			   		  		<input type="hidden" name="absId" value="${item.absId}" />
+			   		  		<input type="submit" value="승인" >
+			   		  	</td>
+			   		  </tr>
+			   		 
+	            	</c:forEach>
+		   		</tbody>
+	   		  </table>
+   		  </form>
    		  <br>
-   	
+   	<script>
+
+   	</script>
    	</div>
       
    </div>
