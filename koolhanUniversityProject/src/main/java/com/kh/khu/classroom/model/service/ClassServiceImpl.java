@@ -67,13 +67,13 @@ public class ClassServiceImpl implements ClassService{
 	}
 
 	@Override
-	public int classBoardCount(String bno) {
-		return cDao.classBoardCount(sqlSession, bno);
+	public int classBoardCount(String bno, String classNum) {
+		return cDao.classBoardCount(sqlSession, bno, classNum);
 	}
 
 	@Override
-	public ClassBoard selectClassDetailBoard(String bno) {
-		return cDao.selectClassDetailBoard(sqlSession, bno);
+	public ClassBoard selectClassDetailBoard(String bno, String classNum) {
+		return cDao.selectClassDetailBoard(sqlSession, bno, classNum);
 	}
 
 

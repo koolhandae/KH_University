@@ -45,22 +45,23 @@ public class StudentDao {
 	}
 	
 	/* 학생 수강 강의 조회*/
-	public ArrayList<Course> selectCourseList(SqlSessionTemplate sqlsession, String studentId){
-		
-		return (ArrayList)sqlsession.selectList("studentMapper.selectCourseList", studentId);
+	public ArrayList<Course> selectCourseList(SqlSessionTemplate sqlsession, int studentNo){	
+		return (ArrayList)sqlsession.selectList("studentMapper.selectCourseList", studentNo);
 	}
 	
 	/* 학생 수강 강의 검색*/
-	public Course searchCourse(SqlSessionTemplate sqlSession, String courseValue) {
-
-		System.out.println("sDao" + sqlSession.selectOne("studentMapper.searchCourse", courseValue));
-		
-		return sqlSession.selectOne("studentMapper.searchCourse", courseValue);
+	public Course searchCourse(SqlSessionTemplate sqlSession, String courseValue, String studentNo) {
+		Map<String, String> parameters = new HashMap();
+	    parameters.put("courseValue", courseValue);
+	    parameters.put("studentNo", studentNo);
+	    
+	    System.out.println(parameters);
+		return sqlSession.selectOne("studentMapper.searchCourse", parameters);
 	}
 	
 	/* 학생 수강 강의 세부 조회 (공지사항) 개수*/
 	public int selectListCount(SqlSessionTemplate sqlSession, String classNum) {
-		System.out.println("DaoclassNum = " + classNum);
+		//System.out.println("DaoclassNum = " + classNum);
 		return sqlSession.selectOne("classMapper.selectListCount", classNum);
 	}
 	
@@ -103,13 +104,21 @@ public class StudentDao {
 	}
 	
 	/* 학생 수강 강의 세부 조회 (공지사항 디테일 조회수)*/
-	public int increaseCount(SqlSessionTemplate sqlSession, String cno) {
-		return sqlSession.update("classMapper.increaseCount", cno);
+	public int increaseCount(SqlSessionTemplate sqlSession, String classNum, String cno) {
+		Map<String, String> parameters = new HashMap();
+	    parameters.put("classNum", classNum);
+	    parameters.put("cno", cno);
+		return sqlSession.update("classMapper.increaseCount", parameters);
 	}
 	
 	/* 학생 수강 강의 세부 조회 (공지사항 디테일뷰)*/
-	public ClassNotice selectClassNoticeDetail(SqlSessionTemplate sqlSession, String cno) {
-		return sqlSession.selectOne("classMapper.selectClassNoticeDetail", cno);
+	public ClassNotice selectClassNoticeDetail(SqlSessionTemplate sqlSession, String classNum, String cno) {
+		
+		Map<String, Object> parameters = new HashMap();
+		parameters.put("classNum", classNum);
+		parameters.put("cno", cno);
+		
+		return sqlSession.selectOne("classMapper.selectClassNoticeDetail", parameters);
 	}
 	
 	/* 학생 수강 강의계획서 조회 */
@@ -117,8 +126,12 @@ public class StudentDao {
 		return sqlSession.selectOne("classMapper.selectCoursePlan", classNum);
 	}
 	
-	public Course selectClassName(SqlSessionTemplate sqlSession, String classNum) {
-		return sqlSession.selectOne("studentMapper.selectClassName", classNum);
+	public ArrayList<Course> selectClassName(SqlSessionTemplate sqlSession, String classNum) {
+		return (ArrayList)sqlSession.selectList("studentMapper.selectClassName", classNum);
+	}
+	
+	public Classroom classPlanView(SqlSessionTemplate sqlSession, String classNum) {
+		return sqlSession.selectOne("classMapper.classPlanView", classNum);
 	}
 
 	public void insertTakeOffStudent() {

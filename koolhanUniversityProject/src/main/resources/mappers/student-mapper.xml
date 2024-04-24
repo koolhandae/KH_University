@@ -20,8 +20,8 @@
 	
 	<resultMap id="courseResult" type="Course">
 		<result column="course_no" property="courseNo"/>
-		<result column="class_num" property="classNum"/>
-		<result column="student_id" property="studentId"/>
+		<result column="class_no" property="classNo"/>
+		<result column="student_no" property="studentNo"/>
 		<result column="course_year" property="courseYear"/>
 		<result column="course_semester" property="courseSemester"/>
 		<result column="class_grade" property="classGrade"/>
@@ -31,6 +31,7 @@
 		<result column="class_score" property="classScore"/>
 		<result column="class_typename" property="classTypeName"/>
 		<result column="class_people" property="classPeople"/>
+		<result column="class_num" property="classNum"/>
 	</resultMap>	
 		
 	<resultMap type="Absence" id="absenceResult">
@@ -226,7 +227,7 @@
 	<select id="selectCourseList" resultMap="courseResult">
 			select
 			       course_no
-			     , class_num
+			     , class_no
 			     , class_grade
 			     , course_semester
 			     , class_name
@@ -235,17 +236,19 @@
 			     , class_score
 		         , class_typename
 		         , class_people
-			  from course
-			  join class using (class_num)
+		         , class_num
+		  from course
+			  join class using (class_no)
 		      join class_type using (class_type)
-			 where student_id = #{studentId}
+			 where student_no = ${studentNo}
 			   and course_year = '2024'
-	</select>
+			   and class.class_status = 'Y'
+</select>
 	
 	<select id="searchCourse" resultMap="courseResult">
 		select
 		       course_no
-		     , class_num
+		     , class_no
 		     , class_grade
 		     , course_semester
 		     , class_name
@@ -254,20 +257,22 @@
 		     , class_score
 	         , class_typename
 	         , class_people
-		  from course
-		  join class using (class_num)
+	         , class_num
+	  from course
+		  join class using (class_no)
 		  join class_type using (class_type)
 		 where course_year = 2024
-	       and class_num = #{courseNum}
+	       and class_no = #{courseValue}
+       and student_no = #{studentNo}
 	</select>
 	
 	<select id="selectClassName" resultMap="courseResult">
 		select 
 		       class_name
 		  from course
-		  join class using (class_num)
+		  join class using (class_no)
 		 where course_status = 'Y'
-		   and class_num = #{classNum}
+		   and class.class_num = #{classNum}
 	</select>
 	
 	<update id="updateAddress">
@@ -369,4 +374,16 @@
 		 where s_status = #{stStatus}
 	</select>
 	
+
+<!-- 과제등록시 인서트를 위한 번호 조회 -->
+<select id="selectCourseStudent" resultMap="courseResult">
+	select 
+	       student_no
+	  from course
+	 where class_no = ${classNo}
+</select>
+	
+	
+	
+
 </mapper>

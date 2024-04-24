@@ -50,11 +50,9 @@ public class StudentController {
 	
 	@ResponseBody
 	@RequestMapping(value="selectCourse.st", produces="application/json; charset=utf-8")
-	public ArrayList<Course>  selectCourseList(String studentId) {
+	public ArrayList<Course>  selectCourseList(int studentNo) {
 
-	System.out.println(studentId);	
-	
-	ArrayList<Course> list = sService.selectCourseList(studentId);
+	ArrayList<Course> list = sService.selectCourseList(studentNo);
 	
 	//System.out.println("courseList = " + list);
 
@@ -64,10 +62,13 @@ public class StudentController {
 	
 	@ResponseBody
 	@RequestMapping(value="searchCourse.st", produces="application/json; charset=utf-8")
-	public Course searchCourse(String courseValue) {		
+	public Course searchCourse(@RequestParam(value="courseValue") String courseValue,
+			                   @RequestParam(value="studentNo")String studentNo) {		
 		
+		System.out.println(courseValue);
+		System.out.println(studentNo);
         Course c = new Course();  
-		c = sService.searchCourse(courseValue);
+		c = sService.searchCourse(courseValue, studentNo);
 		System.out.println("searchCourse = " + c);
 		
 		return c;
@@ -75,19 +76,29 @@ public class StudentController {
 	
 	@ResponseBody
 	@RequestMapping(value="notice.co", produces="application/json; charset=utf-8")
-	public ModelAndView selectListCount(@RequestParam(value="cpage", defaultValue="1")int currentPage, String classNum, ModelAndView mv) {
+	public ModelAndView selectListCount(@RequestParam(value="cpage", defaultValue="1")int currentPage, 
+			                            @RequestParam(value="classNum")String classNum, ModelAndView mv, HttpSession session) {
 		
-		System.out.println("classNum = " + classNum);
+		//System.out.println("CONclassNum = " + classNum);
 		
-		Course c = sService.selectClassName(classNum);
+		ArrayList<Course> c = sService.selectClassName(classNum);
 		
-		String className = c.getClassName();
+		//System.out.println("course" + c);
+			
+		String className = c.get(0).getClassName();
 
 		int listCount = sService.selectListCount(classNum);		
+		
+		 
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+		
+		//System.out.println(pi);
+		
 		ArrayList<ClassNotice> list = sService.selectClassNoticeList(pi, classNum);
 		
-		mv.addObject("pi", pi).addObject("list", list).addObject("classNum", classNum).addObject("className",className).setViewName("student/studentClassDetail");
+		session.setAttribute("classNum", classNum);
+		
+		mv.addObject("pi", pi).addObject("list", list).addObject("className",className).setViewName("student/studentClassDetail");
 		return mv;
 		
 	}
@@ -244,13 +255,14 @@ public class StudentController {
 	}
 	
 	@RequestMapping("noticeDetail.co")
-	public String searchDetailClass(String cno, Model model) {
-		int noticeCount = sService.increaseCount(cno);
+	public String searchDetailClass(@RequestParam(value="classNum") String classNum,
+			                        @RequestParam(value="cno")String cno, Model model) {
+		int noticeCount = sService.increaseCount(classNum, cno);
 		
-		System.out.println("noticeCount" + noticeCount);
+		//System.out.println("noticeCount" + noticeCount);
 		
 		if(noticeCount>0) {
-			ClassNotice cd  = sService.selectClassNoticeDetail(cno);
+			ClassNotice cd  = sService.selectClassNoticeDetail(classNum, cno);
 			model.addAttribute("cd", cd);
 			
 			return "student/studentClassNoticeDetail";
@@ -264,9 +276,10 @@ public class StudentController {
 	@RequestMapping(value="classPlan.co", produces="application/json; charset=utf-8")
 	public Classroom selectCoursePlan(String classNum){
 		
+		//System.out.println(classNum);
 		Classroom c = sService.selectCoursePlan(classNum);
 		
-		System.out.println("classPlan=" + c);
+		//System.out.println("classPlan=" + c);
 	
 		return c;
 	}
@@ -363,6 +376,19 @@ public class StudentController {
 		map.put("leaveStu", leaveStu);
 		
 		return map;
+
+	}
+
+	@ResponseBody
+	@RequestMapping("classPlanView.st")
+	public String classPlanView(@RequestParam(value="classNum")String classNum) {
+		System.out.println("보여지나" + classNum);
+		Classroom c = sService.classPlanView(classNum);
+		
+		String fileName = c.getChangeName();
+		
+		System.out.println(fileName);
+		return fileName;
 	}
 	
 }
