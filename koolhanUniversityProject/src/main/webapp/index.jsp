@@ -34,7 +34,7 @@
 			<%-- <jsp:forward page="WEB-INF/views/admin/adminUpdateForm.jsp" /> --%>
 			<%-- 교수 개인정보 수정 --%>
 				<%-- <jsp:forward page="WEB-INF/views/common/mypage.jsp" /> --%>
-				<%-- <jsp:forward page="WEB-INF/views/common/pagination_testing.jsp" /> --%>
+<%-- 				<jsp:forward page="WEB-INF/views/common/pagination_testing.jsp" /> --%>
 
 
 

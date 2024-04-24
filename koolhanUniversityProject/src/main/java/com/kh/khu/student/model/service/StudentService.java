@@ -83,4 +83,6 @@ public interface StudentService {
 	int getDo(String studentId);
 
 	int insertReturnStudent();
+	
+	int selectNumberOfStudents(String stStatus);
 }

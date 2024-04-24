@@ -166,4 +166,8 @@ public class StudentDao {
 		return sqlSession.selectOne("studentMapper.selectStatusNameSearchStudentListCount", st);
 	}
 	
+	public int selectNumberOfStudent(SqlSessionTemplate sqlSession, String stStatus) {
+		return sqlSession.selectOne("studentMapper.selectNumberOfStudent",stStatus);
+	}
+	
 }

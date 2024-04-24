@@ -362,4 +362,11 @@
 		   and s_status = #{stStatus}
 	</select>
 
+	<select id="selectNumberOfStudent" resultType="_int">
+		select
+		       count(*)
+		  from student
+		 where s_status = #{stStatus}
+	</select>
+	
 </mapper>

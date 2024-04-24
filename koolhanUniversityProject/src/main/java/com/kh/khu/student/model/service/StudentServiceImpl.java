@@ -217,6 +217,11 @@ public class StudentServiceImpl implements StudentService {
 		return 0;
 	}
 
+	@Override
+	public int selectNumberOfStudents(String stStatus) {
+		return sDao.selectNumberOfStudent(sqlSession, stStatus);
+	}
+
 
 
 

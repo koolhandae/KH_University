@@ -8,9 +8,11 @@
 
 			<meta charset="UTF-8">
 			<title>Insert title here</title>
+			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 			<!-- 다음 주소 -->
 			<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 			<!-- 구글 제이쿼리 스니펫 -->

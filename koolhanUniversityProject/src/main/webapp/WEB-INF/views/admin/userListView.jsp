@@ -36,11 +36,12 @@
 }
 
 .text {
-	width: 70%;
+	width: auto;
+	min-width: 250px;
 }
 
 .searchBtn {
-	Width: 20%;
+	width: auto;
 }
 
 #studentPaging li:hover, #memberPaging li:hover {
@@ -67,15 +68,16 @@
 			<div id="userOuter"
 				style="display: flex; justify-content: space-between;">
 				<div id="students">
-					<div id="studentSearchForm"align="center">
+					<div id="studentSearchForm" style="display:flex; justify-content: space-around;">
 						<div class="text">
 							<input type="text" id="studentSearchInput" class="form-control"
 								placeholder="검색할 학생의 이름을 입력하세요">
 						</div>
 						<button type="button" class="searchBtn btn btn-secondary" onclick="loadStudentPage(1)">검색</button>
 						<input id="statusIdentifier" type="hidden" value="all"/>
+   						<button type="button" id="draw" class="btn btn-primary">통계 그래프</button>
 					</div>
-					
+					<canvas id="myChart" width="400" height="400" style="display:none; padding: 20px;"></canvas>
 					<div class="student-navigator">
 						<button id="allStudent" class="stu-nav-item btn" onclick="changeStudentStatus('all');"
 							style="background-color: #1c4587; color: white;">전체</button>
@@ -111,6 +113,7 @@
 							</c:forEach>
 						</tbody>
 					</table>
+					
 					<br>
 
 					<div id="pagingArea">
@@ -137,8 +140,9 @@
 					</div>
 				</div>
 
+
 				<div id="members">
-					<div id="memberSearchForm" style="display: flex;">
+					<div id="memberSearchForm"  style="display:flex; justify-content: space-around;">
 						<div class="text">
 							<input type="text" class="form-control" id="memberSearchInput"
 								placeholder="검색할 교직원의 이름을 입력하세요.">
@@ -179,6 +183,7 @@
 							</c:forEach>
 						</tbody>
 					</table>
+					
 					<br>
 
 					<div id="pagingAreaMe">
@@ -378,7 +383,48 @@
 				"color" : "white"
 			})
 		});
-	</script>
+
+		$("#draw").click(function(){
+    		$.ajax({
+    			url:"statistic.stu",
+    			success:function(response){
+    				$("#myChart").css("display", "block");
+    				var ctx = document.getElementById('myChart').getContext('2d');
+    		        var myChart = new Chart(ctx, {
+    		            type: 'pie',
+    		            data: {
+    		                labels: ['재학생', '휴학생', '제적생', '졸업생', '자퇴생'],
+    		                datasets: [{
+    		                    label: '학생 통계',
+    		                    data: [response.attendStu, response.absenceStu, response.expelledStu, response.gradStu, response.leaveStu],
+    		                    backgroundColor: [
+    		                    	'rgba(255, 99, 132, 0.5)',
+    		                        'rgba(54, 162, 235, 0.5)',
+    		                        'rgba(255, 206, 86, 0.5)',
+    		                        'rgba(75, 192, 192, 0.5)',
+    		                        'rgba(153, 102, 255, 0.5)'
+    		                    ],
+    		                    borderColor: [
+    		                        'rgba(255, 99, 132, 1)',
+    		                        'rgba(54, 162, 235, 1)',
+    		                        'rgba(255, 206, 86, 1)',
+    		                        'rgba(75, 192, 192, 1)',
+    		                        'rgba(153, 102, 255, 1)'
+    		                        ],
+    		                    borderWidth: 1,
+    		                    options: {
+    		                        
+    		                    }
+    		                }]
+    		            },
+    		        });	
+    			},
+    			error:function(){
+    				console.log("sdsdsd")
+    			},
+    		});
+    	});
+    </script>
 
 	<jsp:include page="../common/footer.jsp" />
 </body>
