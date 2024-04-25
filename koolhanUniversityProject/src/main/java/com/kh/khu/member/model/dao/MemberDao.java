@@ -5,10 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.khu.common.model.vo.PageInfo;
+import com.kh.khu.common.template.Pagination;
 import com.kh.khu.member.model.vo.AdminTuition;
 import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.member.model.vo.MemberAbsence;
@@ -51,7 +52,39 @@ public class MemberDao {
 	public int updateAddress(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updateAddress",m);
 	}
+	
+	public ArrayList<Member> selectAllMember(SqlSessionTemplate sqlSession, PageInfo mpi){
+		return (ArrayList)sqlSession.selectList("memberMapper.selectAllMember", null, Pagination.getRowBounds(mpi));
+	}
 
+	public ArrayList<Member> selectAllMemberType(SqlSessionTemplate sqlSession, PageInfo mpi, String meType){
+		return (ArrayList)sqlSession.selectList("memberMapper.selectAllMemberType", meType, Pagination.getRowBounds(mpi));
+	}
+	
+	public ArrayList<Member> selectNameSearchAllMember(SqlSessionTemplate sqlSession, PageInfo mpi, String memberName){
+		return (ArrayList)sqlSession.selectList("memberMapper.selectNameSearchAllMember", memberName, Pagination.getRowBounds(mpi));
+	}
+	
+	public ArrayList<Member> selectNameSearchTypeMember(SqlSessionTemplate sqlSession, PageInfo mpi, Member m){
+		return (ArrayList)sqlSession.selectList("memberMapper.selectNameSearchTypeMember", m, Pagination.getRowBounds(mpi));
+	}
+	
+	public int selectMemberListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("memberMapper.selectMemberListCount");
+	}
+	
+	public int selectMemberListCount(SqlSessionTemplate sqlSession, String meType) {
+		return sqlSession.selectOne("memberMapper.selectMemberListCountType", meType);
+	}
+	
+	public int selectNameSearchMemberListCount(SqlSessionTemplate sqlSession, String memberName) {
+		return sqlSession.selectOne("memberMapper.selectNameSearchMemberListCount", memberName);
+	}
+	
+	public int selectNameSearchTypeMemberListCount(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.selectNameSearchTypeMemberListCount", m);
+	}
+	
 	public List<MemberPresence> getReturnStudent(SqlSessionTemplate sqlSession) {
 		// TODO 새로 만들어진 복학신청자 데이터를 가져옵니다 
 		return (ArrayList)sqlSession.selectList("memberMapper.selectPresenceStudent");

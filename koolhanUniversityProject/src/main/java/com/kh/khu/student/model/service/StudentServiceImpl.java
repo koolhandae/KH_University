@@ -51,21 +51,21 @@ public class StudentServiceImpl implements StudentService {
 
 	/* 학생 수강 강의 조회 */
 	@Override
-	public ArrayList<Course> selectCourseList(String studentId) {
-		return sDao.selectCourseList(sqlSession, studentId);
+	public ArrayList<Course> selectCourseList(int studentNo) {
+		return sDao.selectCourseList(sqlSession, studentNo);
 	}
 
 	/* 학생 수강 강의 검색 */
 	@Override
-	public Course searchCourse(String courseValue) {
-		return sDao.searchCourse(sqlSession, courseValue);
+	public Course searchCourse(String courseValue, String studentNo) {
+		return sDao.searchCourse(sqlSession, courseValue, studentNo);
 	}
 
 	/* 학생 수강 강의 세부 조회 (공지사항) 개수 */
 	@Override
 	public int selectListCount(String classNum) {
 
-		System.out.println("serviceclassNum = " + classNum);
+		//System.out.println("serviceclassNum = " + classNum);
 		return sDao.selectListCount(sqlSession, classNum);
 	}
 	
@@ -77,14 +77,14 @@ public class StudentServiceImpl implements StudentService {
 	
 	/* 학생 수강 강의 세부 조회 (공지사항 디테일 조회수)*/
 	@Override
-	public int increaseCount(String cno) {
-		return sDao.increaseCount(sqlSession, cno);
+	public int increaseCount(String classNum, String cno) {
+		return sDao.increaseCount(sqlSession, classNum, cno);
 	}
 	
 	/* 학생 수강 강의 세부 조회 (공지사항 디테일뷰)*/
 	@Override
-	public ClassNotice selectClassNoticeDetail(String cno) {
-		return sDao.selectClassNoticeDetail(sqlSession, cno);
+	public ClassNotice selectClassNoticeDetail(String classNum, String cno) {
+		return sDao.selectClassNoticeDetail(sqlSession, classNum, cno);
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public Course selectClassName(String classNum) {
+	public ArrayList<Course> selectClassName(String classNum) {
 		return sDao.selectClassName(sqlSession, classNum);
 	}
 
@@ -130,6 +130,51 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
+	public int updatePhone(Student s) {
+		return sDao.updatePhone(sqlSession, s);
+	}
+
+	@Override
+	public ArrayList<Student> selectAllStudent(PageInfo spi) {
+		return sDao.selectAllStudent(sqlSession, spi);
+	}
+
+	@Override
+	public ArrayList<Student> selectNameSearchAllStudent(PageInfo pi, String studentName) {
+		return sDao.selectNameSearchAllStudent(sqlSession,pi,studentName);
+	}
+	
+	@Override
+	public ArrayList<Student> selectStatusStudent(PageInfo pi, String stStatus) {
+		return sDao.selectStatusStudent(sqlSession, pi, stStatus);
+	}
+
+	@Override
+	public ArrayList<Student> selectStatusNameSearchStudent(PageInfo pi, Student st) {
+		return sDao.selectStatusNameSearchStudent(sqlSession, pi, st);
+	}
+
+	@Override
+	public int selectStudentListCount() {
+		return sDao.selectStudentListCount(sqlSession);
+	}
+
+	@Override
+	public int selectStudentListCount(String stStatus) {
+		return sDao.selectStudentListCount(sqlSession, stStatus);
+	}
+
+	@Override
+	public int selectNameSearchStudentListCount(String studentName) {
+		return sDao.selectNameSearchStudentListCount(sqlSession, studentName);
+	}
+	
+	@Override
+	public int selectStatusNameSearchStudentListCount(Student st) {
+		return sDao.selectStatusNameSearchStudentListCount(sqlSession, st);
+	}
+	
+
 	public int insertTakeOffStudent(AbsenceStudent s) {
 		// 없으면 데이터를 넣을 수 있게 
 		// TODO 화면에 입력된 데이터를 데이터베이스에 넣는다
@@ -178,7 +223,14 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 
+	@Override
+	public Classroom classPlanView(String classNum) {
+		return sDao.classPlanView(sqlSession, classNum);
+	}
 
-	
+	@Override
+	public Classroom classPlanView(String classNum) {
+		return sDao.classPlanView(sqlSession, classNum);
+	}
 
 }

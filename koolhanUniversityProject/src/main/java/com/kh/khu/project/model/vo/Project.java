@@ -21,6 +21,6 @@ public class Project {
 	private String pjContent; //과제 내용
 	private String pjDeadline; // 과제 마감일
 	private String pjProfessor; // 과제 내준 교수
-
-	
+	private String classNum; // 강의번호
+	private String pjClassNo; //강의seq번호	
 }

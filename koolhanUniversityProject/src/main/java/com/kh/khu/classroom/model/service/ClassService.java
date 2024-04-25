@@ -42,7 +42,7 @@ public interface ClassService {
 	
 	
 	// 강의실 자유게시판 상세 조회
-	int classBoardCount(String bno);
-	ClassBoard selectClassDetailBoard(String bno);
+	int classBoardCount(String bno, String classNum);
+	ClassBoard selectClassDetailBoard(String bno, String classNum);
 
 }

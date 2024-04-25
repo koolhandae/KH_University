@@ -31,6 +31,7 @@
 		<typeAlias type="com.kh.khu.classroom.model.vo.ClassBoard" alias="ClassBoard"/>
  		<typeAlias type="com.kh.khu.member.model.vo.AdminTuition" alias="AdminTuition"/>
  		<typeAlias type="com.kh.khu.tuition.model.vo.TuitionStudent" alias="TuitionStudents"/>
+		<typeAlias type="com.kh.khu.project.model.vo.StudentProject" alias="studentProject"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="/mappers/board-mapper.xml"/>

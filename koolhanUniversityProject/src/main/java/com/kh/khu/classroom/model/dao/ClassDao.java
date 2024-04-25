@@ -1,6 +1,8 @@
 package com.kh.khu.classroom.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -64,12 +66,20 @@ public class ClassDao {
 		return (ArrayList)sqlSession.selectList("classMapper.selectClassBoardList", classNum, rowBounds);
 	}
 	
-	public int classBoardCount(SqlSessionTemplate sqlSession, String bno) {
-		return sqlSession.update("classMapper.classBoardCount", bno);
+	public int classBoardCount(SqlSessionTemplate sqlSession, String bno, String classNum) {
+		Map<String, Object> parameters = new HashMap();
+		parameters.put("classNum", classNum);
+		parameters.put("bno", bno);
+		
+		return sqlSession.update("classMapper.classBoardCount", parameters);
 	}
 	
-	public ClassBoard selectClassDetailBoard(SqlSessionTemplate sqlSession, String bno) {
-		return sqlSession.selectOne("classMapper.selectClassDetailBoard", bno);
+	public ClassBoard selectClassDetailBoard(SqlSessionTemplate sqlSession, String bno, String classNum) {
+		Map<String, Object> parameters = new HashMap();
+		parameters.put("classNum", classNum);
+		parameters.put("bno", bno);
+		
+		return sqlSession.selectOne("classMapper.selectClassDetailBoard", parameters);
 	}
 }
 

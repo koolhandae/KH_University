@@ -20,13 +20,13 @@ public interface StudentService {
 	int changePwd(String userId, String encPwd);
 
 	// 학생용 강의 조회
-	ArrayList<Course> selectCourseList(String studentId);
+	ArrayList<Course> selectCourseList(int studentNo);
 
 	// 학생용 강의 조회 검색
-	Course searchCourse(String courseValue);
+	Course searchCourse(String courseValue, String studentNo);
 
 	// 강의 공지사항 게시판 조회
-	Course selectClassName(String classNum);
+	ArrayList<Course> selectClassName(String classNum);
 	int selectListCount(String classNum);
 
 	ArrayList<ClassNotice> selectClassNoticeList(PageInfo pi, String classNum);
@@ -35,8 +35,8 @@ public interface StudentService {
 	Course selectClassPlan(int classNum);
 
 	// 강의 세부 공지사항 조회
-	int increaseCount(String cno);
-	ClassNotice selectClassNoticeDetail(String cno);
+	int increaseCount(String classNum , String cno);
+	ClassNotice selectClassNoticeDetail(String classNum, String cno);
 	
 	// 이전 수강내역 조회
 	ArrayList<Course> selectCourseHistory(int studentNo);
@@ -56,6 +56,24 @@ public interface StudentService {
 	ArrayList<Absence> selectTakeOff(String absId);
 	
 	ArrayList<Presence> selectReturnSchool(String preId);
+	
+	int updatePhone(Student s);
+	
+	int selectStudentListCount();
+	
+	int selectStudentListCount(String stStatus);
+	
+	int selectNameSearchStudentListCount(String studentName);
+	
+	int selectStatusNameSearchStudentListCount(Student st);
+
+	ArrayList<Student> selectAllStudent(PageInfo pi);
+
+	ArrayList<Student> selectNameSearchAllStudent(PageInfo pi, String studentName);
+
+	ArrayList<Student> selectStatusStudent(PageInfo pi, String stStatus);
+	
+	ArrayList<Student> selectStatusNameSearchStudent(PageInfo pi, Student st);
 
 	int insertTakeOffStudent(AbsenceStudent s);
 
@@ -65,4 +83,6 @@ public interface StudentService {
 	
 	int selectReturnSchoolStudent(String studentId);
 
+	
+	Classroom classPlanView(String classNum);
 }

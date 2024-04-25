@@ -1,11 +1,13 @@
 package com.kh.khu.member.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.member.model.dao.MemberDao;
 import com.kh.khu.member.model.vo.AdminTuition;
 import com.kh.khu.member.model.vo.Member;
@@ -57,6 +59,37 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.updateAddress(sqlSession, m);
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	public ArrayList<Member> selectAllMember(PageInfo mpi) {
+		return mDao.selectAllMember(sqlSession, mpi);
+	}
+
+	@Override
+	public ArrayList<Member> selectAllMemberType(PageInfo mpi, String meType) {
+		return mDao.selectAllMemberType(sqlSession, mpi, meType);
+	}
+	@Override
+	public ArrayList<Member> selectNameSearchAllMember(PageInfo mpi, String memberName){
+		return mDao.selectNameSearchAllMember(sqlSession, mpi, memberName);
+	}
+	
+	@Override
+	public int selectMemberListCount(String meType) {
+		return mDao.selectMemberListCount(sqlSession, meType);
+	}
+	
+	@Override
+	public int selectNameSearchMemberListCount(String memberName) {
+		return mDao.selectNameSearchMemberListCount(sqlSession, memberName);
+	}
+	
+	@Override
+	public int selectNameSearchTypeMemberListCount(Member m) {
+		return mDao.selectNameSearchTypeMemberListCount(sqlSession, m);
+	}
+>>>>>>> ded45c113c8805428774ecb8a448e3c8a6c8911b
 
 	@Override
 	public List<MemberAbsence> getTakeOffStudent() {
@@ -102,6 +135,11 @@ public class MemberServiceImpl implements MemberService{
 		List<AdminTuition> list = mDao.selectAdminTuition(sqlSession);
 		
 		return list;
+	}
+
+	@Override
+	public ArrayList<Member> selectNameSearchTypeMember(PageInfo mpi, Member m) {
+		return mDao.selectNameSearchTypeMember(sqlSession, mpi, m);
 	}
 	
 

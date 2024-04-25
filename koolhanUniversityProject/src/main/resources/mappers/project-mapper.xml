@@ -12,7 +12,26 @@
 		<result column="member_id" property="memberId"/>
 		<result column="member_pwd" property="memberPwd"/>
 		<result column="member_name" property="memberName"/>
+		<result column="class_num" property="classNum"/>
+		<result column="pj_class_no" property="pjClassNo"/>
 	</resultMap>
+	
+	<resultMap id="stuProjectResult" type="studentProject">
+		<result column="stp_no" property="stpNo"/>
+		<result column="student_no" property="studentNo"/>
+		<result column="class_no" property="classNo"/>
+		<result column="stp_origin_name" property="stpOriginName"/>
+		<result column="stp_change_name" property="stpChangeName"/>
+		<result column="stp_status" property="stpStatus"/>
+		<result column="submit_time" property="submitTime"/>
+		<result column="pj_class_name" property="pjClassName"/>
+		<result column="pj_title" property="pjTitle"/>
+		<result column="pj_deadline" property="pjDeadline"/>
+		<result column="count" property="count"/>
+		<result column="rnum" property="rnum"/>
+		<result column="stp_pj_no" property="stpPjNo"/>
+	</resultMap>
+	
 	
 	<insert id="insertProject">
 		insert
@@ -24,6 +43,7 @@
 		  	 , pj_content
 		  	 , pj_deadline
 		  	 , pj_professor
+		  	 , pj_class_no
 		  	 )
 		values
 			(
@@ -33,6 +53,7 @@
 			, #{pjContent}
 			, #{pjDeadline}
 			, #{pjProfessor}
+			, #{pjClassNo}
 			)
 	</insert>
 	
@@ -81,7 +102,153 @@
 	</select>
 	
 	
+<!-- 과제등록시 학생과제테이블도 인서트 -->
 	
+	<insert id="insertStuProjectTable">
+		insert 
+		  into stu_project
+		     (
+		       stp_no
+		     , student_no
+		     , class_no
+		     , stp_pj_no
+		     , stp_status
+		     , submit_time
+		     )
+		values
+		     (
+		       seq_stp.nextval
+		     , #{sno}
+		     , #{classNo}
+		     , seq_pj.currval
+		     , default
+		     , null
+		     )
+	</insert>
 	
+	<select id="selectStudentProject" resultMap="stuProjectResult">
+		  select rownum rnum, a.*
+			from
+			(select 
+			       stp_no
+			     , pj_title
+			     , pj_class_name
+			     , pj_content
+			     , to_char(trunc(pj_deadline) + interval '1' day - interval '1' second, 'yyyy-mm-dd hh24:mi:ss') as pj_deadline 
+			     , sp.class_no
+			     , stp_pj_no
+			  from stu_project sp 
+			  join project on pj_no = stp_pj_no
+			  join class c on sp.class_no = c.class_no
+			 where student_no = #{studentNo}
+			   and class_num = #{classNum}
+			   and stp_status = 'I'
+			 order
+			    by stp_no desc)a
+			  
+	</select>
 	
+	<select id="ingProjectCount" resultType="_int">
+		select count(*) count
+		 from stu_project sp
+		 right join class c on c.class_no = sp.class_no
+		 where stp_status = 'I'
+		  and student_no = #{studentNo}
+		  and class_num = #{classNum}
+	</select>
+	
+	<select id="missProjectCount" resultType="_int">
+		select count(*) count
+		 from stu_project sp
+		 right join class c on c.class_no = sp.class_no
+		 where stp_status = 'M'
+		  and student_no = #{studentNo}
+		  and class_num = #{classNum}
+	</select>
+	
+	<select id="doneProjectCount" resultType="_int">
+		select count(*) count
+		 from stu_project sp
+		 right join class c on c.class_no = sp.class_no
+		 where stp_status = 'D'
+		  and student_no = #{studentNo}
+		  and class_num = #{classNum}
+	</select>
+	
+	<select id="projectViewStudent" resultMap="projectResult">
+		select 
+		      pj_class_name
+		    , pj_title
+		    , pj_content
+		    , pj_deadline
+		 from project
+		where pj_no = #{pjNo}
+	</select>
+	
+	<insert id="enrollProjectStudent">
+		update stu_project
+		   set stp_status = 'D'
+		     , submit_time = sysdate
+		     , stp_origin_name = #{stpOriginName}
+		     , stp_change_name = #{stpChangeName}
+		 where stp_pj_no = #{stpPjNo}
+		   and student_no = #{studentNo}
+	</insert>
+	
+	<select id="selectStudentDoneProject" resultMap="stuProjectResult">
+		  select rownum rnum, a.*
+			from
+			(select 
+			       stp_no
+			     , pj_title
+			     , pj_class_name
+			     , pj_deadline
+                 , stp_origin_name
+                 , stp_change_name
+                 , submit_time
+			     , sp.class_no
+			     , stp_pj_no
+			  from stu_project sp 
+			  join project on pj_no = stp_pj_no
+			  join class c on sp.class_no = c.class_no
+			 where student_no = #{studentNo}
+			   and class_num = #{classNum}
+			   and stp_status = 'D'
+			 order
+			    by stp_no desc)a
+	</select>
+	
+	<select id="selectStudentNoneProject" resultMap="stuProjectResult">
+		  select rownum rnum, a.*
+			from
+			(select 
+			       stp_no
+			     , pj_title
+			     , pj_class_name
+			     , pj_deadline
+                 , stp_origin_name
+                 , stp_change_name
+			     , sp.class_no
+			     , stp_pj_no
+			  from stu_project sp 
+			  join project on pj_no = stp_pj_no
+			  join class c on sp.class_no = c.class_no
+			 where student_no = #{studentNo}
+			   and class_num = #{classNum}
+			   and stp_status = 'M'
+			 order
+			    by stp_no desc)a
+	</select>
+	
+	<select id="projectFileView" resultMap="stuProjectResult" >
+		select 
+		       stp_change_name
+		  from stu_project sp 
+		  join project on pj_no = stp_pj_no
+		  join class c on sp.class_no = c.class_no
+		 where student_no = #{studentNo}
+		   and class_num = #{classNum}
+		   and stp_status = 'D'
+		   and stp_pj_no = #{pjno}
+	</select>
 </mapper>

@@ -24,5 +24,5 @@ public class Member {
 	private String meAddress;
 	private String meType;
 	private String meStatus;
-	
+
 }

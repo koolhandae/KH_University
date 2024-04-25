@@ -15,8 +15,8 @@ import lombok.ToString;
 public class ClassBoard {
 	
 	private int classBoardNo;
-	private int refClassNo;
-	private int cbWriter;
+	private int refClassNo; //강의고유번호
+	private int cbWriter; //학생고유번호
 	private String cbTitle;
 	private String cbContent;
 	private String cbDate;

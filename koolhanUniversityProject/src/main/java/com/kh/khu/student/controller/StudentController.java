@@ -1,47 +1,36 @@
 package com.kh.khu.student.controller;
 
 import java.util.ArrayList;
-
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 import java.util.HashMap;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.khu.common.model.vo.Address;
-import com.kh.khu.common.template.AddressString;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.google.gson.Gson;
-import com.kh.khu.classroom.model.vo.ClassDetail;
 import com.kh.khu.classroom.model.vo.ClassNotice;
 import com.kh.khu.classroom.model.vo.Classroom;
 import com.kh.khu.classroom.model.vo.Course;
+import com.kh.khu.common.model.vo.Address;
 import com.kh.khu.common.model.vo.PageInfo;
+import com.kh.khu.common.template.AddressString;
 import com.kh.khu.common.template.Pagination;
 import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.student.model.service.StudentService;
 import com.kh.khu.student.model.vo.Absence;
 import com.kh.khu.student.model.vo.AbsenceStudent;
 import com.kh.khu.student.model.vo.Presence;
-import com.kh.khu.student.model.vo.Student;
-import com.kh.khu.student.model.service.StudentServiceImpl;
 import com.kh.khu.student.model.vo.Student;
 
 @Controller
@@ -61,11 +50,9 @@ public class StudentController {
 	
 	@ResponseBody
 	@RequestMapping(value="selectCourse.st", produces="application/json; charset=utf-8")
-	public ArrayList<Course>  selectCourseList(String studentId) {
+	public ArrayList<Course>  selectCourseList(int studentNo) {
 
-	System.out.println(studentId);	
-	
-	ArrayList<Course> list = sService.selectCourseList(studentId);
+	ArrayList<Course> list = sService.selectCourseList(studentNo);
 	
 	//System.out.println("courseList = " + list);
 
@@ -75,10 +62,13 @@ public class StudentController {
 	
 	@ResponseBody
 	@RequestMapping(value="searchCourse.st", produces="application/json; charset=utf-8")
-	public Course searchCourse(String courseValue) {		
+	public Course searchCourse(@RequestParam(value="courseValue") String courseValue,
+			                   @RequestParam(value="studentNo")String studentNo) {		
 		
+		System.out.println(courseValue);
+		System.out.println(studentNo);
         Course c = new Course();  
-		c = sService.searchCourse(courseValue);
+		c = sService.searchCourse(courseValue, studentNo);
 		System.out.println("searchCourse = " + c);
 		
 		return c;
@@ -86,19 +76,29 @@ public class StudentController {
 	
 	@ResponseBody
 	@RequestMapping(value="notice.co", produces="application/json; charset=utf-8")
-	public ModelAndView selectListCount(@RequestParam(value="cpage", defaultValue="1")int currentPage, String classNum, ModelAndView mv) {
+	public ModelAndView selectListCount(@RequestParam(value="cpage", defaultValue="1")int currentPage, 
+			                            @RequestParam(value="classNum")String classNum, ModelAndView mv, HttpSession session) {
 		
-		System.out.println("classNum = " + classNum);
+		//System.out.println("CONclassNum = " + classNum);
 		
-		Course c = sService.selectClassName(classNum);
+		ArrayList<Course> c = sService.selectClassName(classNum);
 		
-		String className = c.getClassName();
+		//System.out.println("course" + c);
+			
+		String className = c.get(0).getClassName();
 
 		int listCount = sService.selectListCount(classNum);		
+		
+		 
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+		
+		//System.out.println(pi);
+		
 		ArrayList<ClassNotice> list = sService.selectClassNoticeList(pi, classNum);
 		
-		mv.addObject("pi", pi).addObject("list", list).addObject("classNum", classNum).addObject("className",className).setViewName("student/studentClassDetail");
+		session.setAttribute("classNum", classNum);
+		
+		mv.addObject("pi", pi).addObject("list", list).addObject("className",className).setViewName("student/studentClassDetail");
 		return mv;
 		
 	}
@@ -282,13 +282,14 @@ public class StudentController {
 	}
 	
 	@RequestMapping("noticeDetail.co")
-	public String searchDetailClass(String cno, Model model) {
-		int noticeCount = sService.increaseCount(cno);
+	public String searchDetailClass(@RequestParam(value="classNum") String classNum,
+			                        @RequestParam(value="cno")String cno, Model model) {
+		int noticeCount = sService.increaseCount(classNum, cno);
 		
-		System.out.println("noticeCount" + noticeCount);
+		//System.out.println("noticeCount" + noticeCount);
 		
 		if(noticeCount>0) {
-			ClassNotice cd  = sService.selectClassNoticeDetail(cno);
+			ClassNotice cd  = sService.selectClassNoticeDetail(classNum, cno);
 			model.addAttribute("cd", cd);
 			
 			return "student/studentClassNoticeDetail";
@@ -302,12 +303,98 @@ public class StudentController {
 	@RequestMapping(value="classPlan.co", produces="application/json; charset=utf-8")
 	public Classroom selectCoursePlan(String classNum){
 		
+		//System.out.println(classNum);
 		Classroom c = sService.selectCoursePlan(classNum);
 		
-		System.out.println("classPlan=" + c);
+		//System.out.println("classPlan=" + c);
 	
 		return c;
-
+	}
+	
+	@ResponseBody
+	@RequestMapping("updatePhone.stu")
+	public String updatePhone(Student s, HttpSession session) {
+		int result = sService.updatePhone(s);
+		session.removeAttribute("loginStudent");
+		Student newSt = sService.loginStudent(s);
+		session.setAttribute("loginStudent", newSt);
+		return result > 0 ? "NNNNY" : "NNNNN";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="userList.stu", produces="application/json; charset=utf-8")
+	public ResponseEntity<HashMap<String,Object>> selectStudentList(int cpage, Student st) {
+		int studentListCount = 0;
+		int pageLimit = 3;
+		int boardLimit = 2;
+		PageInfo newSpi;
+		ArrayList<Student> sList;
+		if(st.getStudentName().equals("")) {
+			switch(st.getStStatus()) {
+				case "all":
+					studentListCount = sService.selectStudentListCount();
+					newSpi = Pagination.getPageInfo(studentListCount, cpage, pageLimit, boardLimit);
+					sList = sService.selectAllStudent(newSpi);
+					break;
+				default:
+					studentListCount = sService.selectStudentListCount(st.getStStatus());
+					newSpi = Pagination.getPageInfo(studentListCount, cpage, pageLimit, boardLimit);
+					sList = sService.selectStatusStudent(newSpi, st.getStStatus());
+					break;
+			}
+		} 
+		else {
+			switch(st.getStStatus()) {
+			case "all":
+				studentListCount = sService.selectNameSearchStudentListCount(st.getStudentName());
+				newSpi = Pagination.getPageInfo(studentListCount, cpage, pageLimit, boardLimit);
+				sList = sService.selectNameSearchAllStudent(newSpi, st.getStudentName());
+				break;
+			default:
+				studentListCount = sService.selectStatusNameSearchStudentListCount(st);
+				newSpi = Pagination.getPageInfo(studentListCount, cpage, pageLimit, boardLimit);
+				sList = sService.selectStatusNameSearchStudent(newSpi, st);
+				break;
+			}
+		}
+		
+		for (Student s : sList) {
+			switch (s.getStStatus()) {
+			case "Y":
+				s.setStStatus("재학");
+				break;
+			case "N":
+				s.setStStatus("자퇴");
+				break;
+			case "H":
+				s.setStStatus("휴학");
+				break;
+			case "Z":
+				s.setStStatus("제적");
+				break;
+			case "J":
+				s.setStStatus("졸업");
+				break;
+			}
+		}
+		HashMap<String, Object> response = new HashMap<>();
+        response.put("sList", sList);
+        response.put("spi", newSpi);
+        response.put("listCount", studentListCount);
+        response.put("searchName", st.getStudentName());
+        return ResponseEntity.ok(response);
+	}
+	
+	@ResponseBody
+	@RequestMapping("classPlanView.st")
+	public String classPlanView(@RequestParam(value="classNum")String classNum) {
+		System.out.println("보여지나" + classNum);
+		Classroom c = sService.classPlanView(classNum);
+		
+		String fileName = c.getChangeName();
+		
+		System.out.println(fileName);
+		return fileName;
 	}
 	
 }

@@ -20,8 +20,8 @@
 	
 	<resultMap id="courseResult" type="Course">
 		<result column="course_no" property="courseNo"/>
-		<result column="class_num" property="classNum"/>
-		<result column="student_id" property="studentId"/>
+		<result column="class_no" property="classNo"/>
+		<result column="student_no" property="studentNo"/>
 		<result column="course_year" property="courseYear"/>
 		<result column="course_semester" property="courseSemester"/>
 		<result column="class_grade" property="classGrade"/>
@@ -31,6 +31,7 @@
 		<result column="class_score" property="classScore"/>
 		<result column="class_typename" property="classTypeName"/>
 		<result column="class_people" property="classPeople"/>
+		<result column="class_num" property="classNum"/>
 	</resultMap>	
 		
 	<resultMap type="Absence" id="absenceResult">
@@ -278,10 +279,31 @@
 	</select>
 
 
-<select id="selectCourseList" resultMap="courseResult">
+	<select id="selectCourseList" resultMap="courseResult">
+			select
+			       course_no
+			     , class_no
+			     , class_grade
+			     , course_semester
+			     , class_name
+			     , class_room
+			     , class_time
+			     , class_score
+		         , class_typename
+		         , class_people
+		         , class_num
+		  from course
+			  join class using (class_no)
+		      join class_type using (class_type)
+			 where student_no = ${studentNo}
+			   and course_year = '2024'
+			   and class.class_status = 'Y'
+</select>
+	
+	<select id="searchCourse" resultMap="courseResult">
 		select
 		       course_no
-		     , class_num
+		     , class_no
 		     , class_grade
 		     , course_semester
 		     , class_name
@@ -290,45 +312,126 @@
 		     , class_score
 	         , class_typename
 	         , class_people
-		  from course
-		  join class using (class_num)
-	      join class_type using (class_type)
-		 where student_id = #{studentId}
-		   and course_year = '2024'
-</select>
-
-<select id="searchCourse" resultMap="courseResult">
-	select
-	       course_no
-	     , class_num
-	     , class_grade
-	     , course_semester
-	     , class_name
-	     , class_room
-	     , class_time
-	     , class_score
-         , class_typename
-         , class_people
+	         , class_num
 	  from course
-	  join class using (class_num)
-	  join class_type using (class_type)
-	 where course_year = 2024
-       and class_num = #{courseNum}
-</select>
-
-<select id="selectClassName" resultMap="courseResult">
-	select 
-	       class_name
-	  from course
-	  join class using (class_num)
-	 where course_status = 'Y'
-	   and class_num = #{classNum}
-</select>
-
-<update id="updateAddress">
-	update student
-	   set s_address = #{stAddress}
-	 where student_id = #{studentId}
-</update>
+		  join class using (class_no)
+		  join class_type using (class_type)
+		 where course_year = 2024
+	       and class_no = #{courseValue}
+       and student_no = #{studentNo}
+	</select>
 	
+	<select id="selectClassName" resultMap="courseResult">
+		select 
+		       class_name
+		  from course
+		  join class using (class_no)
+		 where course_status = 'Y'
+		   and class.class_num = #{classNum}
+	</select>
+	
+	<update id="updateAddress">
+		update student
+		   set s_address = #{stAddress}
+		 where student_id = #{studentId}
+	</update>
+	
+	<update id="updatePhone">
+		update student
+		set s_phone = #{stPhone}
+		where student_id = #{studentId}
+	</update>
+	
+	<select id="selectAllStudent" resultMap="studentResult">
+		select
+			   student_no
+			 , student_name
+			 , student_id
+			 , s_phone
+			 , s_status  
+		  from student
+		 order
+		    by student_no desc	   
+	</select>
+	
+	<select id="selectNameSearchAllStudent" resultMap="studentResult">
+		select
+			   student_no
+			 , student_name
+			 , student_id
+			 , s_phone
+			 , s_status  
+		  from student
+		 where student_name like '%' || #{studentName} || '%'
+		 order
+		    by student_no desc	   
+	</select>
+		
+	<select id="selectStatusStudent" resultMap="studentResult">
+		select
+			   student_no
+			 , student_name
+			 , student_id
+			 , s_phone
+			 , s_status  
+		  from student
+		 where s_status = #{stStatus}
+		 order
+		    by student_no desc	   
+	</select>
+
+	<select id="selectStatusNameSearchStudent" resultMap="studentResult">
+		select
+			   student_no
+			 , student_name
+			 , student_id
+			 , s_phone
+			 , s_status  
+		  from student
+		 where s_status = #{stStatus}
+		   and student_name like '%' || #{studentName} || '%'
+		 order
+		    by student_no desc	   
+	</select>
+
+	<select id="selectStudentListCount" resultType="_int">
+		select
+			   count(*)
+		  from student
+	</select>
+
+	<select id="selectStudentListCountType" resultType="_int">
+		select
+			   count(*)
+		  from student
+		 where s_status = #{stStatus}
+	</select>
+
+	<select id="selectNameSearchStudentListCount" resultType="_int">
+		select
+			   count(*)
+		  from student
+		 where student_name like '%' || #{studentName} || '%'
+	</select>
+
+	<select id="selectStatusNameSearchStudentListCount" resultType="_int">
+		select
+			   count(*)
+		  from student
+		 where student_name like '%' || #{studentName} || '%'
+		   and s_status = #{stStatus}
+	</select>
+
+
+<!-- 과제등록시 인서트를 위한 번호 조회 -->
+<select id="selectCourseStudent" resultMap="courseResult">
+	select 
+	       student_no
+	  from course
+	 where class_no = ${classNo}
+</select>
+	
+	
+	
+
 </mapper>

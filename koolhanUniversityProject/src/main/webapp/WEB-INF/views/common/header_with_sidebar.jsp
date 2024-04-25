@@ -28,8 +28,30 @@
 			<!-- sweetalert2 -->
 			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
 			<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css" rel="stylesheet">
-
+			
+			<!-- sockjs -->
+			<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <style>
+	.pagination {
+	justify-content: center;
+	}
+	
+	.pagination.pagination-rounded-flat .page-item .page-link, a {
+		border: none;
+		border-radius: 50px;
+	}
+	
+	.page-link:active {
+		background-color: #1c4587 !important;
+		color: white !important;
+	}
+	.active{
+	background-color: #1c4587 !important;
+	color: white !important;
+	}
+	li{
+		margin:3px
+	}
 	/* 폰트 */
 	@font-face {
 		font-family: 'KIMM_Bold';
@@ -73,6 +95,8 @@
 			</c:if>
 
 
+
+
 	<!-- Page Wrapper -->
 	<div id="wrapper">
 
@@ -99,6 +123,14 @@
 								<i class="fa-solid fa-user"></i>
 								<span>회원 정보 조회</span></a>
 						</li>
+					<c:if test="${loginUser.meType eq 'A' }">
+						<!-- Nav Item - Charts -->
+						<li class="nav-item">
+							<a class="nav-link" href="userList.go">
+								<i class="fa-solid fa-user"></i>
+								<span>전체 회원 정보 조회</span></a>
+						</li>
+					</c:if>
 					
 					<c:if test="${ not empty loginStudent }">
 						<!-- Divider -->
@@ -258,7 +290,7 @@
           
           <!-- Nav Item - Charts -->
           <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="list.bo">
                   <i class="fa-solid fa-users"></i>
                   <span>커뮤니티 게시판</span></a>
           </li>
@@ -575,6 +607,28 @@
 						</div>
 					</div>
 				</div>
+				
+				
+				<script>
+			        var socket = new WebSocket("ws://localhost:8808/khu/echo");
+			
+			        socket.onopen = function(event) {
+			            console.log("WebSocket 연결 성공");
+			        };
+			
+			        socket.onmessage = function(event) {
+			            console.log("서버로부터 메시지 수신: " + event.data);
+			        };
+			
+			        socket.onclose = function(event) {
+			            console.log("WebSocket 연결 종료");
+			        };
+			
+			        // 필요에 따라 메시지를 서버로 전송할 수 있습니다.
+			        function sendMessage(message) {
+			            socket.send(message);
+			        }
+			    </script>
 
 
 				<!-- Bootstrap core JavaScript-->

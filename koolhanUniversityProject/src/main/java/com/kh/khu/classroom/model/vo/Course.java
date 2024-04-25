@@ -15,8 +15,8 @@ import lombok.ToString;
 
 public class Course {
 	private int courseNo; 
-	private int classNum; 
-	private String studentId; 
+	private int classNo; // 강의고유번호
+	private int studentNo; // 학생고유번호
 	private String courseYear; 
 	private String courseSemester; 
 	private String courseStatus; 
@@ -29,5 +29,6 @@ public class Course {
 	private String classTime;
 	private String classPeople;
 	private String classTypeName;
+	private int classNum;
 	
 }
