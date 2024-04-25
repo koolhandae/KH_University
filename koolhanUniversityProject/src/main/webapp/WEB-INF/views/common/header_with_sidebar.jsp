@@ -165,7 +165,7 @@
 								data-parent="#accordionSidebar">
 								<div class="bg-white py-2 collapse-inner rounded">
 									<a class="collapse-item" href="update.stu">개인 정보 수정</a>
-									<a class="collapse-item" href="#">나의 캘린더</a>
+									<a class="collapse-item" href="myCalender.do">나의 캘린더</a>
 									<a class="collapse-item" href="tuitionBill.do">등록금 납부 신청</a>
 									<a class="collapse-item" href="">등록금 납부 내역 조회</a>
 									<a class="collapse-item" href="#">학점 / 성적 조회</a>

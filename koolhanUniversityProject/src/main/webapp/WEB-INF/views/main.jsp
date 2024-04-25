@@ -142,7 +142,7 @@
 													</div>
 													<div class="find-area">
 														<i class="fa-solid fa-key"></i>
-														<a class="find_login" href="forgot.me">학번/비밀번호 찾기</a>
+														<a class="find_login" href="forgot.me">비밀번호 찾기</a>
 													</div>
 												</div>
 												<button type="button" id="login-btn" onclick="loginProcess();"
