@@ -52,7 +52,7 @@
    	  <h1 style="margin-left: 290px; font-weight:900; color: rgb(75,75,75);">등록금 납부</h1>
    	  <hr><br>
    	  	
-   	  <form action="tuitionPay.do">
+   	  <!-- <form action="tuitionPay.do"> -->
    		<h3>학생 정보</h3>
    		<table id="boardList" class="selectTuition table" style="width: 900px;" align="center">
    			
@@ -96,23 +96,20 @@
       <div class="billBtn" style="display: flex">
         <button class="btn btn-xs" id="btn"  onclick="requestPay()">결제하기</button>
       </div>
-     </form>
+     <!-- </form> -->
      
      <script>
-	     if(radioBtn == null){
-	         alert("결제방식을 선택해 주세요.");
-	         return;
-	       }
+	    
 	     
 	     var IMP = window.IMP; // 생략가능
 	     IMP.init('imp65641437');
 	     
 	  // IMP.request_pay(param, callback) 결제창 호출
 	     IMP.request_pay({
-	       pg: "html5_inicis.INIpayTest ",
-	       pay_method: "vbank",
-	       merchant_uid: "tpNo" + new Date().getTime(),   // 주문번호
-	       name: "쿨한대학교",
+	       pg: 'html5_inicis.INIpayTest',
+	       pay_method: 'vbank',
+	       merchant_uid: 'tpNo' + new Date().getTime(),   // 주문번호
+	       name: '쿨한대학교',
 	       amount: tuition,                         // 숫자 타입
 	       buyer_email: ${loginStudent.stEmail},
 	       buyer_name: ${loginStudent.studentName},
@@ -129,7 +126,7 @@
 	       if ( rsp.success ) { //결제 성공시
 	         var msg = '등록금 납부가 완료 되었습니다.';
 	         var result = {
-	           "studentId" :[[${loginStudent.studentId}]], //회원번호
+	           "studentId" :${loginStudent.studentId}, //회원번호
 	           "tuition": rsp.tuition, // 결제금액
 	           "payDay" : new Date().toISOString().slice(0, 10), //결제일
 	           "mpaytime" : "",
@@ -138,7 +135,7 @@
 	         console.log(result);
 
 	         $.ajax({
-	           url:'',
+	           url:'tuitionPay.do',
 	           type:'POST',
 	           contentType: 'application/json',
 	           data:JSON.stringify(result),
@@ -156,16 +153,17 @@
 	         }
 	       alert(msg);
 	     });
-	  	}
+	  	
+  		}
 	  
-	     //결제 데이터 전달
+	     /* //결제 데이터 전달
 	     var selectedPrice = element.querySelector("p").innerText;
 	     var priceElement = document.getElementById("selectedPrice").querySelector("span");
 	     priceElement.innerText = selectedPrice;
 
 	     var selectedProduct = element.querySelector("h5").innerText;
 	     var productElement = document.getElementById("selectedProduct").querySelector("span");
-	     productElement.innerText = selectedProduct;
+	     productElement.innerText = selectedProduct; */
 	   
 	     	
 	 </script>

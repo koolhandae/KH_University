@@ -103,7 +103,7 @@
         <br />
         <br />
 
-        <!-- <form action="tuitionMakeSelect.ad"> -->
+        <!-- <form action="tuitionMakeSelect.me"> -->
         <table id="boardList" class="table" align="center">
           <tr>
             <th>학부(과)</th>

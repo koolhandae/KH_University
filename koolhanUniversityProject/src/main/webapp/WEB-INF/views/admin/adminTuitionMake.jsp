@@ -95,7 +95,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <br />
         <br />
 
-        <form action="tuitionMakeSelect.ad">
+        <form action="tuitionMakeSelect.me">
 	        <table id="boardList" class="table table-hover" align="center">
 	          <tr>
 	            <th>학부(과)</th>
