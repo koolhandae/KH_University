@@ -31,8 +31,9 @@
 <body>
    <jsp:include page="../common/header_with_sidebar.jsp"/>
    <div class="content">
-   	<div class="innerOuter">
- 
+     <div class="innerOuter">
+     
+     
    		<div class="tuitionBtn" align="center";>
    		<a class="btn btn-primary btn-lg"  href="takeOffSelect.do" roll="button" style="background-color:rgb(48, 76, 121)">휴학 내역</a>
    		   <span style="margin-left: 40px; margin-right: 40px;"></span>
@@ -40,45 +41,39 @@
     	</div>
       <br><br><br>
    	
-   		<h2 style="margin-left: 290px; font-weight:900; color: rgb(75,75,75);">휴학 신청 조회</h2>
+   		<h2 style="margin-left: 290px; font-weight:900; color: rgb(75,75,75);">복학 신청 조회</h2>
    		<hr><br>
    		
-   		<form action="takeOffSelect.do">
+   		<form action="returnSchoolSelect.do">
    		<input type="hidden" name="absId" value="${ loginStudent.studentId }">
    		<table id="boardList" class="selectTuition table" style="width: 900px; margin: auto;">
    			<thead>
 	   		  <tr align="center">
 	   		  	<th>신청일자</th>
-	   		  	<th>구분</th>
-	   		  	<th>시작학기</th>
-	   		  	<th>종료학기</th>
+	   		  	<th>학번</th>
+	   		  	<th>복학연도</th>
+	   		  	<th>복학학기</th>
 	   		  	<th>상태</th>
 	   		  </tr>
 	   		</thead>
 	   		
 	   		<tbody align="center">
-	   		  <c:forEach var="ab" items="${a}">
+	   		  <c:forEach var="pr" items="${p}">
 		   		  <tr>
 		   		  	<td>
-		   		  		 <fmt:parseDate var="parsedDate" value="${ab.absInsert}" pattern="yyyy-MM-dd HH:mm:ss" />
+		   		  		 <fmt:parseDate var="parsedDate" value="${pr.preInsert}" pattern="yyyy-MM-dd HH:mm:ss" />
 	                     <fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd" />
 		   		  	</td>
 		   		  	<td>
-		   		  		<c:choose>
-                            <c:when test="${ab.absSort eq 'a1'}">일반</c:when>
-                            <c:when test="${ab.absSort eq 'a2'}">질병</c:when>
-                            <c:when test="${ab.absSort eq 'a3'}">출산·육아</c:when>
-                            <c:when test="${ab.absSort eq 'a4'}">군입대</c:when>
-                            <c:otherwise>기타</c:otherwise>
-	                    </c:choose>
+		   		  		${ pr.preId }
 		   		  	</td>
-		   		  	<td>2024년도 1학기</td>
-		   		  	<td>${ ab.absSemester }년도 ${ ab.absEnd }학기</td>
+		   		  	<td>${ pr.preYear }년도</td>
+		   		  	<td>${ pr.preSemester }학기</td>
 		   		  	<td>
 		   		  		 <c:choose>
-                            <c:when test="${ab.tbStatus eq 'I'}">처리중</c:when>
-                            <c:when test="${ab.tbStatus eq 'Y'}">승인</c:when>
-                            <c:when test="${ab.tbStatus eq 'N'}">반려</c:when>
+                            <c:when test="${pr.tbStatus eq 'I'}">처리중</c:when>
+                            <c:when test="${pr.tbStatus eq 'Y'}">승인</c:when>
+                            <c:when test="${pr.tbStatus eq 'N'}">반려</c:when>
                             <c:otherwise>오류</c:otherwise>
                         </c:choose>
 		   		  	</td>
@@ -88,8 +83,8 @@
    		  </table>
    		</form>
    		  <br>
-   	</div>
-      
+     
+     </div>
    </div>
    <jsp:include page="../common/footer.jsp"/>
 </body>

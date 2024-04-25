@@ -97,16 +97,6 @@ public class StudentServiceImpl implements StudentService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public int selectTakeOff(Absence a) {
-		return sDao.selectTakeOff(sqlSession, a);
-	}
-
-	@Override
-	public int insertReturnSchool(Presence p) {
-		return sDao.insertReturnSchool(sqlSession, p);
-	}
 	
 	@Override
 	public int insertStudent(Student s) {
@@ -189,13 +179,19 @@ public class StudentServiceImpl implements StudentService {
 		// 없으면 데이터를 넣을 수 있게 
 		// TODO 화면에 입력된 데이터를 데이터베이스에 넣는다
 		// 승인: Y, 처리중: I, 반려: N
-		s.setAbsStatus("I");
-		return sDao.insertTakeOff(sqlSession, s);
+		s.setTbStatus("I");
+		return sDao.insertTakeOffStudent(sqlSession, s);
+	}
+	
+	@Override
+	public int insertReturnSchool(Presence p) {
+		p.setTbStatus("I");
+		return sDao.insertReturnSchool(sqlSession, p);
 	}
 
 	@Override
-	public int getDo(String studentId) {
-		// DB 테이블에 데이터가 있는지 확인한다 
+	public int selectTakeOffStudent(String studentId) {
+		// DB 테이블에 휴학생 데이터가 있는지 확인한다 
 		// 있으면 바로 리턴하고 화면에서 등록버튼을 없앤다 
 		AbsenceStudentResult result = sDao.selectTakeOffStudent(sqlSession, studentId);
 		if(result == null)
@@ -204,23 +200,33 @@ public class StudentServiceImpl implements StudentService {
 		// TODO DB 데이터가 있는지 유무만 확인해서 리턴 데이터 있으면 1, 없으면 0
 		return 1;
 	}
-
+	
 	@Override
-	public int insertReturnStudent() {
-		// TODO Auto-generated method stub
+	public int selectReturnSchoolStudent(String studentId) {
+		// DB 테이블에 복학생 데이터 확인
+		Presence result = sDao.selectReturnSchoolStudent(sqlSession, studentId);
+		if(result == null)
 		return 0;
+		
+		// TODO DB 데이터가 있는지 유무만 확인해서 리턴 데이터 있으면 1, 없으면 0
+		return 1;
+	}
+	
+	@Override
+	public ArrayList<Absence> selectTakeOff(String absId) {
+		return sDao.selectTakeOff(sqlSession, absId);
 	}
 
 	@Override
-	public int insertTakeOff(Absence a) {
-		// TODO Auto-generated method stub
-		return 0;
+	public ArrayList<Presence> selectReturnSchool(String preId) {
+		return sDao.selectReturnSchool(sqlSession, preId);
 	}
 
 
-
-
-
+	@Override
+	public Classroom classPlanView(String classNum) {
+		return sDao.classPlanView(sqlSession, classNum);
+	}
 
 	@Override
 	public Classroom classPlanView(String classNum) {

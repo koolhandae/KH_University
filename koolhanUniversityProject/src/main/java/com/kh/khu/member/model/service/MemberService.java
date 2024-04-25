@@ -10,6 +10,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.kh.khu.member.model.vo.AdminTuition;
 import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.member.model.vo.MemberAbsence;
+import com.kh.khu.member.model.vo.MemberPresence;
+import com.kh.khu.student.model.vo.Presence;
 
 public interface MemberService {
 	
@@ -46,13 +48,14 @@ public interface MemberService {
 	
 	ArrayList<Member> selectNameSearchTypeMember(PageInfo mpi, Member m);
 	
-	public void getReturnStudent();
+	public List<MemberPresence> getReturnStudent();
 	
 	public List<MemberAbsence> getTakeOffStudent();
 	
-	public void setReturnStudent();
+	public int setReturnStudent(String preId);
 
 	public int setTakeOffStudent(String absId);
 	
 	public List<AdminTuition> insertAdminTuition(AdminTuition tuition);
+
 }

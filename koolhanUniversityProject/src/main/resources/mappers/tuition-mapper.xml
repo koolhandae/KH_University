@@ -118,10 +118,20 @@
 	
  	<select id="latestTuition" resultMap="adminTuitionResult">
  	  <![CDATA[
-	    SELECT *
-	    FROM tuition_bill
-	    WHERE ROWNUM <= 1
-	    ORDER BY tb_insert DESC
+		select *
+		  from (
+		         select 
+		         tt_no
+               , tb_open
+               , tb_close
+               , tb_insert
+               , tb_update
+               , tb_price
+               , tb_semester
+            from tuition_bill
+           ORDER BY tt_no desc
+		  	   )
+		  where rownum <=1
 	  ]]>
 	</select> 
 	
@@ -138,7 +148,7 @@
 	
 	<insert id="insertTuitionStudents" parameterType="java.util.List">
         INSERT INTO tuition_student (
-        	TUITION_NO
+        TUITION_NO
         , TT_NO 
         , STUDENT_NO 
         , STUDENT_ID
@@ -161,5 +171,7 @@
             , #{tuitionStudentMake.tsStatus})
         </foreach>
     </insert>
+	
+
 	
 </mapper>

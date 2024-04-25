@@ -95,7 +95,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <br />
         <br />
 
-        <form action="tuitionMakeSelect.ad">
+        <form action="tuitionMakeSelect.me">
 	        <table id="boardList" class="table table-hover" align="center">
 	          <tr>
 	            <th>학부(과)</th>
@@ -113,7 +113,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 	            <td>2024</td>
 	            <th>학기</th>
 	            <td>
-	            	<input type="number" name="semester" />
+	            	<input type="number" name="semester" min="1" max="2" /> 학기
 	            </td>
 	          </tr>
 	      
@@ -145,22 +145,19 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <br><br>
         <table id="boardList" class="table" align="center" width="700px">
           <tr>
-            <th>고지서 번호</th>
-            <th>연도</th>
-            <th>학기</th>
+          	<!-- <th>고지서 번호</th> -->
+            <th>학기 번호</th>
+            <th>등록금</th>
+            <th>기간</th>
           </tr>
-
 		 	 <c:forEach var="item" items="${list}">
-			   		  <tr>
+			   		  <tr align="center">
 			   		  	<td>${item.semester}</td>
 			   		  	<td>${item.tbPrice}</td>
-			   		  	<td>${item.startDate} </td>
-			   		  </tr>
-			   		 
+			   		  	<td>${item.startDate} ~ ${item.endDate}</td>
+			   		  </tr>	 
 	           </c:forEach>
-
         </table>
-        
       </div>
       <%-- innerOuter 끝 --%>
 

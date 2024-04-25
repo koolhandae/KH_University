@@ -13,6 +13,8 @@ import com.kh.khu.common.template.Pagination;
 import com.kh.khu.member.model.vo.AdminTuition;
 import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.member.model.vo.MemberAbsence;
+import com.kh.khu.member.model.vo.MemberPresence;
+import com.kh.khu.student.model.vo.Presence;
 
 @Repository
 public class MemberDao {
@@ -83,32 +85,42 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.selectNameSearchTypeMemberListCount", m);
 	}
 	
-	public void getReturnStudent() {
-		// TODO 새로만들어진 복학신청자 데이터를 가져옵니다 
+	public List<MemberPresence> getReturnStudent(SqlSessionTemplate sqlSession) {
+		// TODO 새로 만들어진 복학신청자 데이터를 가져옵니다 
+		return (ArrayList)sqlSession.selectList("memberMapper.selectPresenceStudent");
 	}
 
 	public List<MemberAbsence> getTakeOffStudent(SqlSessionTemplate sqlSession) {
-		// TODO 새로만들어진 복학 신청자 데이터를 가져옵니다 
+		// TODO 새로 만들어진 휴학 신청자 데이터를 가져옵니다 
 		return (ArrayList)sqlSession.selectList("memberMapper.selectAbsenceStudent");
 	}
 
 	public int changeStudentStatus(SqlSessionTemplate sqlSession, String absId) {
-		// TODO Auto-generated method stub
 		return sqlSession.update("memberMapper.updateAbsenceStudent", absId);
+		
 	}
 
 	public int changeTakeOffStudent(SqlSessionTemplate sqlSession, String absId) {
-		// TODO Auto-generated method stub
-		return sqlSession.update("memberMapper.updateAbsenceStudentSucess", absId);
+		return sqlSession.update("memberMapper.updateAbsenceStudentSuccess", absId);
 	}
 
+	public int changeReturnStatus(SqlSessionTemplate sqlSession, String preId) {
+		return sqlSession.update("memberMapper.updatePresenceStudent", preId);
+	}
+
+	public int changeReturnStudent(SqlSessionTemplate sqlSession, String preId) {
+		return sqlSession.update("memberMapper.updatePresenceStudentSuccess", preId);
+	}
+	
 	public int insertAdminTuition(SqlSessionTemplate sqlSession, AdminTuition tuition) {
-		// TODO Auto-generated method stub
 		return sqlSession.insert("memberMapper.insertAdminTuition", tuition);
 	}
+	
+	
 
 	public List<AdminTuition> selectAdminTuition(SqlSessionTemplate sqlSession) {
-		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("memberMapper.selectAdminTuition");
 	}
+
+
 }

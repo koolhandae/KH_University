@@ -79,7 +79,7 @@
    		<h2 style="margin-left: 290px; font-weight:900; color: rgb(75,75,75);">복학 신청서</h2>
    		<hr><br>
 
-	<form action="insertReturnSchool.do">
+	<form action="returnSchoolForm.do">
 	  <input type="hidden" name="preNo" value="${ loginStudent.studentNo }">
       <input type="hidden" name="preId" value="${ loginStudent.studentId }">
       <table id="boardList" class="selectTuition table" style="width: 900px; margin: auto;">
@@ -104,18 +104,19 @@
         
         <tr>
 			<th>주소</th>
-			<td colspan="2">서울시 어딘가</td>    
+			<td colspan="3">${ loginStudent.stAddress }</td>    
         </tr>
         
         <tr>
           <th>기간</th>
           <td id="takeOffDay" colspan="3">
-          	<select name="preSemester">
+          	<select name="preYear">
           		<option>2024</option>
           		<option>2025</option>
+          		<option>2026</option>
           	</select>년 
           
-            <select name="preGrade">
+            <select name="preSemester">
               <option>1</option>
               <option>2</option>
             </select>학기부터
