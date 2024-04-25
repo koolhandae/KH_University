@@ -18,13 +18,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.khu.common.model.vo.Address;
 import com.kh.khu.common.template.AddressString;
 import com.kh.khu.member.model.service.MemberServiceImpl;
 import com.kh.khu.member.model.vo.AdminTuition;
 import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.member.model.vo.MemberAbsence;
+import com.kh.khu.member.model.vo.MemberPresence;
 import com.kh.khu.student.model.service.StudentServiceImpl;
+import com.kh.khu.student.model.vo.Presence;
 import com.kh.khu.student.model.vo.Student;
 
 @Controller
@@ -199,23 +202,28 @@ public class MemberController {
 	}
 	
 	@RequestMapping("adminReturnSchool.me")
-	public String adminReturnSchool() {
-		// todo 복학 신청자 리스트를 가져와서 승인 버튼으로 승인할 수 있게 해준다 
-		mService.getReturnStudent();
+	public String adminReturnSchool(Model model) {
+		// todo 복학 신청자 리스트를 가져와서 승인 버튼으로 승인할 수 있게 해준다
+		 List<MemberPresence> list = mService.getReturnStudent();
+		 
+		 model.addAttribute("list", list);
 		
 		return "admin/adminReturnShcoolSelect";
 	}
 	
-	@RequestMapping("adminReturnSchoolForm.me")
-	public String adminReturnSchoolForm() {
+	@RequestMapping(value="adminReturnSchoolForm.me", produces="json/application; utf-8")
+	public String adminReturnSchoolForm(Model model, String preId) {
 		// todo 복학 신청자 리스트를 가져와서 승인 버튼으로 승인할 수 있게 해준다 
-		mService.setReturnStudent();
-		
-		return "admin/adminReturnShcoolSelect";
+		 int result = mService.setReturnStudent(preId);
+		 List<MemberPresence> list = mService.getReturnStudent();
+			
+//		return "redirect:adminReturnSchool.me";
+		 return new Gson().toJson(list);
 	}
 
 	@RequestMapping("admintakeOffSelect.me")
 	public String adminTakeOff(Model model) {
+		// 휴학생 select
 		List<MemberAbsence> list = mService.getTakeOffStudent();
 		
 		model.addAttribute("list", list);
@@ -223,17 +231,18 @@ public class MemberController {
 		return "admin/adminTakeOffSelect";
 	}
 	
-	@RequestMapping("admintakeOffSelectForm.me")
+	@ResponseBody
+	@RequestMapping(value="admintakeOffSelectForm.me", produces="json/application; utf-8")
 	public String adminTakeOffForm(Model model, String absId) {
+		// absence 테이블 tbStatus | student 테이블 stStatus update 
 		int result = mService.setTakeOffStudent(absId);
-		
 		List<MemberAbsence> list = mService.getTakeOffStudent();
-		model.addAttribute("list", list);
-		
-		return "admin/adminTakeOffSelect";
+		//model.addAttribute("list", list);
+
+		return new Gson().toJson(list);
 	}
 	
-	@RequestMapping("tuitionMakeSelect.ad")
+	@RequestMapping("tuitionMakeSelect.me")
 	public String adminTuitionMake(Model model, AdminTuition tuition) {
 		List<AdminTuition> list = mService.insertAdminTuition(tuition);
 		

@@ -44,7 +44,7 @@ public class TuitionController {
 		int list = tService.insertTuitionPay(t);
 		
 		if(list > 0) {
-			session.setAttribute("alertMsg", "등록금 납부가 성공적을 완료 되었습니다.");
+			//session.setAttribute("alertMsg", "등록금 납부가 성공적을 완료 되었습니다.");
 			return "student/studentTuition";
 		}else {
 			model.addAttribute("errorMsg", "등록금 납부 실패!");

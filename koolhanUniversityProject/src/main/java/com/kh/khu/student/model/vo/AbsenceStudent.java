@@ -19,5 +19,5 @@ public class AbsenceStudent {
 	private String absSemester; // 휴학 학기
 	private String absGrade;
 	private String absSort; // 휴학 이유 
-	private String absStatus;
+	private String tbStatus;
 }

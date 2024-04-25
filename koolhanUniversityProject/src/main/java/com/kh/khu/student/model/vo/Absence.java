@@ -8,8 +8,8 @@ import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 @Setter
+@Getter
 @ToString
 public class Absence {
 
@@ -21,5 +21,6 @@ public class Absence {
 	private String absSort; // 휴학 이유 
 	private String absInsert; // 휴학서 생성일
 	private String absUpdate; // 휴학서 수정일
+	private String tbStatus;
 	
 }

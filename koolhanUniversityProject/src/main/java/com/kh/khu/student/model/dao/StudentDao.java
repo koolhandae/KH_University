@@ -75,11 +75,8 @@ public class StudentDao {
 		return (ArrayList)sqlSession.selectList("classMapper.selectClassNoticeList", classNum, rowBounds);
 	}
 	
-	public int selectTakeOff(SqlSessionTemplate sqlSession, Absence a) {
-		return sqlSession.selectOne("studentMapper.selectTakeOff", a);
-	}
 	
-	public int insertTakeOff(SqlSessionTemplate sqlSession, AbsenceStudent a) {
+	public int insertTakeOffStudent(SqlSessionTemplate sqlSession, AbsenceStudent a) {
 		return sqlSession.insert("studentMapper.insertTakeOff", a);
 	}
 	
@@ -121,13 +118,21 @@ public class StudentDao {
 		return sqlSession.selectOne("studentMapper.selectClassName", classNum);
 	}
 
-	public void insertTakeOffStudent() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public AbsenceStudentResult selectTakeOffStudent(SqlSessionTemplate sqlSession, String studentId) {
 		return sqlSession.selectOne("studentMapper.selectTakeOffStudent", studentId);
+	}
+	
+	public Presence selectReturnSchoolStudent(SqlSessionTemplate sqlSession, String studentId) {
+		return sqlSession.selectOne("studentMapper.selectReturnSchoolStudent", studentId);
+	}
+	
+	public ArrayList<Absence> selectTakeOff(SqlSessionTemplate sqlSession, String absId) {
+		return (ArrayList)sqlSession.selectList("studentMapper.selectTakeOff", absId);
+	}
+	
+	public ArrayList<Presence> selectReturnSchool(SqlSessionTemplate sqlSession, String preId) {
+		return (ArrayList)sqlSession.selectList("studentMapper.selectReturnSchool", preId);
+		
 	}
 	
 }

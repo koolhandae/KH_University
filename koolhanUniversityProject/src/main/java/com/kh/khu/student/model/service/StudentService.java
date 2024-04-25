@@ -15,8 +15,6 @@ public interface StudentService {
 
 	Student loginStudent(Student s);
 
-	int insertTakeOff(Absence a);
-
 	Student selectChkStudent(String email);
 
 	int changePwd(String userId, String encPwd);
@@ -43,26 +41,28 @@ public interface StudentService {
 	// 이전 수강내역 조회
 	ArrayList<Course> selectCourseHistory(int studentNo);
 
-	int selectTakeOff(Absence a);
-
-	int insertReturnSchool(Presence p);
-
 	int insertStudent(Student s);
 
 	String selectStudentId(Student s);
 	
 	// 학생 수강 강의계획서 조회
 	Classroom selectCoursePlan(String classNum);
-	
 
 	int verifyEmail(String email);
 
 	// 학생용 주소 수정
 	int updateAddress(Student s);
+	
+	ArrayList<Absence> selectTakeOff(String absId);
+	
+	ArrayList<Presence> selectReturnSchool(String preId);
 
 	int insertTakeOffStudent(AbsenceStudent s);
 
-	int getDo(String studentId);
+	int insertReturnSchool(Presence p);
+	
+	int selectTakeOffStudent(String studentId);
+	
+	int selectReturnSchoolStudent(String studentId);
 
-	int insertReturnStudent();
 }
