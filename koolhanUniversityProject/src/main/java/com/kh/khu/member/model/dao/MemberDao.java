@@ -111,4 +111,8 @@ public class MemberDao {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("memberMapper.selectAdminTuition");
 	}
+	
+	public int updateProfilePicture(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateProfilePicture", m);
+	}
 }

@@ -26,4 +26,6 @@ public class Student {
 	private String enrollDate;
 	private String absenceDate;
 	private String gradDate; 
+	private String originName;
+	private String changeName;
 }

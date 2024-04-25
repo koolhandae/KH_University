@@ -9,6 +9,7 @@ import com.kh.khu.classroom.model.vo.ClassNotice;
 import com.kh.khu.classroom.model.vo.Classroom;
 import com.kh.khu.classroom.model.vo.Course;
 import com.kh.khu.common.model.vo.PageInfo;
+import com.kh.khu.common.model.vo.ProfilePicture;
 import com.kh.khu.student.model.vo.Student;
 
 public interface StudentService {
@@ -87,4 +88,8 @@ public interface StudentService {
 	int selectNumberOfStudents(String stStatus);
 	
 	Classroom classPlanView(String classNum);
+	
+	int updateProfilePicture(Student s);
+	
+	int insertProfilePicture(ProfilePicture pp);
 }

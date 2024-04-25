@@ -15,6 +15,8 @@
 		<result column="enroll_date" property="enrollDate"/>
 		<result column="absence_date" property="absenceDate"/>
 		<result column="grad_date" property="gradDate"/>
+		<result column="origin_name" property="originName"/>
+		<result column="change_name" property="changeName"/>
 	</resultMap>
 	
 	
@@ -65,6 +67,14 @@
 		<result column="abs_insert" property="absInsert"/> 
 		<result column="abs_update" property="absUpdate"/>   
 	</resultMap> 
+	
+	<resultMap>
+		<result column="img_no" property="imgNo"/>
+		<result column="ref_mno" property="refMemberNo"/>
+		<result column="ref_sno" property="refStudentNo"/>
+		<result column="origin_name" property="originName"/>
+		<result column="change_name" property="changeName"/>
+	</resultMap>
 
 <select id="loginStudent" resultMap="studentResult">
 	select 
@@ -79,8 +89,11 @@
 	     , enroll_date
 	     , absence_date
 	     , grad_date
+	     , origin_name
+	     , change_name
 	  from student
 	 where student_id = #{studentId}
+	  join profile_images on (student_no = ref_sno)
 	   and s_status = 'Y'
 </select>
 
@@ -383,7 +396,12 @@
 	 where class_no = ${classNo}
 </select>
 	
-	
+	<update id="updateProfilePicture">
+		update profile_images
+		   set change_name = #{changeName}
+		     , origin_name = #{originName}
+		 where ref_mno = #{memberNo}    
+	</update>
 	
 
 </mapper>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.khu.common.model.vo.PageInfo;
+import com.kh.khu.common.model.vo.ProfilePicture;
 import com.kh.khu.member.model.dao.MemberDao;
 import com.kh.khu.member.model.vo.AdminTuition;
 import com.kh.khu.member.model.vo.Member;
@@ -134,6 +135,16 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public ArrayList<Member> selectNameSearchTypeMember(PageInfo mpi, Member m) {
 		return mDao.selectNameSearchTypeMember(sqlSession, mpi, m);
+	}
+
+	@Override
+	public int updateProfilePicture(Member m) {
+		return mDao.updateProfilePicture(sqlSession, m);
+	}
+
+	@Override
+	public int insertProfilePicture(ProfilePicture pp) {
+		return mDao.insertProfilePicture(sqlSession, pp);
 	}
 	
 

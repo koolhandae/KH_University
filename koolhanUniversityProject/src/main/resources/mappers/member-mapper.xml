@@ -13,6 +13,8 @@
 		<result column="m_address" property="meAddress"/>
 		<result column="m_type" property="meType"/>
 		<result column="m_status" property="meStatus"/>
+		<result column="origin_name" property="originName"/>
+		<result column="change_name" property="changeName"/>
 	</resultMap>
 	
 	 <resultMap type="MemberAbsence" id="memberAbsence">
@@ -34,6 +36,14 @@
 		<result column="tb_semester" property="semester"></result>
 	</resultMap>
 	
+	<resultMap>
+		<result column="img_no" property="imgNo"/>
+		<result column="ref_mno" property="refMemberNo"/>
+		<result column="ref_sno" property="refStudentNo"/>
+		<result column="origin_name" property="originName"/>
+		<result column="change_name" property="changeName"/>
+	</resultMap>
+	
 	
 	<select id="loginMember" resultMap="memberResult">
 		select
@@ -46,7 +56,10 @@
 		     , m_email
 		     , m_address
 		     , m_type
+		     , origin_name
+		     , change_name
 		  from member
+		  join profile_images on (member_no = ref_mno)
 		 where m_status = 'Y'
 		   and member_id = #{memberId}
 	</select>
@@ -247,6 +260,11 @@
 		   and m_type = #{meType}
 	</select>
 	
-	
+	<update id="updateProfilePicture">
+		update profile_images
+		   set change_name = #{changeName}
+		     , origin_name = #{originName}
+		 where ref_mno = #{memberNo}    
+	</update>
 		
 </mapper>
