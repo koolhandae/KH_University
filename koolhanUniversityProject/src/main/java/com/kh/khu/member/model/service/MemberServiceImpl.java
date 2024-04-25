@@ -59,8 +59,6 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.updateAddress(sqlSession, m);
 	}
 
-<<<<<<< HEAD
-=======
 	@Override
 	public ArrayList<Member> selectAllMember(PageInfo mpi) {
 		return mDao.selectAllMember(sqlSession, mpi);
@@ -89,7 +87,6 @@ public class MemberServiceImpl implements MemberService{
 	public int selectNameSearchTypeMemberListCount(Member m) {
 		return mDao.selectNameSearchTypeMemberListCount(sqlSession, m);
 	}
->>>>>>> ded45c113c8805428774ecb8a448e3c8a6c8911b
 
 	@Override
 	public List<MemberAbsence> getTakeOffStudent() {
@@ -140,6 +137,11 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public ArrayList<Member> selectNameSearchTypeMember(PageInfo mpi, Member m) {
 		return mDao.selectNameSearchTypeMember(sqlSession, mpi, m);
+	}
+
+	@Override
+	public int selectMemberListCount() {
+		return 0;
 	}
 	
 

@@ -68,7 +68,10 @@
 		border-bottom: 1px;
 		border-color: rgb(75,75,75);
 	}
-
+	
+	hr{
+		width: 1000px;
+	}
 
 </style>
 </head>
@@ -83,11 +86,11 @@
 			<div class="tuitionBtn" align="center";>
 		   		<a class="btn btn-primary btn-lg"  href="tuitionBill.do" roll="button" style="background-color:rgb(48, 76, 121)">등록금 납부 고지서</a>
 		   		   <span style="margin-left: 40px; margin-right: 40px;"></span>
-		   		<a class="btn btn-primary btn-lg"  href="#" roll="button" style="background-color:rgb(48, 76, 121)">등록금 내역 조회</a>  	
+		   		<a class="btn btn-primary btn-lg"  href="tuitionPay.do" roll="button" style="background-color:rgb(48, 76, 121)">등록금 내역 조회</a>  	
 		    </div>
 			<br><br><br>
-			<h1 style="margin-left: 290px; font-weight:900; color: rgb(75,75,75);">등록금 고지서</h1>
-			<h5 style="margin-left: 290px;">2024년도 1학기</h5>
+			<h1 style="margin-left: 150px; font-weight:900; color: rgb(75,75,75);">등록금 고지서</h1>
+			<h5 style="margin-left: 150px;">2024년도 1학기</h5>
             <hr>
 			<br>
 			<br>
@@ -96,28 +99,28 @@
 			<table id="boardList" class="table table-hover" align="center">
 				<tr>
 					<th>학부(과)</th>
-					<td colspan="3">컴퓨터공학과</td>
+					<td>컴퓨터공학과</td>
+					<th>학번</th>
+					<td>${ loginStudent.studentId }</td>
 				</tr>
 
 				<tr>
-					<th>학번</th>
-					<td>${ loginStudent.studentId }</td>
 					<th>성명</th>
 					<td>${ loginStudent.studentName }</td>
+					<th>학기</th>
+					<td>3학년 1학기</td>
 				</tr>
 
                 <tr>
 					<th>등록금</th>
 					<td>4,000,000</td>
-					<th>학기</th>
-					<td>3학년 1학기</td>
-				</tr>
-
-				<tr>
-					<th>납부 금액</th>
-					<td>2,500,000</td>
 					<th>장학금</th>
 					<td>1,500,000</td>
+				</tr>
+
+				<tr colspan="3" align="right">
+					<th>납부 금액</th>
+					<td>2,500,000</td>
 				</tr>
 
 				<tr>

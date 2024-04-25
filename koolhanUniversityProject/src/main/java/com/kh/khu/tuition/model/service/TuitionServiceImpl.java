@@ -28,7 +28,7 @@ public class TuitionServiceImpl implements TuitionService{
 	
 	@Override
 	public int insertTuitionPay(Tuition t) {
-		System.out.println(t);
+		//System.out.println(t);
 		return tDao.insertTuitionPay(sqlSession, t);
 	}
 
