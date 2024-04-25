@@ -13,6 +13,8 @@ import com.kh.khu.member.model.dao.MemberDao;
 import com.kh.khu.member.model.vo.AdminTuition;
 import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.member.model.vo.MemberAbsence;
+import com.kh.khu.member.model.vo.MemberPresence;
+import com.kh.khu.student.model.vo.Presence;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -58,6 +60,8 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.updateAddress(sqlSession, m);
 	}
 
+<<<<<<< HEAD
+=======
 	@Override
 	public ArrayList<Member> selectAllMember(PageInfo mpi) {
 		return mDao.selectAllMember(sqlSession, mpi);
@@ -70,11 +74,6 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public ArrayList<Member> selectNameSearchAllMember(PageInfo mpi, String memberName){
 		return mDao.selectNameSearchAllMember(sqlSession, mpi, memberName);
-	}
-	
-	@Override
-	public int selectMemberListCount() {
-		return mDao.selectMemberListCount(sqlSession);
 	}
 	
 	@Override
@@ -91,35 +90,42 @@ public class MemberServiceImpl implements MemberService{
 	public int selectNameSearchTypeMemberListCount(Member m) {
 		return mDao.selectNameSearchTypeMemberListCount(sqlSession, m);
 	}
-	
-	public void getReturnStudent() {
-		// todo: 만들어야 하는 쿼리는 복학 신청자 테이블을 조회 합니다 이걸 화면에 보여줍니다
-		mDao.getReturnStudent();
-	}
+>>>>>>> ded45c113c8805428774ecb8a448e3c8a6c8911b
 
 	@Override
 	public List<MemberAbsence> getTakeOffStudent() {
-		// TODO 만들어야 하는 쿼리는 휴학 신청자 테이블을 조회합니다 이걸 화면에 보여줍니다 
+		// TODO 휴학 신청자 테이블을 조회합니다 이걸 화면에 보여줍니다 
 		List<MemberAbsence> list = mDao.getTakeOffStudent(sqlSession);
-		
 		return list;
 	}
-
-	@Override
-	public void setReturnStudent() {
-		// TODO 스튜던트의 상태데이터를 UPDATE 합니다 
-		
-		// TODO 복학 신청 등록 데이터를 UPdate 합니다 
-	}
-
+	
 	@Override
 	public int setTakeOffStudent(String absId) {
 		// TODO 스튜던트의 상태데이터를 UPDATE 합니다 
 		int result = mDao.changeStudentStatus(sqlSession, absId);
+		// System.out.println(absId);
 		// TODO 휴학 신청 등록 데이터를 UPdate 합니다 
 		result = mDao.changeTakeOffStudent(sqlSession, absId);
+		return result;	
+	}
+
+	@Override
+	public List<MemberPresence> getReturnStudent() {
+		// todo: 복학 신청자 테이블을 조회 합니다 이걸 화면에 보여줍니다
+		List<MemberPresence> list = mDao.getReturnStudent(sqlSession);
+		
+		return list;
+	}
+	
+	@Override
+	public int setReturnStudent(String preId) {
+		// TODO 스튜던트의 상태데이터를 UPDATE 합니다 
+		int result = mDao.changeReturnStatus(sqlSession, preId);
+		// TODO 복학 신청 등록 데이터를 UPdate 합니다 
+		result = mDao.changeReturnStudent(sqlSession, preId);
 		return result;
 	}
+
 
 	@Override
 	public List<AdminTuition> insertAdminTuition(AdminTuition tuition) {

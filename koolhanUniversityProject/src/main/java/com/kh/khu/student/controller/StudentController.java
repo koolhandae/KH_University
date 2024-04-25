@@ -172,11 +172,24 @@ public class StudentController {
 	public String takeOffForm(HttpSession session, Model model) {
 		// 화면상에 버튼처리를 할 수 있는 서비스
 		Student student = (Student)session.getAttribute("loginStudent");
-		int result = sService.getDo(student.getStudentId());
+		int result = sService.selectTakeOffStudent(student.getStudentId());
 		
 		model.addAttribute("result", result);
 		
 		return "student/studentTakeOff";
+	}
+	
+	@RequestMapping("returnSchool.do")
+	public String returnSchoolForm(HttpSession session, Model model) {
+		// 화면상에 버튼처리를 할 수 있는 서비스
+		// 휴학생만 데이터를 보일 수 있게 한다 
+		//int result = sService.getDo();
+		Student student = (Student)session.getAttribute("loginStudent");
+		int result = sService.selectReturnSchoolStudent(student.getStudentId());
+		
+		model.addAttribute("result", result);
+		
+		return "student/studentReturnSchool";
 	}
 	
 	// 휴학생 데이터를 넣는다 (DB 까지)
@@ -186,46 +199,60 @@ public class StudentController {
 		
 		model.addAttribute("result", result);
 		
-		return "student/studentTakeOff";
-	}
-	
-	
-	@RequestMapping("returnSchool.do")
-	public String returnSchoolForm(HttpSession session) {
-		// 화면상에 버튼처리를 할 수 있는 서비스
-		// 휴학생만 데이터를 보일 수 있게 한다 
-		//int result = sService.getDo();
-		
-		return "student/studentReturnSchool";
+		if(result>0) { //성공
+			HashMap<String, Object> alertMsg = new HashMap<String, Object>();
+	         alertMsg.put("icon", "success");
+	         alertMsg.put("title", "성공!");
+	         alertMsg.put("text", "성공적으로 휴학 신청이 완료되었습니다");
+	         session.setAttribute("alertMsg", alertMsg);
+			 return "redirect:takeOffSelect.do";
+		}else {
+			//실패
+			model.addAttribute("errorMsg","휴학 신청 실패");
+			return "common/errorPage500";
+		}
 	}
 	
 	// 복학 신청 데이터를 넣는다
 	@RequestMapping("returnSchoolForm.do")
 	public String insertReturnSchool(Presence p, Model model , HttpSession session) {
-		int result = sService.insertReturnStudent();
+		int result = sService.insertReturnSchool(p);
 		
+		model.addAttribute("result", result);
 		
+		if(result>0) { //성공
+			HashMap<String, Object> alertMsg = new HashMap<String, Object>();
+	         alertMsg.put("icon", "success");
+	         alertMsg.put("title", "성공!");
+	         alertMsg.put("text", "성공적으로 복학 신청이 완료되었습니다");
+	         session.setAttribute("alertMsg", alertMsg);
+			 return "redirect:returnSchool.do";
+		}else {
+			//실패
+			model.addAttribute("errorMsg","복학 신청 실패");
+			return "common/errorPage500";
+		}
 		
-		return "student/studentReturnSchool";
-
 	}
 	
-	
 	@RequestMapping("takeOffSelect.do")
-	public String selectTakeOff(HttpSession session) {
+	public String selectTakeOff(HttpSession session, String absId, Model model) {
+		// System.out.println(absId);
+		  ArrayList<Absence> a = sService.selectTakeOff(absId);
+	
+		  model.addAttribute("a", a);
+		
 		return "student/studentTakeOffSelect";
 	}
 	
-	@RequestMapping("selectTakeOff.do")
-	public void selectTakeOff(Absence a, Model model, HttpSession session) {
-		System.out.println(a);
-	}
-	
-	@RequestMapping("takeOffDetail.do")
-	public void detailTakeOff() {
+	@RequestMapping("returnSchoolSelect.do")
+	public String selectReturnSchool(HttpSession session, String preId, Model model) {
+		ArrayList<Presence> p = sService.selectReturnSchool(preId);
 		
+		model.addAttribute("p", p);
+		
+		return "student/studentReturnSchoolSelect";
 	}
-	
 
 	
 	@RequestMapping("update.stu")

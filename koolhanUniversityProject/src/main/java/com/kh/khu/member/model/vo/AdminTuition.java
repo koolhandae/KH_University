@@ -14,6 +14,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class AdminTuition {
+	private int ttNo;
 	private int tbPrice;
 	private String startDate;
 	private String endDate;

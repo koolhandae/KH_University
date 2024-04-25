@@ -1,4 +1,4 @@
-package com.kh.khu.student.model.vo;
+package com.kh.khu.member.model.vo;
 
 import java.util.Date;
 
@@ -13,9 +13,8 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-
-public class Presence {
-
+public class MemberPresence {
+	
 	private int preNo; // 복학생 번호
 	private String preId; // 학번
 	private String preYear; // 복학 연도
@@ -23,4 +22,5 @@ public class Presence {
 	private String tbStatus; // 복학서 상태
 	private String preInsert; // 복학서 신청일
 	private String preUpdate; // 복학서 수정일
+
 }

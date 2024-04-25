@@ -29,11 +29,21 @@
 		<result column="abs_update" property="absUpdate"/>   
 	</resultMap> 
 	
+	<resultMap type="MemberPresence" id="memberPresence">
+		<result column="pre_no" property="preNo" />
+		<result column="pre_id" property="preId" />
+		<result column="pre_year" property="preYear" />
+		<result column="pre_semester" property="preSemester" />
+		<result column="tb_status" property="tbStatus" />
+		<result column="pre_insert" property="preInsert" />
+		<result column="pre_update" property="preUpdate" />
+	</resultMap>
+	
 	<resultMap type="AdminTuition" id="adminTuition">
-		<result column="tb_price" property="tbPrice"></result>
-		<result column="tb_open" property="startDate"></result>
-		<result column="tb_close" property="endDate"></result>
-		<result column="tb_semester" property="semester"></result>
+		<result column="tb_price" property="tbPrice" />
+		<result column="tb_open" property="startDate" />
+		<result column="tb_close" property="endDate" />
+		<result column="tb_semester" property="semester" />
 	</resultMap>
 	
 	<resultMap>
@@ -127,28 +137,52 @@
 	
 	<select id="selectAbsenceStudent" resultMap="memberAbsence">
 		select
-	     abs_no
-	     , abs_id
-	     , abs_start
-	     , abs_end
-	     , abs_semester
-	     , tb_status
-	     , abs_sort
-	     , abs_insert
-	     , abs_update
-	  	from absence
+		       abs_no
+		     , abs_id
+		     , abs_start
+		     , abs_end
+		     , abs_semester
+		     , tb_status
+		     , abs_sort
+		     , abs_insert
+		     , abs_update
+		  from absence
+	</select>
+	
+	<select id="selectPresenceStudent" resultMap="memberPresence">
+		select 
+		       pre_no
+		     , pre_id
+		     , pre_year
+		     , pre_semester
+		     , tb_status
+		     , pre_insert
+		     , pre_update
+		  from presence
 	</select>
 	
 	<update id="updateAbsenceStudent">
 		update student
-	    set s_status = 'H'
-	    where student_id = #{absId}
+	       set s_status = 'H'
+	     where student_id = #{absId}
 	</update>
 	
-	<update id="updateAbsenceStudentSucess">
+	<update id="updateAbsenceStudentSuccess">
 		update absence
-	    set tb_status = 'Y'
-	    where abs_id = #{absId}
+	       set tb_status = 'Y'
+	     where abs_id = #{absId}
+	</update>
+	
+	<update id="updatePresenceStudent">
+		update student
+		   set s_status = 'Y'
+		 where student_id = #{preId}
+	</update>
+	
+	<update id="updatePresenceStudentSuccess">
+		update presence
+		   set tb_status = 'Y'
+		 where pre_id = #{preId}
 	</update>
 	
 	<insert id="insertAdminTuition">

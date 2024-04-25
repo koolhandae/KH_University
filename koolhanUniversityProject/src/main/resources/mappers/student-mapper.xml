@@ -44,15 +44,18 @@
 		<result column="abs_semester" property="absSemester"/>	
 		<result column="abs_sort" property="absSort"/>	
 		<result column="abs_insert" property="absInsert"/>	
-		<result column="abs_update" property="absUpdate"/>	
+		<result column="abs_update" property="absUpdate"/>
+		<result column="tb_status" property="tbStatus"/>		
 	</resultMap>
 	
 	<resultMap type="Presence" id="presenceResult">
 		<result column="pre_no" property="preNo"/>
 		<result column="pre_id" property="preId"/>
-		<result column="pre_year" property="preYear"/>	
+		<result column="pre_year" property="preYear"/>
 		<result column="pre_semester" property="preSemester"/>	
 		<result column="tb_status" property="tbStatus"/>	
+		<result column="pre_insert" property="preInsert" />
+		<result column="pre_update" property="preUpdate" />
 	</resultMap>
 
  	<resultMap type="AbsenceStudentResult" id="absenceStudentResult">
@@ -94,7 +97,7 @@
 	  from student
 	 where student_id = #{studentId}
 	  join profile_images on (student_no = ref_sno)
-	   and s_status = 'Y'
+	   and s_status != 'Z'
 </select>
 
 <insert id="insertTakeOff">
@@ -107,7 +110,7 @@
 	  , abs_end
 	  , abs_semester
 	  , abs_sort
-	  , abs_status
+	  , tb_status
 	  , abs_insert
 	  , abs_update
 	  )
@@ -119,7 +122,7 @@
 	  , #{absEnd}
 	  , #{absSemester}
 	  , #{absSort}
-	  , #{absStatus}
+	  , #{tbStatus}
 	  , sysdate
 	  , sysdate
 	  )
@@ -131,29 +134,56 @@
 	  (
 	  	pre_no
 	  , pre_id
+	  , pre_year
 	  , pre_semester
-	  , pre_grade
-
+	  , tb_status
+	  , pre_insert
+	  , pre_update
 	  )
 	  values
 	  (
 	  	#{preNo}
 	  , #{preId}
+	  , #{preYear}
 	  , #{preSemester}
-	  , #{preGrade}
+	  , #{tbStatus}
+	  , sysdate
+	  , sysdate
 	  )
 </insert>
 
 <select id="selectTakeOff" resultMap="absenceResult">
 	select
 	       student_no
+	     , abs_no
+	     , abs_id
 	     , abs_semester
-	     , abs_grade
 	     , abs_sort
+	     , abs_start
+	     , abs_end
+	     , abs_insert
+	     , abs_update
+	     , tb_status
 	  from absence
 	  join student on (student_no = abs_no)
 	 where s_status = 'Y'	  
 </select>
+
+<select id="selectReturnSchool" resultMap="presenceResult">
+	select 
+	       student_no
+	     , pre_no
+	     , pre_id
+	     , pre_year
+	     , pre_semester
+	     , tb_status
+	     , pre_insert
+	     , pre_update
+	  from presence
+	  join student on (student_no = pre_no)
+	 where s_status = 'H'
+</select>
+
 
 <select id="selectTakeOffStudent" resultMap="absenceStudentResult">
 	select
@@ -171,6 +201,31 @@
 	  join student on (student_no = abs_no)
 	 where s_status = 'Y'	  
 	 and abs_id = #{absId}
+</select>
+
+
+<select id="selectReturnSchoolStudent" resultMap="presenceResult">
+	select 
+	       student_no
+	     , pre_no
+	     , pre_id
+	     , pre_year
+	     , pre_semester
+	     , tb_status
+	     , pre_insert
+	     , pre_update
+	  from presence
+	  join student on (student_no = pre_no)
+	 where s_status = 'Y'
+	   and pre_id = #{preId}
+</select>
+
+
+<select id="detailTakeOff" resultMap="absenceResult">
+	select
+		   *
+	  from absence
+	 where abs_id = #{absId}
 </select>
 
 	<!-- 누구껀지확인부탁! 동석, 도현, 수지 아님 혹시 연뎡..? 하하

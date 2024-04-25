@@ -91,9 +91,10 @@ public class HomeController {
 
 		br.close();
 		urlConnection.disconnect();
-
+		
+		// System.out.println(responseText);
 		return responseText;
-
+		
 	}
 
 	@RequestMapping(value = "busApiForm.do")

@@ -65,7 +65,7 @@
 			</script> -->
 			
 			
-			<script>
+	<!-- 		<script>
 			    $.ajax({
 			        url: "shuttleBus.do",
 			        success: function(bus) {
@@ -93,7 +93,196 @@
 			            console.log("실시간 버스 조회 ajax 실패~");
 			        }
 			    });
-			</script>
+			</script> -->
+			
+			
+			
+ <script>
+    $.ajax({
+        url: "shuttleBus.do",
+        success: function(buses) { 
+            var position1 = new naver.maps.LatLng(36.32693, 127.421985);
+            var position2 = new naver.maps.LatLng(36.292885, 127.320356);
+            var position3 = new naver.maps.LatLng(36.278412, 127.252039);
+            var position4 = new naver.maps.LatLng(36.281756, 127.239993);
+            var position5 = new naver.maps.LatLng(36.294965, 127.321379);
+            var position6 = new naver.maps.LatLng(36.318054, 127.396068);
+            var position7 = new naver.maps.LatLng(36.33282, 127.437719);
+
+            var mapOptions = {
+                center: position2,
+                zoom: 13
+            };
+
+            var map = new naver.maps.Map('map', mapOptions);
+
+            var markers = [];
+
+            var markerOptions1 = {
+                position: position1,
+                map: map,
+                icon: {
+                    url: './resources/images/bus-icon-xs50.png',
+                    size: new naver.maps.Size(50, 50),
+                }
+            };
+
+            var markerOptions2 = {
+                position: position2,
+                map: map,
+                icon: {
+                    url: './resources/images/bus-icon-xs50.png',
+                    size: new naver.maps.Size(50, 50),
+                }
+            };
+
+            var markerOptions3 = {
+                position: position3,
+                map: map,
+                icon: {
+                    url: './resources/images/bus-icon-xs50.png',
+                    size: new naver.maps.Size(50, 50),
+                }
+            };
+
+            var markerOptions4 = {
+                position: position4,
+                map: map,
+                icon: {
+                    url: './resources/images/bus-icon-xs50.png',
+                    size: new naver.maps.Size(50, 50),
+                }
+            };
+
+            var markerOptions5 = {
+                position: position5,
+                map: map,
+                icon: {
+                    url: './resources/images/bus-icon-xs50.png',
+                    size: new naver.maps.Size(50, 50),
+                }
+            };
+
+            var markerOptions6 = {
+                position: position6,
+                map: map,
+                icon: {
+                    url: './resources/images/bus-icon-xs50.png',
+                    size: new naver.maps.Size(50, 50),
+                }
+            };
+
+            var markerOptions7 = {
+                position: position7,
+                map: map,
+                icon: {
+                    url: './resources/images/bus-icon-xs50.png',
+                    size: new naver.maps.Size(50, 50),
+                }
+            };
+
+            var marker1 = new naver.maps.Marker(markerOptions1);
+            var marker2 = new naver.maps.Marker(markerOptions2);
+            var marker3 = new naver.maps.Marker(markerOptions3);
+            var marker4 = new naver.maps.Marker(markerOptions4);
+            var marker5 = new naver.maps.Marker(markerOptions5);
+            var marker6 = new naver.maps.Marker(markerOptions6);
+            var marker7 = new naver.maps.Marker(markerOptions7);
+
+            markers.push(marker1);
+            markers.push(marker2);
+            markers.push(marker3);
+            markers.push(marker4);
+            markers.push(marker5);
+            markers.push(marker6);
+            markers.push(marker7);
+
+            buses.forEach(function(bus) {
+                var position = new naver.maps.LatLng(bus.latitude, bus.longitude);
+                var markerOptions = {
+                    position: position,
+                    map: map,
+                    icon: {
+                        url: './resources/images/bus-icon-xs50.png',
+                        size: new naver.maps.Size(50, 50),
+                    }
+                };
+                var marker = new naver.maps.Marker(markerOptions);
+                markers.push(marker);
+            });
+        },
+        error: function() {
+            console.log("실시간 버스 조회 ajax 실패~");
+        }
+    });
+</script>
+			
+			
+<!-- <script>
+    // Function to update map markers with new bus data
+    function updateMarkers(map, markers, busData) {
+        // Remove existing markers
+        markers.forEach(function(marker) {
+            marker.setMap(null);
+        });
+        markers = [];
+
+        // Parse XML data
+        var parser = new DOMParser();
+        var xmlDoc = parser.parseFromString(busData, "text/xml");
+
+        // Get bus location nodes
+        var busLocations = xmlDoc.getElementsByTagName("item");
+
+        // Add new markers based on bus data
+        for (var i = 0; i < busLocations.length; i++) {
+            var latitude = parseFloat(busLocations[i].getElementsByTagName("gpsY")[0].textContent);
+            var longitude = parseFloat(busLocations[i].getElementsByTagName("gpsX")[0].textContent);
+            var position = new naver.maps.LatLng(latitude, longitude);
+
+            var markerOptions = {
+                position: position,
+                map: map
+            };
+            
+            var marker = new naver.maps.Marker(markerOptions);
+            markers.push(marker);
+        }
+    }
+
+    // Fetch real-time bus data from the server
+    function fetchBusData() {
+        $.ajax({
+            url: "shuttleBus.do",
+            dataType: "text",
+            success: function(busData) {
+                // Update the map with new bus data
+                updateMarkers(map, markers, busData);
+            },
+            error: function() {
+                console.log("실시간 버스 조회 ajax 실패~");
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        var mapOptions = {
+            center: new naver.maps.LatLng(36.32693, 127.421985),
+            zoom: 17
+        };
+
+        var map = new naver.maps.Map('map', mapOptions);
+        var markers = [];
+
+        // Initial fetch
+        fetchBusData();
+
+        // Poll for new data every 30 seconds (or adjust as needed)
+        setInterval(fetchBusData, 30000);  // Every 30 seconds
+    });
+</script> -->
+			
+			
 		      
       </div>
    </div>

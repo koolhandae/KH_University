@@ -78,8 +78,8 @@
         <tr>
           <th>학년</th>
           <td>3
-          	<input type="hidden" name="absStart" value="3" />
-          	<input type="hidden" name="absEnd" value="3" />
+          	<input type="hidden" name="absStart" value="1" />
+          	<input type="hidden" name="absEnd" value="2" />
           </td>
           <th>성명</th>
           <td>${ loginStudent.studentName }</td>
