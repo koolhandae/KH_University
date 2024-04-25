@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.khu.common.model.vo.PageInfo;
+import com.kh.khu.common.model.vo.ProfilePicture;
 import com.kh.khu.common.template.Pagination;
 import com.kh.khu.member.model.vo.AdminTuition;
 import com.kh.khu.member.model.vo.Member;
@@ -124,5 +125,9 @@ public class MemberDao {
 	
 	public int updateProfilePicture(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updateProfilePicture", m);
+	}
+	
+	public int insertProfilePicture(SqlSessionTemplate sqlSession, ProfilePicture pp) {
+		return 0;
 	}
 }

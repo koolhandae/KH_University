@@ -234,10 +234,6 @@ public class StudentServiceImpl implements StudentService {
 		return sDao.classPlanView(sqlSession, classNum);
 	}
 
-	@Override
-	public Classroom classPlanView(String classNum) {
-		return sDao.classPlanView(sqlSession, classNum);
-	}
 
 	@Override
 	public int updateProfilePicture(Student s) {

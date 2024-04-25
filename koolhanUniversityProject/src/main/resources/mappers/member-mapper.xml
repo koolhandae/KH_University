@@ -46,7 +46,7 @@
 		<result column="tb_semester" property="semester" />
 	</resultMap>
 	
-	<resultMap>
+	<resultMap type="ProfilePic" id="profileResult">
 		<result column="img_no" property="imgNo"/>
 		<result column="ref_mno" property="refMemberNo"/>
 		<result column="ref_sno" property="refStudentNo"/>

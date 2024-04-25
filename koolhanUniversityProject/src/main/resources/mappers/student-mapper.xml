@@ -71,7 +71,7 @@
 		<result column="abs_update" property="absUpdate"/>   
 	</resultMap> 
 	
-	<resultMap>
+	<resultMap type="ProfilePic" id="profileResult">
 		<result column="img_no" property="imgNo"/>
 		<result column="ref_mno" property="refMemberNo"/>
 		<result column="ref_sno" property="refStudentNo"/>
@@ -92,18 +92,13 @@
 	     , enroll_date
 	     , absence_date
 	     , grad_date
-<<<<<<< HEAD
-	     , origin_name
+	     , s_status
+		 , origin_name
 	     , change_name
 	  from student
 	 where student_id = #{studentId}
 	  join profile_images on (student_no = ref_sno)
 	   and s_status != 'Z'
-=======
-	     , s_status
-	  from student
-	 where student_id = #{studentId}
->>>>>>> 194233265ae784ba499083ae243dac8ed126041e
 </select>
 
 <insert id="insertTakeOff">
