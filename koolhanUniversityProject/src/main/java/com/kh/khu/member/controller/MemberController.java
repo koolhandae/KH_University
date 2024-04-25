@@ -70,45 +70,62 @@ public class MemberController {
 			s.setStudentPwd(userPwd);
 
 			Student loginStudent = sService.loginStudent(s);
+			
+			System.out.println(loginStudent);
 
-			if (loginStudent != null
-					&& bcryptPasswordEncoder.matches(s.getStudentPwd(), loginStudent.getStudentPwd())) {
-				// 로그인성공
-				session.setAttribute("loginStudent", loginStudent);
-
-				alertMsg.put("icon", "success");
-				alertMsg.put("title", "로그인 성공");
-				alertMsg.put("text", "성공적으로 로그인 됐습니다");
-				session.setAttribute("alertMsg", alertMsg);
-
-				return "redirect:/mainPage.me";
+				if (loginStudent != null && !loginStudent.getStStatus().equals("Z") && !loginStudent.getStStatus().equals("N")
+						&& bcryptPasswordEncoder.matches(s.getStudentPwd(), loginStudent.getStudentPwd())) {
+					// 로그인성공
+					session.setAttribute("loginStudent", loginStudent);
+	
+					alertMsg.put("icon", "success");
+					alertMsg.put("title", "로그인 성공");
+					alertMsg.put("text", "성공적으로 로그인 됐습니다");
+					session.setAttribute("alertMsg", alertMsg);
+	
+					return "redirect:/mainPage.me";
+				
+				// 재직된 학생은 로그인 못함
+				}else if(loginStudent != null && loginStudent.getStStatus().equals("Z")) {
+					alertMsg.put("icon", "error");
+					alertMsg.put("title", "로그인 실패");
+					alertMsg.put("text", "재적된 학생은 로그인 하실 수 없습니다");
+					session.setAttribute("alertMsg", alertMsg);
+					return "redirect:/";
+					
+				// 자퇴 학생은 로그인 못함
+				}else if(loginStudent != null && loginStudent.getStStatus().equals("N")) {
+					alertMsg.put("icon", "error");
+					alertMsg.put("title", "로그인 실패");
+					alertMsg.put("text", "자퇴한 학생은 로그인 하실 수 없습니다");
+					session.setAttribute("alertMsg", alertMsg);
+					return "redirect:/";
+				}	
+			} else{
+				Member m = new Member();
+				m.setMemberId(userId);
+				m.setMemberPwd(userPwd);
+	
+				Member loginUser = mService.loginMember(m);
+	
+				if (loginUser != null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
+					// 로그인 성공
+					session.setAttribute("loginUser", loginUser);
+	
+					alertMsg.put("icon", "success");
+					alertMsg.put("title", "로그인 성공");
+					alertMsg.put("text", "성공적으로 로그인 됐습니다");
+					session.setAttribute("alertMsg", alertMsg);
+					return "redirect:/mainPage.me";
+				}
 			}
-
-		} else {
-			Member m = new Member();
-			m.setMemberId(userId);
-			m.setMemberPwd(userPwd);
-
-			Member loginUser = mService.loginMember(m);
-
-			if (loginUser != null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
-				// 로그인 성공
-				session.setAttribute("loginUser", loginUser);
-
-				alertMsg.put("icon", "success");
-				alertMsg.put("title", "로그인 성공");
-				alertMsg.put("text", "성공적으로 로그인 됐습니다");
-				session.setAttribute("alertMsg", alertMsg);
-				return "redirect:/mainPage.me";
-			}
-		}
 
 		alertMsg.put("icon", "error");
 		alertMsg.put("title", "로그인 실패");
 		alertMsg.put("text", "아이디 또는 비밀번호가 올바르지 않습니다.");
 		session.setAttribute("alertMsg", alertMsg);
 		return "redirect:/";
-
+		
 	}
 
 	@RequestMapping("logout.me")

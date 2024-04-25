@@ -79,9 +79,9 @@
 	     , enroll_date
 	     , absence_date
 	     , grad_date
+	     , s_status
 	  from student
 	 where student_id = #{studentId}
-	   and s_status = 'Y'
 </select>
 
 <insert id="insertTakeOff">
