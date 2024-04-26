@@ -5,13 +5,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- fullcalendar CDN -->
+<link
+	href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css'
+	rel='stylesheet' />
+<script
+	src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
+<!-- fullcalendar 언어 CDN -->
+<script
+	src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script> -->
 <title>Insert title here</title>
 <style>
+    /*
     div{
         border: 1px solid red;
     }
+    */
     #topDiv{
-        padding-top: 100px;
+        padding-top: 30px;
     }
     #topDiv>div{
         width: 50%;
@@ -20,14 +32,20 @@
     }
     #calendar{
         padding-right: 50px;
-        padding-left: 50px;
+        padding-left: 100px;
+        height: 500px;
+        padding-top: 40px;
     }
     #notice{
-        padding-right: 50px;
-        padding-left: 50px;
+        padding-right: 80px;
+        padding-left: 100px;
         padding-bottom: 30px;
+        padding-top: 100px;
         color: rgb(39, 39, 39);
         
+    }
+    .table{
+        width: 80% !important;
     }
     td{
         /* border: solid 1px red; */
@@ -70,6 +88,136 @@
         text-decoration: none;
     }
     
+    /* 캘린더 관련 */
+    #calendarArea{
+	    padding: 5px;
+	    height: 450px;
+    }
+    /* 달력 스타일 변경 (테두리)*/
+    .fc-button-group .fc-next-button, .fc-button-group .fc-prev-button {
+        border: 0px;
+    }
+
+    .fc-theme-standard th {
+        padding: 5px;
+    }
+
+    .fc-scrollgrid-section>td {
+        padding: 5px;
+    }
+
+    .fc .fc-daygrid-day-frame {
+        padding: 5px;
+    }
+
+    .fc-direction-ltr .fc-button-group>.fc-button:not(:first-child) {
+        border: 0px;
+    }
+
+    .fc-direction-ltr .fc-button-group>.fc-button:not(:last-child) {
+        border: 0px;
+    }
+
+    /*제목*/
+    .fc .fc-toolbar-title {
+        color: #4d4d4d;
+        font-weight: 900;
+        font-size: xx-large;
+    }
+
+    .fc-toolbar-chunk {
+        display: flex;     
+        align-items: center; 
+    }
+
+    .fc .fc-scrollgrid-liquid {
+        border-top: 5px solid #676767;;
+    }
+    /*요일*/
+    .fc-col-header-cell-cushion {
+        color: #000;
+    }
+
+    .fc-col-header-cell-cushion:hover {
+        text-decoration: none;
+        color: #000;
+    }
+    /*일자*/
+    .fc-daygrid-day-number {
+        color: #000;
+        font-size: 1em;
+    }
+
+    /*종일제목*/
+    .fc-event-title.fc-sticky {
+        
+    }
+    /*more버튼*/
+    .fc-daygrid-more-link.fc-more-link {
+        color: #000;
+    }
+    /*일정시간*/
+    .fc-daygrid-event>.fc-event-time {
+        color: #000;
+    }
+    /*시간제목*/
+    .fc-daygrid-dot-event>.fc-event-title {
+        color: #000 !important;
+    }
+
+    /*month/week/day*/
+    .fc-button-active {
+        background-color: white !important;
+        font-weight: bold !important;
+        font-size: x-large !important;
+        color: #1c4587 !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    /* today 버튼*/
+    .fc-today-button {
+        border: 0px !important;
+        background-color: #f27474 !important;
+        border-radius: 5px !important;
+        border-radius: 150px !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    /* 추가버튼 */
+    .fc-addBtn-button {
+        background-color: #f6c23e !important;
+        border-radius: 100px !important;
+        color: white !important;
+        width: 38px !important;
+        margin-right: 5px !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    /*기본버튼색상*/
+    .fc .fc-button-group>.fc-button, .fc-today-button {
+        background-color: white;
+        color: #464646;
+        font-weight: bold;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    .fc-prev-button, .fc-next-button {
+        background-color: white !important;
+    border: none !important;
+    }
+    .fc-icon{
+    color: #464646;
+    }
+    /*일요일 색상*/
+    .fc-day-sun a {
+        color: red;
+        font-weight: 600;
+    }
+    /*토요일 색상*/
+    .fc-day-sat a {
+        color: rgb(0, 0, 147);
+    }
+
 
 </style>
 </head>
@@ -77,9 +225,9 @@
    <jsp:include page="../common/header_with_sidebar.jsp"/>
    <div class="content">
 
-            <div id="topDiv" class="bg-white" style="height: 450px;">
-                <div id="calendar">달력자리
-                	<jsp:include page="../common/myCalendar.jsp"/>
+            <div id="topDiv" class="bg-white" style="height: 600px;">
+                <div id="calendar">
+                	<div id="calendarArea"></div>
                 </div>
                 <div id="notice">
                     <div id="noticeTitle">
@@ -158,6 +306,43 @@
 			location.href="detail.no?nno=" + num;
 		}
 	</script>
+
+	<script>
+	 document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendarArea');
+      // 풀캘린더 생성
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+
+        // 구글캘린더API 키값
+        googleCalendarApiKey : 'AIzaSyC4CerWedE4ejM_0st4KefILKimQ2SPkDI',
+      
+        //locale: 'ko', // 로컬설정
+        height:'450px', // 높이 설정
+        expandRows:true, // 화면에 맞게 높이 재설정
+        slotMinTime: '09:00', // Day 캘린더에서 시작 시간        
+        slotMaxTime: '18:00', // Day 캘린더에서 종료 시작
+        // 헤더 툴바
+        headerToolbar: {
+          left: 'title',
+          right: 'prev next today'
+        },
+        initialView: 'dayGridMonth', // 처음 보이는 캘린더 화면 (기본설정:달)
+        editable: true, // 기존에 입력된 이벤트 드래그로 움직임
+        selectable: true, // 날짜 드래그
+        dayMaxEvents: true, // allow "more" link when too many events
+        eventSources :[
+            {  
+            	googleCalendarId:'ko.south_korea#holiday@group.v.calendar.google.com', 
+                color:'white',
+                textColor:'red'
+            },
+        ]
+      });
+           
+      calendar.render(); // 딜력을 띄워줌
+    });
+ 
+  </script>
 	
    <jsp:include page="../common/footer.jsp"/>
 </body>

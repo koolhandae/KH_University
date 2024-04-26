@@ -59,8 +59,9 @@ body {
 	height: 50px;
 	background-color: white;
 	display: flex;
-	line-height: 50px;
+	line-height: 30px;
 	justify-content: flex-start;
+	margin-bottom:15px;
 }
 
 .title-area div {
@@ -73,16 +74,19 @@ body {
 	color: #1c4587;
 	padding-left: 30px;
 	margin-right: 1400px;
+  padding-top: revert-layer;
 }
 
 #mid-title {
 	font-size: small;
 	padding-right: 20px;
+  padding-top: revert-layer;
 }
 
 #fin-title {
 	padding-left: 20px;
 	font-size: small;
+  padding-top: revert-layer;
 }
 
 /* 달력 스타일 변경 (테두리)*/
@@ -276,22 +280,29 @@ body {
 #modaltable {
 	border: none !important;
 }
+.navbar, .navbar-nav{
+	display:flex !important;
+}
 </style>
 </head>
 <body>
-	<jsp:include page="../common/header_with_sidebar.jsp" />
+<jsp:include page="../common/header_with_sidebar.jsp" />
 	<div class="content">
-    <input type="hidden" id="studentNo" value="${loginStudent.studentNo}">
+    	<input type="hidden" id="studentNo" value="${loginStudent.studentNo}">
 		<div class="title-area">
 			<div id="title" onclick="location.href=''">나의 캘린더</div>
 			<div id="mid-title">마이페이지</div>
-			<div>></div>
+			<div style="padding-top: 0px;">></div>
 			<div id="fin-title">나의 캘린더</div>
 		</div>
-	</div>
 
-	<div id='calendar'></div>
+	
+	<div id='calendar'>
+		<jsp:include page="../common/calendarArea.jsp"/>
+	</div>
+</div>
 	<!-- 부트스트랩 모달 일정추가 -->
+	<!--  
 	<div class="modal fade" id="exampleModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -333,10 +344,9 @@ body {
 		</div>
 	</div>
 	</div>
-
 	</div>
-	<jsp:include page="../common/footer.jsp" />
-</body>
+	
+	
 
 <script>
 
@@ -517,4 +527,8 @@ body {
     });
  
   </script>
+  -->
+ <jsp:include page="../common/footer.jsp" />
+</body>
+
 </html>

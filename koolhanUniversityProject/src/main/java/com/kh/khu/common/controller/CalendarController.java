@@ -1,14 +1,16 @@
 package com.kh.khu.common.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@Controller
 public class CalendarController {
 	
-	@RequestMapping("myCalender.do")
+	@RequestMapping("myCalender.st")
 	public String goMyCalendar() {
-		return "common/myCalendar";
+	    return "common/myCalendar";
 	}
 	
 	@ResponseBody
@@ -25,6 +27,7 @@ public class CalendarController {
 		System.out.println(start);
 		System.out.println(end);
 		System.out.println(color);
+		
 		
 	}
 }
