@@ -69,7 +69,7 @@
 		     , origin_name
 		     , change_name
 		  from member
-		  join profile_images on (member_no = ref_mno)
+		  left join profile_images on (member_no = ref_mno)
 		 where m_status = 'Y'
 		   and member_id = #{memberId}
 	</select>
