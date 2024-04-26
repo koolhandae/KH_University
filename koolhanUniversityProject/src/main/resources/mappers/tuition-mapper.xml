@@ -58,6 +58,12 @@
 		<result column="grad_date" property="gradDate"/>
 	</resultMap>
 	
+	<resultMap type="TopStudent" id="topStudent">
+		<result column="student_no" property="studentNo" />
+		<result column="student_name" property="studentName" /> 
+		<result column="total_point" property="totalPoint" /> 
+	</resultMap>
+	
 	
 	<select id="tuitionBillForm" resultMap="tuitionResult">
 		SELECT 
@@ -139,7 +145,7 @@
 	
 	<delete id="deleteTuitionStudent">
 		delete from tuition_student
-	
+		where 1=1
 	</delete>
 	
 	
@@ -148,7 +154,8 @@
 		where s_status = 'Y'
 	</select>
 	
-	<insert id="insertTuitionStudents" parameterType="java.util.List">
+	<insert id="insertTuitionStudents" >
+
         INSERT INTO tuition_student (
         TUITION_NO
         , TT_NO 
@@ -161,19 +168,34 @@
         , TS_STATUS 
         )
         VALUES
-        <foreach collection="list" item="tuitionStudentMake" separator=",">
-            (SEQ_TSNO.NEXTVAL
-            , #{tuitionStudentMake.ttNo}
-            , #{tuitionStudentMake.studentNo}
-            , #{tuitionStudentMake.studentId}
-            , #{tuitionStudentMake.tuition}
-            , #{tuitionStudentMake.scholarShip}
-            , #{tuitionStudentMake.tsYear}
-            , #{tuitionStudentMake.tsSemester}                                                        
-            , #{tuitionStudentMake.tsStatus})
-        </foreach>
+         (
+            SEQ_TSNO.NEXTVAL
+            , #{ttNo}
+            , #{studentNo}
+            , #{studentId}
+            , #{tuition}
+            , #{scholarShip}
+            , #{tsYear}
+            , #{tsSemester}                                                        
+            , #{tsStatus}
+               )
+
     </insert>
 	
+	<select id="topSelectStudent" resultMap="topStudent">
+			<![CDATA[
+			SELECT A.STUDENT_NO, A.STUDENT_NAME, A.TOTAL_POINT
+			FROM 
+			(
+			    SELECT s.STUDENT_NO, S.STUDENT_NAME, G.TOTAL_POINT
+			    FROM STUDENT S
+                JOIN GRADE G ON S.STUDENT_NO = G.STUDENT_NO
+                WHERE S_STATUS = 'Y'
+			    ORDER BY TOTAL_POINT DESC
+			) A
+			WHERE ROWNUM <= 3
+			 ]]>
+	</select>
 
 	
 </mapper>
