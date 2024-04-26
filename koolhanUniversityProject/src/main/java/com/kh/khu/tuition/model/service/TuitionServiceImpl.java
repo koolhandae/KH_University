@@ -34,8 +34,8 @@ public class TuitionServiceImpl implements TuitionService{
 
 
 	@Override
-	public ArrayList<Tuition> tuitionBillForm(Tuition t) {
-		return tDao.tuitionBillForm(sqlSession, t);
+	public ArrayList<Tuition> tuitionBillForm(String studentId) {
+		return tDao.tuitionBillForm(sqlSession, studentId);
 	}
 
 

@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="tuitionMapper">
 
+
 	<resultMap type="TuitionStudent" id="tuitionResult">
 		<result column="tuition_no" property="tuitiontNo"/>
 		<result column="tt_no" property="ttNo"/>
@@ -12,11 +13,12 @@
 		<result column="ts_year" property="tsYear"/>
 		<result column="ts_semester" property="tsSemester"/>
 		<result column="ts_status" property="tsStatus"/>
+		<result column="tp_date" property="tpDate" />
 	</resultMap>
 	
 	<resultMap type="TuitionPayment" id="tuitionPaymentResult">
 		<result column="tp_no" property="tpNo"/>
-		<result column="tt_no" property="refTuitionNo"/>
+		<result column="tt_no" property="ttNo"/>
 		<result column="tp_date" property="tpDate"/>
 		<result column="tp_total_price" property="totalPrice"/>
 	</resultMap>
@@ -68,7 +70,7 @@
 		     , t.ts_year
 		     , tp.tp_date
 		FROM tuition_student t
-		JOIN tuition_payment tp on (t.tt_no = tp.tt_no)
+		JOIN tuition_payment tp on (t.tt_no = tp.tp_no)
 		WHERE t.STUDENT_ID = #{studentId}
 	</select>
 	

@@ -16,12 +16,13 @@ import com.kh.khu.tuition.model.vo.TuitionStudentMake;
 public class TuitionDao {
 	
 	public int insertTuitionPay(SqlSessionTemplate sqlSession, Tuition t) {
-		System.out.println("dao" + t);
+		//System.out.println("dao" + t);
 		return sqlSession.insert("tuitionMapper.insertTuitionPay", t);
 	}
 	
-	public ArrayList<Tuition> tuitionBillForm(SqlSessionTemplate sqlSession, Tuition t){
-		return (ArrayList)sqlSession.selectList("tuitionMapper.tuitionBillForm", t);
+	public ArrayList<Tuition> tuitionBillForm(SqlSessionTemplate sqlSession, String studentId){
+		//System.out.println(studentId);
+		return (ArrayList)sqlSession.selectList("tuitionMapper.tuitionBillForm", studentId);
 	}
 	
 	public ArrayList<AdminTuitionMake> tuitionMakeForm(SqlSessionTemplate sqlSession) {
