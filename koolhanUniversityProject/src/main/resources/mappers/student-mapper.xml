@@ -96,9 +96,8 @@
 		 , origin_name
 	     , change_name
 	  from student
-	  join profile_images on (student_no = ref_sno)
+ left join profile_images on (student_no = ref_sno)
 	 where student_id = #{studentId}
-
 </select>
 
 <insert id="insertTakeOff">
