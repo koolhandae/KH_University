@@ -116,13 +116,12 @@ body {
 	font-weight: 900;
 	font-size: xx-large;
 }
-/*
-  .fc .fc-toolbar.fc-header-toolbar {
-    margin-bottom: 1.5em;
-    border-top: solid 5px rgb(255, 208, 0);
-    padding-top: 1.5em;
-  }
-  */
+
+.fc-toolbar-chunk {
+    display: flex;     
+    align-items: center; 
+}
+
 .fc .fc-scrollgrid-liquid {
 	border-top: 5px solid #676767;;
 }
@@ -193,6 +192,13 @@ body {
 	font-weight: bold;
 	outline: none !important;
 	box-shadow: none !important;
+}
+.fc-prev-button, .fc-next-button {
+	background-color: white !important;
+  border: none !important;
+}
+.fc-icon{
+  color: #464646;
 }
 /*일요일 색상*/
 .fc-day-sun a {
@@ -275,6 +281,7 @@ body {
 <body>
 	<jsp:include page="../common/header_with_sidebar.jsp" />
 	<div class="content">
+    <input type="hidden" id="studentNo" value="${loginStudent.studentNo}">
 		<div class="title-area">
 			<div id="title" onclick="location.href=''">나의 캘린더</div>
 			<div id="mid-title">마이페이지</div>
@@ -298,24 +305,15 @@ body {
 					<table id="modaltable">
 						<tr>
 							<th>일정제목 :</th>
-							<td><input type="text" id="modal_title" /><br /></td>
+							<td><input type="text" id="modal_title"></td>
 						</tr>
 						<tr>
-							<th>시작시간 :</th>
-							<td><input type="datetime-local" id="start" /><br /></td>
+							<th>시작날짜 :</th>
+							<td><input type="date" id="start"></td>
 						</tr>
 						<tr>
-							<th>종료시간 :</th>
-							<td><input type="datetime-local" id="end" /><br /></td>
-						</tr>
-						<tr>
-							<th>자격증 일정 :</th>
-							<td><select id="testDate">
-									<option value="test1">sql 1차</option>
-									<option value="test2">sql 2차</option>
-									<option value="test3">sql 3차</option>
-									<option value="test4">sql 4차</option>
-							</select></td>
+							<th>종료날짜 :</th>
+							<td><input type="date" id="end"></td>
 						</tr>
 						<tr>
 							<th>배경색상 :</th>
@@ -326,7 +324,7 @@ body {
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">취소</button>
+						data-bs-dismiss="modal" id="cancelBtn">취소</button>
 					<button type="button" class="btn btn-primary" id="addSch"
 						style="background-color: #1c4587; border-color: #1c4587;">
 						추가</button>
@@ -359,6 +357,10 @@ body {
           addBtn:{
             text:" + ",
             click : function(){
+              $("#modal_title").val("");
+              $("#start").val("");
+              $("#end").val("");
+              $("#selectColor").val("");  
               // click function 이용하여 모달열기
               $("#exampleModal").modal("show");
             }
@@ -371,8 +373,8 @@ body {
         headerToolbar: {
           left: 'dayGridYear,dayGridMonth,timeGridWeek',
           // left: 'prev,next today',
-          center: 'title',
-          right: 'today prev,next addBtn,saveBtn'
+          center: 'prev title next',
+          right: 'today addBtn,saveBtn'
         },
         initialView: 'dayGridMonth', // 처음 보이는 캘린더 화면 (기본설정:달)
         editable: true, // 기존에 입력된 이벤트 드래그로 움직임
@@ -380,127 +382,137 @@ body {
         dayMaxEvents: true, // allow "more" link when too many events
         
         // 날짜 클릭 혹은 드래그시 팝업창으로 이벤트 표시(모달로변경예정)
-        select: function (event) {
-            insertModalOpen(event);
-           },
+        select: function (e) {
+            insertModalOpen(e);
+        },
         
-        // 이벤트 클릭시 모달 호출
-        eventClick:function(event){
-          insertModalOpen(event);
+        evendAdd:function(e){
 
+        },
+
+        // 이벤트 클릭시 모달 호출
+        eventClick:function(e){
+          insertModalOpen(e);
         }, 
 
         // 이벤트 수정시
-        eventChange:function(event){
-
+        eventChange:function(e){
+          insertModalOpen(e);
         },
 
         // 이벤트 삭제시
-        eventRemove:function(){
-
+        eventRemove:function(e){
+          insertModalOpen(e);
         },
 
-		
         eventSources :[ 
             {  
             	googleCalendarId:'ko.south_korea#holiday@group.v.calendar.google.com', 
-                color:'black',
+                color:'white',
                 textColor:'red'
             },
-            {  
-            	googleCalendarId:'koolhandae@gmail.com', 
-                color:'yellow',
-                textColor:'blue'
-            }
         ],
-          
         
         events: [
     	   {
              title: 'All Day Event',
              start: '2024-03-01'
            },
-           {
-             groupId: 999,
-             title: 'Repeating Event',
-             start: '2024-03-09T16:00:00'
-           },
-           {
-             groupId: 999,
-             title: 'Repeating Event',
-             start: '2024-01-16T16:00:00'
-           },
-           {
-             title: 'Conference',
-             start: '2024-04-11',
-             end: '2024-04-11'
-           },
-           {
-             title: 'Meeting',
-             start: '2024-03-12T10:30:00',
-             end: '2024-03-12T12:30:00'
-           },
-           {
-             title: 'Lunch',
-             start: '2024-03-12T12:00:00'
-           },
-           {
-             title: 'Meeting',
-             start: '2024-04-12T14:30:00',
-             display:'background'
-           },
-           {
-             title: 'Happy Hour',
-             start: '2024-03-12T17:30:00'
-           },
-           {
-             title: 'Dinner',
-             start: '2024-01-12T20:00:00'
-           },
-           {
-             title: 'Birthday Party',
-             start: '2024-01-13T07:00:00'
-           }
-
+        
         	]
         
       });
+           
+      function insertModalOpen(e){
+          // instaneof Date(date타입이 맞는지 확인)
+          // toISOString // 문자열 형식으로 변환 -> YYYY-MM-DDTHH:mm:ss.sssZ
+          // split('T')[0] // T 즉 날짜 / 시간으로 배열을 만들어서 그중 0번째 배열인 날짜만 잘라줌
+         endDate = e.end instanceof Date ? e.end.toISOString().split('T')[0] : e.startStr;
+
+          $("#start").val(e.startStr);
+         // $("#end").val(e.endStr);
+         $("#end").val(endDate);
+          $("#exampleModal").modal("show");
     
+      }
+
       //모달창 이벤트
       $("#addSch").on("click", function () {
-          var eventData = {
-            title: $("#modal_title").val(),
-            start: $("#start").val(),
-            end: $("#end").val(),
-            test: $("#testDate").val(),
-            color: $("#selectColor").val(),
-          };
+         console.log($("#modal_title").val());
+         console.log($("#start").val());
+         console.log($("#end").val());
+         console.log($("#selectColor").val());
+
+         var title = $("#modal_title").val();
+         var start = $("#start").val();
+         var end = $("#end").val();
+         var color = $("#selectColor").val();
+         
+         // 이벤트 추가할때는 모달에띄워준 date보다 하루 더 추가해줌
+         var endDate = new Date($("#end").val());
+         endDate.setDate(endDate.getDate() + 1);
+         
+
           //빈값입력시 오류
-          if (
-            eventData.title == "" ||
-            eventData.start == "" ||
-            eventData.end == "" ||
-            eventData.test == "" ||
-            eventData.color == ""
-          ) {
+          if ($(title == ""  ||  start == "" ))
+             {
+                Swal.fire({
+                  icon: 'error',
+                  text: '모든 값을 입력해주세요!'
+                })
+                return; // 빈값일경우 함수종료
+             }
+            //끝나는 날짜가 시작하는 날짜보다 값이 크면 안됨
+         if (start> date) {
             Swal.fire({
-            icon: 'error',
-            text: '모든 값을 입력해주세요!'
+              icon: 'error',
+              text: '이벤트 종료기간이 시작기간보다 작습니다!'
+            });
+             return;
+          }
+
+          // 이벤트 등록시 초기화
+            calendar.addEvent({         
+              allDay:true,
+              title: title,
+              start: start,
+              end: endDate,
+              color: color,
+            });  
+
+            // 이벤트 등록 ajax
+            $.ajax({
+              url:"addCalendar.st",
+              data:{
+                stuNo:$("#studentNo").val(),
+                title:title,
+                start:start,
+                end:endDate,
+                color:color
+              },
+              success:function(){
+                console.log("ajax성공");
+                
+              }, error:function(){
+                console.log("ajax실패")
+
+              }
             })
 
-            //끝나는 날짜가 시작하는 날짜보다 값이 크면 안됨
-          } else if ($("#start").val() > $("#end").val()) {
-            alert("시간을 잘못입력 하셨습니다.");
-          } else {
-            // 이벤트 등록시 초기화
-            calendar.addEvent(eventData);
+          // 모달 초기화
             $("#exampleModal").modal("hide");
-            $("#title").val("");
+            $("#modal_title").val("");
             $("#start").val("");
             $("#end").val("");
-            $("#selectColor").val("");
-          }
+            $("#selectColor").val("");      
         });
+
+       $(document).ready(function(){
+           $("#start").change(function(){
+              $("#end").val($("#start").val())
+            });
+       });
+
       calendar.render(); // 딜력을 띄워줌
     });
  

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="calendarMapper">
+	<resultMap type="Calendar" id="calendarResult">
+		<result column="calendar_no" property="calendarNo"/>
+		<result column="student_no" property="studentNo"/>
+		<result column="cal_title" property="calTitle"/>
+		<result column="cal_start_date" property="calStartDate"/>
+		<result column="cal_end_date" property="calEndDate"/>
+		<result column="background_color" property="backgroundColor"/>
+		<result column="create_date" property="createDate"/>
+		<result column="update_date" property="updateDate"/>
+		<result column="cal_status" property="calStatus"/>
+	</resultMap>
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

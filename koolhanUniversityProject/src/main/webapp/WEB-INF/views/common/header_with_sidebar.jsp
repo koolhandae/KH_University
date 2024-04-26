@@ -148,7 +148,7 @@
 							<div id="collapseOne" class="collapse" aria-labelledby="headingOne"
 								data-parent="#accordionSidebar">
 								<div class="bg-white py-2 collapse-inner rounded">
-									<a class="collapse-item" href="#">나의 시간표</a>
+									<a class="collapse-item" href="myCalender.do">나의 시간표</a>
 									<a class="collapse-item" href="showCourse.st">나의 수강 조회</a>
 									<a class="collapse-item" href="#">이전 수강 내역 조회</a>
 								</div>

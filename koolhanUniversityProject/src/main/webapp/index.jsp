@@ -39,7 +39,7 @@
 
 
 				<!-- 김도현 -->
-				<%--<jsp:forward page="WEB-INF/views/main.jsp" />  --%>
+				<jsp:forward page="WEB-INF/views/main.jsp" />
 				<%-- <jsp:forward page="WEB-INF/views/student/studentClassPage.jsp" /> --%>
 				<%-- <jsp:forward page="WEB-INF/views/student/studentBeforeClassPage.jsp" /> --%>
 				<%-- <jsp:forward page="WEB-INF/views/student/studentScorePage.jsp" /> --%>
@@ -50,8 +50,7 @@
 				<%-- <jsp:forward page="WEB-INF/views/common/forgotPassword.jsp" /> --%>
 				<%-- <jsp:forward page="WEB-INF/views/student/studentBoardInsertForm.jsp" /> --%>
 				<%-- <jsp:forward page="WEB-INF/views/common/findPassword.jsp" /> --%>
-				<jsp:forward page="WEB-INF/views/common/myCalendar.jsp" /> 
-
+				<%--<jsp:forward page="WEB-INF/views/common/myCalendar.jsp" /> --%>
 
 
 

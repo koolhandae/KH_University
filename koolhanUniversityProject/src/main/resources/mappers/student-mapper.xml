@@ -96,9 +96,9 @@
 		 , origin_name
 	     , change_name
 	  from student
-	 where student_id = #{studentId}
 	  join profile_images on (student_no = ref_sno)
-	   and s_status != 'Z'
+	 where student_id = #{studentId}
+
 </select>
 
 <insert id="insertTakeOff">

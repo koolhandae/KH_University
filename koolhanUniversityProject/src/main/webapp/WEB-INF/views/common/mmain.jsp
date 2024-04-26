@@ -79,6 +79,7 @@
 
             <div id="topDiv" class="bg-white" style="height: 450px;">
                 <div id="calendar">달력자리
+                	<jsp:include page="../common/myCalendar.jsp"/>
                 </div>
                 <div id="notice">
                     <div id="noticeTitle">
