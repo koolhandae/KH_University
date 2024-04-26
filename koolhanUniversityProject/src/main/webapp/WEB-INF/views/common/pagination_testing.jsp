@@ -1,83 +1,55 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-.pagination {
-	justify-content: center;
-}
-
-.pagination.pagination-rounded-flat .page-item .page-link, a {
-	border: none;
-	border-radius: 50px;
-}
-
-.page-link:active {
-	background-color: #1c4587 !important;
-	color: white !important;
-}
-.active{
-	background-color: #1c4587 !important;
-	color: white !important;
-}
-li{
-	margin:3px
-}
-</style>
+    <meta charset="UTF-8">
+    <title>Chart Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
-   <jsp:include page="../common/header_with_sidebar.jsp"/>
-   <div class="content">
-
-		<div id="pagingArea">
-			<ul
-				class="pagination d-flex justify-content-center flex-wrap pagination-rounded-flat pagination-success">
-				<c:choose>
-					<c:when test="${ pi.currentPage eq 1 }">
-						<li class="page-item disabled"><a class="page-link" href="#?cpage=${pi.currentPage - 1}"><i
-								class="fa fa-angle-left"></i></a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link"
-							href="#?cpage=${pi.currentPage - 1}">&laquo;</a></li>
-					</c:otherwise>
-				</c:choose>
-				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-					<c:choose>
-						<c:when test="${pi.currentPage eq p}">
-							<li class="page-item disabled"><a class="page-link active"
-								href="#?cpage=${p}">${ p }</a></li>
-						</c:when>
-						<c:otherwise>
-							<li class="page-item"><a class="page-link"
-								href="#?cpage=${p}">${ p }</a></li>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-
-				<c:choose>
-					<c:when test="${ pi.currentPage eq pi.maxPage }">
-						<li class="page-item disabled"><a class="page-link" href="#?cpage=${pi.currentPage + 1}"><i
-								class="fa fa-angle-right"></i></a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link"
-							href="#?cpage=${pi.currentPage + 1}">&raquo;</a></li>
-					</c:otherwise>
-				</c:choose>
-			</ul>
-		</div>
-
-
-
-
-
-
-	</div>
-   <jsp:include page="../common/footer.jsp"/>
+<body style="width:400px;">
+    <canvas id="myChart" width="400" height="400"></canvas>
+    <button id="draw" class="btn btn-large btn-primary">그려</button>
+    <script>
+    	$("#draw").click(function(){
+    		$.ajax({
+    			url:"statistic.stu",
+    			success:function(response){
+    				var ctx = document.getElementById('myChart').getContext('2d');
+    		        var myChart = new Chart(ctx, {
+    		            type: 'pie',
+    		            data: {
+    		                labels: ['재학생', '휴학생', '제적생', '졸업생', '자퇴생'],
+    		                datasets: [{
+    		                    label: '학생 통계',
+    		                    data: [response.attendStu, response.absenceStu, response.expelledStu, response.gradStu, response.leaveStu],
+    		                    backgroundColor: [
+    		                    	'rgba(255, 99, 132, 0.5)',
+    		                        'rgba(54, 162, 235, 0.5)',
+    		                        'rgba(255, 206, 86, 0.5)',
+    		                        'rgba(75, 192, 192, 0.5)',
+    		                        'rgba(153, 102, 255, 0.5)'
+    		                    ],
+    		                    borderColor: [
+    		                        'rgba(255, 99, 132, 1)',
+    		                        'rgba(54, 162, 235, 1)',
+    		                        'rgba(255, 206, 86, 1)',
+    		                        'rgba(75, 192, 192, 1)',
+    		                        'rgba(153, 102, 255, 1)'
+    		                        ],
+    		                    borderWidth: 1,
+    		                    options: {
+    		                        
+    		                    }
+    		                }]
+    		            },
+    		        });	
+    			},
+    			error:function(){
+    				console.log("sdsdsd")
+    			},
+    		});
+    	});
+    </script>
 </body>
 </html>

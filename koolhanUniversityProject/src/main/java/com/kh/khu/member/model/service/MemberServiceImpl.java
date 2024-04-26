@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.khu.common.model.vo.PageInfo;
+import com.kh.khu.common.model.vo.ProfilePicture;
 import com.kh.khu.member.model.dao.MemberDao;
 import com.kh.khu.member.model.vo.AdminTuition;
 import com.kh.khu.member.model.vo.Member;
@@ -73,6 +74,11 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.selectNameSearchAllMember(sqlSession, mpi, memberName);
 	}
 	
+	@Override
+	public int selectMemberListCount() {
+		return mDao.selectMemberListCount(sqlSession);
+	}
+
 	@Override
 	public int selectMemberListCount(String meType) {
 		return mDao.selectMemberListCount(sqlSession, meType);
@@ -143,6 +149,18 @@ public class MemberServiceImpl implements MemberService{
 	public int selectMemberListCount() {
 		return 0;
 	}
+
+	@Override
+	public int updateProfilePicture(Member m) {
+		return mDao.updateProfilePicture(sqlSession, m);
+	}
+
+
+	@Override
+	public int insertProfilePicture(ProfilePicture pp) {
+		return mDao.insertProfilePicture(sqlSession, pp);
+	}
+
 	
 
 	

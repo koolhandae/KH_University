@@ -184,4 +184,11 @@ public class StudentDao {
 		return sqlSession.selectOne("studentMapper.selectStatusNameSearchStudentListCount", st);
 	}
 	
+	public int selectNumberOfStudent(SqlSessionTemplate sqlSession, String stStatus) {
+		return sqlSession.selectOne("studentMapper.selectNumberOfStudent",stStatus);
+	}
+	
+	public int updateProfilePicture(SqlSessionTemplate sqlSession, Student s) {
+		return sqlSession.update("studentMapper.updateProfilePicture", s);
+	}
 }

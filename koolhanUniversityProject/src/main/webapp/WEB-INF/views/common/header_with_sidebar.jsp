@@ -8,9 +8,11 @@
 
 			<meta charset="UTF-8">
 			<title>Insert title here</title>
+			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 			<!-- 다음 주소 -->
 			<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 			<!-- 구글 제이쿼리 스니펫 -->
@@ -163,7 +165,7 @@
 								data-parent="#accordionSidebar">
 								<div class="bg-white py-2 collapse-inner rounded">
 									<a class="collapse-item" href="update.stu">개인 정보 수정</a>
-									<a class="collapse-item" href="#">나의 캘린더</a>
+									<a class="collapse-item" href="myCalender.do">나의 캘린더</a>
 									<a class="collapse-item" href="tuitionBill.do">등록금 납부 신청</a>
 									<a class="collapse-item" href="tuitionPay.do">등록금 납부 내역 조회</a>
 									<a class="collapse-item" href="#">학점 / 성적 조회</a>

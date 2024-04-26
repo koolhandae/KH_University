@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,54 +8,122 @@
 <title>Insert title here</title>
 </head>
 <body>
-   <jsp:include page="../common/header_with_sidebar.jsp"/>
-   						
-   	<div class="innerOuter">
-                <div class="form-group">
-                    <label for="studentName"> 이름 :</label>
-                    <input type="text" class="form-control" id="memberName" name="memberName" value="${loginUser.memberName}" readonly><br>
+	<jsp:include page="../common/header_with_sidebar.jsp" />
 
-                    <label for="memberId"> 교직원 ID :</label>
-                    <input type="text" class="form-control" id="memberId" name="userId" value="${loginUser.memberId}" readonly><br>
-                    
-                    <label for="email"> &nbsp;  이메일 :</label>
-                    <input type="email" class="form-control" id="email" name="email" readonly value="${loginUser.meEmail}">
-                    <br>
-                    
-                    <label for="phone"> &nbsp;  전화번호 :</label>
-                    <input type="text" class="form-control" id="phone" name="mePhone" placeholder="전화번호를 입력하세요(- 포함)" value="${loginUser.mePhone }"><br>
+	<div class="innerOuter">
+		<c:choose>
+			<c:when test="${loginUser.meType eq 'A' }">
+				<h2>교직원 정보 수정</h2>
+			</c:when>
+			<c:otherwise>
+				<h2>교수 정보 수정</h2>
+			</c:otherwise>
+		</c:choose>
+		<br>
+		<div class="form-group">
+			<label for="memberProfilePic"> 프로필 사진 :</label>
+			<div align="center">
+				<img id="display-image" style="width: 200px; height: 200px;" alt=""
+					src="resources/images/logo.png"> <br> <input type="file"
+					style="display: none;" id="profile-pic" accept="image/*"> <br>
+				<button onclick="changePic();" class="btn btn-primary">프로필
+					사진 변경</button>
+				<button id="saveImage" onclick="saveImage();"
+					class="btn btn-success" style="display: none">이미지 저장</button>
+			</div>
+			<script>
+                    	function changePic(){
+                    		$("#profile-pic").click();
+                    	}
+                    	
+                    	$("#profile-pic").change(function(){
+                    		if (this.files && this.files[0]) {
+                                var reader = new FileReader();
+                                reader.onload = function(e) {
+                                    $('#display-image').attr('src', e.target.result);
+                                };
+                                reader.readAsDataURL(this.files[0]);
+                                $("#saveImage").removeAttr("style");
+                            }
+                    	})
+                    	
+                    	function saveImage(){
+                    		var fileData = $('#profile-pic').prop('files')[0];
+                    	    var formData = new FormData();
+                    	    formData.append('profileImage', fileData);
 
-                    <label for="address"> &nbsp;  주소 : (주소 변경은 아래 입력창을 클릭하세요 ) <i class="fa-solid fa-arrow-down"></i></label>
-	                    <input onclick="execDaumPostcode();" type="text" class="form-control" id="address" name="stAddress" value="${loginUser.meAddress}" readonly>
-	                
-                    
-						<div id="wrap" style="display:none;border:1px solid;width:500px;height:470px;margin:5px 0;position:relative">
-							<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
-						</div>
-						<br><br>
-                    <div id="addressFix" style="display:none;">
-	                    <label for="address"> &nbsp; 새로운 주소 :</label>
-		                    <input type="text" class="form-control" onclick="execDaumPostcode();" id="postcode" name="postcode" placeholder="우편번호" readonly>
-							<input type="text" class="form-control" onclick="execDaumPostcode();" id="newAddress" name="address" placeholder="주소" readonly>
-	                    <div style="display:flex;">
-							<input type="text" class="form-control" id="detailAddress" name="detailAddress"placeholder="상세주소">
-							<input type="text" class="form-control" onclick="execDaumPostcode();" id="extraAddress" name="extraAddress" placeholder="참고항목" readonly>
-	                    </div>
-	                    <br>
-	                    <br>
-						<div align="center">
-							<input id="changeAddress" type="button" class="btn btn-primary" value="주소 변경">
-						</div>						
-						
-                    </div>
+                    	    $.ajax({
+                    	        url: 'profile.img',  
+                    	        type: 'POST',
+                    	        data: formData,
+                    	        processData: false,
+                    	        contentType: false,
+                    	        Rsuccess: function(response) {
+                    	            alert('프로필 사진이 성공적으로 저장되었습니다.');
+                    	        },
+                    	        error: function() {
+                    	            alert('프로필 사진 저장에 실패했습니다.');
+                    	        }
+                    	    });
+                    	}
+                    </script>
 
-                    </div>
-					<br>
-					<div align="center">
-                    <button id="changePwd" class="btn btn-success">비밀번호 변경</button>
-					</div>
-					<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-						<script>
+			<label for="memberName"> 이름 :</label> <input type="text"
+				class="form-control" id="memberName" name="memberName"
+				value="${loginUser.memberName}" readonly><br> <label
+				for="memberId"> 교직원 ID :</label> <input type="text"
+				class="form-control" id="memberId" name="userId"
+				value="${loginUser.memberId}" readonly><br> <label
+				for="email"> &nbsp; 이메일 :</label> <input type="email"
+				class="form-control" id="email" name="email" readonly
+				value="${loginUser.meEmail}"> <br> <label for="phone">
+				&nbsp; 전화번호 :</label> <input type="text" class="form-control" id="phone"
+				name="mePhone" placeholder="전화번호를 입력하세요(- 포함)"
+				value="${loginUser.mePhone }"><br> <label for="address">
+				&nbsp; 주소 : (주소 변경은 아래 입력창을 클릭하세요 ) <i
+				class="fa-solid fa-arrow-down"></i>
+			</label> <input onclick="execDaumPostcode();" type="text"
+				class="form-control" id="address" name="stAddress"
+				value="${loginUser.meAddress}" readonly>
+
+
+			<div id="wrap"
+				style="display: none; border: 1px solid; width: 500px; height: 470px; margin: 5px 0; position: relative">
+				<img src="//t1.daumcdn.net/postcode/resource/images/close.png"
+					id="btnFoldWrap"
+					style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1"
+					onclick="foldDaumPostcode()" alt="접기 버튼">
+			</div>
+			<br>
+			<br>
+			<div id="addressFix" style="display: none;">
+				<label for="address"> &nbsp; 새로운 주소 :</label> <input type="text"
+					class="form-control" onclick="execDaumPostcode();" id="postcode"
+					name="postcode" placeholder="우편번호" readonly> <input
+					type="text" class="form-control" onclick="execDaumPostcode();"
+					id="newAddress" name="address" placeholder="주소" readonly>
+				<div style="display: flex;">
+					<input type="text" class="form-control" id="detailAddress"
+						name="detailAddress" placeholder="상세주소"> <input
+						type="text" class="form-control" onclick="execDaumPostcode();"
+						id="extraAddress" name="extraAddress" placeholder="참고항목" readonly>
+				</div>
+				<br> <br>
+				<div align="center">
+					<input id="changeAddress" type="button" class="btn btn-primary"
+						value="주소 변경">
+				</div>
+
+			</div>
+
+		</div>
+		<br>
+		<div align="center">
+			<button id="changePwd" class="btn btn-success">비밀번호 변경</button>
+		</div>
+		<script
+			src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script>
 							
 						    // 우편번호 찾기 찾기 화면을 넣을 element
 						    var element_wrap = document.getElementById('wrap');
@@ -197,8 +265,9 @@
 	                		})
 	                	})
 	                </script>
-	                </div>
-	        <br><br>
-   <jsp:include page="../common/footer.jsp"/>
+	</div>
+	<br>
+	<br>
+	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>

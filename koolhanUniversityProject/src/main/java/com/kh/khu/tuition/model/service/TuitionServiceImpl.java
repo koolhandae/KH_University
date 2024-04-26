@@ -67,7 +67,8 @@ public class TuitionServiceImpl implements TuitionService{
 		
 		// TODO 장학금 대상자를 선별하기 위해 다른 개발자가 만든 성적 데이터를 가져온다 
 		//List studnet
-		
+		/*
+		//서버 오류로 잠시 막아놨습니다 
 		// TODO 장학금이 반영된 녀석을 찾아서 셋팅해야 한다
 		List<TuitionStudentMake> list = students
 				.stream()
@@ -91,10 +92,8 @@ public class TuitionServiceImpl implements TuitionService{
 
 		// TODO 화면에 보여질 등록금 납부 대상자를 화면에 출력한다 
 		return list;
+		 */
 	}
 	
 
-	
-
-	
 }

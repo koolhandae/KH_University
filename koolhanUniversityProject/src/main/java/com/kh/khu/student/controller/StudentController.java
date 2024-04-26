@@ -386,6 +386,27 @@ public class StudentController {
 	}
 	
 	@ResponseBody
+	@RequestMapping("statistic.stu")
+	public HashMap<String,Object> studentStatistic(){
+		System.out.println("asdasd");
+		int attendStu = sService.selectNumberOfStudents("Y");
+		int absenceStu = sService.selectNumberOfStudents("H");
+		int expelledStu = sService.selectNumberOfStudents("Z");
+		int gradStu = sService.selectNumberOfStudents("J");
+		int leaveStu = sService.selectNumberOfStudents("N");
+		
+		HashMap<String,Object> map = new HashMap<String, Object>();
+		map.put("attendStu", attendStu);
+		map.put("absenceStu", absenceStu);
+		map.put("expelledStu", expelledStu);
+		map.put("gradStu", gradStu);
+		map.put("leaveStu", leaveStu);
+		
+		return map;
+
+	}
+
+	@ResponseBody
 	@RequestMapping("classPlanView.st")
 	public String classPlanView(@RequestParam(value="classNum")String classNum) {
 		System.out.println("보여지나" + classNum);

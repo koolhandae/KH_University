@@ -3,6 +3,8 @@ package com.kh.khu.member.model.service;
 import java.util.ArrayList;
 
 import com.kh.khu.common.model.vo.PageInfo;
+import com.kh.khu.common.model.vo.ProfilePicture;
+
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -57,5 +59,8 @@ public interface MemberService {
 	public int setTakeOffStudent(String absId);
 	
 	public List<AdminTuition> insertAdminTuition(AdminTuition tuition);
-
+	
+	int updateProfilePicture(Member m);
+	
+	int insertProfilePicture(ProfilePicture pp);
 }
