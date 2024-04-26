@@ -284,7 +284,17 @@
 			    success:function(result){
 					if (result > 0) {
                         // 성공적으로 처리된 경우
-                        location.href = "professorPJenrollSuccess.do"; // 페이지 리디렉션
+                        console.debug("PJ.js::socket>>",socket)
+                        if (socket && socket.readyState === 1) {
+   							// 소켓 객체가 존재하고, 웹 소켓 연결이 OPEN 상태일 때 실행될 코드
+                        	// webSocket에 보내기!!(PJ,댓글작성자,게시글작성자,글번호)
+                        	console.log("socket가머임?" + socket)
+                        	let socketMsg = "PJ," + pjProfessor + "," + "admin" + "," + pjClassName;
+                        	console.debug("ssssssssmsg>>", socketMsg);
+                        	socket.send(socketMsg);
+                        	//"PJ," + pjProfessor + "," + pjProfessor + "," + classNo
+                        }
+                        	location.href = "professorPJenrollSuccess.do"; // 페이지 리디렉션
                     } else {
                         // 처리 실패 또는 조건에 맞지 않는 경우
                         console.log("게시글 등록 실패");
