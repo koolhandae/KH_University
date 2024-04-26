@@ -455,8 +455,26 @@
 		update profile_images
 		   set change_name = #{changeName}
 		     , origin_name = #{originName}
-		 where ref_mno = #{memberNo}    
+		 where ref_sno = #{refStudentNo}    
 	</update>
+	
+	<insert id="insertProfilePicture">
+		insert 
+		  into profile_images
+		     (
+		       img_no
+		     , ref_sno  
+		     , origin_name   
+		     , change_name
+		     )
+		values 
+		     (
+		       seq_profile_img.nextval
+		     , #{refStudentNo}  
+		     , #{originName}
+		     , #{changeName}
+		     )    
+	</insert>
 	
 
 </mapper>

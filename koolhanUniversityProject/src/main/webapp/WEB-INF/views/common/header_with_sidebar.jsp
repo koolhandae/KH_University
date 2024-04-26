@@ -535,23 +535,40 @@
 								<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
 									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<c:choose>
-										<c:when
-											test="${ not empty loginUser and loginUser.memberId ne 'admin'}">
-											<span class="mr-2 d-none d-lg-inline text-gray-600 small">${
-												loginUser.memberName } 교수</span>
+										<c:when	test="${ not empty loginUser and loginUser.memberId ne 'admin'}">
+											<span class="mr-2 d-none d-lg-inline text-gray-600 small">${loginUser.memberName } 교수</span>
+											<c:choose>
+												<c:when test="${empty loginUser.changeName}">
+													<img class="img-profile rounded-circle"	src="resources/images/default_user.png">	
+												</c:when>
+												<c:otherwise>
+													<img class="img-profile rounded-circle"	src="${loginUser.changeName}">
+												</c:otherwise>
+											</c:choose>
 										</c:when>
-										<c:when
-											test="${ not empty loginUser and loginUser.memberName eq 'admin'}">
-											<span class="mr-2 d-none d-lg-inline text-gray-600 small">${
-												loginUser.memberName }님</span>
+										<c:when test="${ not empty loginUser and loginUser.memberName eq 'admin'}">
+											<span class="mr-2 d-none d-lg-inline text-gray-600 small">${loginUser.memberName }님</span>
+											<c:choose>
+												<c:when test="${empty loginUser.changeName}">
+													<img class="img-profile rounded-circle"	src="resources/images/default_user.png">	
+												</c:when>
+												<c:otherwise>
+													<img class="img-profile rounded-circle"	src="${loginUser.changeName}">
+												</c:otherwise>
+											</c:choose>
 										</c:when>
 										<c:when test="${ not empty loginStudent and empty loginUser }">
-											<span class="mr-2 d-none d-lg-inline text-gray-600 small">${
-												loginStudent.studentName }님</span>
+											<span class="mr-2 d-none d-lg-inline text-gray-600 small">${loginStudent.studentName }님</span>
+											<c:choose>
+												<c:when test="${empty loginStudent.changeName}">
+													<img class="img-profile rounded-circle"	src="resources/images/default_user.png">	
+												</c:when>
+												<c:otherwise>
+													<img class="img-profile rounded-circle"	src="${loginStudent.changeName}">
+												</c:otherwise>
+											</c:choose>
 										</c:when>
 									</c:choose>
-									<img class="img-profile rounded-circle"
-										src="resources/images/undraw_profile.svg">
 								</a>
 								<!-- Dropdown - User Information -->
 								<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

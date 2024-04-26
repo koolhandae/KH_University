@@ -123,11 +123,11 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectAdminTuition");
 	}
 	
-	public int updateProfilePicture(SqlSessionTemplate sqlSession, Member m) {
-		return sqlSession.update("memberMapper.updateProfilePicture", m);
+	public int updateProfilePicture(SqlSessionTemplate sqlSession, ProfilePicture pp) {
+		return sqlSession.update("memberMapper.updateProfilePicture", pp);
 	}
 	
 	public int insertProfilePicture(SqlSessionTemplate sqlSession, ProfilePicture pp) {
-		return 0;
+		return sqlSession.insert("memberMapper.insertProfilePicture", pp);
 	}
 }

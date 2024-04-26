@@ -348,8 +348,7 @@ public class HomeController {
 
 	@ResponseBody
 	@RequestMapping("profile.img")
-	public HashMap<String,Object> updateProfilePicutre(MultipartFile upfile, HttpSession session) {
-
+	public HashMap<String,Object> updateProfilePicutre(@RequestParam("profileImage") MultipartFile upfile, HttpSession session) {
 		Member m = (Member) session.getAttribute("loginUser");
 		Student s = (Student) session.getAttribute("loginStudent");
 		int result = 0;
@@ -358,24 +357,23 @@ public class HomeController {
 		pp.setOriginName(upfile.getOriginalFilename());
 		pp.setChangeName("resources/uploadFiles/" + changeName);
 		if (s == null) {
-			if (!m.getChangeName().equals("")) {
+			pp.setRefMemberNo(m.getMemberNo());
+			if (m.getChangeName() != null) {
 				new File(session.getServletContext().getRealPath(m.getChangeName())).delete();
-				result = mService.updateProfilePicture(m);
+				result = mService.updateProfilePicture(pp);
 			}else {
 				result = mService.insertProfilePicture(pp);
 			}
-			
-
+			session.setAttribute("loginUser", mService.loginMember(m));
 		} else {
-			if (!upfile.getOriginalFilename().equals("")) {
+			pp.setRefStudentNo(s.getStudentNo());
+			if (s.getChangeName() != null) {
 				new File(session.getServletContext().getRealPath(s.getChangeName())).delete();
-
-
-				s.setChangeName("/resources/uploadFiles/" + changeName);
-				s.setOriginName(upfile.getOriginalFilename());
+				result = sService.updateProfilePicture(pp);
+			}else {
+				result = sService.insertProfilePicture(pp);
 			}
-
-			result = sService.updateProfilePicture(s);
+			session.setAttribute("loginStudent", sService.loginStudent(s));
 		}
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -390,7 +388,6 @@ public class HomeController {
 			map.put("icon", "error");
 			map.put("imgLocation", "failed");
 		}
-		
 		return map;
 	}
 }

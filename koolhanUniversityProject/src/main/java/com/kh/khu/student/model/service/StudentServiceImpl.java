@@ -236,8 +236,8 @@ public class StudentServiceImpl implements StudentService {
 
 
 	@Override
-	public int updateProfilePicture(Student s) {
-		return sDao.updateProfilePicture(sqlSession, s);
+	public int updateProfilePicture(ProfilePicture pp) {
+		return sDao.updateProfilePicture(sqlSession, pp);
 	}
 
 	@Override

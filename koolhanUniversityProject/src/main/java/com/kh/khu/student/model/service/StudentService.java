@@ -89,7 +89,7 @@ public interface StudentService {
 	
 	Classroom classPlanView(String classNum);
 	
-	int updateProfilePicture(Student s);
+	int updateProfilePicture(ProfilePicture pp);
 	
 	int insertProfilePicture(ProfilePicture pp);
 }

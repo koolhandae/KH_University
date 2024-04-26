@@ -85,7 +85,7 @@ public class MemberController {
 					alertMsg.put("title", "로그인 성공");
 					alertMsg.put("text", "성공적으로 로그인 됐습니다");
 					session.setAttribute("alertMsg", alertMsg);
-	
+					
 					return "redirect:/mainPage.me";
 				
 				// 재직된 학생은 로그인 못함
