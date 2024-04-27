@@ -315,6 +315,7 @@ body {
 				</div>
 				<div class="modal-body">
 					<table id="modaltable">
+						<input="hidden" id="calendarNo">
 						<tr>
 							<th>일정제목 :</th>
 							<td><input type="text" id="modal_title"></td>
@@ -340,6 +341,11 @@ body {
 					<button type="button" class="btn btn-primary" id="addSch"
 						style="background-color: #1c4587; border-color: #1c4587;">
 						추가</button>
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal" id="updateBtn" style="display:none">수정</button>
+					<button type="button" class="btn btn-primary" id="deleteBtn"
+						style="background-color: #1c4587; border-color: #1c4587; display:none;">
+						삭제</button>
 				</div>
 			</div>
 		</div>
@@ -401,15 +407,17 @@ body {
 
         // 이벤트 클릭시 모달 호출
         eventClick:function(e){
-          insertModalOpen(e);
+        	 if(e.event != undefined){
+        		 Swal.fire({
+        			  title: "일정을 수정 또는 삭제하시겠습니까?",
+        			  icon: "question"
+        			});
+        		 setTimeout(function() {
+				     insertModalOpen(e); 			       
+ 			    }, 2000); 
+             }
         }, 
 
-        // 이벤트 수정시
-        eventChange:function(e){
-          insertModalOpen(e);
-        },
-
-        // 이벤트 삭제시
         eventRemove:function(e){
           insertModalOpen(e);
         },
@@ -420,40 +428,45 @@ body {
                 color:'white',
                 textColor:'red'
             },
-        ],
-        
-        events: [
-    	   {
-             title: 'All Day Event',
-             start: '2024-03-01'
-           },
-        
-        	]
-        
+        ]
       });
            
       function insertModalOpen(e){
           if(e.event != undefined){
-        	  
+	          console.log(e.event.id);
+	          console.log(e.event.endStr);
+	          var calDate = e.event.endStr;
+	          var endDate = new Date(calDate); // date타입으로 변경 후
+	          endDate.setDate(endDate.getDate() - 1); //(add에 1을 더해서 여기선빼줌)
+	          var newCalDate = endDate.toISOString().split('T')[0];  // 문자열로 바꿔준후 날짜만뽑아줌
+	          console.log(newCalDate);
+
+	          $("#calendarNo").val(e.event.id);
         	  $("#modal_title").val(e.event.title);
         	  $("#start").val(e.event.startStr);
-        	  $("#end").val(e.event.endStr);
+        	  $("#end").val(newCalDate);
         	  $("#selectColor").val(e.event.backgroundColor);
         	  $("#exampleModal").modal("show");
-        	  
+        	  $("#cancelBtn").hide();
+        	  $("#addSch").hide();
+        	  $("#updateBtn").show();
+        	  $("#deleteBtn").show();
+
           }else{
-      	  
         	  // instaneof Date(date타입이 맞는지 확인)
               // toISOString // 문자열 형식으로 변환 -> YYYY-MM-DDTHH:mm:ss.sssZ
               // split('T')[0] // T 즉 날짜 / 시간으로 배열을 만들어서 그중 0번째 배열인 날짜만 잘라줌
-	          endDate = e.end instanceof Date ? e.end.toISOString().split('T')[0] : e.startStr;
-			
+              endDate = e.end instanceof Date ? e.end.toISOString().split('T')[0] : e.startStr;
+    		
 	          $("#modal_title").val("");
 	          $("#start").val(e.startStr);
 	          $("#end").val(endDate);
 	          $("#selectColor").val("");
+        	  $("#updateBtn").hide();
+        	  $("#deleteBtn").hide();
+        	  $("#cancelBtn").show();
+        	  $("#addSch").show();
 	          $("#exampleModal").modal("show");
- 
           }
       }
 
@@ -538,12 +551,15 @@ body {
             $("#selectColor").val("");      
         });
 	   
+
        // 처음 모달창 킬때 끝나는날짜 자동으로 시작날짜로 고정
        $(document).ready(function(){
            $("#start").change(function(){
               $("#end").val($("#start").val())
             });
        });
+       
+
        
        // 일정조회
        $.ajax({
@@ -568,9 +584,95 @@ body {
     	   }, error:function(){
     		   console.log("조회 ajax 실패");
     	   }
-       });
-	
-	
+       });	
+ 	
+   	  // 일정 수정
+	  	 $("#updateBtn").on("click", function(){
+				
+			 var id =   $("#calendarNo").val();
+			 var title = $("#modal_title").val();
+	         var start = $("#start").val();
+	         var end = $("#end").val();
+	         var color = $("#selectColor").val();
+	         
+	         var endDate = new Date(end); // date타입으로 변경 후
+		     endDate.setDate(endDate.getDate() + 1); //(add에 1을 더해서 여기선빼줌)
+		     var newCalDate = endDate.toISOString().split('T')[0];  // 문자열로 바꿔준후 날짜만뽑아줌
+	         
+	         console.log(id);
+	         console.log(title);
+	         console.log(start);
+	         console.log(newCalDate);
+	         console.log(color);
+			
+	         $.ajax({
+	      	   url:"updateCal.st",
+	      	   data:{
+	      		     id:id,
+	      		     stuNo:$("#studentNo").val(),
+	      		     title:title,
+	      		     start:start,
+	      		     end:newCalDate,
+	      		     color:color
+	      	  },
+	      	   success:function(result){
+	      		   console.log("수정ajax성공");
+	      		   if(result>0){
+						 Swal.fire({
+							 icon: 'success',
+	                         text: '일정 수정이 완료됐습니다!!'
+							})
+				   // 1초 후 호출
+					setTimeout(function() {
+				        location.reload();
+				    }, 1000);
+	      		   } 
+	      	   }, error:function(){
+	      		   console.log("수정ajax 실패");
+	      	   }
+	         });
+	  	  });
+   	  
+   	  // 일정 삭제
+   	  	 $("#deleteBtn").on("click", function(){	
+
+			 var id =   $("#calendarNo").val();
+	         
+		     $.ajax({
+		      	   url:"deleteCal.st",
+		      	   data:{
+		      		     id:id,
+		      		     stuNo:$("#studentNo").val(),
+		      	  },
+		      	   success:function(result){
+		      		   console.log("수정ajax성공");
+
+		      		   if(result>0){
+		      			   
+						//remove이벤트 사용
+		      		 	var eventRemove = calendar.getEventById(id);
+		                if (eventRemove) {
+		                	eventRemove.remove();
+		                }
+		                
+						 Swal.fire({
+							 icon: 'success',
+	                         text: '일정 삭제가 완료됐습니다!!'
+							})
+							
+					   // 1초 후 호출
+						setTimeout(function() {
+					        location.reload();
+					    }, 1500);
+		      		   } 
+		      	   }, error:function(){
+		      		   console.log("수정ajax 실패");
+		      	   }
+		         });
+   	  	 });
+
+   	  
+       
       calendar.render(); // 딜력을 띄워줌
     });
  

@@ -27,6 +27,16 @@ public class CalendarServiceImpl implements CalendarService {
 	public ArrayList<Calendar> selectCalendar(int stuNo) {
 		return caDao.selectCalendar(sqlSession, stuNo);
 	}
+
+	@Override
+	public int updateCalendar(Calendar cal) {
+		return caDao.updateCalendar(sqlSession, cal);
+	}
+
+	@Override
+	public int deleteCalendar(int stuNo, int calNo) {
+		return caDao.deleteCalendar(sqlSession, stuNo, calNo);
+	}
 	
 	
 	

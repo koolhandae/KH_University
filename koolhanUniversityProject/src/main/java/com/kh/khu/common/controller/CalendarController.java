@@ -29,13 +29,13 @@ public class CalendarController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="addCalendar.st", produces="text/html; charset=utf-8")
-	public Model addCalencar(@RequestParam("stuNo") int stuNo,
+	@RequestMapping(value="addCalendar.st", produces="application/json; charset=utf-8")
+	public String addCalencar(@RequestParam("stuNo") int stuNo,
 			                  @RequestParam("title") String title,
 			                  @RequestParam("start") String start,
 			                  @RequestParam("end") String end,
-			                  @RequestParam("color") String color,
-							  HttpSession session, Model model) {
+			                  @RequestParam("color") String color
+							  ) {
 		
 		System.out.println(stuNo);
 		System.out.println(title);
@@ -55,8 +55,7 @@ public class CalendarController {
 		int result  = caService.insertCalendar(cal);
 		System.out.println(result);
 
-		model.addAttribute("result", result);
-		return model;
+		return new Gson().toJson(result);
 	}
 	
 	@ResponseBody
@@ -70,4 +69,50 @@ public class CalendarController {
 		
 		return new Gson().toJson(cList);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="updateCal.st", produces="application/json; charset=utf-8")
+	public String updateCalendar(@RequestParam(value="id") String id, 
+	                            @RequestParam(value="stuNo") int stuNo,
+	                            @RequestParam(value="title") String title,
+				                @RequestParam(value="start") String start,
+				                @RequestParam(value="end") String end,
+				                @RequestParam(value="color") String color
+				                ) {
+
+		System.out.println(id);
+		System.out.println(stuNo);
+		System.out.println(title);
+		System.out.println(start);
+		System.out.println(end);
+		System.out.println(color);
+		
+		int calNo = Integer.parseInt(id);
+		
+		Calendar cal = new Calendar();
+		cal.setCalendarNo(calNo);
+		cal.setStudentNo(stuNo);
+		cal.setCalTitle(title);
+		cal.setCalStartDate(start);
+		cal.setCalEndDate(end);
+		cal.setBackgroundColor(color);
+		
+		int result = caService.updateCalendar(cal);
+		System.out.println(cal);
+		
+	    return new Gson().toJson(result);
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="deleteCal.st", produces="applicaition/json; charset=utf-8")
+	public String deleteCalendar(@RequestParam(value="id")String id,
+			                     @RequestParam(value="stuNo")int stuNo) {
+		
+		int calNo = Integer.parseInt(id);
+		int result = caService.deleteCalendar(stuNo, calNo);
+		
+		return new Gson().toJson(result);
+	}
+	
 }

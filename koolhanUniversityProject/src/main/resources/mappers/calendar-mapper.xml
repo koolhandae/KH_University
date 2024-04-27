@@ -51,6 +51,26 @@
 		   and cal_status = 'N'
 	</select>
 	
+	<update id="updateCalendar">
+		update
+		        calendar
+		   set  cal_title = #{calTitle}
+		      , cal_start_date = #{calStartDate}
+		      , cal_end_date = #{calEndDate}
+		      , background_color = #{backgroundColor}
+		      , update_date = sysdate
+		  where calendar_no = #{calendarNo}
+		    and student_no = #{studentNo}
+	</update>
+	
+	<update id="deleteCalendar">
+		 update
+		         calendar
+		    set  cal_status = 'Y'
+		      , update_date = sysdate
+		  where calendar_no = #{calNo}
+		    and student_no = #{stuNo}
+	</update>
 	
 	
 	

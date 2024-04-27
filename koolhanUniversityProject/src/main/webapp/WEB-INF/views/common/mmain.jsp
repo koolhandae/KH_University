@@ -224,7 +224,7 @@
 <body>
    <jsp:include page="../common/header_with_sidebar.jsp"/>
    <div class="content">
-
+			<input type="hidden" id="studentNo" value="${loginStudent.studentNo}">
             <div id="topDiv" class="bg-white" style="height: 600px;">
                 <div id="calendar">
                 	<div id="calendarArea"></div>
@@ -338,7 +338,32 @@
             },
         ]
       });
-           
+      
+   // 일정조회
+      $.ajax({
+   	   url:"selectCal.st",
+   	   data:{stuNo:$("#studentNo").val()},
+   	   success:function(data){
+   		   console.log("조회ajax 성공");
+   		   console.log(data);
+   		   
+   		   for (let i in data) {
+                  calendar.addEvent({
+                    id: data[i].calendarNo,
+                    title: data[i].calTitle,
+                    start: data[i].calStartDate,
+                    allday:true,
+                    end: data[i].calEndDate,
+                    backgroundColor: data[i].backgroundColor,
+                    borderColor: '#ffffff'
+                  });
+                }
+   		   
+   	   }, error:function(){
+   		   console.log("조회 ajax 실패");
+   	   }
+      });	
+      
       calendar.render(); // 딜력을 띄워줌
     });
  

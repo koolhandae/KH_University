@@ -9,4 +9,8 @@ public interface CalendarService {
 	public int insertCalendar(Calendar cal);
 	
 	ArrayList<Calendar> selectCalendar(int stuNo);
+	
+	public int updateCalendar(Calendar cal);
+
+	public int deleteCalendar(int stuNo, int calNo);
 }
