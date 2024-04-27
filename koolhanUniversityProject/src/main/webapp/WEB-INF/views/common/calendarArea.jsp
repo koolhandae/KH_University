@@ -10,9 +10,7 @@
 <!-- calender용  -->
 
 <!--daygried-->
-<script src="
-https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@5.8.0/main.global.min.js
-"></script>
+
 <link href="
 https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@5.8.0/main.min.css
 " rel="stylesheet">
@@ -185,6 +183,7 @@ body {
 .fc-addBtn-button {
 	background-color: #f6c23e !important;
 	border-radius: 100px !important;
+	border-color: #f6c23e !important;
 	color: white !important;
 	width: 38px !important;
 	margin-right: 5px !important;
@@ -369,7 +368,7 @@ body {
 			left: 'dayGridYear,dayGridMonth,timeGridWeek',
           // left: 'prev,next today',
           center: 'prev title next',
-          right: 'today addBtn,saveBtn'
+          right: 'today addBtn'
         },
         initialView: 'dayGridMonth', // 처음 보이는 캘린더 화면 (기본설정:달)
         editable: true, // 기존에 입력된 이벤트 드래그로 움직임

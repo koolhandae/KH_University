@@ -182,6 +182,7 @@ body {
 /* 추가버튼 */
 .fc-addBtn-button {
 	background-color: #f6c23e !important;
+	border-color: #f6c23e !important;
 	border-radius: 100px !important;
 	color: white !important;
 	width: 38px !important;
@@ -285,7 +286,7 @@ body {
 }
 </style>
 </head>
-<body>
+<body>	
 <jsp:include page="../common/header_with_sidebar.jsp" />
 	<div class="content">
     	<input type="hidden" id="studentNo" value="${loginStudent.studentNo}">
@@ -298,11 +299,11 @@ body {
 
 	
 	<div id='calendar'>
-		<jsp:include page="../common/calendarArea.jsp"/>
+
 	</div>
 </div>
+
 	<!-- 부트스트랩 모달 일정추가 -->
-	<!--  
 	<div class="modal fade" id="exampleModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -345,28 +346,26 @@ body {
 	</div>
 	</div>
 	</div>
-	
-	
-
+</body>
 <script>
 
     document.addEventListener('DOMContentLoaded', function() {
+      $(".fc-dayGridYear-button").text("year");
       var calendarEl = document.getElementById('calendar');
       // 풀캘린더 생성
       var calendar = new FullCalendar.Calendar(calendarEl, {
-
         // 구글캘린더API 키값
         googleCalendarApiKey : 'AIzaSyC4CerWedE4ejM_0st4KefILKimQ2SPkDI',
       
         //locale: 'ko', // 로컬설정
         height:'1000px', // 높이 설정
         expandRows:true, // 화면에 맞게 높이 재설정
-        slotMinTime: '09:00', // Day 캘린더에서 시작 시간        
-        slotMaxTime: '18:00', // Day 캘린더에서 종료 시작
+        slotMinTime: '00:00', // Day 캘린더에서 시작 시간        
+        slotMaxTime: '24:00', // Day 캘린더에서 종료 시작
         customButtons:{ // 커스텀버튼추가
           addBtn:{
             text:" + ",
-            click : function(){
+            click : function(e){
               $("#modal_title").val("");
               $("#start").val("");
               $("#end").val("");
@@ -381,10 +380,10 @@ body {
         },
         // 헤더 툴바
         headerToolbar: {
-          left: 'dayGridYear,dayGridMonth,timeGridWeek',
+			left: 'dayGridYear,dayGridMonth,timeGridWeek',
           // left: 'prev,next today',
           center: 'prev title next',
-          right: 'today addBtn,saveBtn'
+          right: 'today addBtn'
         },
         initialView: 'dayGridMonth', // 처음 보이는 캘린더 화면 (기본설정:달)
         editable: true, // 기존에 입력된 이벤트 드래그로 움직임
@@ -396,7 +395,7 @@ body {
             insertModalOpen(e);
         },
         
-        evendAdd:function(e){
+        eventAdd:function(e){
 
         },
 
@@ -434,24 +433,32 @@ body {
       });
            
       function insertModalOpen(e){
-          // instaneof Date(date타입이 맞는지 확인)
-          // toISOString // 문자열 형식으로 변환 -> YYYY-MM-DDTHH:mm:ss.sssZ
-          // split('T')[0] // T 즉 날짜 / 시간으로 배열을 만들어서 그중 0번째 배열인 날짜만 잘라줌
-         endDate = e.end instanceof Date ? e.end.toISOString().split('T')[0] : e.startStr;
-
-          $("#start").val(e.startStr);
-         // $("#end").val(e.endStr);
-         $("#end").val(endDate);
-          $("#exampleModal").modal("show");
-    
+          if(e.event != undefined){
+        	  
+        	  $("#modal_title").val(e.event.title);
+        	  $("#start").val(e.event.startStr);
+        	  $("#end").val(e.event.endStr);
+        	  $("#selectColor").val(e.event.backgroundColor);
+        	  $("#exampleModal").modal("show");
+        	  
+          }else{
+      	  
+        	  // instaneof Date(date타입이 맞는지 확인)
+              // toISOString // 문자열 형식으로 변환 -> YYYY-MM-DDTHH:mm:ss.sssZ
+              // split('T')[0] // T 즉 날짜 / 시간으로 배열을 만들어서 그중 0번째 배열인 날짜만 잘라줌
+	          endDate = e.end instanceof Date ? e.end.toISOString().split('T')[0] : e.startStr;
+			
+	          $("#modal_title").val("");
+	          $("#start").val(e.startStr);
+	          $("#end").val(endDate);
+	          $("#selectColor").val("");
+	          $("#exampleModal").modal("show");
+ 
+          }
       }
 
       //모달창 이벤트
       $("#addSch").on("click", function () {
-         console.log($("#modal_title").val());
-         console.log($("#start").val());
-         console.log($("#end").val());
-         console.log($("#selectColor").val());
 
          var title = $("#modal_title").val();
          var start = $("#start").val();
@@ -460,11 +467,15 @@ body {
          
          // 이벤트 추가할때는 모달에띄워준 date보다 하루 더 추가해줌
          var endDate = new Date($("#end").val());
-         endDate.setDate(endDate.getDate() + 1);
-         
+         //YYYY-MM-DD 로 표현하기위함
+         var yyyy = endDate.getFullYear();
+         //padStart() -> 문자열을 항상 두자리로 만들어주기위함
+         var mm = String(endDate.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줍니다.
+         var dd = String(endDate.getDate() + 1).padStart(2, '0'); // 날짜에 1을 더하고, 문자열로 변환하여 두 자리로 맞춥니다.
+         endDate = yyyy + '-' + mm + '-' + dd;
 
           //빈값입력시 오류
-          if ($(title == ""  ||  start == "" ))
+          if (title == ""  ||  start == "" )
              {
                 Swal.fire({
                   icon: 'error',
@@ -473,7 +484,7 @@ body {
                 return; // 빈값일경우 함수종료
              }
             //끝나는 날짜가 시작하는 날짜보다 값이 크면 안됨
-         if (start> date) {
+         if (start> endDate) {
             Swal.fire({
               icon: 'error',
               text: '이벤트 종료기간이 시작기간보다 작습니다!'
@@ -500,12 +511,22 @@ body {
                 end:endDate,
                 color:color
               },
-              success:function(){
+              success:function(result){
                 console.log("ajax성공");
                 
+                if(result > 0){
+                	 Swal.fire({
+                         icon: 'success',
+                         text: '성공적으로 일정을 등록했습니다!'
+                       })
+                } else {
+                	 Swal.fire({
+                         icon: 'error',
+                         text: '일정 등록에 실패했습니다. 재등록해주세요!'
+                       })
+                }
               }, error:function(){
                 console.log("ajax실패")
-
               }
             })
 
@@ -516,18 +537,46 @@ body {
             $("#end").val("");
             $("#selectColor").val("");      
         });
-
+	   
+       // 처음 모달창 킬때 끝나는날짜 자동으로 시작날짜로 고정
        $(document).ready(function(){
            $("#start").change(function(){
               $("#end").val($("#start").val())
             });
        });
-
+       
+       // 일정조회
+       $.ajax({
+    	   url:"selectCal.st",
+    	   data:{stuNo:$("#studentNo").val()},
+    	   success:function(data){
+    		   console.log("조회ajax 성공");
+    		   console.log(data);
+    		   
+    		   for (let i in data) {
+                   calendar.addEvent({
+                     id: data[i].calendarNo,
+                     title: data[i].calTitle,
+                     start: data[i].calStartDate,
+                     allday:true,
+                     end: data[i].calEndDate,
+                     backgroundColor: data[i].backgroundColor,
+                     borderColor: '#ffffff'
+                   });
+                 }
+    		   
+    	   }, error:function(){
+    		   console.log("조회 ajax 실패");
+    	   }
+       });
+	
+	
       calendar.render(); // 딜력을 띄워줌
     });
  
+ 
   </script>
-  -->
+
  <jsp:include page="../common/footer.jsp" />
 </body>
 

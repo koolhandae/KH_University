@@ -13,9 +13,43 @@
 		<result column="cal_status" property="calStatus"/>
 	</resultMap>
 	
+	<insert id="insertCalendar">
+		insert 
+		  into calendar
+		     (
+		       calendar_no
+		     , student_no
+		     , cal_title
+		     , cal_start_date
+		     , cal_end_date
+		     , background_color
+		     )
+		values
+		     (
+		       seq_cal.nextval
+		     , #{studentNo}
+		     , #{calTitle}
+		     , #{calStartDate}
+		     , #{calEndDate}
+		     , #{backgroundColor}
+		     )
+	</insert>
 	
-	
-	
+	<select id="selectCalendar" resultMap="calendarResult">
+		select 
+		       calendar_no
+		     , student_no
+		     , cal_title
+		     , cal_start_date
+		     , cal_end_date
+		     , background_color
+		     , create_date
+		     , update_date
+		     , cal_status
+		  from calendar
+		 where student_no = #{studentNo}
+		   and cal_status = 'N'
+	</select>
 	
 	
 	

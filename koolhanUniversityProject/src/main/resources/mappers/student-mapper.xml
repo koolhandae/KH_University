@@ -80,6 +80,7 @@
 	</resultMap>
 
 <select id="loginStudent" resultMap="studentResult">
+
 	select 
 	       student_no
 	     , student_id
@@ -93,10 +94,12 @@
 	     , absence_date
 	     , grad_date
 	     , s_status
+	     <!-- 
 		 , origin_name
 	     , change_name
+	      -->
 	  from student
- left join profile_images on (student_no = ref_sno)
+ <!-- left join profile_images on (student_no = ref_sno)  -->
 	 where student_id = #{studentId}
 </select>
 
