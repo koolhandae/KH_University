@@ -8,6 +8,14 @@
 <title>Insert title here</title>
 
 <!-- calender용  -->
+
+<!--daygried-->
+<script src="
+https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@5.8.0/main.global.min.js
+"></script>
+<link href="
+https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@5.8.0/main.min.css
+" rel="stylesheet">
 <!-- fullcalendar CDN -->
 <link
 	href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css'
@@ -332,7 +340,6 @@ body {
       var calendarEl = document.getElementById('calendar');
       // 풀캘린더 생성
       var calendar = new FullCalendar.Calendar(calendarEl, {
-		plugins: [dayGridPlugin],
         // 구글캘린더API 키값
         googleCalendarApiKey : 'AIzaSyC4CerWedE4ejM_0st4KefILKimQ2SPkDI',
       
