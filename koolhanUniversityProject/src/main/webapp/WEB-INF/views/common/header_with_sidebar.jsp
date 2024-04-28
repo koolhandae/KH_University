@@ -150,7 +150,6 @@
 								<div class="bg-white py-2 collapse-inner rounded">
 									<a class="collapse-item" href="myCalender.st">나의 시간표</a>
 									<a class="collapse-item" href="showCourse.st">나의 수강 조회</a>
-									<a class="collapse-item" href="#">이전 수강 내역 조회</a>
 								</div>
 							</div>
 						</li>
@@ -168,7 +167,7 @@
 									<a class="collapse-item" href="myCalender.do">나의 캘린더</a>
 									<a class="collapse-item" href="tuitionBill.do">등록금 납부 신청</a>
 									<a class="collapse-item" href="">등록금 납부 내역 조회</a>
-									<a class="collapse-item" href="#">학점 / 성적 조회</a>
+									<a class="collapse-item" href="courseScore.st">학점 / 성적 조회</a>
 									<a class="collapse-item" href="takeOff.do">휴 · 복학 신청</a>
 									<a class="collapse-item" href="takeOffSelect.do">휴 · 복학 신청 조회</a>
 									<a class="collapse-item" href="certificate.issue">증명서 발급</a>

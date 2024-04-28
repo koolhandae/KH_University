@@ -461,5 +461,16 @@
 		 where ref_mno = #{memberNo}    
 	</update>
 	
+<!-- 수강년도학기조회 -->
+<select id="selectScoreYear" resultMap="courseResult">
+	select 
+	        course_year
+	      , course_semester
+	 from course
+	where student_no = #{stuNo}
+	 group 
+	    by course_year, course_semester
+</select>
+	
 
 </mapper>

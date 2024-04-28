@@ -17,6 +17,7 @@ import com.kh.khu.classroom.model.vo.Classroom;
 import com.kh.khu.classroom.model.vo.Course;
 import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.common.template.Pagination;
+import com.kh.khu.grade.model.vo.Grade;
 import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.student.model.vo.Student;
 
@@ -191,4 +192,5 @@ public class StudentDao {
 	public int updateProfilePicture(SqlSessionTemplate sqlSession, Student s) {
 		return sqlSession.update("studentMapper.updateProfilePicture", s);
 	}
+
 }

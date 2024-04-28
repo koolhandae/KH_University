@@ -34,18 +34,18 @@
         padding-right: 50px;
         padding-left: 100px;
         height: 500px;
-        padding-top: 40px;
+        padding-top: 60px;
     }
     #notice{
         padding-right: 80px;
         padding-left: 100px;
         padding-bottom: 30px;
-        padding-top: 100px;
+        padding-top: 50px;
         color: rgb(39, 39, 39);
         
     }
     .table{
-        width: 80% !important;
+        width: 90% !important;
     }
     td{
         /* border: solid 1px red; */
@@ -86,6 +86,9 @@
     a{
         color: inherit;
         text-decoration: none;
+    }
+    #sersvice{
+        padding-right: 60px !important;
     }
     
     /* 캘린더 관련 */
@@ -217,6 +220,10 @@
     .fc-day-sat a {
         color: rgb(0, 0, 147);
     }
+    #addService>ul>li{
+        padding:15px;
+        margin-right:20px;
+    }
 
 
 </style>
@@ -225,7 +232,7 @@
    <jsp:include page="../common/header_with_sidebar.jsp"/>
    <div class="content">
 			<input type="hidden" id="studentNo" value="${loginStudent.studentNo}">
-            <div id="topDiv" class="bg-white" style="height: 600px;">
+            <div id="topDiv" class="bg-white" style="height: 700px;">
                 <div id="calendar">
                 	<div id="calendarArea"></div>
                 </div>
@@ -242,43 +249,56 @@
                     	<tbody>
                     	</tbody>
                     </table>
+                    <br>
+                    <div id="sersvice">
+                    	<div>
+                            <h3 style="font-weight: 600;padding-bottom: 10px; border-bottom: 2px solid #595959;">KOOLHAN SERVICE</h3>
+                        </div>
+                    	 <div style="display: flex; justify-content: center; background-color: white; height: 130px;" id="addService">
+			                
+			                <ul style="padding-top: 10px; margin-left:-10px;">
+			                    <li>
+			                        <a href="" class="icon" style="text-decoration: none; color: inherit;">
+			                            <img width="70" height="70" src="resources/images/버스.png" style="margin-top: -2px;"/>
+			                            <br>
+			                            <span>버스</span>
+			                        </a>
+			                    </li>
+			                    <li>
+			                        <a href="library.go" class="icon" style="text-decoration: none; color: inherit;">
+			                            <img width="67" height="67" src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/96/external-Library-places-those-icons-lineal-color-those-icons.png" alt="external-Library-places-those-icons-lineal-color-those-icons"/>
+			                            <br>
+			                            <span>도서관</span>
+			                        </a>
+			                    </li>
+			                    <li>
+			                        <a href="" class="icon" style="text-decoration: none; color: inherit;">
+			                            <img width="66" height="66"src="resources/images/일.png"/>
+			                            <br>
+			                            <span>취업관련</span>
+			                        </a>
+			                    </li>
+			                    <li>
+			                        <a href="" class="icon" style="text-decoration: none; color: inherit;"> 
+			                            <img width="66" height="66" src="resources/images/커뮤니티.png"/>
+			                            <br>
+			                            <span>커뮤니티</span>
+			                        </a>
+			                    </li>
+			                    <li>
+			                        <a href="" class="icon" style="text-decoration: none; color: inherit;">
+			                            <img width="70" height="70" src="resources/images/학사일정.png" style="margin-top: -4px"/>
+			                            <br>
+			                            <span>학사일정</span>
+			                        </a>
+			                    </li>
+			                <ul>
+            			</div>
+                    </div>
                 </div>
             </div>
     
-            <div style="display: flex; justify-content: center;">
-                <ul>
-                    <li>
-                        <a href="" class="icon" style="text-decoration: none; color: inherit;">
-                            <span id="icon" class="service_icon type_mail"></span>
-                            <span>버스</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="library.go" class="icon" style="text-decoration: none; color: inherit;">
-                            <span id="icon" class="service_icon type_mail" style="width: 100px; height: 100px;"></span>
-                            <span>도서관</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="" class="icon" style="text-decoration: none; color: inherit;">
-                            <span id="icon" class="service_icon type_mail"></span>
-                            <span>취업관련</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="" class="icon" style="text-decoration: none; color: inherit;"> 
-                            <span id="icon" class="service_icon type_mail"></span>
-                            <span>커뮤니티</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="" class="icon" style="text-decoration: none; color: inherit;">
-                            <span id="icon" class="service_icon type_mail"></span>
-                            <span>학사일정</span>
-                        </a>
-                    </li>
-                <ul>
-            </div>
+           
         
     </div>
 	
