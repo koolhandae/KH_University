@@ -434,4 +434,30 @@
 		 where class_num = #{classNum}
 		   and  SUBSTR(enroll_date, 1, 4) = '2024'
 	</select>
+	
+	<insert id="insertClassBoard">
+		insert 
+		  into class_board
+		      (
+		        class_board_no
+		      , ref_class_no
+		      , cb_writer
+		      , cb_title
+		      , cb_content
+		      , cb_origin_name
+		      , cb_change_name
+		      )
+		 values
+		      (
+		      	seq_cnbo.nextval
+		      , #{refClassNo}
+		      , #{cbWriter}
+		      , #{cbTitle}
+		      , #{cbContent}
+		      , #{cbOriginName}
+		      , #{cbChangeName}
+		      )
+	</insert>
+	
+	
 </mapper>

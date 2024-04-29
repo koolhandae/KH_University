@@ -14,13 +14,19 @@
                 <div class="form-group">
                 	<label for="display-image"> 프로필 사진 :</label>
 					<div align="center">
-						<img id="display-image" style="width: 200px; height: 200px;" alt=""
-							src="resources/images/logo.png"> <br> <input type="file"
-							style="display: none;" id="profile-pic" accept="image/*"> <br>
-						<button onclick="changePic();" class="btn btn-primary">프로필
-							사진 변경</button>
-						<button id="saveImage" onclick="saveImage();"
-							class="btn btn-success" style="display: none">이미지 저장</button>
+						<c:choose>
+							<c:when test="${empty loginStudent.changeName}">
+								<img id="display-image" style="width: 225px; height: 200px;" src="resources/images/default_user.png">	
+							</c:when>
+							<c:otherwise>
+								<img id="display-image" style="width: 225px; height: 200px;" src="${loginStudent.changeName}">
+							</c:otherwise>
+						</c:choose>
+							<br> 
+							<input type="file" style="display: none;" id="profile-pic" accept="image/*"> 
+							<br>
+						<button onclick="changePic();" class="btn btn-primary">프로필	사진 변경</button>
+						<button id="saveImage" onclick="saveImage();" class="btn btn-success" style="display: none">이미지 저장</button>
 					</div>
 					<script>
                     	function changePic(){
@@ -40,17 +46,26 @@
                     	
                     	function saveImage(){
                     		var fileData = $('#profile-pic').prop('files')[0];
-                    	    var formData = new FormData();
-                    	    formData.append('profileImage', fileData);
+                    	    var upfile = new FormData();
+                    	    upfile.append('profileImage', fileData);
 
                     	    $.ajax({
                     	        url: 'profile.img',  
                     	        type: 'POST',
-                    	        data: formData,
+                    	        data: upfile,
                     	        processData: false,
                     	        contentType: false,
-                    	        Rsuccess: function(response) {
-                    	            alert('프로필 사진이 성공적으로 저장되었습니다.');
+                    	        success: function(response) {
+                    	            $("#saveImage").hide();
+                    	        	Swal.fire({
+            							icon: response.icon,
+            							title: response.title,
+            							text: response.text,
+            						}).then((result) => {
+            			                if (result.isConfirmed) {
+            			                    location.reload(); 
+            			                }
+            						})
                     	        },
                     	        error: function() {
                     	            alert('프로필 사진 저장에 실패했습니다.');

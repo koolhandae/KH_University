@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="calendarMapper">
+	<resultMap type="Calendar" id="calendarResult">
+		<result column="calendar_no" property="calendarNo"/>
+		<result column="student_no" property="studentNo"/>
+		<result column="cal_title" property="calTitle"/>
+		<result column="cal_start_date" property="calStartDate"/>
+		<result column="cal_end_date" property="calEndDate"/>
+		<result column="background_color" property="backgroundColor"/>
+		<result column="create_date" property="createDate"/>
+		<result column="update_date" property="updateDate"/>
+		<result column="cal_status" property="calStatus"/>
+	</resultMap>
+	
+	<insert id="insertCalendar">
+		insert 
+		  into calendar
+		     (
+		       calendar_no
+		     , student_no
+		     , cal_title
+		     , cal_start_date
+		     , cal_end_date
+		     , background_color
+		     )
+		values
+		     (
+		       seq_cal.nextval
+		     , #{studentNo}
+		     , #{calTitle}
+		     , #{calStartDate}
+		     , #{calEndDate}
+		     , #{backgroundColor}
+		     )
+	</insert>
+	
+	<select id="selectCalendar" resultMap="calendarResult">
+		select 
+		       calendar_no
+		     , student_no
+		     , cal_title
+		     , cal_start_date
+		     , cal_end_date
+		     , background_color
+		     , create_date
+		     , update_date
+		     , cal_status
+		  from calendar
+		 where student_no = #{studentNo}
+		   and cal_status = 'N'
+	</select>
+	
+	<update id="updateCalendar">
+		update
+		        calendar
+		   set  cal_title = #{calTitle}
+		      , cal_start_date = #{calStartDate}
+		      , cal_end_date = #{calEndDate}
+		      , background_color = #{backgroundColor}
+		      , update_date = sysdate
+		  where calendar_no = #{calendarNo}
+		    and student_no = #{studentNo}
+	</update>
+	
+	<update id="deleteCalendar">
+		 update
+		         calendar
+		    set  cal_status = 'Y'
+		      , update_date = sysdate
+		  where calendar_no = #{calNo}
+		    and student_no = #{stuNo}
+	</update>
+	
+	
+	
+</mapper>

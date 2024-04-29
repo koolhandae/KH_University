@@ -3,6 +3,7 @@ package com.kh.khu.board.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -55,9 +56,12 @@ public class BoardController {
 		}
 		
 		int result = bService.insertBoard(b);
-	
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		if(result>0) { 
-			session.setAttribute("alertMsg", "성공적으로 게시글을 등록했습니다.");
+			map.put("title", "게시글 등록 성공");
+			map.put("text", "성공적으로 게시글을 등록했습니다.");
+			map.put("icon", "success");
+			session.setAttribute("alertMsg", map);
 			return "redirect:list.bo";
 		}else {
 			model.addAttribute("errorMsg", "게시글 등록 실패");
@@ -80,11 +84,15 @@ public class BoardController {
 	@RequestMapping("delete.bo")
 	public String deleteBoard(int bno, String filePath, HttpSession session, Model model) { 
 		int result = bService.deleteBoard(bno);
+		HashMap<String , Object> map = new HashMap<String, Object>();
 		if(result > 0) {
 			if(!filePath.equals("")) {
 				new File(session.getServletContext().getRealPath(filePath)).delete();
 			}
-			session.setAttribute("alertMsg", "게시글삭제 ㅅㄱ");
+			map.put("title", "게시글 삭제 성공");
+			map.put("text", "성공적으로 게시글을 삭제했습니다.");
+			map.put("icon", "success");
+			session.setAttribute("alertMsg", map);
 			return "redirect:list.bo";
 		} else {
 			model.addAttribute("errorMsg", "게시글 삭제 실패");
@@ -108,8 +116,12 @@ public class BoardController {
 			b.setOriginName(reupfile.getOriginalFilename());
 		}
 		int result = bService.updateBoard(b);
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		if(result > 0) { 
-			session.setAttribute("alertMsg", "게시글 수정 성공");
+			map.put("title", "게시글 수정 성공");
+			map.put("text", "성공적으로 게시글을 수정했습니다.");
+			map.put("icon", "success");
+			session.setAttribute("alertMsg", map);
 			mv.addObject("b", b);
 			mv.setViewName("redirect:detail.bo?bno="+b.getBoardNo());
 		} else { 

@@ -145,7 +145,7 @@ public class ProjectController {
 	@RequestMapping(value="projectAllSelectAjax.do",produces="application/json; charset=utf-8")
 	public String classAllSelectAjaxMethod(String memberId) {
 		ArrayList<Project> list = pService.selectProjectList(memberId);
-		System.out.println("list" + list);
+//		System.out.println("list" + list);
 		
 		return new Gson().toJson(list);
 	}
@@ -206,7 +206,7 @@ public class ProjectController {
 		 Map<String, Object> response = new HashMap();
 		
 		try {
-	        System.out.println("pjno: " + pjno);
+//	        System.out.println("pjno: " + pjno);
 	        
 	        
 	        if (!file.getOriginalFilename().equals("")) {
@@ -280,10 +280,10 @@ public class ProjectController {
 		String classNum = (String)session.getAttribute("classNum");
 		int studentNo = (Integer)session.getAttribute("studentNo");
 		
-		System.out.println("갑자기 왜안되냐" + studentNo);
+//		System.out.println("갑자기 왜안되냐" + studentNo);
 
 		 ArrayList<StudentProject> spList = pService.selectStudentDoneProject(studentNo, classNum);
-         System.out.println("sPLIST뭘까" + spList);
+//         System.out.println("sPLIST뭘까" + spList);
  		int pjCount = pService.ingProjectCount(classNum, studentNo);
  		int pjCountMiss = pService.missProjectCount(classNum, studentNo);
  		int pjCountDone = pService.doneProjectCount(classNum, studentNo);
@@ -304,7 +304,7 @@ public class ProjectController {
 			//System.out.println("가져오나2" + studentNo);
 		
 			ArrayList<StudentProject> spList = pService.selectStudentNoneProject(studentNo, classNum);
-         	System.out.println("sPLIST뭘까 NONE" + spList);
+//         	System.out.println("sPLIST뭘까 NONE" + spList);
         	int pjCount = pService.ingProjectCount(classNum, studentNo);
      		int pjCountMiss = pService.missProjectCount(classNum, studentNo);
      		int pjCountDone = pService.doneProjectCount(classNum, studentNo);
@@ -335,7 +335,7 @@ public class ProjectController {
 	public String projectFileView(@RequestParam(value="pjno") String pjno, HttpSession session, Model model) {
 		String classNum = (String)session.getAttribute("classNum");
 		int studentNo = (Integer)session.getAttribute("studentNo");
-		System.out.println("pjno" + pjno);
+//		System.out.println("pjno" + pjno);
 		
 		//System.out.println("가져오나1" + classNum);
 		//System.out.println("가져오나2" + studentNo);

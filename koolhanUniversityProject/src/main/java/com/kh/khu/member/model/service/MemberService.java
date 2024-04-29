@@ -60,7 +60,7 @@ public interface MemberService {
 	
 	public List<AdminTuition> insertAdminTuition(AdminTuition tuition);
 	
-	int updateProfilePicture(Member m);
+	int updateProfilePicture(ProfilePicture pp);
 	
 	int insertProfilePicture(ProfilePicture pp);
 }

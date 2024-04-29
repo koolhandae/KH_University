@@ -80,6 +80,7 @@
 	</resultMap>
 
 <select id="loginStudent" resultMap="studentResult">
+
 	select 
 	       student_no
 	     , student_id
@@ -93,10 +94,10 @@
 	     , absence_date
 	     , grad_date
 	     , s_status
-		 <!-- , origin_name
-	     , change_name -->
+		 , origin_name
+	     , change_name
 	  from student
-<!--  left join profile_images on (student_no = ref_sno) -->
+      left join profile_images on (student_no = ref_sno)
 	 where student_id = #{studentId}
 </select>
 
@@ -337,6 +338,7 @@
 	<select id="selectClassName" resultMap="courseResult">
 		select 
 		       class_name
+		     , class_no
 		  from course
 		  join class using (class_no)
 		 where course_status = 'Y'
@@ -455,8 +457,36 @@
 		update profile_images
 		   set change_name = #{changeName}
 		     , origin_name = #{originName}
-		 where ref_mno = #{memberNo}    
+		 where ref_sno = #{refStudentNo}    
 	</update>
+	
+	<insert id="insertProfilePicture">
+		insert 
+		  into profile_images
+		     (
+		       img_no
+		     , ref_sno  
+		     , origin_name   
+		     , change_name
+		     )
+		values 
+		     (
+		       seq_profile_img.nextval
+		     , #{refStudentNo}  
+		     , #{originName}
+		     , #{changeName}
+		     )    
+	</insert>
+<!-- 수강년도학기조회 -->
+<select id="selectScoreYear" resultMap="courseResult">
+	select 
+	        course_year
+	      , course_semester
+	 from course
+	where student_no = #{stuNo}
+	 group 
+	    by course_year, course_semester
+</select>
 	
 
 </mapper>

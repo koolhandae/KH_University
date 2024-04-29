@@ -30,11 +30,12 @@
    <!-- websocket handler -->
 	<beans:bean id="echoHandler" class="com.kh.khu.alarm.EchoHandler" />
 	<websocket:handlers>
-	    <websocket:mapping handler="echoHandler" path="/alram" />
+
+	  <websocket:mapping handler="echoHandler" path="/echo" />
 	    <websocket:handshake-interceptors>
-	        <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+	        <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/> <!-- httpsession을 웹소켓세션한테 실어주는거 -->
 	    </websocket:handshake-interceptors>
-	    <websocket:sockjs websocket-enabled="true"/>
+	    <!--<websocket:sockjs websocket-enabled="true"/>-->
 	</websocket:handlers>
 
    

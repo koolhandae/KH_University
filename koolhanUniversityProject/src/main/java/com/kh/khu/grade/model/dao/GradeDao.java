@@ -1,11 +1,14 @@
 package com.kh.khu.grade.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.khu.classroom.model.vo.Course;
 import com.kh.khu.grade.model.vo.Grade;
 
 @Repository
@@ -34,7 +37,7 @@ public class GradeDao {
 	// GradeDao.java
 	public int insertGradeStudent(SqlSessionTemplate sqlSession, ArrayList<Grade> gradesData) {
 	    int result = 0;
-	    System.out.println("Dao"+ gradesData);
+//	    System.out.println("Dao"+ gradesData);
 	    for (Grade grade : gradesData) {
 	        result += sqlSession.insert("gradeMapper.insertGradeStudent", grade);
 	    }
@@ -53,5 +56,23 @@ public class GradeDao {
 	        result += sqlSession.update("gradeMapper.updateGradeStudent", grade);
 	    }
 	    return result;
+	}
+	
+	
+	public ArrayList<Course> selectScoreYear(SqlSessionTemplate sqlSession, int stuNo){
+		return (ArrayList)sqlSession.selectList("studentMapper.selectScoreYear", stuNo);
+	}
+	
+	public ArrayList<Grade> selectScoreStudent(SqlSessionTemplate sqlSession, int stuNo){
+		return (ArrayList)sqlSession.selectList("gradeMapper.selectScoreStudent", stuNo);
+	}
+	
+	public ArrayList<Grade> chooseScoreStudent(SqlSessionTemplate sqlSession, String year, String term, int stuNo){
+		Map<String, Object> parameter = new HashMap<String, Object>();
+		parameter.put("stuNo", stuNo);
+		parameter.put("year", year);
+		parameter.put("term", term);
+		
+		return (ArrayList)sqlSession.selectList("gradeMapper.chooseScoreStudent", parameter);
 	}
 }

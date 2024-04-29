@@ -62,7 +62,7 @@
             </table>
             <br>
 
-			<c:if test="${loginUser.studentId eq b.boardWriter }">
+			<c:if test="${loginStudent.studentName eq b.boardWriter }">
 				<div align="center">
 					<!-- 수정하기, 삭제하기 버튼은 이글이 본인글일 경우만 보여져야됨 -->
 					<a class="btn btn-primary" onclick="postFormSubmit(1);">수정하기</a>
@@ -102,7 +102,7 @@
                 <thead>
                     <tr>
 						<c:choose>
-							<c:when test="${ empty loginUser }">
+							<c:when test="${ empty loginStudent }">
 		                        <th colspan="2">
 		                            <textarea class="form-control" cols="55" rows="2" style="resize:none; width:100%" readonly>로그인한 사용자만 이용가능한 서비스입니다.</textarea>
 		                        </th>
@@ -110,7 +110,7 @@
 							</c:when>
 							<c:otherwise>
 		                        <th colspan="2">
-		                            <textarea class="form-control" name="replyContent" id="content" cols="55" rows="2" style="resize:none; width:100%"></textarea>
+		                            <textarea class="form-control" name="replyContent" id="r-content" cols="55" rows="2" style="resize:none; width:100%"></textarea>
 		                        </th>
 		                        <th style="vertical-align: middle"><button class="btn btn-secondary" onclick="addReply();">등록하기</button></th>
 							</c:otherwise>
@@ -121,7 +121,7 @@
                     </tr>
                 </thead>
                 <tbody>
-
+					
                 </tbody>
             </table>
         </div>
@@ -157,18 +157,18 @@
     	}
     	
     	function addReply(){
-    		if($("#content").val().trim().length != 0 ){ // 유효한 댓글을 작성 할 때에만 =>insert ajax 요청
+    		if($("#r-content").val().trim().length != 0 ){ // 유효한 댓글을 작성 할 때에만 =>insert ajax 요청
 	   			$.ajax({
 	   				url:"insertReply.bo",
 	   				data: {
-	   					replyWriter: "${loginUser.studentNo}",
-	   					replyContent: $("#content").val(),
+	   					replyWriter: "${loginStudent.studentNo}",
+	   					replyContent: $("#r-content").val(),
 	   					refBoardNo: ${b.boardNo}
 	   					},
 	   				success: function(response){
 	   					if(response == "NNNNY"){
 	   						selectReplyList();
-	   						$("#content").val("");
+	   						$("#r-content").val("");
 	   					}else{
 	   					}
 	   				},
@@ -177,7 +177,7 @@
 	   				},
 	   			})
     		} else {
-    			alertify.alert("뭐라도 쓰고 등록해라")
+    			alert("뭐라도 쓰고 등록해라")
     		}
     	}
     </script>

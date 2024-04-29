@@ -125,12 +125,12 @@ public class HomeController {
 	@RequestMapping("chkmail.st")
 	public Student chkMailSt(String email, HttpSession session) {
 
-		System.out.println(email);
+//		System.out.println(email);
 
 		Student s = new Student();
 		s = sService.selectChkStudent(email);
 
-		System.out.println(s);
+//		System.out.println(s);
 
 		if (s != null) {
 			/* 해당이메일에 해당하는 Id를 세션값에 올려서 사용해줌 */
@@ -163,12 +163,12 @@ public class HomeController {
 
 		Map<String, Object> resultMap = new HashMap();
 		// System.out.println(email);
-		System.out.println("sendmailcontroll" + userId);
+//		System.out.println("sendmailcontroll" + userId);
 
 		// 난수의 범위 111111 ~ 999999 (6자리 난수)
 		Random random = new Random();
 		int checkNum = random.nextInt(888888) + 111111;
-		System.out.println("인증번호" + checkNum);
+//		System.out.println("인증번호" + checkNum);
 
 		String url = "http://localhost:8808/khu/changePwdForm.me?checkNum=" + checkNum;
 
@@ -205,7 +205,7 @@ public class HomeController {
 
 		// 페이지뒤에 난수가 없을경우에는 못바꾸게 막음!
 		if (checkNum != "") {
-			System.out.println("changePwdForm" + memberId);
+//			System.out.println("changePwdForm" + memberId);
 			mv.addObject("memberId", memberId);
 			mv.setViewName("common/findPassword");
 
@@ -224,7 +224,7 @@ public class HomeController {
 		// System.out.println("changeCON" + userPwd);
 
 		String encPwd = bcryptPasswordEncoder.encode(userPwd);
-		System.out.println(encPwd);
+//		System.out.println(encPwd);
 
 		int result = 0;
 		int mresult = 0;
@@ -348,8 +348,7 @@ public class HomeController {
 
 	@ResponseBody
 	@RequestMapping("profile.img")
-	public HashMap<String,Object> updateProfilePicutre(MultipartFile upfile, HttpSession session) {
-
+	public HashMap<String,Object> updateProfilePicutre(@RequestParam("profileImage") MultipartFile upfile, HttpSession session) {
 		Member m = (Member) session.getAttribute("loginUser");
 		Student s = (Student) session.getAttribute("loginStudent");
 		int result = 0;
@@ -358,24 +357,23 @@ public class HomeController {
 		pp.setOriginName(upfile.getOriginalFilename());
 		pp.setChangeName("resources/uploadFiles/" + changeName);
 		if (s == null) {
-			if (!m.getChangeName().equals("")) {
+			pp.setRefMemberNo(m.getMemberNo());
+			if (m.getChangeName() != null) {
 				new File(session.getServletContext().getRealPath(m.getChangeName())).delete();
-				result = mService.updateProfilePicture(m);
+				result = mService.updateProfilePicture(pp);
 			}else {
 				result = mService.insertProfilePicture(pp);
 			}
-			
-
+			session.setAttribute("loginUser", mService.loginMember(m));
 		} else {
-			if (!upfile.getOriginalFilename().equals("")) {
+			pp.setRefStudentNo(s.getStudentNo());
+			if (s.getChangeName() != null) {
 				new File(session.getServletContext().getRealPath(s.getChangeName())).delete();
-
-
-				s.setChangeName("/resources/uploadFiles/" + changeName);
-				s.setOriginName(upfile.getOriginalFilename());
+				result = sService.updateProfilePicture(pp);
+			}else {
+				result = sService.insertProfilePicture(pp);
 			}
-
-			result = sService.updateProfilePicture(s);
+			session.setAttribute("loginStudent", sService.loginStudent(s));
 		}
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -390,7 +388,6 @@ public class HomeController {
 			map.put("icon", "error");
 			map.put("imgLocation", "failed");
 		}
-		
 		return map;
 	}
 }

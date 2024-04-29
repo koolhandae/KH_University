@@ -8,15 +8,17 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.khu.student.model.vo.Absence;
-import com.kh.khu.student.model.vo.AbsenceStudent;
-import com.kh.khu.student.model.vo.AbsenceStudentResult;
-import com.kh.khu.student.model.vo.Presence;
 import com.kh.khu.classroom.model.vo.ClassNotice;
 import com.kh.khu.classroom.model.vo.Classroom;
 import com.kh.khu.classroom.model.vo.Course;
 import com.kh.khu.common.model.vo.PageInfo;
+import com.kh.khu.common.model.vo.ProfilePicture;
 import com.kh.khu.common.template.Pagination;
+import com.kh.khu.student.model.vo.Absence;
+import com.kh.khu.student.model.vo.AbsenceStudent;
+import com.kh.khu.student.model.vo.AbsenceStudentResult;
+import com.kh.khu.student.model.vo.Presence;
+import com.kh.khu.grade.model.vo.Grade;
 import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.student.model.vo.Student;
 
@@ -55,7 +57,7 @@ public class StudentDao {
 	    parameters.put("courseValue", courseValue);
 	    parameters.put("studentNo", studentNo);
 	    
-	    //System.out.println(parameters);
+//	    //System.out.println(parameters);
 		return sqlSession.selectOne("studentMapper.searchCourse", parameters);
 	}
 	
@@ -188,7 +190,11 @@ public class StudentDao {
 		return sqlSession.selectOne("studentMapper.selectNumberOfStudent",stStatus);
 	}
 	
-	public int updateProfilePicture(SqlSessionTemplate sqlSession, Student s) {
-		return sqlSession.update("studentMapper.updateProfilePicture", s);
+	public int updateProfilePicture(SqlSessionTemplate sqlSession, ProfilePicture pp) {
+		return sqlSession.update("studentMapper.updateProfilePicture", pp);
 	}
+	public int insertProfilePicture(SqlSessionTemplate sqlSession, ProfilePicture pp) {
+		return sqlSession.update("studentMapper.insertProfilePicture", pp);
+	}
+
 }
