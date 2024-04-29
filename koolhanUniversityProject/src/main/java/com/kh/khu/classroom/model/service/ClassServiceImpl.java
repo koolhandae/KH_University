@@ -67,8 +67,8 @@ public class ClassServiceImpl implements ClassService{
 	}
 
 	@Override
-	public int classBoardCount(String bno, String classNum) {
-		return cDao.classBoardCount(sqlSession, bno, classNum);
+	public int classBoardCount(int classBoardNo, String classNum) {
+		return cDao.classBoardCount(sqlSession, classBoardNo, classNum);
 	}
 
 	@Override
@@ -79,6 +79,11 @@ public class ClassServiceImpl implements ClassService{
 	@Override
 	public int insertClassBoard(ClassBoard cb) {
 		return cDao.insertClassBoard(sqlSession, cb);
+	}
+
+	@Override
+	public int deleteBoardStudent(int classNo, int bno) {
+		return cDao.deleteBoardStudent(sqlSession, classNo, bno);
 	}
 
 

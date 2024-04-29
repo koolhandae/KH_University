@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -203,32 +204,45 @@ public class ClassController {
 		
 		PageInfo pi = Pagination.getPageInfo(boardCount, currentPage, 5, 5);
 		ArrayList<ClassBoard> list = cService.selectClassBoardList(pi, classNum);
+		
+		System.out.println("자유게시판 리스트" + list);
 			
 		mv.addObject("pi", pi).addObject("list", list).addObject("className", className).setViewName("student/studentClassBoardList");
 		return mv;
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="boardDetail.co")
-	public String selectClassBoardDetail(@RequestParam(value="bno")String bno, 
-			                             @RequestParam(value="classNum")String classNum, Model model) {
+	public ModelAndView selectClassBoardDetail(@RequestParam(value="bno")String bno, 
+			                             @RequestParam(value="classNum")String classNum,
+			                             @RequestParam(value="classBoardNo")int classBoardNo, ModelAndView mv) {
 		
 		//System.out.println(bno);
 		//System.out.println(classNum);
 		
-		int boardCount = cService.classBoardCount(bno, classNum);
+		Map<String, Object> response = new HashMap<>();
+		 
+		int boardCount = cService.classBoardCount(classBoardNo, classNum);
 		
+		System.out.println("보드카운트" + boardCount);
+		
+		System.out.println(bno);
+		System.out.println(classBoardNo);
+		System.out.println(classNum);
+
 		if(boardCount > 0) {
 			ClassBoard cb = cService.selectClassDetailBoard(bno, classNum);
-			model.addAttribute("cb", cb);
-			model.addAttribute("classNum", classNum);
+			mv.addObject("cb", cb).addObject("classNum", classNum).addObject("bno", bno).setViewName("student/studentClassBoardDetail");
 			
 			//System.out.println("자유게시판" + cb);
-			return "student/studentClassBoardDetail";
+			return mv;
 			
 		}else {
-			model.addAttribute("errorMsg", "수강 자유게시판 세부조회에 실패하셨습니다.");
-			return "common/errorPage404";
+			mv.addObject("errorMsg", "수강 자유게시판 세부조회에 실패하셨습니다.").setViewName( "common/errorPage404");
+			return mv;
 		}
+
+		
 	}
 	@RequestMapping(value="classDetail.co")
 	public String selectClassDetail(int cno,Model model ) {
@@ -347,6 +361,8 @@ public class ClassController {
 	@RequestMapping("insertCBoard.st")
 	public String insertBoardStudent(ClassBoard cb, HttpSession session, MultipartFile upfile, Model model) {
 		
+		System.out.println("upfile: " + upfile);
+		
 		 Student s = (Student) session.getAttribute("loginStudent");
 		 int studentNo = s.getStudentNo();
 		
@@ -365,6 +381,8 @@ public class ClassController {
 		}
 		
 		int result = cService.insertClassBoard(cb);
+		
+		System.out.println("cb : " + cb);
 
 		if(result>0) { //성공
 			HashMap<String, Object> alertMsg = new HashMap<String, Object>();
@@ -412,4 +430,31 @@ public class ClassController {
 			return changeName;
 			
 		}
+		
+		@ResponseBody
+		@RequestMapping("deleteBoard.st")
+		public int deleteBoardStrudent(@RequestParam("bno")int bno, HttpSession session, String filePath) {
+			int classNo = (int)session.getAttribute("classNo");
+			
+			System.out.println("삭제" + classNo);
+			System.out.println("삭제" + bno);
+			
+			int result = cService.deleteBoardStudent(classNo, bno);
+			
+			if(result>0) { //성공
+				if(!filePath.equals("")) {//파일이 있을경우
+					new File(session.getServletContext().getRealPath(filePath)).delete();
+				}
+				
+				HashMap<String, Object> alertMsg = new HashMap<String, Object>();
+		         alertMsg.put("icon", "success");
+		         alertMsg.put("title", "성공!");
+		         alertMsg.put("text", "게시글이 성공적으로 삭제되었습니다");
+		         session.setAttribute("alertMsg", alertMsg);
+			}
+			
+			return result;
+		}
+		
+			
 }

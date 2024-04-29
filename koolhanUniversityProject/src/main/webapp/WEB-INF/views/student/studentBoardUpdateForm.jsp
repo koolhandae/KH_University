@@ -80,7 +80,7 @@
                     <tr id="file-area">
                         <th><label>첨부파일</label></th>
                         <th>
-                            <input type="file" id="board-file" class="btn1"/>
+                            <input type="file" id="board-file" class="btn1" name="upfile"/>
                             <div id="board-file-div">
                                 <label id="board-file-label" for="board-file">
                                     <span>첨부파일을 선택해주세요</span>
