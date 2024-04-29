@@ -17,7 +17,13 @@
 <!-- fullcalendar 언어 CDN -->
 <script
 	src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'></script>
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script> -->
+
+
+
 
 <!--부트스트랩-->
 <link
@@ -289,6 +295,9 @@ body {
 #testTitle{
 	cursor:pointer;
 }
+#calendar a.fc-event {
+	color: #fff;
+}
 </style>
 </head>
 <body>
@@ -435,13 +444,24 @@ body {
 									eventRemove : function(e) {
 										insertModalOpen(e);
 									},
+									
+									eventDidMount: function(info) {
+							            tippy(info.el, {
+							                content:  info.event._def.title,
+							                placement: 'top',
+							                offset: [0, 0],
+							                interactive: true,
+							            });
+							        },
 
 									eventSources : [
 											{
 												googleCalendarId : 'ko.south_korea#holiday@group.v.calendar.google.com',
 												color : 'white',
 												textColor : 'red'
-											}, ]
+											}, 
+									]
+							
 								});
 
 						function insertModalOpen(e) {
@@ -730,13 +750,35 @@ body {
 										
 											calendar.addEvent({
 												allDay : true,
-												title : item.시험장소,
-												start : item.접수시작일,
-												end : item.점수마감일,
-												backgroundColor : '#4e73df',
-												borderColor : '#4e73df',
+												title : item.시험장소 + ' - 접수기간',
+												start : new Date(item.접수시작일),
+												end : new Date(item.접수마감일),
+												backgroundColor : '#518fc7',
+												borderColor : '#518fc7',
 												Color : '#ffffff'
 											});
+											
+											calendar.addEvent({
+												allDay : true,
+												title : item.시험장소 + ' - 시험일',
+												start : new Date(item.시험일),
+												end : new Date(new Date(item.시험일).getTime() + 24 * 60 * 60 * 1000),
+												backgroundColor : '#74bdf2',
+												borderColor : '#74bdf2',
+												Color : '#ffffff'
+											});
+											
+											calendar.addEvent({
+												allDay : true,
+												title : item.시험장소 + ' - 힙격발표일',
+												start : new Date(item.합격자발표일),
+												end : new Date(new Date(item.합격자발표일).getTime() + 24 * 60 * 60 * 1000),
+												backgroundColor : '#ffc107',
+												borderColor : '#ffc107',
+												Color : '#ffffff'
+											});
+											
+											
 									}
 
 								}, error:function(){
