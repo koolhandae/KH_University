@@ -80,6 +80,7 @@
 	</resultMap>
 
 <select id="loginStudent" resultMap="studentResult">
+
 	select 
 	       student_no
 	     , student_id
@@ -96,7 +97,7 @@
 		 , origin_name
 	     , change_name
 	  from student
- left join profile_images on (student_no = ref_sno)
+      left join profile_images on (student_no = ref_sno)
 	 where student_id = #{studentId}
 </select>
 
@@ -337,6 +338,7 @@
 	<select id="selectClassName" resultMap="courseResult">
 		select 
 		       class_name
+		     , class_no
 		  from course
 		  join class using (class_no)
 		 where course_status = 'Y'
@@ -457,6 +459,17 @@
 		     , origin_name = #{originName}
 		 where ref_mno = #{memberNo}    
 	</update>
+	
+<!-- 수강년도학기조회 -->
+<select id="selectScoreYear" resultMap="courseResult">
+	select 
+	        course_year
+	      , course_semester
+	 from course
+	where student_no = #{stuNo}
+	 group 
+	    by course_year, course_semester
+</select>
 	
 
 </mapper>

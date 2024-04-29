@@ -81,6 +81,10 @@ public class ClassDao {
 		
 		return sqlSession.selectOne("classMapper.selectClassDetailBoard", parameters);
 	}
+	
+	public int insertClassBoard(SqlSessionTemplate sqlSession, ClassBoard cb) {
+		return sqlSession.insert("classMapper.insertClassBoard", cb);
+	}
 }
 
 

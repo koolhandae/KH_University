@@ -16,6 +16,10 @@
 		<result column="student_name" property="studentName"/>
 		<result column="student_hak" property="studentHak"/>
 		<result column="class_name" property="className"/>
+		<result column="class_num" property="classNum"/>
+		<result column="class_typename" property="classTypeName"/>
+		<result column="class_score" property="classScore"/>
+		<result column="course_year" property="courseYear"/>
 	</resultMap>
 	
 	
@@ -136,5 +140,54 @@
 		      and class_no = #{classNo}
 	</update>
 	
+	<!-- 학생용성적조회 -->
+	
+	<select id="selectScoreStudent" resultMap="gradeResult">
+		select distinct *
+		  from (select 
+		       class_num
+		     , class_name  
+		     , class_typename
+		     , class_score
+		     , term_no
+		     , mid_point
+		     , fin_point
+		     , project_point
+		     , atten_point
+		     , total_point
+		     , grade
+		     , course_year
+		  from grade g
+		  right join class c on g.class_no = c.class_no
+		  left join course co on c.class_no = co.class_no
+		  left join class_type ct on c.class_type = ct.class_type
+		 where g.student_no = #{stuNo}
+		   and course_year = 2024
+		   and course_semester = 1)
+	</select>
+	
+	<select id="chooseScoreStudent" resultMap="gradeResult">
+			select distinct *
+			  from (select 
+			       class_num
+			     , class_name  
+			     , class_typename
+			     , class_score
+			     , term_no
+			     , mid_point
+			     , fin_point
+			     , project_point
+			     , atten_point
+			     , total_point
+			     , grade
+			     , course_year
+			  from grade g
+			  right join class c on g.class_no = c.class_no
+			  left join course co on c.class_no = co.class_no
+			  left join class_type ct on c.class_type = ct.class_type
+			 where g.student_no = #{stuNo}
+			   and course_year = #{year}
+			   and course_semester = #{term})
+	</select>
 	
 </mapper>

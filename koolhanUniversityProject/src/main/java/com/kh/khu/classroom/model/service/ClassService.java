@@ -45,4 +45,6 @@ public interface ClassService {
 	int classBoardCount(String bno, String classNum);
 	ClassBoard selectClassDetailBoard(String bno, String classNum);
 
+	int insertClassBoard(ClassBoard cb);
+	
 }

@@ -26,6 +26,7 @@ import com.kh.khu.common.model.vo.Address;
 import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.common.template.AddressString;
 import com.kh.khu.common.template.Pagination;
+import com.kh.khu.grade.model.vo.Grade;
 import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.student.model.service.StudentService;
 import com.kh.khu.student.model.vo.Absence;
@@ -82,7 +83,9 @@ public class StudentController {
 		//System.out.println("CONclassNum = " + classNum);
 		
 		ArrayList<Course> c = sService.selectClassName(classNum);
+		int classNo = c.get(0).getClassNo();
 		
+		//System.out.println("classNo" + classNo);
 		//System.out.println("course" + c);
 			
 		String className = c.get(0).getClassName();
@@ -97,6 +100,7 @@ public class StudentController {
 		ArrayList<ClassNotice> list = sService.selectClassNoticeList(pi, classNum);
 		
 		session.setAttribute("classNum", classNum);
+		session.setAttribute("classNo", classNo);
 		
 		mv.addObject("pi", pi).addObject("list", list).addObject("className",className).setViewName("student/studentClassDetail");
 		return mv;
@@ -417,5 +421,7 @@ public class StudentController {
 		System.out.println(fileName);
 		return fileName;
 	}
+	
+	
 	
 }

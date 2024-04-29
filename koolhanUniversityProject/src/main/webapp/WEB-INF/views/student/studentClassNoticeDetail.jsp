@@ -39,7 +39,7 @@
         font-weight: 600;
         color: #1c4587;
         padding-left: 20px;
-        margin-right: 1200px;
+        margin-right: 1450px;
      }
      #mid-title{
         font-size:small;
