@@ -143,7 +143,7 @@
           <button class="btn" id="btn">검색</button>
         </div>
         <div class="generateBtn">
-        	<a href="tuitionMakeStudent.ad" >등록금 납부 대상 발급 및 조회</a>
+        	<a href="tuitionMakeStudent.ad" class="btn" id="btn">등록금 납부 대상 발급 및 조회</a>
         </div>
         <br><br>
         <table id="boardList" class="table" align="center" width="700px">

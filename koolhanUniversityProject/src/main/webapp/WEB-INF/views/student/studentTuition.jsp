@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -98,11 +99,11 @@
 	   		<a class="btn btn-primary btn-lg"  href="tuitionPay.do" roll="button" style="background-color:rgb(48, 76, 121)">등록금 내역 조회</a>  	
 	    </div>
 		<br><br><br>
-      <h2 style="margin-left: 140px; font-weight:900; color: rgb(75,75,75);">등록금 납부 내역 조회</h2>
+      <h2 style="margin-left: 150px; font-weight:900; color: rgb(75,75,75);">등록금 납부 내역 조회</h2>
       <hr>
       <br>
       	
-      	<div class="semesterArea">
+<!--       	<div class="semesterArea">
          <select class="form-control" name="termNo" id="semester">
          	<option value="total">전체</option>
             <option value="1_1">1학년 1학기</option>
@@ -116,39 +117,39 @@
          </select>
          <button class="btn btn-xs" id="btn">조회</button>
       	</div>
-      	<br>
+      	<br> -->
       	
+      		<input type="hidden" name="studentId" value="${ loginStudent.studentId }">
       	<table id="boardList" class="selectTuition table table-hover" style="width: 900px;" align="center">
             <tr class="topMenu">
                <th>등록연도</th>
                <th>등록학기</th>
-               <th>장학금 유형</th>
                <th>등록금</th>
                <th>장학금</th>
                <th>납부금</th>
                <th>납부구분</th>
                <th>납부일자</th>
             </tr>
+          <c:forEach var="st" items="${ list }">
             <tr>
-               <td>2024</td>
-               <td>1학기</td>
-               <td>2유형</td>
-               <td>4,000,000</td>
-               <td>1,500,000</td>
-               <td>2,500,000</td>
-               <td>납부</td>
-               <td>24.04.12</td>
+               <td>${ st.tsYear }</td>
+               <td>${ st.tsSemester }</td>
+               <td>${ st.tuition }</td>
+               <td>${ st.scholarship }</td>
+               <td>${ st.tuition - st.scholarship }</td>
+               <td>
+        		 <c:choose>
+                     <c:when test="${ st.tsStatus eq 'N' }">미납</c:when>
+                     <c:when test="${ st.tsStatus eq 'Y' }">납입완료</c:when>
+                     <c:otherwise>처리중</c:otherwise>
+                 </c:choose>
+               </td>
+               <td>
+               	<fmt:parseDate value="${st.tpDate}" pattern="yyyy-MM-dd" var="tpDate" />
+               	<fmt:formatDate value="${tpDate}" pattern="yyyy-MM-dd" />
+               </td>
             </tr>
-            <tr>
-               <td>2024</td>
-               <td>1학기</td>
-               <td>2유형</td>
-               <td>4,000,000</td>
-               <td>1,500,000</td>
-               <td>2,500,000</td>
-               <td>미납부</td>
-               <td>-</td>
-            </tr>
+          </c:forEach>
          </table>
       
       </div>

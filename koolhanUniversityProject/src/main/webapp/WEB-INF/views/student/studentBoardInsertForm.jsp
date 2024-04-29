@@ -81,7 +81,7 @@
                     <tr id="file-area">
                         <th><label>첨부파일</label></th>
                         <th>
-                            <input type="file" id="board-file" class="btn1"/>
+                            <input type="file" id="board-file" class="btn1" name="upfile"/>
                             <div id="board-file-div">
                                 <label id="board-file-label" for="board-file">
                                     <span>첨부파일을 선택해주세요</span>
@@ -95,7 +95,7 @@
 
                 <div align="center">
                     <button type="submit" class="btn btn-secondary" style="background-color: #1c4587; border: none;">등록하기</button>
-                    <button type="reset" class="btn btn-outline-secondary">취소하기</button>
+                    <button type="reset" class="btn btn-outline-secondary" onclick="location.href='board.co'">취소하기</button>
                 </div>
             </form>
         </div>

@@ -34,6 +34,12 @@ public class TuitionServiceImpl implements TuitionService{
 		return tDao.insertTuitionPay(sqlSession, t);
 	}
 
+	
+	@Override
+	public ArrayList<Tuition> tuitionPayForm(String studentId) {
+		return tDao.tuitionPayForm(sqlSession, studentId);
+	}
+	
 
 	@Override
 	public ArrayList<Tuition> tuitionBillForm(String studentId) {
@@ -67,6 +73,7 @@ public class TuitionServiceImpl implements TuitionService{
 		// TODO 학생데이터를 가져온다 (상태가 = 재학중) dao 필요
 		List<TuitionStudent> students = tDao.selectAllTuitionStudent(sqlSession);
 		// TODO 장학금이 반영된 녀석을 찾아서 셋팅해야 한다
+		
 		List<TuitionStudentMake> studentList = students
 				.stream()
 				.map(s -> 
@@ -114,8 +121,7 @@ public class TuitionServiceImpl implements TuitionService{
 			}
 		}
 
-		
-		
+
 		// TODO 데이터를 insert 시킨다 
 		for(TuitionStudentMake tt : studentList) {
 			int result = tDao.insertTuitionMake(sqlSession, tt);
@@ -127,6 +133,12 @@ public class TuitionServiceImpl implements TuitionService{
 		return studentList;
 		
 	}
-	
+
+
+	@Override
+	public ArrayList<Tuition> studentTuition(String studentId) {
+		return tDao.studentTuition(sqlSession, studentId);
+	}
+
 
 }

@@ -30,6 +30,8 @@
 		<result column="count" property="count"/>
 		<result column="rnum" property="rnum"/>
 		<result column="stp_pj_no" property="stpPjNo"/>
+		<result column="student_name" property="studentName"/>
+        <result column="student_id" property="studentId"/>
 	</resultMap>
 	
 	
@@ -250,5 +252,19 @@
 		   and class_num = #{classNum}
 		   and stp_status = 'D'
 		   and stp_pj_no = #{pjno}
+	</select>
+	
+	
+	<select id="stuPjFileDownload" resultMap="stuProjectResult">
+        select 
+        	   student_name
+        	 , student_id
+        	 , st.stp_status
+        	 , st.stp_origin_name
+        	 , st.stp_change_name
+		  from stu_project st
+          join student using(student_no)
+          where st.stp_pj_no = #{pjNo}
+	
 	</select>
 </mapper>

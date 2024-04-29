@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,7 +90,8 @@
 			<h5 style="margin-left: 150px;">2024년도 1학기</h5>
             <hr>
 			<br>
-		<form action="tuitionPayForm.do">
+		<form action="tuitionPayForm.do" method="post">
+			<input type="hidden" name="studentId" value="${ loginStudent.studentId }">
 			<table id="boardList" class="table table-hover" align="center">
 				<tr>
 					<th>학부(과)</th>
@@ -105,22 +107,28 @@
 					<td>3학년 1학기</td>
 				</tr>
 
-             <c:forEach var="l" items="${ list }">
+              <c:forEach var="li" items="${ list }">
                 <tr>
 						<th>등록금</th>
-						<td>${ l.tuition }</td>
+						<td>${ li.tuition }</td>
 						<th>장학금</th>
-						<td>${ l.scholarship }<td>
+						<td>${ li.scholarship }<td>
 				</tr>
+
 				<tr>
 					<th>납부 금액</th>
-					<td colspan="3" align="center" style="font-size:20px";>2500000</td>
+					<td colspan="3" align="center" style="font-size:20px";>${ li.tuition - li.scholarship }</td>
 				</tr>
-			 </c:forEach>
 				<tr>
 					<th>납부기간</th>
-					<td colspan="3" align="center">24.04.11 (목) ~ 24.05.02 (목)</td>
+					 <td colspan="3" align="center">
+					  <fmt:parseDate value="${li.tbOpen}" pattern="yyyy-MM-dd" var="openDate" />
+                      <fmt:parseDate value="${li.tbClose}" pattern="yyyy-MM-dd" var="closeDate" />
+					  <fmt:formatDate value="${openDate}" pattern="yyyy-MM-dd" /> ~
+				      <fmt:formatDate value="${closeDate}" pattern="yyyy-MM-dd" />
+				     </td>
 				</tr>
+			 </c:forEach>
 			</table>
 
 			<br>

@@ -57,7 +57,7 @@ public class StudentDao {
 	    parameters.put("courseValue", courseValue);
 	    parameters.put("studentNo", studentNo);
 	    
-//	    System.out.println(parameters);
+//	    //System.out.println(parameters);
 		return sqlSession.selectOne("studentMapper.searchCourse", parameters);
 	}
 	

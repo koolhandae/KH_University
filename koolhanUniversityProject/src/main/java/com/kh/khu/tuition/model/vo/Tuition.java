@@ -21,8 +21,8 @@ public class Tuition {
 	private int tuition; // 등록금
 	private int scholarship; // 장학금
 	private String tsYear; // 연도
-	private String tsSemster; // 학기
-	private String tsStatuse; // 납부 현황
+	private String tsSemester; // 학기
+	private String tsStatus; // 납부 현황
 	private String tpDate;
 	
 }

@@ -27,6 +27,15 @@ public class TuitionDao {
 		return (ArrayList)sqlSession.selectList("tuitionMapper.tuitionBillForm", studentId);
 	}
 	
+	public ArrayList<Tuition> tuitionPayForm(SqlSessionTemplate sqlSession, String studentId){
+		// System.out.println("DAODAO : " + studentId);
+		return (ArrayList)sqlSession.selectList("tuitionMapper.tuitionPayForm",studentId);
+	}
+	
+	public ArrayList<Tuition> studentTuition(SqlSessionTemplate sqlSession, String studentId){
+		return (ArrayList)sqlSession.selectList("tuitionMapper.studentTuition", studentId);
+	}
+	
 	public ArrayList<AdminTuitionMake> tuitionMakeForm(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("tuitionMapper.tuitionMakeForm");
 	}

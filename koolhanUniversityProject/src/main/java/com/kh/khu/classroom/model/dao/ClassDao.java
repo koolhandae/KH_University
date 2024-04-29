@@ -66,11 +66,11 @@ public class ClassDao {
 		return (ArrayList)sqlSession.selectList("classMapper.selectClassBoardList", classNum, rowBounds);
 	}
 	
-	public int classBoardCount(SqlSessionTemplate sqlSession, String bno, String classNum) {
+	public int classBoardCount(SqlSessionTemplate sqlSession, int classBoardNo, String classNum) {
 		Map<String, Object> parameters = new HashMap();
 		parameters.put("classNum", classNum);
-		parameters.put("bno", bno);
-		
+		parameters.put("classBoardNo", classBoardNo);
+		System.out.println("parameter" + parameters);
 		return sqlSession.update("classMapper.classBoardCount", parameters);
 	}
 	
@@ -84,6 +84,13 @@ public class ClassDao {
 	
 	public int insertClassBoard(SqlSessionTemplate sqlSession, ClassBoard cb) {
 		return sqlSession.insert("classMapper.insertClassBoard", cb);
+	}
+	
+	public int deleteBoardStudent(SqlSessionTemplate sqlSession, int classNo, int bno) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("classNo", classNo);
+		parameters.put("bno", bno);
+		return sqlSession.update("classMapper.deleteBoardStudent", parameters);
 	}
 }
 
