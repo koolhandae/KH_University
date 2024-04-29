@@ -66,10 +66,10 @@
 		     , m_email
 		     , m_address
 		     , m_type
-<!-- 		     , origin_name
-		     , change_name -->
+		     , origin_name
+		     , change_name
 		  from member
-<!-- 		  left join profile_images on (member_no = ref_mno) -->
+		  left join profile_images on (member_no = ref_mno)
 		 where m_status = 'Y'
 		   and member_id = #{memberId}
 	</select>

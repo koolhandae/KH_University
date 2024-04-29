@@ -51,6 +51,7 @@ public class BoardDao {
 	}
 	
 	public int updateReply(SqlSessionTemplate sqlSession, Reply r) {
+		System.out.println(r);
 		return sqlSession.insert("boardMapper.updateReply", r);
 	}
 	

@@ -7,9 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    div{
-        border: 1px solid red;
-    }
     #topDiv{
         padding-top: 100px;
     }
@@ -27,7 +24,7 @@
         padding-left: 50px;
         padding-bottom: 30px;
         color: rgb(39, 39, 39);
-        
+        border: 1px solid lightgray;
     }
     td{
         /* border: solid 1px red; */
@@ -75,7 +72,7 @@
 </head>
 <body>
    <jsp:include page="../common/header_with_sidebar.jsp"/>
-   <div class="content">
+   <div class="content bg-white">
 
             <div id="topDiv" class="bg-white" style="height: 450px;">
                 <div id="calendar">달력자리
@@ -117,7 +114,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="" class="icon" style="text-decoration: none; color: inherit;"> 
+                        <a href="list.bo" class="icon" style="text-decoration: none; color: inherit;"> 
                             <span id="icon" class="service_icon type_mail"></span>
                             <span>커뮤니티</span>
                         </a>
@@ -128,7 +125,7 @@
                             <span>학사일정</span>
                         </a>
                     </li>
-                <ul>
+                </ul>
             </div>
         
     </div>

@@ -30,7 +30,6 @@ import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.member.model.vo.MemberAbsence;
 import com.kh.khu.member.model.vo.MemberPresence;
 import com.kh.khu.student.model.service.StudentServiceImpl;
-import com.kh.khu.student.model.vo.Presence;
 import com.kh.khu.student.model.vo.Student;
 
 @Controller
@@ -47,18 +46,6 @@ public class MemberController {
 
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
-
-	// 임시 로그인 메소드
-	/*
-	 * @RequestMapping("login.me") public String loginMember(String userId, String
-	 * userPwd, HttpSession session) { Member m = new Member();
-	 * m.setMemberId(userId); m.setMemberPwd(userPwd); Member loginUser =
-	 * mService.loginMember(m);
-	 * 
-	 * session.setAttribute("loginUser", loginUser);
-	 * 
-	 * return "admin/noticeListView"; }
-	 */
 
 	@RequestMapping("login.me")
 	public String loginMember(String userId, String userPwd, HttpSession session, Model model) {

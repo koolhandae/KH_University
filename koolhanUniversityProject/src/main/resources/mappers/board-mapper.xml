@@ -114,8 +114,8 @@
 		     , student_name as reply_writer
 		     , to_char(create_date, 'yyyy-MM-dd') as create_date
 		  from reply
-		 where r_status = 'Y'
 		  join student on (reply_writer = student_no)
+		 where r_status = 'Y'
 		   and ref_bno = #{boardNo}
 		 order 
 		    by reply_no desc
