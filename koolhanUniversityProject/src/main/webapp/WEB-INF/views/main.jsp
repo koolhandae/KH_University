@@ -83,12 +83,13 @@
 					font-size: small;
 					color: gray;
 					text-align: right;
+
 				}
 			</style>
 		</head>
 
 		<body class="bg-gradient-primary">
-			
+
 
 			<div class="container" style="min-width: 912px;">
 				<!-- Outer Row -->
@@ -218,19 +219,19 @@
 					document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
 				}
 
-				$(document).ready(function() {
-				    $('.hit_enter').keypress(function(e) {
-				        if (e.which == 13) { 
-				            $('#login-btn').click(); 
-				        }
-				    });
+				$(document).ready(function () {
+					$('.hit_enter').keypress(function (e) {
+						if (e.which == 13) {
+							$('#login-btn').click();
+						}
+					});
 				});
-				
+
 
 			</script>
 
 			<script>
-				$(document).on("keydown", function(event) {
+				$(document).on("keydown", function (event) {
 					if (event.which === 13 || event.keyCode === 13) {
 						$("#login-btn").click();
 					}
