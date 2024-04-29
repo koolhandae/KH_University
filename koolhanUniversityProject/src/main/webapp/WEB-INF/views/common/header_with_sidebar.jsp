@@ -82,6 +82,7 @@
 </head>
 
 <body id="page-top">
+<div id="socketAlert" class="alert alert alert-success" role="alert" style="display:none;"></div>
 
 			<c:if test="${not empty alertMsg}">
 				<script>
@@ -96,11 +97,13 @@
 				<c:remove var="alertMsg" scope="session" />
 			</c:if>
 
-
+	
 
 
 	<!-- Page Wrapper -->
 	<div id="wrapper">
+	
+					
 
 		<!-- Sidebar -->
 		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -115,7 +118,7 @@
 
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
-
+			
 					<a class="sidebar-brand d-flex align-items-center justify-content-center" href="mainPage.me">
 						<div class="sidebar-brand-text mx-3">KH University<sup></sup></div>
 					</a>
@@ -372,6 +375,41 @@
 							</div>
 						</div>
 					</form>
+					
+					<!-- 날씨정보 div -->
+					<div>
+				      <div id="weatherDiv" style="display:flex;flex-direction: row; align-items: center;">
+					      	<input type="hidden" id="seoul" value="서울">
+							
+							<div style="padding-left:500px;">
+							
+							</div>
+							<div>
+								<h5 style="margin:2px; font-size: 15px;" >강남구</h5>
+								<span style="margin:2px" id="ondo"></span>
+							</div>
+								
+							<div>
+								ㅣ
+							</div>
+							
+							<div>
+								<table>
+									<thead>
+										<tr>
+											<td><span style="font-size: 13px;  line-height:0;">미세먼지</span></td>
+											<td><span id="mise" style="font-size: 13px;  line-height:none;"></span></td>
+										</tr>
+										<tr>
+											<td><span style="font-size: 13px;  line-height:0;">대기환경지수</span></td>
+											<td><span  id="daegi" style="font-size: 13px;  line-height:none;"></span></td>
+										</tr>
+									</thead>
+								</table>
+							</div>
+					     </div>
+					</div>
+					<!-- 날씨정보 div -->
 
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto">
@@ -452,6 +490,9 @@
 									Alerts</a>
 							</div>
 						</li>
+
+			
+
 
 						<!-- Nav Item - Messages -->
 						<li class="nav-item dropdown no-arrow mx-1">
@@ -581,6 +622,7 @@
 
 				</nav>
 				<!-- End of Topbar -->
+				
 
 
 				<!-- Scroll to Top Button-->
@@ -607,29 +649,175 @@
 							</div>
 						</div>
 					</div>
+
 				</div>
 				
-				
+
 				<script>
-			        var socket = new WebSocket("ws://localhost:8808/khu/echo");
-			
-			        socket.onopen = function(event) {
-			            console.log("WebSocket 연결 성공");
-			        };
-			
-			        socket.onmessage = function(event) {
-			            console.log("서버로부터 메시지 수신: " + event.data);
-			        };
-			
-			        socket.onclose = function(event) {
-			            console.log("WebSocket 연결 종료");
-			        };
-			
+					var socket = null;
+					
+					$(function(){
+						connectWS();
+					})
+					
+					
+					
+					
+					function connectWS(){
+						//이벤트핸들러 이벤트리스너~
+			      		//커넥션이 연결됏을때 이걸 탐
+			      		//그래서 보통은 onmessage랑 onclose랑 onerror는 커넥션이 된 곳으로 들어가는게 좋음 여기!
+						var ws = new WebSocket("ws://localhost:8808/khu/echo");
+						socket = ws;
+				        ws.onopen = function(event) {
+				            console.log("WebSocket 연결 성공");
+				            
+				            //ws.onmessage = function(event) {
+					          //  console.log("서버로부터 메시지 수신: " + event.data);
+					       // };// 여기넣는게 원칙! 커넥션도 안됐는데 메세지를 받을 수는 없을테니까
+				          	//이렇게 해도 되고 아까처럼 해도되고 상관은 없음
+				        };
+				        
+				        ws.onmessage = function(event) {
+					    	console.log(event);
+				            console.log("서버로부터 메시지 수신: " + event.data);
+				            //let socketAlert = $("#socketAlert".val());
+				            let $socketAlert = $("#socketAlert");
+				            $socketAlert.html(event.data);
+				            $socketAlert.css('display', 'block');
+				            //socket.send(event.data);
+				        };
+				        
+				        
+				
+				        ws.onclose = function(event) {
+				            console.log("WebSocket 연결 종료");
+				        };      	
+				        ws.onerror = function(err){console.log('Error:', err);};
+				        
+				        
+					}
 			        // 필요에 따라 메시지를 서버로 전송할 수 있습니다.
 			        function sendMessage(message) {
-			            socket.send(message);
+			        	ws.send(message);
 			        }
 			    </script>
+			    
+			    
+			    
+			    <!-- 날씨받는 script -->
+			    <script>
+			   	$(function(){
+			   		let seoul = $("#seoul").val();
+			   			//json형식으로 응답받기
+			   			$.ajax({
+			   				url:"air.do",
+			   				data:{seoul:seoul},
+			   				success:function(data){
+			   					//console.log(data)
+			   					//console.log(data.response.body.items)
+			   					const itemArr = data.response.body.items
+			   					
+			   					const filteredItems = itemArr.filter(item => item.stationName === "강남구"); //강남구인것만 뽑아오게 필터링
+								let item = (filteredItems[0]);
+								let mise = Number(item.khaiValue);
+								let daegi = Number(item.pm10Value);
+			
+								if(mise>=0 && mise<= 30){
+									$("#mise").text("좋음").css("color","#32a1ff"); 
+								}else if(mise>=31 && mise<= 80){
+									$("#mise").text("보통").css("color","#00c73c"); 
+								}else if(mise>=81 && mise<= 150){
+									$("#mise").text("나쁨").css("color","#fd9b5a"); 
+								}else if(mise>=151){
+									$("#mise").text("매우나쁨").css("color","#ff5959"); 
+								}
+								
+								if(daegi>=0 && daegi<= 30){
+									$("#daegi").text("좋음").css("color","#32a1ff"); 
+								}else if(daegi>=31 && daegi<= 80){
+									$("#daegi").text("보통").css("color","#00c73c"); 
+								}else if(daegi>=81 && daegi<= 150){
+									$("#daegi").text("나쁨").css("color","#fd9b5a"); 
+								}else if(daegi>=151){
+									$("#daegi").text("매우나쁨").css("color","#ff5959"); 
+								}
+			   				},error:function(){
+			   					
+			   				}
+			   			})
+			   	})
+			   </script>
+			   <!-- 날씨받는 script -->
+			 	
+			 	<script>
+			 	
+			 	
+			 		$(function(){
+			 			
+				 		let today = new Date();
+				 		//console.log(today);
+				 		// 결과 : Thu Apr 25 2024 21:42:20 GMT+0900 (한국 표준시)
+				 		let year = today.getFullYear();
+				 		let month = ('0' + (today.getMonth() + 1)).slice(-2);
+				 		let day = ('0' + today.getDate()).slice(-2);
+				 		
+				 		var dateString = year + month  + day;
+				 		//console.log(dateString);
+				 		// 결과 : 20240425
+				 		
+				 		let hours = ('0' + today.getHours()).slice(-2);
+				 		let minutes = ('0' + today.getMinutes()).slice(-2);
+						let hoursMin = hours+minutes;
+				 		let baseTime="";
+				 		// 결과 : 21
+				 		// Base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 (1일 8회)
+				 		if(hoursMin>=2300 && hoursMin<=0159){
+				 			baseTime = 2300;
+				 		}else if(hoursMin>=0200 && hoursMin<=0459){
+				 			baseTime = 0200;
+				 		}else if(hoursMin>=0500 && hoursMin<=0759){
+				 			baseTime = 0500;
+				 		}else if(hoursMin>=0800 && hoursMin<=1059){
+				 			baseTime = 0800;
+				 		}else if(hoursMin>=1100 && hoursMin<=1359){
+				 			baseTime = 1100;
+				 		}else if(hoursMin>=1400 && hoursMin<=1659){
+				 			baseTime = 1400;
+				 		}else if(hoursMin>=1700 && hoursMin<=1959){
+				 			baseTime = 1700;
+				 		}else if(hoursMin>=2000 && hoursMin<=2259){
+				 			baseTime = 2000;
+				 		}
+				 		console.log(baseTime)
+			 			$.ajax({
+			 				url:"ondo.do",
+			 				data:{dateString:dateString,
+			 					  baseTime:baseTime},
+			 				success:function(ondo){
+			 					
+			 					//console.log(ondo.response.body.items.item);
+			 					let item = ondo.response.body.items.item;
+			 					//console.log(item);
+			 					let tmp ="";
+			 					
+			 					
+			 					for (let i = 0; i < item.length; i++) {
+			 						//console.log(item[i]);
+			 			            if (item[i].category === "TMP") {
+			 			                tmp = item[i].fcstValue;
+			 			                break; // category가 "TMP"인 경우를 찾으면 반복문을 종료합니다.
+			 			            }
+			 			        }
+			 			        //console.log("TMP value:", tmp); // TMP 값 확인
+			 					$("#ondo").html(tmp+"도");
+			 				},error:function(){
+			 					
+			 				}
+			 			})
+			 		})
+			 	
+			 	</script>
 
 
 				<!-- Bootstrap core JavaScript-->
