@@ -442,7 +442,7 @@ public class ClassController {
 			int result = cService.deleteBoardStudent(classNo, bno);
 			
 			if(result>0) { //성공
-				if(!filePath.equals("")) {//파일이 있을경우
+				if(filePath != null && !filePath.isEmpty()) {//파일이 있을경우
 					new File(session.getServletContext().getRealPath(filePath)).delete();
 				}
 				

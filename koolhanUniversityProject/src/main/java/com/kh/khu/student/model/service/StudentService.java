@@ -37,7 +37,7 @@ public interface StudentService {
 	Course selectClassPlan(int classNum);
 
 	// 강의 세부 공지사항 조회
-	int increaseCount(String classNum , String cno);
+	int increaseCount(String classNum , String classNoticeNo);
 	ClassNotice selectClassNoticeDetail(String classNum, String cno);
 	
 	// 이전 수강내역 조회

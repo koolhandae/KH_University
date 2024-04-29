@@ -79,8 +79,8 @@ public class StudentServiceImpl implements StudentService {
 	
 	/* 학생 수강 강의 세부 조회 (공지사항 디테일 조회수)*/
 	@Override
-	public int increaseCount(String classNum, String cno) {
-		return sDao.increaseCount(sqlSession, classNum, cno);
+	public int increaseCount(String classNum, String classNoticeNo) {
+		return sDao.increaseCount(sqlSession, classNum, classNoticeNo);
 	}
 	
 	/* 학생 수강 강의 세부 조회 (공지사항 디테일뷰)*/

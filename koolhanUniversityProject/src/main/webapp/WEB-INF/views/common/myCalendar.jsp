@@ -317,7 +317,7 @@ body {
 				</div>
 				<div class="modal-body">
 					<table id="modaltable">
-						<input ="hidden" id="calendarNo">
+						<input type="hidden" id="calendarNo">
 						<tr>
 							<th>일정제목 :</th>
 							<td><input type="text" id="modal_title"></td>

@@ -246,7 +246,8 @@
 	               	<c:otherwise>
 			            <c:forEach var="n" items="${ list }">
 			                  <tr>
-			                     <td class="cno">${ n.classNoticeNo }</td>
+			                     <input type="hidden" id="classNoticeNo" value="${n.classNoticeNo}">
+			                     <td class="cno">${ n.refClassNo }</td>
 			                     <td>${ n.cnTitle }</td>
 			                     <td>${ n.cnDate}</td>
 			                     <td>${ n.cnCount }</td>
@@ -261,8 +262,10 @@
 			    $(document).ready(function(){
 			      $("#boardList>tbody>tr>td").click(function(){
 			    	 console.log($(this).closest("tr").find(".cno").text());
+			    	 var classNoticeNo =  $(this).closest("tr").find("#classNoticeNo").val();
+			    	 console.log(classNoticeNo);
 			    	 
-			         location.href='noticeDetail.co?classNum=${classNum}&cno=' + $(this).closest("tr").find(".cno").text();
+			         location.href='noticeDetail.co?classNum=${classNum}&cno=' + $(this).closest("tr").find(".cno").text() + '&classNoticeNo=' + classNoticeNo;
 			      });
 			    })
 		  	 </script>
