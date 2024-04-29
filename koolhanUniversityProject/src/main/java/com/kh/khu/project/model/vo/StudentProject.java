@@ -29,4 +29,7 @@ public class StudentProject {
 	 private String pjDeadline; // 과제 마감일
 	 private int count; // 과제 마감일
 	 private int rnum; // 과제 마감일
+	 
+	 private String studentName;
+	 private String studentId;
 }
