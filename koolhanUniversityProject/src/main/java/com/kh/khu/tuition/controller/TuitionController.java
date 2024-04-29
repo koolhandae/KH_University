@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.khu.student.model.vo.Student;
 import com.kh.khu.tuition.model.service.TuitionService;
 import com.kh.khu.tuition.model.vo.AdminTuitionMake;
 import com.kh.khu.tuition.model.vo.Tuition;
@@ -24,11 +25,18 @@ public class TuitionController {
 	private TuitionService tService;
 	
 	@RequestMapping("tuitionBill.do")
-	public String tuitionBillForm(String studentId, Tuition t, Model model, HttpSession session) {
+	public String tuitionBillForm(Model model, HttpSession session) {
 		
-		ArrayList<Tuition> list = tService.tuitionBillForm(t);
+		Student student = (Student)session.getAttribute("loginStudent");
 		
+		String studentId = student.getStudentId();
+		
+		ArrayList<Tuition> list = tService.tuitionBillForm(studentId);
+		
+		
+		model.addAttribute("studentId", studentId);
 		model.addAttribute("list", list);
+
 		
 		return "student/studentTuitionBill";
 	}

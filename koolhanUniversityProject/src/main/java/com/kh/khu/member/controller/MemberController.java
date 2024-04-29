@@ -233,13 +233,13 @@ public class MemberController {
 				memberListCount = mService.selectMemberListCount();
 				mpi = Pagination.getPageInfo(memberListCount, cpage, pageLimit, boardLimit);
 				mList = mService.selectAllMember(mpi);
-				System.out.println(memberListCount);
+				//System.out.println(memberListCount);
 				break;
 			default:
 				memberListCount = mService.selectMemberListCount(me.getMeType());
 				mpi = Pagination.getPageInfo(memberListCount, cpage, pageLimit, boardLimit);
 				mList = mService.selectAllMemberType(mpi, me.getMeType());
-				System.out.println(memberListCount);
+				//System.out.println(memberListCount);
 				break;
 			}
 		} else {
@@ -248,18 +248,18 @@ public class MemberController {
 				memberListCount = mService.selectNameSearchMemberListCount(me.getMemberName());
 				mpi = Pagination.getPageInfo(memberListCount, cpage, pageLimit, boardLimit);
 				mList = mService.selectNameSearchAllMember(mpi, me.getMemberName());
-				System.out.println(memberListCount);
+				//System.out.println(memberListCount);
 				break;
 			default:
 				memberListCount = mService.selectNameSearchTypeMemberListCount(me);
 				mpi = Pagination.getPageInfo(memberListCount, cpage, pageLimit, boardLimit);
 				mList = mService.selectNameSearchTypeMember(mpi, me);
-				System.out.println(memberListCount);
+				//System.out.println(memberListCount);
 				break;
 			}
 		}
 
-		System.out.println(mList);
+		//System.out.println(mList);
 		
 		for (Member m : mList) {
 			if (m.getMeType().equals("A")) {
@@ -273,7 +273,7 @@ public class MemberController {
 				m.setMeStatus("퇴직");
 			}
 		}
-		System.out.println(memberListCount);
+		//System.out.println(memberListCount);
 		HashMap<String, Object> response = new HashMap<>();
 		response.put("mList", mList);
 		response.put("mpi", mpi);
