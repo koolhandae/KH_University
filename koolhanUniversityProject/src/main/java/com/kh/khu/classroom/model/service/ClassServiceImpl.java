@@ -76,6 +76,11 @@ public class ClassServiceImpl implements ClassService{
 		return cDao.selectClassDetailBoard(sqlSession, bno, classNum);
 	}
 
+	@Override
+	public int insertClassBoard(ClassBoard cb) {
+		return cDao.insertClassBoard(sqlSession, cb);
+	}
+
 
 	
 	

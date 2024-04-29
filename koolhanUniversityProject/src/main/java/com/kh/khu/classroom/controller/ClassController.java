@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,6 +33,7 @@ import com.kh.khu.common.template.Pagination;
 import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.project.model.vo.Project;
 import com.kh.khu.student.model.service.StudentService;
+import com.kh.khu.student.model.vo.Student;
 
 @Controller
 public class ClassController {
@@ -337,4 +339,77 @@ public class ClassController {
 				
 	}
 	
+	@RequestMapping("insertBoard.st")
+	public String insertBoardView() {
+		return "student/studentBoardInsertForm";
+	}
+	
+	@RequestMapping("insertCBoard.st")
+	public String insertBoardStudent(ClassBoard cb, HttpSession session, MultipartFile upfile, Model model) {
+		
+		 Student s = (Student) session.getAttribute("loginStudent");
+		 int studentNo = s.getStudentNo();
+		
+		int classNo = (int)session.getAttribute("classNo");
+		
+		cb.setRefClassNo(classNo);
+		cb.setCbWriter(studentNo);
+		
+		System.out.println("studentNo: " + studentNo);
+		
+		if (upfile != null && !upfile.isEmpty()) {
+		    // Process file upload
+		    String changeName = SaveFileStudent(upfile, session);   
+		    cb.setCbOriginName(upfile.getOriginalFilename()); 
+		    cb.setCbChangeName("resources/classBoardFile/" + changeName);
+		}
+		
+		int result = cService.insertClassBoard(cb);
+
+		if(result>0) { //성공
+			HashMap<String, Object> alertMsg = new HashMap<String, Object>();
+	         alertMsg.put("icon", "success");
+	         alertMsg.put("title", "성공!");
+	         alertMsg.put("text", "성공적으로 게시판 등록이 완료되었습니다");
+	         session.setAttribute("alertMsg", alertMsg);
+			 return "redirect:board.co";
+		}else {
+			//실패
+			model.addAttribute("errorMsg","게시글 등록 실패");
+			return "common/errorPage500";
+		}
+	}
+	
+	// 넘어온 첨부파일 그 자체를 서버의 폴더에 저장시키고, 바뀐 파일명 리턴하는 함수
+		public String SaveFileStudent(MultipartFile upfile,HttpSession session) {
+			
+			String originName = upfile.getOriginalFilename(); //"flower.png"
+			
+			//"20240415151005"(년월시분초)
+			//String currentTime = new SimpleDateFormat("특정포맷").format("특정날짜")
+			String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+			int ranNum = (int)(Math.random() * 90000 + 10000); //5자리 랜덤값
+			String ext = originName.substring(originName.lastIndexOf("."));
+			//ex) flower.png 에서 점을 찾고 점부터 자름 그래서 .png이게 담김
+			
+			String changeName = currentTime + ranNum + ext; //바뀐파일명 완성
+			
+					
+			// 업로드 시키고자 하는 폴더의 물리적인 경로 알아내기
+			String savePath = session.getServletContext().getRealPath("/resources/classBoardFile/");
+			
+		
+			try {
+				upfile.transferTo(new File(savePath+changeName));
+				//이 경로에 (savePath) changeName 바뀐이름으로 저장해줘
+				// 우리 로컬에 바뀐이름이 저장됨
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			return changeName;
+			
+		}
 }

@@ -38,7 +38,7 @@
       font-weight: 600;
       color: #1c4587;
       padding-left: 20px;
-      margin-right: 1200px;
+      margin-right: 1450px;
    }
    #mid-title{
       font-size:small;
@@ -218,7 +218,7 @@
 	      	<div class="list-main-title">
 		      <div class="list-title" style="margin-bottom: 20px;">자유게시판</div>
 		      <div>
-		      	<button type="button" class="btn btn-outline-secondary btn-sm">글쓰기</button>
+		      	<button type="button" id="writeBtn" class="btn btn-outline-secondary btn-sm">글쓰기</button>
 		      </div>
 	        </div>
 	            <table id="boardList" class="table table-hover" align="center">
@@ -314,6 +314,14 @@
       })
    </script>
    
+   <!-- 글작성으로 이동 -->
+   	<script>
+		$("#writeBtn").click(function(){
+			location.href="insertBoard.st";
+		})
+	</script>
+	
+   
    
   <!-- 다시 공지사항으로 이동 -->
    <script>
@@ -403,6 +411,7 @@
    		})
    </script>
 	
+
 
    <jsp:include page="../common/footer.jsp"/>
 </body>

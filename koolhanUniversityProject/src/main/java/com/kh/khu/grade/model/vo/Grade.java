@@ -29,6 +29,10 @@ public class Grade {
 	private String studentName; //학생이름
 	private String studentHak; //학번
 	private String className; //과목이름
+	private String classNum; //과목번호
+	private String classTypeName; //과목구분
+	private String classScore; //과목학년
+	private int courseYear; //과목년도
 	
 	
 }

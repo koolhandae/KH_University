@@ -59,22 +59,23 @@
             <h4>자유게시판 작성</h4>
             <br>
 
-            <form id="enrollForm" method="post" action="insert.bo" enctype="multipart/form-data">
+            <form id="enrollForm" method="post" action="insertCBoard.st" enctype="multipart/form-data">
+            	<input type="hidden" id="studentNo" value="${loginStudent.studentNo}">
                 <table align="center">
                     <tr>
                         <th><label for="title">제목</label></th>
-                        <td><input type="text" id="title" class="form-control" name="boardTitle" required></td>
+                        <td><input type="text" id="cbtitle" class="form-control" name="cbTitle" required></td>
                     </tr>
                     <tr>
                         <th><label for="writer">작성자</label></th>
-                        <td><input type="text" id="writer" class="form-control" name="boardWriter"></td>
+                        <td><input type="text" id="studentName" class="form-control" name="studentName" value="${loginStudent.studentName}" readonly></td>
                     </tr>
                     <tr>
                         <th colspan="2"><label for="content">내용</label></th>
                     </tr>
                     <tr>
                         <th colspan="2">
-                            <textarea class="form-control" required name="boardContent" id="content" rows="10" style="resize:none;"></textarea>
+                            <textarea class="form-control" required name="cbContent" id="cbcontent" rows="10" style="resize:none;"></textarea>
                         </th>
                     </tr>
                     <tr id="file-area">
@@ -107,6 +108,7 @@
     })
  
     </script>
+
    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

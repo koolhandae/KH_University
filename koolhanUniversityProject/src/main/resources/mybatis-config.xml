@@ -34,6 +34,7 @@
 		<typeAlias type="com.kh.khu.project.model.vo.StudentProject" alias="studentProject"/>
 		<typeAlias type="com.kh.khu.common.model.vo.ProfilePicture" alias="ProfilePic"/>
 		<typeAlias type="com.kh.khu.tuition.model.vo.TopStudent" alias="TopStudent"/>
+		<typeAlias type="com.kh.khu.common.model.vo.Calendar" alias="Calendar"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="/mappers/board-mapper.xml"/>
@@ -44,6 +45,7 @@
 		<mapper resource="/mappers/scholarships-mapper.xml"/>
 		<mapper resource="/mappers/student-mapper.xml"/>
 		<mapper resource="/mappers/tuition-mapper.xml"/>
+		<mapper resource="/mappers/calendar-mapper.xml"/>
 		<mapper resource="/mappers/project-mapper.xml"/>
 	</mappers>
 

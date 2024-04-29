@@ -18,6 +18,8 @@ import com.kh.khu.student.model.vo.Absence;
 import com.kh.khu.student.model.vo.AbsenceStudent;
 import com.kh.khu.student.model.vo.AbsenceStudentResult;
 import com.kh.khu.student.model.vo.Presence;
+import com.kh.khu.grade.model.vo.Grade;
+import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.student.model.vo.Student;
 
 @Repository
@@ -194,4 +196,5 @@ public class StudentDao {
 	public int insertProfilePicture(SqlSessionTemplate sqlSession, ProfilePicture pp) {
 		return sqlSession.update("studentMapper.insertProfilePicture", pp);
 	}
+
 }

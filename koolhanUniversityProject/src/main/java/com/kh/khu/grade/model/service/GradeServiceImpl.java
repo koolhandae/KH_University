@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.khu.classroom.model.vo.Course;
 import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.grade.model.dao.GradeDao;
 import com.kh.khu.grade.model.vo.Grade;
@@ -51,9 +52,6 @@ public class GradeServiceImpl implements GradeService{
 		return gDao.insertGradeStudent(sqlSession, gradesData);
 	}
 
-
-	
-	
 	@Override
 	public ArrayList<Grade> selectProfessorInputStudent(int classNo) {
 		return gDao.selectProfessorInputStudent(sqlSession, classNo);
@@ -65,5 +63,25 @@ public class GradeServiceImpl implements GradeService{
 	public int updateGradeStudent(ArrayList<Grade> gradesData) {
 		return gDao.updateGradeStudent(sqlSession,gradesData);
 	}
+
+	
+	@Override
+	public ArrayList<Course> selectScoreYear(int stuNo) {
+		return gDao.selectScoreYear(sqlSession, stuNo);
+	}
+	
+	@Override
+	public ArrayList<Grade> selectScoreStudent(int stuNo) {
+		return gDao.selectScoreStudent(sqlSession, stuNo);
+	}
+
+	@Override
+	public ArrayList<Grade> chooseScoreStudent(String year, String term, int stuNo) {
+		return gDao.chooseScoreStudent(sqlSession, year, term, stuNo);
+	}
+
+
+
+
 	
 }

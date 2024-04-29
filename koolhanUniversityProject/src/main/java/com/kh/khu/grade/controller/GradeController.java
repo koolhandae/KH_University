@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import com.kh.khu.classroom.model.service.ClassService;
 import com.kh.khu.classroom.model.service.ClassServiceImpl;
 import com.kh.khu.classroom.model.vo.Classroom;
+import com.kh.khu.classroom.model.vo.Course;
 import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.common.template.Pagination;
 import com.kh.khu.grade.model.service.GradeService;
@@ -101,5 +102,36 @@ public class GradeController {
 		return new Gson().toJson(list);
 	
 	}
+	
+	@RequestMapping("courseScore.st")
+	public String courseScoreView() {
+		return "student/studentScorePage";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="selectScore.st" , produces="application/json; charset=utf-8")
+	public HashMap<String, Object> selectScoreStudent(@RequestParam(value="stuNo")int stuNo) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		ArrayList<Course> cList = gService.selectScoreYear(stuNo);
+		ArrayList<Grade> gList = gService.selectScoreStudent(stuNo);
+		
+		map.put("cList", cList);
+		map.put("gList", gList);
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="chooseScore.st")
+	public ArrayList<Grade> chooseScoreStudent(@RequestParam("year")String year,
+			                                   @RequestParam("term")String term,
+			                                   @RequestParam("stuNo")int stuNo){
+		
+		ArrayList<Grade> gList = gService.chooseScoreStudent(year, term, stuNo);
+		return gList;
+	}
+	
 	
 }
