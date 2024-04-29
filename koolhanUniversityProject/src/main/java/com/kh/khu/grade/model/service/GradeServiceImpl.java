@@ -47,7 +47,7 @@ public class GradeServiceImpl implements GradeService{
 
 	@Override
 	public int insertGradeStudent(ArrayList<Grade> gradesData ) {
-		System.out.println("서비스"+ gradesData);
+		//System.out.println("서비스"+ gradesData);
 		return gDao.insertGradeStudent(sqlSession, gradesData);
 	}
 

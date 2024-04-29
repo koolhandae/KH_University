@@ -78,7 +78,11 @@
 	
 	.semesterArea{
 		display: flex;
-		padding-left: 50px;
+		padding-left: 150px;
+	}
+	
+	hr{
+		width: 1000px;
 	}
 
 </style>
@@ -88,12 +92,13 @@
    <div class="content" >
        <div class="innerOuter">
       
-      <div class="tuitionBtn" align="center";>
-         <button class="selectTuitionbtn btn">등록금 내역 조회</button>
-         <button class="paymentTuition btn" id="">등록금 납부 고지서</button>
-      </div>
-      <br><br><br>
-      <h2 style="margin-left: 40px; font-weight:900; color: rgb(75,75,75);">등록금 납부 내역 조회</h2>
+    	<div class="tuitionBtn" align="center";>
+	   		<a class="btn btn-primary btn-lg"  href="tuitionBill.do" roll="button" style="background-color:rgb(48, 76, 121)">등록금 납부 고지서</a>
+	   		   <span style="margin-left: 40px; margin-right: 40px;"></span>
+	   		<a class="btn btn-primary btn-lg"  href="tuitionPay.do" roll="button" style="background-color:rgb(48, 76, 121)">등록금 내역 조회</a>  	
+	    </div>
+		<br><br><br>
+      <h2 style="margin-left: 140px; font-weight:900; color: rgb(75,75,75);">등록금 납부 내역 조회</h2>
       <hr>
       <br>
       	

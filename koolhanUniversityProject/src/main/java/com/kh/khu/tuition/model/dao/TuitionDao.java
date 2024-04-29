@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.khu.student.model.vo.Student;
 import com.kh.khu.tuition.model.vo.AdminTuitionMake;
+import com.kh.khu.tuition.model.vo.Top3Student;
+import com.kh.khu.tuition.model.vo.TopStudent;
 import com.kh.khu.tuition.model.vo.Tuition;
 import com.kh.khu.tuition.model.vo.TuitionStudent;
 import com.kh.khu.tuition.model.vo.TuitionStudentMake;
@@ -16,19 +18,20 @@ import com.kh.khu.tuition.model.vo.TuitionStudentMake;
 public class TuitionDao {
 	
 	public int insertTuitionPay(SqlSessionTemplate sqlSession, Tuition t) {
-		System.out.println("dao" + t);
+		//System.out.println("dao" + t);
 		return sqlSession.insert("tuitionMapper.insertTuitionPay", t);
 	}
 	
-	public ArrayList<Tuition> tuitionBillForm(SqlSessionTemplate sqlSession, Tuition t){
-		return (ArrayList)sqlSession.selectList("tuitionMapper.tuitionBillForm", t);
+	public ArrayList<Tuition> tuitionBillForm(SqlSessionTemplate sqlSession, String studentId){
+		//System.out.println(studentId);
+		return (ArrayList)sqlSession.selectList("tuitionMapper.tuitionBillForm", studentId);
 	}
 	
 	public ArrayList<AdminTuitionMake> tuitionMakeForm(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("tuitionMapper.tuitionMakeForm");
 	}
 	
-	public int insertTuitionMake(SqlSessionTemplate sqlSession, List<TuitionStudentMake> students) {
+	public int insertTuitionMake(SqlSessionTemplate sqlSession, TuitionStudentMake students) {
 		// todo: 화면에서 입력받은 등록금 데이터를 db 에 insert 
 		return sqlSession.insert("tuitionMapper.insertTuitionStudents", students);
 	}
@@ -47,6 +50,11 @@ public class TuitionDao {
 	public ArrayList<TuitionStudent> selectAllTuitionStudent(SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("tuitionMapper.selectAllTuitionStudent");
+	}
+
+	public ArrayList<TopStudent> top3SelectStudent(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("tuitionMapper.topSelectStudent");
 	}
 
 }

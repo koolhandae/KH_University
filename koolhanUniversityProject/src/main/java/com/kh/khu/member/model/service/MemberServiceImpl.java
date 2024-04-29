@@ -150,7 +150,6 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.updateProfilePicture(sqlSession, pp);
 	}
 
-
 	@Override
 	public int insertProfilePicture(ProfilePicture pp) {
 		return mDao.insertProfilePicture(sqlSession, pp);

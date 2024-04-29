@@ -69,7 +69,7 @@ public class StudentController {
 		System.out.println(studentNo);
         Course c = new Course();  
 		c = sService.searchCourse(courseValue, studentNo);
-		System.out.println("searchCourse = " + c);
+		// System.out.println("searchCourse = " + c);
 		
 		return c;
 	}

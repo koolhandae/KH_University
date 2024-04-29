@@ -78,7 +78,7 @@
 					    <button class="btn btn-danger" name="tbStatus" value="N" onclick="no('${l.preId}', '${l.tbStatus}');">반려</button>
                      </td>
 		   		  </tr>
-		   </c:forEach>
+		   		</c:forEach>
 	   		</tbody>
    		  </table>
    		  <br>
@@ -94,12 +94,14 @@
    						   tbStatus: tbStatus},
    						   
    					success: function(list){
-   						
    						location.reload();
    						
    					}, error: function(){
    						console.log("복학 승인 ajax 실패");
-   					}
+   						
+   					}, complete: function () {
+   			            location.reload();
+   			        }
    				})
    			}
    			
@@ -111,12 +113,14 @@
    					url:"adminReturnSchoolForm.me",
    					data:{ preId: preId,
    						   tbStatus: tbStatus},
-   					success: function(list) {
-   						
+   					success: function(list) {		
    						location.reload();
    						
    					}, error : function(){
    						console.log("복학 반려 ajax 실패");
+   						
+   					}, complet : function() {
+   						location.reload();
    					}
    				})
    			}

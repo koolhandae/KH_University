@@ -82,7 +82,6 @@
         </tr>
       </table>
       <br>
-      <h3>납입 방식</h3>
 <!--       <table id="boardList" class="selectTuition table" style="width: 900px;" align="center">
         <tr>
           <td>
@@ -98,75 +97,57 @@
       </div>
      <!-- </form> -->
      
-     <script>
-	    
-	     
-	     var IMP = window.IMP; // 생략가능
-	     IMP.init('imp65641437');
-	     
-	  // IMP.request_pay(param, callback) 결제창 호출
-	     IMP.request_pay({
-	       pg: 'html5_inicis.INIpayTest',
-	       pay_method: 'vbank',
-	       merchant_uid: 'tpNo' + new Date().getTime(),   // 주문번호
-	       name: '쿨한대학교',
-	       amount: tuition,                         // 숫자 타입
-	       buyer_email: ${loginStudent.stEmail},
-	       buyer_name: ${loginStudent.studentName},
-	       buyer_tel: ${loginStudent.stPhone},
-	       buyer_addr: ${loginStudent.stAddress},
-	       vbank_due: "YYYYMMDD",
-	     },
-	    	 period: {
-			     from : "20240501",
-			     to : "20240508",
-	     },
-	     function (rsp) { // callback
-	       console.log(rsp);
-	       if ( rsp.success ) { //결제 성공시
-	         var msg = '등록금 납부가 완료 되었습니다.';
-	         var result = {
-	           "studentId" :${loginStudent.studentId}, //회원번호
-	           "tuition": rsp.tuition, // 결제금액
-	           "payDay" : new Date().toISOString().slice(0, 10), //결제일
-	           "mpaytime" : "",
-	           "trainername":"",
-	         }
-	         console.log(result);
+      <script>
 
-	         $.ajax({
-	           url:'tuitionPay.do',
-	           type:'POST',
-	           contentType: 'application/json',
-	           data:JSON.stringify(result),
-	           success: function (res) {
-	             console.log(res);
-	             location.href=res;
-	           },
-	           error: function (err) {
-	             console.log(err);
-	           }
-	         }); //ajax
-	       } else {
-	           var msg = '결제 실패';
-	           msg += '\n에러내용 : ' + rsp.error_msg;
-	         }
-	       alert(msg);
-	     });
-	  	
-  		}
-	  
-	     /* //결제 데이터 전달
-	     var selectedPrice = element.querySelector("p").innerText;
-	     var priceElement = document.getElementById("selectedPrice").querySelector("span");
-	     priceElement.innerText = selectedPrice;
+        IMP.init("imp65641437"); 
+      
+        var today = new Date();   
+        var hours = today.getHours(); // 시
+        var minutes = today.getMinutes();  // 분
+        var seconds = today.getSeconds();  // 초
+        var milliseconds = today.getMilliseconds();
+        var makeMerchantUid = hours +  minutes + seconds + milliseconds;
+        
 
-	     var selectedProduct = element.querySelector("h5").innerText;
-	     var productElement = document.getElementById("selectedProduct").querySelector("span");
-	     productElement.innerText = selectedProduct; */
-	   
-	     	
-	 </script>
+        function requestPay() {
+            IMP.request_pay({
+                pg : 'html5_inicis',
+                pay_method : 'card',
+                merchant_uid: "IMP"+makeMerchantUid, 
+                name : '등록금',
+                amount : '${ tuition }',
+                buyer_email : '${ loginStudent.stEmail }',
+                buyer_name : '${ loginStudent.studentName }',
+                buyer_tel : '${ loginStudent.stPhone }',
+                buyer_addr : '${ loginStudent.stAddress }'
+               // buyer_postcode : '123-456'
+            }, function (rsp) { // callback
+                if (rsp.success) {
+
+                	Swal.fire({
+       	                 icon: 'success',
+       	                 text: '등록금 납부가 완료 되었습니다.'})
+                    
+                } else {
+                    console.log(rsp);
+                    
+                    Swal.fire({
+      	                 icon: 'error',
+      	                 text: '등록금 납부에 실패 했습니다.'})
+                    
+                }
+            });
+            
+            $.ajax({
+            	url: "tuitionMake.ad",
+            	data: "",
+            	success:{
+            		
+            	}
+            })
+            
+        }
+    </script>
      
    </div>  
    </div>

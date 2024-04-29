@@ -210,8 +210,8 @@ public class ClassController {
 	public String selectClassBoardDetail(@RequestParam(value="bno")String bno, 
 			                             @RequestParam(value="classNum")String classNum, Model model) {
 		
-		System.out.println(bno);
-		System.out.println(classNum);
+		//System.out.println(bno);
+		//System.out.println(classNum);
 		
 		int boardCount = cService.classBoardCount(bno, classNum);
 		
@@ -220,7 +220,7 @@ public class ClassController {
 			model.addAttribute("cb", cb);
 			model.addAttribute("classNum", classNum);
 			
-			System.out.println("자유게시판" + cb);
+			//System.out.println("자유게시판" + cb);
 			return "student/studentClassBoardDetail";
 			
 		}else {
