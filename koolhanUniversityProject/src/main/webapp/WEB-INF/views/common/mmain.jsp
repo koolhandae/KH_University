@@ -49,7 +49,7 @@
     }
     td{
         /* border: solid 1px red; */
-        padding: 10px;
+        /*padding: 10px;*/
     }
     .icon{
         width: 44px;
@@ -272,7 +272,7 @@
 			                        </a>
 			                    </li>
 			                    <li>
-			                        <a href="" class="icon" style="text-decoration: none; color: inherit;">
+			                        <a href="job.do" class="icon" style="text-decoration: none; color: inherit;">
 			                            <img width="66" height="66"src="resources/images/일.png"/>
 			                            <br>
 			                            <span>취업관련</span>

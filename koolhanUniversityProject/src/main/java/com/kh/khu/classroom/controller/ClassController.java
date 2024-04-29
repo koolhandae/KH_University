@@ -412,4 +412,9 @@ public class ClassController {
 			return changeName;
 			
 		}
+		
+		@RequestMapping("job.do")
+		public String jobtestpagegogo() {
+			return "admin/jobTEST";
+		}
 }

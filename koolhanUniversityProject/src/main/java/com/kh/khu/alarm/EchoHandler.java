@@ -121,7 +121,7 @@ public class EchoHandler extends TextWebSocketHandler {
 	
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-    	//System.out.println("afterConnectionEstablished"+session);
+    	System.out.println("afterConnectionEstablished"+session);
     	// 커넥션이 연결됐을때 클라이언트가 접속이 성공했을때 Established-> 확립되다 수립되다
     		sessions.add(session);
     		//session값:StandardWebSocketSession[id=99967481-d588-ffe5-8cfa-96b222bc8a71, uri=ws://localhost:8808/khu/echo]
@@ -129,10 +129,10 @@ public class EchoHandler extends TextWebSocketHandler {
     	// key value쌍으로 하고 싶으면 map으로 하면 됨 
     		String senderId = getId(session);
     		if(senderId !=null) {    			
-    	//		System.out.println(senderId + " 연결 됨");// bdc04ed1-2ed5-9058-a027-0b048eada88
+    			System.out.println(senderId + " 연결 됨");// bdc04ed1-2ed5-9058-a027-0b048eada88
     			userSessions.put(senderId, session);
     		}
-    	//	System.out.println("userSession에는 뭐가있어?" + userSessions);
+    		System.out.println("userSession에는 뭐가있어?" + userSessions);
     		//{bdc04ed1-2ed5-9058-a027-0b048eada888=StandardWebSocketSession[id=bdc04ed1-2ed5-9058-a027-0b048eada888, uri=ws://localhost:8808/khu/echo]}
     		//userSession에는 접속중인 유저들의 정보가 들어감
 
@@ -143,7 +143,7 @@ public class EchoHandler extends TextWebSocketHandler {
 	@Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         // 클라이언트가 메시지를 보냈을 때 실행되는 로직
-    	//System.out.println("handleTextMessage "+session+":"+message);
+    	System.out.println("handleTextMessage "+session+":"+message);
     	// 접속되어있는 모든 사람들에게 메세지를 보낼거임
     	//ex)게임에서 접속되어있는 유저들에게 전체공지 날리는거~ 확성기
     	/*
@@ -160,7 +160,7 @@ public class EchoHandler extends TextWebSocketHandler {
     	  
     	  
     	String senderId = session.getId(); //이렇게 하면 웹소켓세션session의 아이디 보내는사람의 아이디
-    	//System.out.println("senderId : "+senderId);
+    	System.out.println("senderId : "+senderId);
 
     	// 로그인하면 로그인한 유저의 아이디를 줄거고 로그인안했으면 소켓의 아이디를 줍시다
     	
@@ -180,13 +180,13 @@ public class EchoHandler extends TextWebSocketHandler {
     	//protocol: cmd,댓글작성자,게시글 작성자,bno (User1의 게시글에 User2가 댓글을 달았다면,234)
     	//(ex reply,user2,user1,1234)
     	String msg = message.getPayload();
-    	//System.out.println("msg핸들러ㅓㅓ"+msg);
+    	System.out.println("msg핸들러ㅓㅓ"+msg);
     	
     	
     	
     	if(StringUtils.isNotEmpty(msg)) {	
     		String[] strs = msg.split(","); //ㅁ메세지가 없으면 클라이언트에서는 안보내줘야함 null값이 뜨니까 null처리도 해줄것
-    	//	System.out.println("strs: " + Arrays.toString(strs)); // 배열 값 뽑는방법
+    		System.out.println("strs: " + Arrays.toString(strs)); // 배열 값 뽑는방법
 
     		if(strs != null && strs.length <= 4) {
     			String cmd = strs[0]; // 공백을 제거하여 프로토콜을 추출
@@ -203,27 +203,27 @@ public class EchoHandler extends TextWebSocketHandler {
     			
     			//게시글 작성자가 온라인일때만!
     			WebSocketSession boardWriterSession =  userSessions.get(boardWriter);//게시글 작성자가 있으면
-    			//System.out.println("sessions : "+sessions);
-    			//System.out.println("userSessions :"+userSessions);
-    			//System.out.println("boardWriter : "+boardWriter);
-    			//System.out.println("boardWriterSession : "+boardWriterSession);
+    			System.out.println("sessions : "+sessions);
+    			System.out.println("userSessions :"+userSessions);
+    			System.out.println("boardWriter : "+boardWriter);
+    			System.out.println("boardWriterSession : "+boardWriterSession);
     			
     			
     			if("PJ".equals(cmd)) {
     				// && boardWriterSession != null
     				TextMessage tmpMsg = new TextMessage("과목 '"+bno + "'의 과제가 등록되었습니다");
-    				//System.out.println("tmpMsg" + tmpMsg);
+    				System.out.println("tmpMsg" + tmpMsg);
     				boardWriterSession.sendMessage(tmpMsg);
     				
     			}else if("NT".equals(cmd)) {// 공지사항 등록됐을때
     				TextMessage tmpMsg = new TextMessage("공지사항 :" + replyWriter + " (이)가 등록되었습니다.");
-    				//System.out.println("tmpMsg" + tmpMsg);
+    				System.out.println("tmpMsg" + tmpMsg);
     				// 모든 로그인한 사용자에게 메시지를 보냄
     		        for (WebSocketSession userSession : userSessions.values()) {
     		            userSession.sendMessage(tmpMsg);
     		        }
     				
-    				//System.out.println("session : " + session);
+    				System.out.println("session : " + session);
     			}
     		}
     	}
@@ -239,19 +239,19 @@ public class EchoHandler extends TextWebSocketHandler {
         // 웹 소켓 세션에서 로그인 사용자 정보를 가져옴
     	Map<String, Object> httpSession = session.getAttributes();
     	Object loginUserObject = httpSession.get(SessionNames.LOGIN);
-    	//System.out.println("loginUserObject : "+loginUserObject);
-    	//System.out.println("httpSession : " + httpSession);
+    	System.out.println("loginUserObject : "+loginUserObject);
+    	System.out.println("httpSession : " + httpSession);
     	
     	
     	
         if (loginUserObject != null) {
             // 로그인한 사용자인 경우
             Member loginUser = (Member) loginUserObject;
-            //System.out.println("loginUser" + loginUser);
+            System.out.println("loginUser" + loginUser);
             return loginUser.getMemberId(); // 사용자의 아이디를 반환
         } else {
             // 로그인하지 않은 경우 또는 로그인 정보가 올바르지 않은 경우
-        	//System.out.println("session.getId()" + session.getId());
+        	System.out.println("session.getId()" + session.getId());
             return session.getId(); // 웹 소켓 세션의 ID를 반환
         }
     
