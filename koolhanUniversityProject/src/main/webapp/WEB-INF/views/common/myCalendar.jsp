@@ -286,6 +286,9 @@ body {
 .navbar, .navbar-nav {
 	display: flex !important;
 }
+#testTitle{
+	cursor:pointer;
+}
 </style>
 </head>
 <body>
@@ -302,7 +305,11 @@ body {
 		</div>
 
 
-		<div id='calendar'></div>
+		<div id='calendar'>
+		
+		<br> <span id="testTitle">🔔 자격증일정을 확인하고 일정에 등록해보세요!</span>
+		</div>
+		<br>
 	</div>
 
 	<!-- 부트스트랩 모달 일정추가 -->
@@ -335,7 +342,7 @@ body {
 							<td><input type="color" id="selectColor"></td>
 						</tr>
 					</table>
-					<br> <span id="testTitle">🔔 자격증일정을 확인하고 일정에 등록해보세요!</span>
+				
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
@@ -707,6 +714,37 @@ body {
 										}
 									});
 								});
+						
+						$("#testTitle").on("click", function(){
+							
+							$.ajax({
+								url:"openTest.st",
+								success:function(data){
+									console.log("ajax성공");
+									console.log(data.data);
+									const dataArr = data.data;
+										
+									for(let i in dataArr){
+										
+										let item = dataArr[i]
+										
+											calendar.addEvent({
+												allDay : true,
+												title : item.시험장소,
+												start : item.접수시작일,
+												end : item.점수마감일,
+												backgroundColor : '#4e73df',
+												borderColor : '#4e73df',
+												Color : '#ffffff'
+											});
+									}
+
+								}, error:function(){
+									console.log("ajax실패");
+								}
+								
+							})
+						})
 
 						calendar.render(); // 딜력을 띄워줌
 					});
