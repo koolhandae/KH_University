@@ -125,12 +125,12 @@ public class HomeController {
 	@RequestMapping("chkmail.st")
 	public Student chkMailSt(String email, HttpSession session) {
 
-		System.out.println(email);
+//		System.out.println(email);
 
 		Student s = new Student();
 		s = sService.selectChkStudent(email);
 
-		System.out.println(s);
+//		System.out.println(s);
 
 		if (s != null) {
 			/* 해당이메일에 해당하는 Id를 세션값에 올려서 사용해줌 */
@@ -163,12 +163,12 @@ public class HomeController {
 
 		Map<String, Object> resultMap = new HashMap();
 		// System.out.println(email);
-		System.out.println("sendmailcontroll" + userId);
+//		System.out.println("sendmailcontroll" + userId);
 
 		// 난수의 범위 111111 ~ 999999 (6자리 난수)
 		Random random = new Random();
 		int checkNum = random.nextInt(888888) + 111111;
-		System.out.println("인증번호" + checkNum);
+//		System.out.println("인증번호" + checkNum);
 
 		String url = "http://localhost:8808/khu/changePwdForm.me?checkNum=" + checkNum;
 
@@ -205,7 +205,7 @@ public class HomeController {
 
 		// 페이지뒤에 난수가 없을경우에는 못바꾸게 막음!
 		if (checkNum != "") {
-			System.out.println("changePwdForm" + memberId);
+//			System.out.println("changePwdForm" + memberId);
 			mv.addObject("memberId", memberId);
 			mv.setViewName("common/findPassword");
 
@@ -224,7 +224,7 @@ public class HomeController {
 		// System.out.println("changeCON" + userPwd);
 
 		String encPwd = bcryptPasswordEncoder.encode(userPwd);
-		System.out.println(encPwd);
+//		System.out.println(encPwd);
 
 		int result = 0;
 		int mresult = 0;

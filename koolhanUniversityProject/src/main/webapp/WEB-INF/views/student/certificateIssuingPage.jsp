@@ -35,40 +35,44 @@
                 </thead>
                 <tbody>
 	                    <tr>
-	                        <td class="bno">1</td>
+	                        <td class="bno">101</td>
 	                        <td>성적 증명서</td>
 	                        <td>
 	                        	<button class="btn btn-primary"  onclick="location.href='transcript.certificate'">PDF 파일 / 인쇄</button>
 	                        </td>
 	                    </tr>
+	                    <c:if test="${loginStudent.stStatus eq 'J' }">
+		                    <tr>
+		                        <td class="bno">102</td>
+		                        <td>졸업 증명서</td>
+		                        <td>
+		                        	<button class="btn btn-primary" onclick="location.href='grad.certificate'">PDF 파일 / 인쇄</button>
+		                        </td>
+		                    </tr>
+	                    </c:if>
 	                    <tr>
-	                        <td class="bno">2</td>
-	                        <td>졸업 증명서</td>
-	                        <td>
-	                        	<button class="btn btn-primary" onclick="location.href='grad.certificate'">PDF 파일 / 인쇄</button>
-	                        </td>
-	                    </tr>
-	                    <tr>
-	                        <td class="bno">3</td>
+	                        <td class="bno">103</td>
 	                        <td>등록금 납부 영수증</td>
 	                        <td>
 	                        	<button class="btn btn-primary" onclick="location.href='tuition.reciept'">PDF 파일 / 인쇄</button>
 	                        </td>
 	                    </tr>
 	                    <tr>
-	                        <td class="bno">4</td>
+	                        <td class="bno">104</td>
 	                        <td>등록금 고지서</td>
 	                        <td>
 	                        	<button class="btn btn-primary" onclick="location.href='tuition.notice'">PDF 파일 / 인쇄</button>
 	                        </td>
 	                    </tr>
-	                    <tr>
-	                        <td class="bno">5</td>
-	                        <td>재학 증명서</td>
-	                        <td>
-	                        	<button class="btn btn-primary"  onclick="location.href='attending.certificate'">PDF 파일 / 인쇄</button>
-	                        </td>
-	                    </tr>
+	                    <c:if test="${loginStudent.stStatus eq 'Y' }">
+		                    <tr>
+		                        <td class="bno">105</td>
+		                        <td>재학 증명서</td>
+		                        <td>
+		                        	<button class="btn btn-primary"  onclick="location.href='attending.certificate'">PDF 파일 / 인쇄</button>
+		                        </td>
+		                    </tr>
+	                    </c:if>
                 </tbody>
             </table>
 		

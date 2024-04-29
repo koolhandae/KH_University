@@ -43,7 +43,7 @@ public class ProjectServiceImpl implements ProjectService{
 
 	@Override
 	public int insertProject(Project pj) {
-		System.out.println("project Service"+pj);
+//		System.out.println("project Service"+pj);
 		return pDao.insertProject(sqlSession, pj);
 	}
 

@@ -66,8 +66,8 @@ public class StudentController {
 	public Course searchCourse(@RequestParam(value="courseValue") String courseValue,
 			                   @RequestParam(value="studentNo")String studentNo) {		
 		
-		System.out.println(courseValue);
-		System.out.println(studentNo);
+//		System.out.println(courseValue);
+//		System.out.println(studentNo);
         Course c = new Course();  
 		c = sService.searchCourse(courseValue, studentNo);
 		// System.out.println("searchCourse = " + c);
@@ -119,7 +119,7 @@ public class StudentController {
 		s.setStudentPwd(bcryptPasswordEncoder.encode((s.getStudentSsn().substring(0, 6)) + "1!"));
 		s.setStAddress(AddressString.AddressMake(ad));
 		int result = sService.insertStudent(s);
-		String url = (String)session.getAttribute("url");
+		String url = request.getHeader("Referer");
 		if (result > 0) {
 			String setFrom = "koolhandae@gmail.com";
 			String toMail = s.getStEmail();
@@ -392,7 +392,7 @@ public class StudentController {
 	@ResponseBody
 	@RequestMapping("statistic.stu")
 	public HashMap<String,Object> studentStatistic(){
-		System.out.println("asdasd");
+//		System.out.println("asdasd");
 		int attendStu = sService.selectNumberOfStudents("Y");
 		int absenceStu = sService.selectNumberOfStudents("H");
 		int expelledStu = sService.selectNumberOfStudents("Z");
@@ -413,12 +413,12 @@ public class StudentController {
 	@ResponseBody
 	@RequestMapping("classPlanView.st")
 	public String classPlanView(@RequestParam(value="classNum")String classNum) {
-		System.out.println("보여지나" + classNum);
+//		System.out.println("보여지나" + classNum);
 		Classroom c = sService.classPlanView(classNum);
 		
 		String fileName = c.getChangeName();
 		
-		System.out.println(fileName);
+//		System.out.println(fileName);
 		return fileName;
 	}
 	

@@ -225,22 +225,6 @@
 								<i class="fa-solid fa-bullhorn"></i>
 								<span>휴학 신청서 조회</span></a>
 						</li>
-	
-				<!-- Nav Item - Pages Collapse Menu -->
-				<li class="nav-item">
-					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-						aria-expanded="true" aria-controls="collapsePages">
-						<i class="fa-solid fa-chart-line"></i>
-						<span>통계</span>
-					</a>
-					<div id="collapsePages" class="collapse" aria-labelledby="headingPages"
-						data-parent="#accordionSidebar">
-						<div class="bg-white py-2 collapse-inner rounded">
-							<a class="collapse-item" href="#">학생 통계</a>
-							<a class="collapse-item" href="#">교직원 통계</a>
-						</div>
-					</div>
-				</li>
 			</c:if>
 		  <c:if test="${ not empty loginUser and loginUser.meType eq 'P' }">
           <!-- Divider -->
@@ -287,39 +271,21 @@
           <!-- Divider -->
           <hr class="sidebar-divider">
           
-          <!-- Heading -->
-          <div class="sidebar-heading">
-              <h4>공통사항</h4>
-          </div>
-          
-          <!-- Nav Item - Charts -->
-          <li class="nav-item">
-              <a class="nav-link" href="list.bo">
-                  <i class="fa-solid fa-users"></i>
-                  <span>커뮤니티 게시판</span></a>
-          </li>
-          
-          <!-- Nav Item - Charts -->
-          <li class="nav-item">
-              <a class="nav-link" href="library.go">
-                  <i class="fa-solid fa-book-bookmark" ></i>
-                  <span>중앙 도서관</span></a>
-          </li>
-          
-          <!-- Nav Item - Pages Collapse Menu -->
-          <li class="nav-item">
-              <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
-                  aria-expanded="true" aria-controls="collapseTwo">
-                  <i class="fa-solid fa-paper-plane"></i>
-                  <span>쪽지함</span>
-              </a>
-              <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                  <div class="bg-white py-2 collapse-inner rounded">
-                      <a class="collapse-item" href="#">쪽지 보내기</a>
-                      <a class="collapse-item" href="#">받은 쪽지함</a>
-                  </div>
-              </div>
-          </li>
+          <c:if test="${not empty loginStudent}">
+	          <!-- Nav Item - Charts -->
+	          <li class="nav-item">
+	              <a class="nav-link" href="list.bo">
+	                  <i class="fa-solid fa-users"></i>
+	                  <span>커뮤니티 게시판</span></a>
+	          </li>
+	          
+	          <!-- Nav Item - Charts -->
+	          <li class="nav-item">
+	              <a class="nav-link" href="library.go">
+	                  <i class="fa-solid fa-book-bookmark" ></i>
+	                  <span>중앙 도서관</span></a>
+	          </li>
+          </c:if>
           
           <!-- Nav Item - Pages Collapse Menu -->
           <li class="nav-item">
@@ -331,7 +297,6 @@
               <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                   <div class="bg-white py-2 collapse-inner rounded">
                       <a class="collapse-item" href="list.no">공지사항</a>
-                      <a class="collapse-item" href="#">학사일정</a>
                       <a class="collapse-item" href="busApiForm.do">셔틀버스 안내</a>
                       <a class="collapse-item" href="job.do">관련 취업 정보</a>
                   </div>
@@ -435,134 +400,6 @@
 										</div>
 									</div>
 								</form>
-							</div>
-						</li>
-
-						<!-- Nav Item - Alerts -->
-						<li class="nav-item dropdown no-arrow mx-1">
-							<a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-bell fa-fw"></i>
-								<!-- Counter - Alerts -->
-								<span class="badge badge-danger badge-counter">543+</span>
-							</a>
-							<!-- Dropdown - Alerts -->
-							<div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-								aria-labelledby="alertsDropdown">
-								<h6 class="dropdown-header">
-									Alerts Center
-								</h6>
-								<a class="dropdown-item d-flex align-items-center" href="#">
-									<div class="mr-3">
-										<div class="icon-circle bg-primary">
-											<i class="fas fa-file-alt text-white"></i>
-										</div>
-									</div>
-									<div>
-										<div class="small text-gray-500">December 12, 2019</div>
-										<span class="font-weight-bold">A new monthly report is ready to
-											download!</span>
-									</div>
-								</a>
-								<a class="dropdown-item d-flex align-items-center" href="#">
-									<div class="mr-3">
-										<div class="icon-circle bg-success">
-											<i class="fas fa-donate text-white"></i>
-										</div>
-									</div>
-									<div>
-										<div class="small text-gray-500">December 7, 2019</div>
-										$290.29 has been deposited into your account!
-									</div>
-								</a>
-								<a class="dropdown-item d-flex align-items-center" href="#">
-									<div class="mr-3">
-										<div class="icon-circle bg-warning">
-											<i class="fas fa-exclamation-triangle text-white"></i>
-										</div>
-									</div>
-									<div>
-										<div class="small text-gray-500">December 2, 2019</div>
-										Spending Alert: We've noticed unusually high spending for your account.
-									</div>
-								</a>
-								<a class="dropdown-item text-center small text-gray-500" href="#">Show All
-									Alerts</a>
-							</div>
-						</li>
-
-			
-
-
-						<!-- Nav Item - Messages -->
-						<li class="nav-item dropdown no-arrow mx-1">
-							<a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-envelope fa-fw"></i>
-								<!-- Counter - Messages -->
-								<span class="badge badge-danger badge-counter">7</span>
-							</a>
-							<!-- Dropdown - Messages -->
-							<div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-								aria-labelledby="messagesDropdown">
-								<h6 class="dropdown-header">
-									Message Center
-								</h6>
-								<a class="dropdown-item d-flex align-items-center" href="#">
-									<div class="dropdown-list-image mr-3">
-										<img class="rounded-circle" src="resources/images/undraw_profile_1.svg"
-											alt="...">
-										<div class="status-indicator bg-success"></div>
-									</div>
-									<div class="font-weight-bold">
-										<div class="text-truncate">Hi there! I am wondering if you can help me
-											with a
-											problem I've been having.</div>
-										<div class="small text-gray-500">Emily Fowler · 58m</div>
-									</div>
-								</a>
-								<a class="dropdown-item d-flex align-items-center" href="#">
-									<div class="dropdown-list-image mr-3">
-										<img class="rounded-circle" src="resources/images/undraw_profile_2.svg"
-											alt="...">
-										<div class="status-indicator"></div>
-									</div>
-									<div>
-										<div class="text-truncate">I have the photos that you ordered last
-											month, how
-											would you like them sent to you?</div>
-										<div class="small text-gray-500">Jae Chun · 1d</div>
-									</div>
-								</a>
-								<a class="dropdown-item d-flex align-items-center" href="#">
-									<div class="dropdown-list-image mr-3">
-										<img class="rounded-circle" src="resources/images/undraw_profile_3.svg"
-											alt="...">
-										<div class="status-indicator bg-warning"></div>
-									</div>
-									<div>
-										<div class="text-truncate">Last month's report looks great, I am very
-											happy with
-											the progress so far, keep up the good work!</div>
-										<div class="small text-gray-500">Morgan Alvarez · 2d</div>
-									</div>
-								</a>
-								<a class="dropdown-item d-flex align-items-center" href="#">
-									<div class="dropdown-list-image mr-3">
-										<img class="rounded-circle"
-											src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
-										<div class="status-indicator bg-success"></div>
-									</div>
-									<div>
-										<div class="text-truncate">Am I a good boy? The reason I ask is because
-											someone
-											told me that people say this to all dogs, even if they aren't
-											good...</div>
-										<div class="small text-gray-500">Chicken the Dog · 2w</div>
-									</div>
-								</a>
-								<a class="dropdown-item text-center small text-gray-500" href="#">Read More
-									Messages</a>
 							</div>
 						</li>
 

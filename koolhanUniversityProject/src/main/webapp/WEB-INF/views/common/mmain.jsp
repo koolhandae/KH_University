@@ -310,7 +310,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="" class="icon" style="text-decoration: none; color: inherit;">
+                                        <a href="list.bo" class="icon" style="text-decoration: none; color: inherit;">
                                             <img width="66" height="66" src="resources/images/커뮤니티.png" />
                                             <br>
                                             <span>커뮤니티</span>

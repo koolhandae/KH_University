@@ -48,7 +48,7 @@
                 </tr>
             </table>
             <br>
-
+				<c:if test="${loginUser.meType eq 'A'}">
 				<div align="center">
 					<!-- 수정하기, 삭제하기 버튼은 이글이 본인글일 경우만 보여져야됨 -->
 					<a class="btn btn-primary" onclick="postFormSubmit(1);">수정하기</a>
@@ -58,10 +58,17 @@
 				<br>
 				<br>
 				
-				<form id="postForm" method="post">
-					<input type="hidden" name="nno" value="${n.noticeNo}">
-				</form>
-
+					<form id="postForm" method="post">
+						<input type="hidden" name="nno" value="${n.noticeNo}">
+					</form>
+				</c:if>
+		<script>
+			function postFormSubmit(e){
+				$.ajax({
+					url: 
+				})
+			}
+		</script>
         </div>
         <br><br>
    </div>

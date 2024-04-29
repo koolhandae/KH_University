@@ -180,50 +180,50 @@ public class EchoHandler extends TextWebSocketHandler {
     	//protocol: cmd,댓글작성자,게시글 작성자,bno (User1의 게시글에 User2가 댓글을 달았다면,234)
     	//(ex reply,user2,user1,1234)
     	String msg = message.getPayload();
-    	System.out.println("msg핸들러ㅓㅓ"+msg);
+//    	System.out.println("msg핸들러ㅓㅓ"+msg);
     	
     	
     	
     	if(StringUtils.isNotEmpty(msg)) {	
     		String[] strs = msg.split(","); //ㅁ메세지가 없으면 클라이언트에서는 안보내줘야함 null값이 뜨니까 null처리도 해줄것
-    		System.out.println("strs: " + Arrays.toString(strs)); // 배열 값 뽑는방법
+//    		System.out.println("strs: " + Arrays.toString(strs)); // 배열 값 뽑는방법
 
     		if(strs != null && strs.length <= 4) {
     			String cmd = strs[0]; // 공백을 제거하여 프로토콜을 추출
-    			System.out.println("cmd : "+cmd);
+//    			System.out.println("cmd : "+cmd);
     			//cmd 종류 
     			//NT-공지사항
     			//PJ-과제
     			String replyWriter = strs[1]; 
-    			System.out.println("replyWriter : " + replyWriter);
+//    			System.out.println("replyWriter : " + replyWriter);
     			String boardWriter = strs[2];
-    			System.out.println("boardWriter : " + boardWriter);
+//    			System.out.println("boardWriter : " + boardWriter);
     			String bno = strs[3];
-    			System.out.println("bno : " + bno);
+//    			System.out.println("bno : " + bno);
     			
     			//게시글 작성자가 온라인일때만!
     			WebSocketSession boardWriterSession =  userSessions.get(boardWriter);//게시글 작성자가 있으면
-    			System.out.println("sessions : "+sessions);
-    			System.out.println("userSessions :"+userSessions);
-    			System.out.println("boardWriter : "+boardWriter);
-    			System.out.println("boardWriterSession : "+boardWriterSession);
+//    			System.out.println("sessions : "+sessions);
+//    			System.out.println("userSessions :"+userSessions);
+//    			System.out.println("boardWriter : "+boardWriter);
+//    			System.out.println("boardWriterSession : "+boardWriterSession);
     			
     			
     			if("PJ".equals(cmd)) {
     				// && boardWriterSession != null
     				TextMessage tmpMsg = new TextMessage("과목 '"+bno + "'의 과제가 등록되었습니다");
-    				System.out.println("tmpMsg" + tmpMsg);
+//    				System.out.println("tmpMsg" + tmpMsg);
     				boardWriterSession.sendMessage(tmpMsg);
     				
     			}else if("NT".equals(cmd)) {// 공지사항 등록됐을때
     				TextMessage tmpMsg = new TextMessage("공지사항 :" + replyWriter + " (이)가 등록되었습니다.");
-    				System.out.println("tmpMsg" + tmpMsg);
+//    				System.out.println("tmpMsg" + tmpMsg);
     				// 모든 로그인한 사용자에게 메시지를 보냄
     		        for (WebSocketSession userSession : userSessions.values()) {
     		            userSession.sendMessage(tmpMsg);
     		        }
     				
-    				System.out.println("session : " + session);
+//    				System.out.println("session : " + session);
     			}
     		}
     	}
@@ -239,19 +239,19 @@ public class EchoHandler extends TextWebSocketHandler {
         // 웹 소켓 세션에서 로그인 사용자 정보를 가져옴
     	Map<String, Object> httpSession = session.getAttributes();
     	Object loginUserObject = httpSession.get(SessionNames.LOGIN);
-    	System.out.println("loginUserObject : "+loginUserObject);
-    	System.out.println("httpSession : " + httpSession);
+//    	System.out.println("loginUserObject : "+loginUserObject);
+//    	System.out.println("httpSession : " + httpSession);
     	
     	
     	
         if (loginUserObject != null) {
             // 로그인한 사용자인 경우
             Member loginUser = (Member) loginUserObject;
-            System.out.println("loginUser" + loginUser);
+//            System.out.println("loginUser" + loginUser);
             return loginUser.getMemberId(); // 사용자의 아이디를 반환
         } else {
             // 로그인하지 않은 경우 또는 로그인 정보가 올바르지 않은 경우
-        	System.out.println("session.getId()" + session.getId());
+//        	System.out.println("session.getId()" + session.getId());
             return session.getId(); // 웹 소켓 세션의 ID를 반환
         }
     
@@ -262,7 +262,7 @@ public class EchoHandler extends TextWebSocketHandler {
 	@Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         // 클라이언트와 연결이 종료될 때 실행되는 로직
-    	System.out.println("afterConnectionClosed"+session+":"+status);
+//    	System.out.println("afterConnectionClosed"+session+":"+status);
     	
     }
 }

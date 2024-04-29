@@ -17,7 +17,7 @@ import com.kh.khu.project.model.vo.StudentProject;
 public class ProjectDao {
 	
 	public int insertProject(SqlSessionTemplate sqlSession, Project pj) {
-		System.out.println("project Dao"+pj);
+//		System.out.println("project Dao"+pj);
 		return sqlSession.insert("projectMapper.insertProject", pj);
 	}
 	
@@ -96,7 +96,7 @@ public class ProjectDao {
 	}
 	
 	public int enrollProjectStudent(SqlSessionTemplate sqlSession, StudentProject sp) {
-		System.out.println("pjdAO sp 객체" + sp);
+//		System.out.println("pjdAO sp 객체" + sp);
 		return sqlSession.update("projectMapper.enrollProjectStudent", sp);
 	}
 	
