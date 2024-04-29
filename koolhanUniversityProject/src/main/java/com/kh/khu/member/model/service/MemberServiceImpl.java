@@ -146,6 +146,11 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
+	public int selectMemberListCount() {
+		return 0;
+	}
+
+	@Override
 	public int updateProfilePicture(Member m) {
 		return mDao.updateProfilePicture(sqlSession, m);
 	}

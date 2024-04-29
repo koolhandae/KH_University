@@ -62,25 +62,25 @@ public class ProjectController {
 		
 		int result = pService.insertProject(pj);
 
-		System.out.println("왜안돼=" + pj);
+		//System.out.println("왜안돼=" + pj);
 		
 		
 		// insert시 학생프로젝트 테이블에(진행중 상태로)도 등록되게 끔 추가		
 			if(result>0) {
 				
-				System.out.println("들어가니?");
+				//System.out.println("들어가니?");
 
 				ArrayList<Course> sList = pService.selectCourseStudent(classNo);
 				
 				//ArrayList<String> studentNos = new ArrayList();
 				
-			    System.out.println("학생들조회" + sList);
+			    //System.out.println("학생들조회" + sList);
 				
 				if(sList != null) {		
 					for(Course c : sList) {
 						int sno = c.getStudentNo();
 						
-						System.out.println("sno값=" + sno);
+						//System.out.println("sno값=" + sno);
 						//String studentNo = Integer.toString(studentNoInt);
 						//studentNos.add(studentNo);
 	
@@ -162,7 +162,7 @@ public class ProjectController {
 		ArrayList<StudentProject> spList = pService.selectStudentProject(classNum, studentNo);
 		ArrayList<Course> c = sService.selectClassName(classNum);
 		
-		System.out.println(spList);
+		//System.out.println(spList);
 		
 		//System.out.println("rnum되냐" + spList.get(0).getRnum());
 		String className = c.get(0).getClassName();
@@ -198,7 +198,7 @@ public class ProjectController {
 	                                   @RequestParam(value="file", required=false) MultipartFile file,
 	                                   HttpSession session) {
 
-		 System.out.println("파일 있냐"+file);
+		 //System.out.println("파일 있냐"+file);
 			
 		String classNum = (String)session.getAttribute("classNum");
 		int studentNo = (Integer) session.getAttribute("studentNo");
@@ -300,8 +300,8 @@ public class ProjectController {
 			String classNum = (String)session.getAttribute("classNum");
 			int studentNo = (Integer)session.getAttribute("studentNo");
 			
-			System.out.println("가져오나1" + classNum);
-			System.out.println("가져오나2" + studentNo);
+			//System.out.println("가져오나1" + classNum);
+			//System.out.println("가져오나2" + studentNo);
 		
 			ArrayList<StudentProject> spList = pService.selectStudentNoneProject(studentNo, classNum);
          	System.out.println("sPLIST뭘까 NONE" + spList);
@@ -319,8 +319,8 @@ public class ProjectController {
 		int studentNo = (Integer)session.getAttribute("studentNo");
 		System.out.println("pjno" + pjno);
 		
-		System.out.println("가져오나1" + classNum);
-		System.out.println("가져오나2" + studentNo);
+		//System.out.println("가져오나1" + classNum);
+		//System.out.println("가져오나2" + studentNo);
 		
 		StudentProject sp = pService.projectFileView(studentNo, classNum, pjno);
 		
@@ -337,12 +337,12 @@ public class ProjectController {
 		int studentNo = (Integer)session.getAttribute("studentNo");
 		System.out.println("pjno" + pjno);
 		
-		System.out.println("가져오나1" + classNum);
-		System.out.println("가져오나2" + studentNo);
+		//System.out.println("가져오나1" + classNum);
+		//System.out.println("가져오나2" + studentNo);
 		
 		StudentProject sp = pService.projectFileView(studentNo, classNum, pjno);
 		
-		System.out.println("파일불러오니???" + sp);
+		//System.out.println("파일불러오니???" + sp);
 		String file = sp.getStpChangeName();
 	
 	    return file;
