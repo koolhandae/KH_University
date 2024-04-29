@@ -42,22 +42,28 @@ public class NoticeController {
 		return "admin/noticeEnrollForm";
 	}
 	
-	@RequestMapping("insert.no")
-	public ModelAndView insertNotice(Notice n, ModelAndView mv, HttpSession session) {
+	@ResponseBody
+	@RequestMapping(value="insert.no",produces = "application/json; charset=utf-8")
+	public int insertNotice(String noticeTitle,String noticeWriter, String noticeContent, HttpSession session) {
+		Notice n = new Notice();
+		n.setNoticeTitle(noticeTitle);
+		n.setNoticeWriter(noticeWriter);
+		n.setNoticeContent(noticeContent);
+		
 		int result = nService.insertNotice(n);
-		if(result > 0) { //성공
+		return result;
+	}
+	
+	@RequestMapping("adminNTenrollSuccess.do")
+	public String NoticeListgogoPage(HttpSession session) {
 			HashMap<String, Object> alertMsg = new HashMap<String, Object>();
 			alertMsg.put("icon", "success");
 			alertMsg.put("title", "공지사항 작성 완료.");
 			alertMsg.put("text", "성공적으로 공지사항이 작성되었습니다.");
 			session.setAttribute("alertMsg", alertMsg);
-			mv.setViewName("redirect:list.no");
-		}else {
-			mv.addObject("errorMsg", "공지사항 등록 실패");
-			mv.setViewName("common/errorPage500");
-		}
-		return mv;
+			return "redirect:list.no";
 	}
+
 	
 	@RequestMapping("detail.no")
 	public ModelAndView selectNotice(int nno, ModelAndView mv) {

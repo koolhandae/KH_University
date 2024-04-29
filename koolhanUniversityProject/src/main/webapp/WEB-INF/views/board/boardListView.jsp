@@ -82,7 +82,7 @@
             <script>
             	$(function(){
             		$("#boardList>tbody>tr").click(function(){
-            			location.href = 'detail.no?nno=' + $(this).children(".nno").text();
+            			location.href = 'detail.bo?bno=' + $(this).children(".bno").text();
             		})
             	})
             </script>
@@ -124,20 +124,6 @@
            
             <br clear="both"><br>
             
-
-            <form id="searchForm" action="" method="get" align="center">
-                <div class="select">
-                    <select class="custom-select" name="condition">
-                        <option value="writer">작성자</option>
-                        <option value="title">제목</option>
-                        <option value="content">내용</option>
-                    </select>
-                </div>
-                <div class="text">
-                    <input type="text" class="form-control" name="keyword">
-                </div>
-                <button type="submit" class="searchBtn btn btn-secondary">검색</button>
-            </form>
             <br><br>
         </div>
         <br><br>

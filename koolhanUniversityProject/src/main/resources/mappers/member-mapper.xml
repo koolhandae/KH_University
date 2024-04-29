@@ -66,10 +66,10 @@
 		     , m_email
 		     , m_address
 		     , m_type
-             , origin_name
+		     , origin_name
 		     , change_name
 		  from member
-          left join profile_images on (member_no = ref_mno)
+		  left join profile_images on (member_no = ref_mno)
 		 where m_status = 'Y'
 		   and member_id = #{memberId}
 	</select>
@@ -298,7 +298,25 @@
 		update profile_images
 		   set change_name = #{changeName}
 		     , origin_name = #{originName}
-		 where ref_mno = #{memberNo}    
+		 where ref_mno = #{refMemberNo}    
 	</update>
+	
+	<insert id="insertProfilePicture">
+		insert 
+		  into profile_images
+		     (
+		       img_no
+		     , ref_mno  
+		     , origin_name   
+		     , change_name
+		     )
+		values 
+		     (
+		       seq_profile_img.nextval
+		     , #{refMemberNo}  
+		     , #{originName}
+		     , #{changeName}
+		     )    
+	</insert>
 		
 </mapper>

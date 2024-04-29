@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="tuitionMapper">
 
+	<resultMap type="Tuition" id="tuitionTuition">
+		<result column="tuition_no" property="tuitiontNo"/>
+		<result column="tt_no" property="ttNo"/>
+		<result column="student_no" property="studentNo"/>
+		<result column="student_id" property="studentId"/>
+		<result column="tuition" property="tuition"/>
+		<result column="scholarship" property="scholarship"/>
+		<result column="ts_year" property="tsYear"/>
+		<result column="ts_semester" property="tsSemester"/>
+		<result column="ts_status" property="tsStatus"/>
+		<result column="tp_date" property="tpDate" />
+	</resultMap>
+
 
 	<resultMap type="TuitionStudent" id="tuitionResult">
 		<result column="tuition_no" property="tuitiontNo"/>
@@ -58,26 +71,60 @@
 		<result column="grad_date" property="gradDate"/>
 	</resultMap>
 	
-	<resultMap type="TopStudent" id="topStudent">
-		<result column="student_no" property="studentNo" />
-		<result column="student_name" property="studentName" /> 
-		<result column="total_point" property="totalPoint" /> 
+	<resultMap type="TuitionBill" id="tuitionBill">
+		<result column="tt_no" property="ttNo" />
+		<result column="tuition" property="tuition" />
+		<result column="scholarship" property="scholarship" />
+		<result column="tb_open" property="tbOpen" />
+		<result column="tb_close" property="tbClose" />
+		<result column="tb_semester" property="tbSemester" />
 	</resultMap>
 	
+	<resultMap type="TopStudent" id="topStudent">
+      <result column="student_no" property="studentNo" />
+      <result column="student_name" property="studentName" /> 
+      <result column="total_point" property="totalPoint" /> 
+   </resultMap>
 	
-	<select id="tuitionBillForm" resultMap="tuitionResult">
-		SELECT 
-		       t.tuition_no
-		     , t.tt_no
-		     , t.student_no
-		     , t.student_id
-		     , t.tuition
-		     , t.scholarship
-		     , t.ts_year
-		     , tp.tp_date
-		FROM tuition_student t
-		JOIN tuition_payment tp on (t.tt_no = tp.tp_no)
-		WHERE t.STUDENT_ID = #{studentId}
+	<select id="tuitionPayForm" resultMap="tuitionBill">
+		select 
+		       tt_no
+		     , tuition
+		     , scholarship
+		     , tb_open
+		     , tb_close
+		     , ts_semester
+		  from tuition_student
+		  join tuition_bill using (tt_no)
+		 where student_id = #{studentId}
+	</select>
+	
+	
+	<select id="tuitionBillForm" resultMap="tuitionBill">
+		select 
+		       tt_no
+		     , tuition
+		     , scholarship
+		     , tb_open
+		     , tb_close
+		     , ts_semester
+		  from tuition_student
+		  join tuition_bill using (tt_no)
+		 where student_id = #{studentId}
+	</select>
+	
+	<select id="studentTuition" resultMap="tuitionTuition">
+		select 
+		       tuition_no
+		     , ts_year
+		     , ts_semester
+		     , tuition
+		     , scholarship
+		     , ts_status
+		     , tp_date
+		  from tuition_student
+		  join tuition_payment using (tt_no)
+		 where student_id = #{studentId}	
 	</select>
 	
 	<insert id="insertTuitionPay">
@@ -145,7 +192,7 @@
 	
 	<delete id="deleteTuitionStudent">
 		delete from tuition_student
-		where 1=1
+		 where 1=1
 	</delete>
 	
 	
@@ -154,8 +201,7 @@
 		where s_status = 'Y'
 	</select>
 	
-	<insert id="insertTuitionStudents" >
-
+	<insert id="insertTuitionStudents">
         INSERT INTO tuition_student (
         TUITION_NO
         , TT_NO 
@@ -168,8 +214,8 @@
         , TS_STATUS 
         )
         VALUES
-         (
-            SEQ_TSNO.NEXTVAL
+            (
+              SEQ_TSNO.NEXTVAL
             , #{ttNo}
             , #{studentNo}
             , #{studentId}
@@ -178,24 +224,25 @@
             , #{tsYear}
             , #{tsSemester}                                                        
             , #{tsStatus}
-               )
-
+            )
     </insert>
-	
-	<select id="topSelectStudent" resultMap="topStudent">
-			<![CDATA[
-			SELECT A.STUDENT_NO, A.STUDENT_NAME, A.TOTAL_POINT
-			FROM 
-			(
-			    SELECT s.STUDENT_NO, S.STUDENT_NAME, G.TOTAL_POINT
-			    FROM STUDENT S
+    
+    <select id="topSelectStudent" resultMap="topStudent">
+         <![CDATA[
+         SELECT A.STUDENT_NO, A.STUDENT_NAME, A.TOTAL_POINT
+         FROM 
+         (
+             SELECT s.STUDENT_NO, S.STUDENT_NAME, G.TOTAL_POINT
+             FROM STUDENT S
                 JOIN GRADE G ON S.STUDENT_NO = G.STUDENT_NO
                 WHERE S_STATUS = 'Y'
-			    ORDER BY TOTAL_POINT DESC
-			) A
-			WHERE ROWNUM <= 3
-			 ]]>
-	</select>
+                  AND CLASS_NO = 3
+             ORDER BY TOTAL_POINT DESC
+         ) A
+         WHERE ROWNUM <= 3
+          ]]>
+   </select>
+	
 
 	
 </mapper>

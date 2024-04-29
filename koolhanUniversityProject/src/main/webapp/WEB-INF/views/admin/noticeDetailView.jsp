@@ -18,6 +18,7 @@
 </head>
 <body>
    <jsp:include page="../common/header_with_sidebar.jsp"/>
+   <jsp:include page="../common/datePickerNsummernote.jsp"/>
    <div class="content">
       <br><br>
         <div class="innerOuter">
@@ -42,11 +43,12 @@
                     <td colspan="3"></td>
                 </tr>
                 <tr>
-                    <td colspan="4"><p style="height:150px">${n.noticeContent }</p></td>
+                    <td colspan="4">
+                    <span id="SMcontentSpan">${n.noticeContent }</span></td>
                 </tr>
             </table>
             <br>
-
+				<c:if test="${loginUser.meType eq 'A'}">
 				<div align="center">
 					<!-- 수정하기, 삭제하기 버튼은 이글이 본인글일 경우만 보여져야됨 -->
 					<a class="btn btn-primary" onclick="postFormSubmit(1);">수정하기</a>
@@ -56,10 +58,17 @@
 				<br>
 				<br>
 				
-				<form id="postForm" method="post">
-					<input type="hidden" name="nno" value="${n.noticeNo}">
-				</form>
-
+					<form id="postForm" method="post">
+						<input type="hidden" name="nno" value="${n.noticeNo}">
+					</form>
+				</c:if>
+		<script>
+			function postFormSubmit(e){
+				$.ajax({
+					url: 
+				})
+			}
+		</script>
         </div>
         <br><br>
    </div>

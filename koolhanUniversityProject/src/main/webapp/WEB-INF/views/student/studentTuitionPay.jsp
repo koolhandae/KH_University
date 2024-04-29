@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,16 +71,18 @@
    	  <br>
       <h3>등록금 납입 정보</h3>
       <table id="boardList" class="selectTuition table" style="width: 900px; border-bottom: 1px solid rgb(230, 230, 230);" align="center">
+       <c:forEach var="l" items="${ list }">
         <tr>
           <th>등록금</th>
-          <td>4,000,000</td>
+          <td>${ l.tuition }</td>
           <th>장학금</th>
-          <td>1,500,000</td>
+          <td>${ l.scholarship }</td>
         </tr>
         <tr>
-          <th style="font-size: 20px";>총 납부금</th>
-          <td colspan="3" style="font-size: 20px; font-weight: bold;">2,500,000</td>
+          <th style="font-size: 20px;">총 납부금</th>
+          <td class="amount" colspan="3" style="font-size: 20px; font-weight: bold;">${ l.tuition - l.scholarship }</td>
         </tr>
+       </c:forEach>
       </table>
       <br>
 <!--       <table id="boardList" class="selectTuition table" style="width: 900px;" align="center">
@@ -98,7 +101,11 @@
      <!-- </form> -->
      
       <script>
+      
+      	let amount = $(".amount").text();
+      	console.log(amount);
 
+      	
         IMP.init("imp65641437"); 
       
         var today = new Date();   
@@ -115,7 +122,7 @@
                 pay_method : 'card',
                 merchant_uid: "IMP"+makeMerchantUid, 
                 name : '등록금',
-                amount : '${ tuition }',
+                amount : amount,
                 buyer_email : '${ loginStudent.stEmail }',
                 buyer_name : '${ loginStudent.studentName }',
                 buyer_tel : '${ loginStudent.stPhone }',
@@ -147,6 +154,8 @@
             })
             
         }
+        
+        
     </script>
      
    </div>  

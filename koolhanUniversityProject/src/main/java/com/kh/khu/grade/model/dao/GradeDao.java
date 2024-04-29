@@ -37,7 +37,7 @@ public class GradeDao {
 	// GradeDao.java
 	public int insertGradeStudent(SqlSessionTemplate sqlSession, ArrayList<Grade> gradesData) {
 	    int result = 0;
-	    System.out.println("Dao"+ gradesData);
+//	    System.out.println("Dao"+ gradesData);
 	    for (Grade grade : gradesData) {
 	        result += sqlSession.insert("gradeMapper.insertGradeStudent", grade);
 	    }

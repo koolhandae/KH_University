@@ -30,17 +30,13 @@ public class SaveFile {
 		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
 
 		try {
-
 			upfile.transferTo(new File(savePath + changeName));
-
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
-		
 		// 나중에 첨부파일의 경로를 세팅할 경우(Board 객체의 changeName)
 		// "/resources/uploadfiles/" 를 붙여서 세팅한다
 		// ex) b.setChangeName("resources/uploadfiles" + changeName);
-		
 		return changeName;
 
 	}

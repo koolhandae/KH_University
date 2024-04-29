@@ -68,7 +68,28 @@ th{
 	            </table>
             </div>
             <div style="display:flex; justify-content: center;">
-            	<img style="width:200px;height:200px;margin-top:90px;" alt="" src="resources/images/logo.png">
+            <c:choose>
+            	<c:when test="${empty loginUser}">
+	            	<c:choose>
+						<c:when test="${empty loginStudent.changeName}">
+			            	<img style="width:225px;height:200px;margin-top:90px;" alt="" src="resources/images/default_user.png">
+						</c:when>
+						<c:otherwise>
+							<img style="width:225px;height:200px;margin-top:90px;"	src="${loginStudent.changeName}">
+						</c:otherwise>
+					</c:choose>
+            	</c:when>
+				<c:otherwise>
+	            	<c:choose>
+						<c:when test="${empty loginUser.changeName}">
+			            	<img style="width:225px;height:200px;margin-top:90px;" alt="" src="resources/images/default_user.png">
+						</c:when>
+						<c:otherwise>
+							<img style="width:225px;height:200px;margin-top:90px;"	src="${loginUser.changeName}">
+						</c:otherwise>
+					</c:choose>
+				</c:otherwise>				
+            </c:choose>
             </div>
             <div class="btns" align="center">
                 <button id="updateInfo" type="submit" class="btn btn-primary updateInfo">정보수정</button>

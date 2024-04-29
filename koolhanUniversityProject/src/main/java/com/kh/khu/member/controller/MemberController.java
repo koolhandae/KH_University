@@ -1,6 +1,7 @@
 package com.kh.khu.member.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,7 +31,6 @@ import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.member.model.vo.MemberAbsence;
 import com.kh.khu.member.model.vo.MemberPresence;
 import com.kh.khu.student.model.service.StudentServiceImpl;
-import com.kh.khu.student.model.vo.Presence;
 import com.kh.khu.student.model.vo.Student;
 
 @Controller
@@ -48,25 +48,13 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 
-	// 임시 로그인 메소드
-	/*
-	 * @RequestMapping("login.me") public String loginMember(String userId, String
-	 * userPwd, HttpSession session) { Member m = new Member();
-	 * m.setMemberId(userId); m.setMemberPwd(userPwd); Member loginUser =
-	 * mService.loginMember(m);
-	 * 
-	 * session.setAttribute("loginUser", loginUser);
-	 * 
-	 * return "admin/noticeListView"; }
-	 */
-
 	@RequestMapping("login.me")
 	public String loginMember(String userId, String userPwd, HttpSession session, Model model) {
 
 		String encPwd = bcryptPasswordEncoder.encode(userPwd);
 
 		HashMap<String, Object> alertMsg = new HashMap<String, Object>();
-
+		
 		if (userId.startsWith("kh")) {
 			Student s = new Student();
 			s.setStudentId(userId);
@@ -74,7 +62,7 @@ public class MemberController {
 
 			Student loginStudent = sService.loginStudent(s);
 			
-			System.out.println(loginStudent);
+//			//System.out.println(loginStudent);
 
 				if (loginStudent != null && !loginStudent.getStStatus().equals("Z") && !loginStudent.getStStatus().equals("N")
 						&& bcryptPasswordEncoder.matches(s.getStudentPwd(), loginStudent.getStudentPwd())) {
@@ -85,7 +73,7 @@ public class MemberController {
 					alertMsg.put("title", "로그인 성공");
 					alertMsg.put("text", "성공적으로 로그인 됐습니다");
 					session.setAttribute("alertMsg", alertMsg);
-	
+					session.setAttribute("now", new Date());
 					return "redirect:/mainPage.me";
 				
 				// 재직된 학생은 로그인 못함
@@ -119,6 +107,7 @@ public class MemberController {
 					alertMsg.put("title", "로그인 성공");
 					alertMsg.put("text", "성공적으로 로그인 됐습니다");
 					session.setAttribute("alertMsg", alertMsg);
+					session.setAttribute("now", new Date());
 					return "redirect:/mainPage.me";
 				}
 			}
@@ -142,13 +131,18 @@ public class MemberController {
 		return "common/forgotPassword";
 	}
 
+	@RequestMapping("insertForm.me")
+	public String insertMemberForm() {
+		return "admin/adminEnrollForm";
+	}
+	
 	@RequestMapping("insert.me")
 	public ModelAndView insertMember(Member m, HttpSession session, HttpServletRequest request, ModelAndView mv,
 			Address ad) {
 		m.setMemberPwd(bcryptPasswordEncoder.encode((m.getMemberSsn().substring(0, 6)) + "1!"));
 		m.setMeAddress(AddressString.AddressMake(ad));
 		int result = mService.insertMember(m);
-		String url = (String) session.getAttribute("url");
+		String url = request.getHeader("Referer");
 		if (result > 0) {
 			String position = m.getMeType().equals("P") ? "교수" : "교직원";
 			String setFrom = "koolhandae@gmail.com";

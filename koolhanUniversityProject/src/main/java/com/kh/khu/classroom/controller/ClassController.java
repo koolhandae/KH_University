@@ -179,7 +179,7 @@ public class ClassController {
 		ArrayList<Classroom> list = cService.classSelect(memberId);
 		//System.out.println("project list select list" + list);
 		
-		System.out.println(list);
+//		System.out.println(list);
 		
 		return new Gson().toJson(list);
 	}
@@ -371,7 +371,7 @@ public class ClassController {
 		cb.setRefClassNo(classNo);
 		cb.setCbWriter(studentNo);
 		
-		System.out.println("studentNo: " + studentNo);
+//		System.out.println("studentNo: " + studentNo);
 		
 		if (upfile != null && !upfile.isEmpty()) {
 		    // Process file upload
@@ -457,4 +457,8 @@ public class ClassController {
 		}
 		
 			
+		@RequestMapping("job.do")
+		public String jobtestpagegogo() {
+			return "admin/jobTEST";
+		}
 }

@@ -37,11 +37,11 @@ public class CalendarController {
 			                  @RequestParam("color") String color
 							  ) {
 		
-		System.out.println(stuNo);
-		System.out.println(title);
-		System.out.println(start);
-		System.out.println(end);
-		System.out.println(color);
+//		System.out.println(stuNo);
+//		System.out.println(title);
+//		System.out.println(start);
+//		System.out.println(end);
+//		System.out.println(color);
 		
 		Calendar cal = new Calendar();
 		cal.setStudentNo(stuNo);
@@ -50,10 +50,10 @@ public class CalendarController {
 		cal.setCalEndDate(end);
 		cal.setBackgroundColor(color);
 		
-		System.out.println(cal);
+//		System.out.println(cal);
 		
 		int result  = caService.insertCalendar(cal);
-		System.out.println(result);
+//		System.out.println(result);
 
 		return new Gson().toJson(result);
 	}
@@ -61,11 +61,11 @@ public class CalendarController {
 	@ResponseBody
 	@RequestMapping(value="selectCal.st",  produces="application/json; charset=utf-8")
 	public String selectCalendar (@RequestParam(value="stuNo") int stuNo) {
-		System.out.println(stuNo);
+//		System.out.println(stuNo);
 		
 		ArrayList<Calendar> cList = caService.selectCalendar(stuNo);
 		
-		System.out.println("일정리스트" + cList);
+//		System.out.println("일정리스트" + cList);
 		
 		return new Gson().toJson(cList);
 	}
@@ -80,12 +80,12 @@ public class CalendarController {
 				                @RequestParam(value="color") String color
 				                ) {
 
-		System.out.println(id);
-		System.out.println(stuNo);
-		System.out.println(title);
-		System.out.println(start);
-		System.out.println(end);
-		System.out.println(color);
+//		System.out.println(id);
+//		System.out.println(stuNo);
+//		System.out.println(title);
+//		System.out.println(start);
+//		System.out.println(end);
+//		System.out.println(color);
 		
 		int calNo = Integer.parseInt(id);
 		
@@ -98,7 +98,7 @@ public class CalendarController {
 		cal.setBackgroundColor(color);
 		
 		int result = caService.updateCalendar(cal);
-		System.out.println(cal);
+//		System.out.println(cal);
 		
 	    return new Gson().toJson(result);
 	}
