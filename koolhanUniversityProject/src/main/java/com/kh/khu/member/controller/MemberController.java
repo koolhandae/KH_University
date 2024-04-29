@@ -74,7 +74,7 @@ public class MemberController {
 
 			Student loginStudent = sService.loginStudent(s);
 			
-			System.out.println(loginStudent);
+			//System.out.println(loginStudent);
 
 				if (loginStudent != null && !loginStudent.getStStatus().equals("Z") && !loginStudent.getStStatus().equals("N")
 						&& bcryptPasswordEncoder.matches(s.getStudentPwd(), loginStudent.getStudentPwd())) {

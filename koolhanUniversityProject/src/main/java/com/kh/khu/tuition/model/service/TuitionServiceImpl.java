@@ -34,6 +34,12 @@ public class TuitionServiceImpl implements TuitionService{
 		return tDao.insertTuitionPay(sqlSession, t);
 	}
 
+	
+	@Override
+	public ArrayList<Tuition> tuitionPayForm(String studentId) {
+		return tDao.tuitionPayForm(sqlSession, studentId);
+	}
+	
 
 	@Override
 	public ArrayList<Tuition> tuitionBillForm(String studentId) {
@@ -127,6 +133,12 @@ public class TuitionServiceImpl implements TuitionService{
 		return studentList;
 		
 	}
-	
+
+
+	@Override
+	public ArrayList<Tuition> studentTuition(String studentId) {
+		return tDao.studentTuition(sqlSession, studentId);
+	}
+
 
 }

@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@ taglib prefix="c"
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib prefix="c"
 uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -154,7 +155,12 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 			   		  <tr align="center">
 			   		  	<td>${item.semester}</td>
 			   		  	<td>${item.tbPrice}</td>
-			   		  	<td>${item.startDate} ~ ${item.endDate}</td>
+			   		  	  <td>
+				             <fmt:parseDate value="${item.startDate}" pattern="yyyy-MM-dd" var="parsedStartDate"/>
+				             <fmt:parseDate value="${item.endDate}" pattern="yyyy-MM-dd" var="parsedEndDate"/>
+				             <fmt:formatDate value="${parsedStartDate}" pattern="yyyy-MM-dd" /> ~ 
+				             <fmt:formatDate value="${parsedEndDate}" pattern="yyyy-MM-dd" />
+				          </td>
 			   		  </tr>	 
 	           </c:forEach>
         </table>

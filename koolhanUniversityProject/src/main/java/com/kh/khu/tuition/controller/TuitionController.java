@@ -31,19 +31,45 @@ public class TuitionController {
 		
 		String studentId = student.getStudentId();
 		
-		ArrayList<Tuition> list = tService.tuitionBillForm(studentId);
-		
+		ArrayList<Tuition> list = tService.tuitionPayForm(studentId);		
 		
 		model.addAttribute("studentId", studentId);
 		model.addAttribute("list", list);
-
 		
 		return "student/studentTuitionBill";
 	}
 
 	@RequestMapping("tuitionPayForm.do")
-	public String tuitionPayForm(HttpSession session) {
+	public String tuitionPayForm(HttpSession session, Model model) {
+		
+		Student student = (Student)session.getAttribute("loginStudent");
+		
+		String studentId = student.getStudentId();
+		
+		ArrayList<Tuition> list = tService.tuitionBillForm(studentId);
+		
+		model.addAttribute("studentId", studentId);
+		model.addAttribute("list", list);
+			
+		
 		return "student/studentTuitionPay";
+	}
+	
+	@RequestMapping("studentTuition.do")
+	public String studentTuition(HttpSession session, Model model) {
+		
+		Student student = (Student)session.getAttribute("loginStudent");
+		
+		String studentId = student.getStudentId();
+		
+		ArrayList<Tuition> list = tService.studentTuition(studentId);	
+		
+		model.addAttribute("studentId", studentId);
+		model.addAttribute("list", list);
+		
+		System.out.println(list);
+		
+		return "student/studentTuition";
 	}
 	
 	@RequestMapping("tuitionPay.do")
@@ -53,7 +79,7 @@ public class TuitionController {
 		
 		if(list > 0) {
 			//session.setAttribute("alertMsg", "등록금 납부가 성공적을 완료 되었습니다.");
-			return "student/studentTuition";
+			return "redirect:studentTuition.do";
 		}else {
 			model.addAttribute("errorMsg", "등록금 납부 실패!");
 			return "common/errorPage404";
