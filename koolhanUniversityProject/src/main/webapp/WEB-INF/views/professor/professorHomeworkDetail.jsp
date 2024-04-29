@@ -196,6 +196,8 @@
                     <th >파일첨부</th>
                 </tr>
             </thead>
+			
+			
 
             <tbody>
                 <tr>
@@ -216,6 +218,7 @@
                     </td>
                 </tr>
             </tbody>
+
         </table>
     </div>
 

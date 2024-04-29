@@ -18,6 +18,7 @@
 </head>
 <body>
    <jsp:include page="../common/header_with_sidebar.jsp"/>
+   <jsp:include page="../common/datePickerNsummernote.jsp"/>
    <div class="content">
       <br><br>
         <div class="innerOuter">
@@ -42,7 +43,8 @@
                     <td colspan="3"></td>
                 </tr>
                 <tr>
-                    <td colspan="4"><p style="height:150px">${n.noticeContent }</p></td>
+                    <td colspan="4">
+                    <span id="SMcontentSpan">${n.noticeContent }</span></td>
                 </tr>
             </table>
             <br>

@@ -41,7 +41,7 @@
                     padding-bottom: 30px;
                     padding-top: 50px;
                     color: rgb(39, 39, 39);
-                    border: 1px solid lightgray;
+
                 }
 
                 .table {
@@ -50,7 +50,7 @@
 
                 td {
                     /* border: solid 1px red; */
-                    padding: 10px;
+                    /*padding: 10px;*/
                 }
 
                 .icon {
@@ -303,7 +303,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="" class="icon" style="text-decoration: none; color: inherit;">
+                                        <a href="job.do" class="icon" style="text-decoration: none; color: inherit;">
                                             <img width="66" height="66" src="resources/images/일.png" />
                                             <br>
                                             <span>취업관련</span>
@@ -330,41 +330,7 @@
                     </div>
                 </div>
 
-                <div style="display: flex; justify-content: center;">
-                    <ul>
-                        <li>
-                            <a href="" class="icon" style="text-decoration: none; color: inherit;">
-                                <span id="icon" class="service_icon type_mail"></span>
-                                <span>버스</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="library.go" class="icon" style="text-decoration: none; color: inherit;">
-                                <span id="icon" class="service_icon type_mail"
-                                    style="width: 100px; height: 100px;"></span>
-                                <span>도서관</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="" class="icon" style="text-decoration: none; color: inherit;">
-                                <span id="icon" class="service_icon type_mail"></span>
-                                <span>취업관련</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="list.bo" class="icon" style="text-decoration: none; color: inherit;">
-                                <span id="icon" class="service_icon type_mail"></span>
-                                <span>커뮤니티</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="" class="icon" style="text-decoration: none; color: inherit;">
-                                <span id="icon" class="service_icon type_mail"></span>
-                                <span>학사일정</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+
 
             </div>
 
@@ -443,6 +409,7 @@
                                     backgroundColor: data[i].backgroundColor,
                                     borderColor: '#ffffff'
                                 });
+
                             }
 
                         }, error: function () {
