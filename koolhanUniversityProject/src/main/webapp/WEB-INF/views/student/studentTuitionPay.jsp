@@ -128,28 +128,23 @@
                 buyer_tel : '${ loginStudent.stPhone }',
                 buyer_addr : '${ loginStudent.stAddress }'
                // buyer_postcode : '123-456'
-            }, function (rsp) { // callback
-                if (rsp.success) {
-                	Swal.fire({
-       	                 icon: 'success',
-       	                 text: '등록금 납부가 완료 되었습니다.'})
-                    
-                } else {
-                    console.log(rsp);
-                    
-                    Swal.fire({
-      	                 icon: 'error',
-      	                 text: '등록금 납부에 실패 했습니다.'}) 
-                }
+            },function(res) {
+                $.ajax({
+                    type : "POST",
+                    url : "tuitionPay.do"
+                }).done(function(data) {
+                    if(res.success){
+                    		Swal.fire({
+          	                 icon: 'success',
+          	                 text: '등록금 납부가 완료 되었습니다.'});
+
+                        //결제 성공 시 비즈니스 로직
+                        
+                    } else {
+                        alert("결제 실패");
+                    }
+                });
             });
-            
-            $.ajax({
-            	url: "tuitionMake.ad",
-            	data: "",
-            	success:{
-            		
-            	}
-            })
             
         }
         

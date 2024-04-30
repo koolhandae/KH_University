@@ -1,13 +1,16 @@
 package com.kh.khu.tuition.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -15,12 +18,16 @@ import com.kh.khu.student.model.vo.Student;
 import com.kh.khu.tuition.model.service.TuitionService;
 import com.kh.khu.tuition.model.vo.AdminTuitionMake;
 import com.kh.khu.tuition.model.vo.Tuition;
+import com.kh.khu.tuition.model.vo.TuitionPayment;
 import com.kh.khu.tuition.model.vo.TuitionStudentMake;
+import com.siot.IamportRestClient.IamportClient;
+import com.siot.IamportRestClient.exception.IamportResponseException;
+import com.siot.IamportRestClient.response.IamportResponse;
 
 
 @Controller
 public class TuitionController {
-	
+    
 	@Autowired
 	private TuitionService tService;
 	
@@ -125,10 +132,5 @@ public class TuitionController {
 		return "admin/takeOffSelect";
 	}
 	
-	/*
-	 * @RequestMapping("tuitionMakeInsert.ad") public String
-	 * selectTuitionMake(AdminTuitionMake at, Model model, HttpSession session) {
-	 * int result = tService. }
-	 */
 	
 }

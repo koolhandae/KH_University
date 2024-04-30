@@ -24,8 +24,13 @@
             <name>Aspose Java API</name>
             <url>https://releases.aspose.com/java/repo/</url>
         </repository>
+        <!-- 아임포트 REST API연동 모듈 -->
+         <repository>
+	        <id>jitpack.io</id>
+	        <url>https://jitpack.io</url>
+	    </repository>
    </repositories>
-   
+
    <dependencies>
       <!-- Spring -->
       <dependency>
@@ -45,6 +50,7 @@
          <artifactId>spring-webmvc</artifactId>
          <version>${org.springframework-version}</version>
       </dependency>
+		      
             
       <!-- AspectJ -->
       <dependency>
@@ -293,7 +299,12 @@
 		    <version>3.14.0</version>
 		</dependency>
 		
-		
+      <!-- 아임포트 REST API연동 모듈 -->
+	  <dependency>
+	    <groupId>com.github.iamport</groupId>
+	    <artifactId>iamport-rest-client-java</artifactId>
+	    <version>0.2.14</version>
+	  </dependency>
 
       
    </dependencies>

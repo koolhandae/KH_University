@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -119,7 +118,7 @@
       	</div>
       	<br> -->
       	
-      		<input type="hidden" name="studentId" value="${ loginStudent.studentId }">
+      		<input type="hidden" name="studentId" value="${ loginStudent.studentId }" >
       	<table id="boardList" class="selectTuition table table-hover" style="width: 900px;" align="center">
             <tr class="topMenu">
                <th>등록연도</th>
@@ -130,26 +129,24 @@
                <th>납부구분</th>
                <th>납부일자</th>
             </tr>
-          <c:forEach var="st" items="${ list }">
-            <tr>
-               <td>${ st.tsYear }</td>
-               <td>${ st.tsSemester }</td>
-               <td>${ st.tuition }</td>
-               <td>${ st.scholarship }</td>
-               <td>${ st.tuition - st.scholarship }</td>
-               <td>
-        		 <c:choose>
-                     <c:when test="${ st.tsStatus eq 'N' }">미납</c:when>
-                     <c:when test="${ st.tsStatus eq 'Y' }">납입완료</c:when>
-                     <c:otherwise>처리중</c:otherwise>
-                 </c:choose>
-               </td>
-               <td>
-               	<fmt:parseDate value="${st.tpDate}" pattern="yyyy-MM-dd" var="tpDate" />
-               	<fmt:formatDate value="${tpDate}" pattern="yyyy-MM-dd" />
-               </td>
+             <tr>
+               <td>2024년</td>
+               <td>1학기</td>
+               <td>1,234,567</td>
+               <td>617,283</td>
+               <td>617,283</td>
+               <td>납부완료</td>
+               <td>2024-05-02</td>
             </tr>
-          </c:forEach>
+            <tr>
+               <td>2023년</td>
+               <td>2학기</td>
+               <td>3,800,000</td>
+               <td>0</td>
+               <td>3,800,000</td>
+               <td>납부완료</td>
+               <td>2023-08-29</td>
+            </tr>
          </table>
       
       </div>
