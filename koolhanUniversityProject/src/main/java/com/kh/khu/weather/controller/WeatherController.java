@@ -52,7 +52,8 @@ public class WeatherController {
 	@ResponseBody
 	@RequestMapping(value="ondo.do",produces = "application/json; charset=utf-8")
 	public String ondo(String dateString,String baseTime) throws IOException{
-		
+		System.out.println("baseTime"+baseTime);
+		System.out.println("dateString"+dateString);
 		String url =  "https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst";
 			   url += "?serviceKey=" + serviceKey;
 			   url += "&pageNo=1&numOfRows=14&dataType=json";

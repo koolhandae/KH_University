@@ -23,5 +23,6 @@ public class Board {
 	private String bStatus;
 	private String originName;
 	private String changeName;
+	private String studentId;
 	
 }

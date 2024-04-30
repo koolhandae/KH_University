@@ -567,8 +567,8 @@
 			   				url:"air.do",
 			   				data:{seoul:seoul},
 			   				success:function(data){
-			   					//console.log(data)
-			   					//console.log(data.response.body.items)
+			   					console.log(data)
+			   					console.log(data.response.body.items)
 			   					const itemArr = data.response.body.items
 			   					
 			   					const filteredItems = itemArr.filter(item => item.stationName === "강남구"); //강남구인것만 뽑아오게 필터링
@@ -576,23 +576,23 @@
 								let mise = Number(item.khaiValue);
 								let daegi = Number(item.pm10Value);
 			
-								if(mise>=0 && mise<= 30){
+								if(mise>='0' && mise<= '30'){
 									$("#mise").text("좋음").css("color","#32a1ff"); 
-								}else if(mise>=31 && mise<= 80){
+								}else if(mise>='31' && mise<= '80'){
 									$("#mise").text("보통").css("color","#00c73c"); 
-								}else if(mise>=81 && mise<= 150){
+								}else if(mise>='81' && mise<= '150'){
 									$("#mise").text("나쁨").css("color","#fd9b5a"); 
-								}else if(mise>=151){
+								}else if(mise>='151'){
 									$("#mise").text("매우나쁨").css("color","#ff5959"); 
 								}
 								
-								if(daegi>=0 && daegi<= 30){
+								if(daegi>='0' && daegi<= '30'){
 									$("#daegi").text("좋음").css("color","#32a1ff"); 
-								}else if(daegi>=31 && daegi<= 80){
+								}else if(daegi>='31' && daegi<= '80'){
 									$("#daegi").text("보통").css("color","#00c73c"); 
-								}else if(daegi>=81 && daegi<= 150){
+								}else if(daegi>='81' && daegi<= '150'){
 									$("#daegi").text("나쁨").css("color","#fd9b5a"); 
-								}else if(daegi>=151){
+								}else if(daegi>='151'){
 									$("#daegi").text("매우나쁨").css("color","#ff5959"); 
 								}
 			   				},error:function(){
@@ -616,7 +616,7 @@
 				 		let day = ('0' + today.getDate()).slice(-2);
 				 		
 				 		var dateString = year + month  + day;
-				 		//console.log(dateString);
+				 		console.log(dateString);
 				 		// 결과 : 20240425
 				 		
 				 		let hours = ('0' + today.getHours()).slice(-2);
@@ -625,22 +625,22 @@
 				 		let baseTime="";
 				 		// 결과 : 21
 				 		// Base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 (1일 8회)
-				 		if(hoursMin>=2300 && hoursMin<=0159){
-				 			baseTime = 2300;
-				 		}else if(hoursMin>=0200 && hoursMin<=0459){
-				 			baseTime = 0200;
-				 		}else if(hoursMin>=0500 && hoursMin<=0759){
-				 			baseTime = 0500;
-				 		}else if(hoursMin>=0800 && hoursMin<=1059){
-				 			baseTime = 0800;
-				 		}else if(hoursMin>=1100 && hoursMin<=1359){
-				 			baseTime = 1100;
-				 		}else if(hoursMin>=1400 && hoursMin<=1659){
-				 			baseTime = 1400;
-				 		}else if(hoursMin>=1700 && hoursMin<=1959){
-				 			baseTime = 1700;
-				 		}else if(hoursMin>=2000 && hoursMin<=2259){
-				 			baseTime = 2000;
+				 		if(hoursMin>='2300' && hoursMin<='0159'){
+				 			baseTime = '2300';
+				 		}else if(hoursMin>='0200' && hoursMin<='0459'){
+				 			baseTime = '0200';
+				 		}else if(hoursMin>='0500' && hoursMin<='0759'){
+				 			baseTime = '0500';
+				 		}else if(hoursMin>='0800' && hoursMin<='1059'){
+				 			baseTime = '0800';
+				 		}else if(hoursMin>='1100' && hoursMin<='1359'){
+				 			baseTime = '1100';
+				 		}else if(hoursMin>='1400' && hoursMin<='1659'){
+				 			baseTime = '1400';
+				 		}else if(hoursMin>='1700' && hoursMin<='1959'){
+				 			baseTime = '1700';
+				 		}else if(hoursMin>='2000' && hoursMin<='2259'){
+				 			baseTime = '2000';
 				 		}
 				 		console.log(baseTime)
 			 			$.ajax({
@@ -649,7 +649,7 @@
 			 					  baseTime:baseTime},
 			 				success:function(ondo){
 			 					
-			 					//console.log(ondo.response.body.items.item);
+			 					//console.log(ondo);
 			 					let item = ondo.response.body.items.item;
 			 					//console.log(item);
 			 					let tmp ="";
@@ -665,12 +665,13 @@
 			 			        //console.log("TMP value:", tmp); // TMP 값 확인
 			 					$("#ondo").html(tmp+"도");
 			 				},error:function(){
-			 					
+			 					console.log("온도실패");
 			 				}
 			 			})
 			 		})
 			 	
 			 	</script>
+			 	
 
 
 				<!-- Bootstrap core JavaScript-->

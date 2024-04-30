@@ -96,14 +96,14 @@
       </table>
       <br><br> -->
       <div class="billBtn" style="display: flex">
-        <button class="btn btn-xs" id="btn"  onclick="requestPay()">결제하기</button>
+        <button class="btn btn-xs" id="btn"  onclick="requestPay();">결제하기</button>
       </div>
      <!-- </form> -->
      
       <script>
       
       	let amount = $(".amount").text();
-      	console.log(amount);
+      	// console.log(amount);
 
       	
         IMP.init("imp65641437"); 
@@ -130,7 +130,6 @@
                // buyer_postcode : '123-456'
             }, function (rsp) { // callback
                 if (rsp.success) {
-
                 	Swal.fire({
        	                 icon: 'success',
        	                 text: '등록금 납부가 완료 되었습니다.'})
@@ -140,8 +139,7 @@
                     
                     Swal.fire({
       	                 icon: 'error',
-      	                 text: '등록금 납부에 실패 했습니다.'})
-                    
+      	                 text: '등록금 납부에 실패 했습니다.'}) 
                 }
             });
             
