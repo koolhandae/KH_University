@@ -56,6 +56,7 @@
                     	        processData: false,
                     	        contentType: false,
                     	        success: function(response) {
+                    	        	console.log(response)
                     	            $("#saveImage").hide();
                     	        	Swal.fire({
             							icon: response.icon,

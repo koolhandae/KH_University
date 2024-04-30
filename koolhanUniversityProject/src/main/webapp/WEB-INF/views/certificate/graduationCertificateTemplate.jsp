@@ -1,7 +1,16 @@
+<%@page import="com.kh.khu.student.model.vo.Student"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%
+	Student loginStudent = (Student)session.getAttribute("loginStudent");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    Date gradDate = sdf.parse(loginStudent.getGradDate());
+    request.setAttribute("formattedGradDate", gradDate);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,7 +99,7 @@ thead * {
 			<br>
 			<div class="center">
 				<span>수여 년 월 일 :</span>
-				<span>${loginStudent.gradDate}</span>
+				<span><fmt:formatDate value="${formattedGradDate}" pattern="yyyy년 MM월 dd일" /></span>
 			</div>
 			<br>
 			<div style="margin:120px 0">

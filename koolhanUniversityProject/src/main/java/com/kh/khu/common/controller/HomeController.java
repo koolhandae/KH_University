@@ -349,6 +349,7 @@ public class HomeController {
 	@ResponseBody
 	@RequestMapping("profile.img")
 	public HashMap<String,Object> updateProfilePicutre(@RequestParam("profileImage") MultipartFile upfile, HttpSession session) {
+		System.out.println("wewe");
 		Member m = (Member) session.getAttribute("loginUser");
 		Student s = (Student) session.getAttribute("loginStudent");
 		int result = 0;
@@ -366,12 +367,15 @@ public class HomeController {
 			}
 			session.setAttribute("loginUser", mService.loginMember(m));
 		} else {
+			System.out.println("1212");
 			pp.setRefStudentNo(s.getStudentNo());
 			if (s.getChangeName() != null) {
+				System.out.println("sdkfjlskdjf");
 				new File(session.getServletContext().getRealPath(s.getChangeName())).delete();
 				result = sService.updateProfilePicture(pp);
 			}else {
 				result = sService.insertProfilePicture(pp);
+				System.out.println(result);
 			}
 			session.setAttribute("loginStudent", sService.loginStudent(s));
 		}

@@ -16,7 +16,7 @@ public interface TuitionService {
 
 	ArrayList<Tuition> tuitionPayForm(String studentId);
 
-	ArrayList<Tuition> studentTuition(String studentId);
+	ArrayList<Tuition> studentTuition(int studentNo);
 	
 	ArrayList<AdminTuitionMake> tuitionMakeForm();
 

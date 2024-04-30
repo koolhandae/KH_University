@@ -130,6 +130,11 @@
                <th>납부구분</th>
                <th>납부일자</th>
             </tr>
+            <c:if test="${empty list}">
+            	<tr>
+            		<td colspan="7" align="center"><h2>납부 내역이 없습니다</h2></td>
+            	</tr>
+            </c:if>
           <c:forEach var="st" items="${ list }">
             <tr>
                <td>${ st.tsYear }</td>
