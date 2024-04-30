@@ -101,6 +101,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.kh.khu.common.interceptor.SessionNames;
 import com.kh.khu.member.model.vo.Member;
+import com.kh.khu.student.model.vo.Student;
 
 //import com.kh.khu.common.interceptor.LoginInterceptor;
 
@@ -128,12 +129,18 @@ public class EchoHandler extends TextWebSocketHandler {
     	// 그러면 접속하는 유저들은 여기안에 들어감
     	// key value쌍으로 하고 싶으면 map으로 하면 됨 
     		String senderId = getId(session);
+    		String senderId2 = getSTUId(session);
     		if(senderId !=null) {    			
-    			System.out.println(senderId + " 연결 됨");// bdc04ed1-2ed5-9058-a027-0b048eada88
+    			System.out.println(senderId + " 연결 됨");
     			userSessions.put(senderId, session);
     		}
-    		// System.out.println("userSession에는 뭐가있어?" + userSessions);
-    		//{bdc04ed1-2ed5-9058-a027-0b048eada888=StandardWebSocketSession[id=bdc04ed1-2ed5-9058-a027-0b048eada888, uri=ws://localhost:8808/khu/echo]}
+    		
+    		if(senderId2 != null) {
+    			System.out.println(senderId2 + " 연결 됨");
+    			userSessions.put(senderId2, session);
+    		}
+    		
+    		System.out.println("userSession에는 뭐가있어?" + userSessions);
     		//userSession에는 접속중인 유저들의 정보가 들어감
 
     }
@@ -160,7 +167,9 @@ public class EchoHandler extends TextWebSocketHandler {
     	  
     	  
     	String senderId = session.getId(); //이렇게 하면 웹소켓세션session의 아이디 보내는사람의 아이디
+    	String senderId2 = session.getId();
     	System.out.println("senderId : "+senderId);
+    	System.out.println("senderId2 : "+senderId2);
 
     	// 로그인하면 로그인한 유저의 아이디를 줄거고 로그인안했으면 소켓의 아이디를 줍시다
     	
@@ -180,33 +189,34 @@ public class EchoHandler extends TextWebSocketHandler {
     	//protocol: cmd,댓글작성자,게시글 작성자,bno (User1의 게시글에 User2가 댓글을 달았다면,234)
     	//(ex reply,user2,user1,1234)
     	String msg = message.getPayload();
-//    	System.out.println("msg핸들러ㅓㅓ"+msg);
+    	System.out.println("msg핸들러ㅓㅓ"+msg);
     	
     	
     	
     	if(StringUtils.isNotEmpty(msg)) {	
     		String[] strs = msg.split(","); //ㅁ메세지가 없으면 클라이언트에서는 안보내줘야함 null값이 뜨니까 null처리도 해줄것
-//    		System.out.println("strs: " + Arrays.toString(strs)); // 배열 값 뽑는방법
+    		System.out.println("strs: " + Arrays.toString(strs)); // 배열 값 뽑는방법
 
     		if(strs != null && strs.length <= 4) {
     			String cmd = strs[0]; // 공백을 제거하여 프로토콜을 추출
-//    			System.out.println("cmd : "+cmd);
+    			System.out.println("cmd : "+cmd);
     			//cmd 종류 
     			//NT-공지사항
     			//PJ-과제
+    			//RT-댓글
     			String replyWriter = strs[1]; 
-//    			System.out.println("replyWriter : " + replyWriter);
+    			System.out.println("replyWriter : " + replyWriter);
     			String boardWriter = strs[2];
-//    			System.out.println("boardWriter : " + boardWriter);
+    			System.out.println("boardWriter : " + boardWriter);
     			String bno = strs[3];
-//    			System.out.println("bno : " + bno);
+    			System.out.println("bno : " + bno);
     			
     			//게시글 작성자가 온라인일때만!
     			WebSocketSession boardWriterSession =  userSessions.get(boardWriter);//게시글 작성자가 있으면
-//    			System.out.println("sessions : "+sessions);
-//    			System.out.println("userSessions :"+userSessions);
-//    			System.out.println("boardWriter : "+boardWriter);
-//    			System.out.println("boardWriterSession : "+boardWriterSession);
+    			System.out.println("sessions : "+sessions);
+    			System.out.println("userSessions :"+userSessions);
+    			System.out.println("boardWriter : "+boardWriter);
+    			System.out.println("boardWriterSession : "+boardWriterSession);
     			
     			
     			if("PJ".equals(cmd)) {
@@ -224,6 +234,10 @@ public class EchoHandler extends TextWebSocketHandler {
     		        }
     				
 //    				System.out.println("session : " + session);
+    			}else if("RP".equals(cmd)) { //내가 쓴글에 댓글 등록됐을 때
+    				TextMessage tmpMsg = new TextMessage("게시글 '"+bno + "'에 "+"새로운 댓글이 등록되었습니다!");
+    				System.out.println("tmpMsg" + tmpMsg);
+    				boardWriterSession.sendMessage(tmpMsg);
     			}
     		}
     	}
@@ -239,6 +253,8 @@ public class EchoHandler extends TextWebSocketHandler {
         // 웹 소켓 세션에서 로그인 사용자 정보를 가져옴
     	Map<String, Object> httpSession = session.getAttributes();
     	Object loginUserObject = httpSession.get(SessionNames.LOGIN);
+
+
 //    	System.out.println("loginUserObject : "+loginUserObject);
 //    	System.out.println("httpSession : " + httpSession);
     	
@@ -254,15 +270,29 @@ public class EchoHandler extends TextWebSocketHandler {
 //        	System.out.println("session.getId()" + session.getId());
             return session.getId(); // 웹 소켓 세션의 ID를 반환
         }
+        
+        
     
     
 }
+    
+    private String getSTUId(WebSocketSession session) {
+    	Map<String, Object> httpSession = session.getAttributes();
+    	Object loginStudentObject =httpSession.get(SessionNames.STUDENT);
+    	if(loginStudentObject != null) {
+        	Student loginStudent = (Student)loginStudentObject;
+        	return loginStudent.getStudentId();
+        }else {
+        	return session.getId();
+        }
+    }
+    
 
     
 	@Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         // 클라이언트와 연결이 종료될 때 실행되는 로직
-//    	System.out.println("afterConnectionClosed"+session+":"+status);
+    	System.out.println("afterConnectionClosed"+session+":"+status);
     	
     }
 }

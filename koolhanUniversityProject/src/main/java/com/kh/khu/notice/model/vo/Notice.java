@@ -20,5 +20,5 @@ public class Notice {
 	private String noticeTitle;
 	private String noticeContent;
 	private String createDate;
-	private String status;
+	private String nstatus;
 }

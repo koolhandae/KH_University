@@ -40,12 +40,12 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public int updateNotice(Notice n) {
-		return 0;
+		return nDao.updateNotice(sqlSession, n);
 	}
 
 	@Override
-	public int deleteNotice(Notice n) {
-		return 0;
+	public int deleteNotice(int noticeNo) {
+		return nDao.deleteNotice(sqlSession, noticeNo);
 	}
 
 	@Override

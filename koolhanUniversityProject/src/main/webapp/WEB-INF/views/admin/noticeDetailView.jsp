@@ -61,14 +61,34 @@
 					<form id="postForm" method="post">
 						<input type="hidden" name="nno" value="${n.noticeNo}">
 					</form>
-				</c:if>
 		<script>
-			function postFormSubmit(e){
-				$.ajax({
-					url: 
-				})
+			function postFormSubmit(num){
+				if(num == 1){ // 수정하기를 클릭
+        			$("#postForm").attr("action","noticeUpdateForm.bo").submit(); //속성은 attr0
+        		}else{ // 삭제하기 클릭
+        			Swal.fire({
+      				  title: "정말로 삭제하시겠습니까?",
+      				  text:"",
+      				  icon: 'warning',
+      				  
+      				  showCancelButton: true,
+      				  confirmButtonText: "승인",
+      				  cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+      				  
+      				}).then((result) => {
+      				  /* Read more about isConfirmed, isDenied below */
+      				  if (result.isConfirmed) {
+      					$("#postForm").attr("action","noticeDelete.bo").submit(); //속성은 attr
+      				  } else if (result.isDismissed) { // 만약 모달창에서 cancel 버튼을 눌렀다면
+      				     Swal.fire('취소되었습니다!', '', 'info');
+      				    
+      				  }
+      				});
+        			
+        		}
 			}
 		</script>
+				</c:if>
         </div>
         <br><br>
    </div>

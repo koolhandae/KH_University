@@ -12,6 +12,7 @@
 		<result column="b_status" property="bStatus" />
 		<result column="origin_name" property="originName" />
 		<result column="change_name" property="changeName" />
+		<result column="student_id" property="studentId"/>
 	</resultMap>
 	
 	<resultMap type="Reply" id="replyResult">
@@ -85,6 +86,7 @@
 		     , to_char(create_date, 'yyyy-mm-dd') create_date
 		     , origin_name
 		     , change_name
+		     , student_id
 		  from board
 		  join student on (board_writer = student_no)
 		 where b_status = 'Y'
@@ -153,6 +155,8 @@
 		   set r_status = 'N'
 		 where reply_no = ${replyNo}
 	</update>
+	
+
 	
 	
 </mapper>
