@@ -24,5 +24,6 @@ public class Tuition {
 	private String tsSemester; // 학기
 	private String tsStatus; // 납부 현황
 	private String tpDate;
+	private int totalPrice;
 	
 }

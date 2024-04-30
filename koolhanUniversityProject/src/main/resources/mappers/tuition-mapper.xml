@@ -134,14 +134,23 @@
 	    tp_no
 	  , tt_no
 	  , tp_date
+	  , tp_total_price
 	  )
 	  values
 	  (
 	    seq_tpno.nextVAL
 	  , #{ttNo}
 	  , SYSDATE
+	  , #{totalPrice}
 	  )
 	</insert>
+	
+	<!-- <update id="insertTuitionPay">
+		UPDATE 
+		       tuition_student
+		   SET ts_status = 'Y'
+		   WHERE student_id = #{studentId}
+	</update> -->
 	
 <!--  	<select id="tuitionMakeForm" resultMap="adminTuitionResult">
 		SELECT

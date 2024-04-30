@@ -132,7 +132,7 @@ public class EchoHandler extends TextWebSocketHandler {
     			System.out.println(senderId + " 연결 됨");// bdc04ed1-2ed5-9058-a027-0b048eada88
     			userSessions.put(senderId, session);
     		}
-    		System.out.println("userSession에는 뭐가있어?" + userSessions);
+    		// System.out.println("userSession에는 뭐가있어?" + userSessions);
     		//{bdc04ed1-2ed5-9058-a027-0b048eada888=StandardWebSocketSession[id=bdc04ed1-2ed5-9058-a027-0b048eada888, uri=ws://localhost:8808/khu/echo]}
     		//userSession에는 접속중인 유저들의 정보가 들어감
 
