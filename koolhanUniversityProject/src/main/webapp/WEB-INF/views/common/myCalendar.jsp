@@ -447,7 +447,7 @@ body {
 									
 									eventDidMount: function(info) {
 							            tippy(info.el, {
-							                content:  info.event._def.title,
+							                content:  info.event.title,
 							                placement: 'top',
 							                offset: [0, 0],
 							                interactive: true,
@@ -465,6 +465,8 @@ body {
 								});
 
 						function insertModalOpen(e) {
+							
+							console.log(e);
 							if (e.event != undefined) {
 								console.log(e.event.id);
 								console.log(e.event.endStr);
@@ -743,13 +745,16 @@ body {
 									console.log("ajax성공");
 									console.log(data.data);
 									const dataArr = data.data;
-										
+									let eventId = 1000;
+
 									for(let i in dataArr){
 										
 										let item = dataArr[i]
+										let uniqueId = eventId++;
 										
 											calendar.addEvent({
 												allDay : true,
+												id : uniqueId,
 												title : item.시험장소 + ' - 접수기간',
 												start : new Date(item.접수시작일),
 												end : new Date(item.접수마감일),
@@ -760,6 +765,7 @@ body {
 											
 											calendar.addEvent({
 												allDay : true,
+												id : uniqueId,
 												title : item.시험장소 + ' - 시험일',
 												start : new Date(item.시험일),
 												end : new Date(new Date(item.시험일).getTime() + 24 * 60 * 60 * 1000),
@@ -770,6 +776,7 @@ body {
 											
 											calendar.addEvent({
 												allDay : true,
+												id : uniqueId,
 												title : item.시험장소 + ' - 힙격발표일',
 												start : new Date(item.합격자발표일),
 												end : new Date(new Date(item.합격자발표일).getTime() + 24 * 60 * 60 * 1000),
