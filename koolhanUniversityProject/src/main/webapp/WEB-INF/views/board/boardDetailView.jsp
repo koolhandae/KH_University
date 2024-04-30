@@ -29,11 +29,13 @@
             <table id="contentArea" align="center" class="table">
                 <tr>
                     <th width="100">제목</th>
-                    <td colspan="3">${b.boardTitle }</td>
+                    <td colspan="3"><span id="boardTitle">${b.boardTitle }</span></td>
+                    <input type="hidden" id="studentId" value="${b.studentId}"/>
                 </tr>
                 <tr>
                     <th>작성자</th>
-                    <td>${b.boardWriter}</td>
+                    <td><span id="boardWriter">${b.boardWriter}</span></td>
+                    
                     <th>작성일</th>
                     <td>${b.createDate}</td>
                 </tr>
@@ -130,8 +132,11 @@
     
     <script>
     	$(function(){
+
     		selectReplyList();
-    	});    
+    	});   
+    	
+
     	
     	function selectReplyList(){ // 해당 게시글에 딸린 댁슬 리스트 조회용
     		$.ajax({
@@ -156,7 +161,16 @@
     		});
     	}
     	
+    	
+
+
     	function addReply(){
+			let rpWriter = "${loginStudent.studentId}"
+	    	let boardWriter = $("#studentId").val();
+	    	let boardTitle = $("#boardTitle").text();
+	    	console.log(boardWriter);
+	    	console.log(boardTitle);
+
     		if($("#r-content").val().trim().length != 0 ){ // 유효한 댓글을 작성 할 때에만 =>insert ajax 요청
 	   			$.ajax({
 	   				url:"insertReply.bo",
@@ -167,6 +181,14 @@
 	   					},
 	   				success: function(response){
 	   					if(response == "NNNNY"){
+	   						console.debug("댓글등록.RP::socket>>",socket)
+	     					 if (socket && socket.readyState === 1) {
+	   							// 소켓 객체가 존재하고, 웹 소켓 연결이 OPEN 상태일 때 실행될 코드
+	                        	// webSocket에 보내기!!(NT,글제목,게시글작성자,글번호)
+	                        	let socketMsg = "RP," + rpWriter + "," + boardWriter + "," + boardTitle;
+	                        	console.debug("RPsssmsg>>", socketMsg);
+	                        	socket.send(socketMsg);
+	     					 }
 	   						selectReplyList();
 	   						$("#r-content").val("");
 	   					}else{
@@ -180,6 +202,8 @@
     			alert("뭐라도 쓰고 등록해라")
     		}
     	}
+    	
+    	
     </script>
     
    <jsp:include page="../common/footer.jsp"/>
