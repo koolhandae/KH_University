@@ -63,4 +63,6 @@ public interface MemberService {
 	int updateProfilePicture(ProfilePicture pp);
 	
 	int insertProfilePicture(ProfilePicture pp);
+	
+	int updatePhone(Member m);
 }

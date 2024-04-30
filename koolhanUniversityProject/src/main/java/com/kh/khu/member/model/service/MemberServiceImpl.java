@@ -155,6 +155,11 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.insertProfilePicture(sqlSession, pp);
 	}
 
+	@Override
+	public int updatePhone(Member m) {
+		return mDao.updatePhone(sqlSession, m);
+	}
+
 	
 
 	

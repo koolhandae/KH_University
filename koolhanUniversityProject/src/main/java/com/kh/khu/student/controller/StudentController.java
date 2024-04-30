@@ -26,13 +26,13 @@ import com.kh.khu.common.model.vo.Address;
 import com.kh.khu.common.model.vo.PageInfo;
 import com.kh.khu.common.template.AddressString;
 import com.kh.khu.common.template.Pagination;
-import com.kh.khu.grade.model.vo.Grade;
-import com.kh.khu.member.model.vo.Member;
 import com.kh.khu.student.model.service.StudentService;
 import com.kh.khu.student.model.vo.Absence;
 import com.kh.khu.student.model.vo.AbsenceStudent;
 import com.kh.khu.student.model.vo.Presence;
 import com.kh.khu.student.model.vo.Student;
+import com.kh.khu.tuition.model.service.TuitionService;
+import com.kh.khu.tuition.model.vo.Tuition;
 
 @Controller
 public class StudentController {
@@ -43,7 +43,10 @@ public class StudentController {
 	JavaMailSenderImpl mailSender;
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
-
+	@Autowired
+	private TuitionService tService;
+	
+	
 	@RequestMapping("showCourse.st")
 	public String showCourseList() {
 		return "student/studentClassPage";
@@ -169,8 +172,11 @@ public class StudentController {
 	}
 	
 	@RequestMapping("certificate.issue")
-	public String connectCertificateIssuePage() {
-		return "student/certificateIssuingPage";
+	public ModelAndView connectCertificateIssuePage(HttpSession session, ModelAndView mv) {
+		Student s = (Student)session.getAttribute("loginStudent");
+		Tuition t = tService.selectTuition(s.getStudentNo());
+		mv.addObject("t",t).setViewName("student/certificateIssuingPage");
+		return mv;
 	}
 	
 	@RequestMapping("takeOff.do")

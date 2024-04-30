@@ -24,5 +24,5 @@ public interface TuitionService {
 
 	List<TuitionStudentMake> makeTuitionStudent();
 
-	
+	Tuition selectTuition(int studentNo);
 }

@@ -77,15 +77,15 @@ thead * {
 				<tbody>
 					<tr>
 						<td colspan="4">수업료 (A)</td>
-						<td>4,200,000</td>
+						<td>${t.tuition}</td>
 					</tr>
 					<tr>
 						<td colspan="4">감면액 (B)</td>
-						<td>1,700,000</td>
+						<td>${t.scholarship}</td>
 					</tr>
 					<tr>
 						<th colspan="4">합계 (A - B)</th>
-						<td>2,500,000</td>
+						<td>${t.tuition - t.scholarship}</td>
 					</tr>
 				</tbody>
 			</table>

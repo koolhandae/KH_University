@@ -70,21 +70,21 @@ thead * {
 						<td>학부</td>
 						<td>등록금</td>
 						<td>국가장학금</td>
-						<td>교내장학금</td>
+						<td>성적장학금</td>
 						<td>기타장학금</td>
 					</tr>
 				</thead>
 				<tbody>
 						<tr>
 							<td>컴퓨터공학과</td>
-							<td>4,200,000</td>
-							<td>1,200,000</td>
-							<td>500,000</td>
+							<td>${t.tuition }</td>
+							<td>0</td>
+							<td>${t.scholarship}</td>
 							<td>0</td>
 						</tr>
 						<tr>
 							<td colspan="4">납부액</td>
-							<td>2,500,000</td>
+							<td>${t.tuition - t.scholarship}</td>
 						</tr>
 						
 				</tbody>

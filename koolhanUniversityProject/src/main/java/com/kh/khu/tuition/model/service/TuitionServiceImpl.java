@@ -141,4 +141,10 @@ public class TuitionServiceImpl implements TuitionService{
 	}
 
 
+	@Override
+	public Tuition selectTuition(int studentNo) {
+		return tDao.selectTuition(sqlSession, studentNo);
+	}
+
+
 }
