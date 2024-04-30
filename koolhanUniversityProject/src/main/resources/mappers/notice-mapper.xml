@@ -8,6 +8,7 @@
 		<result column="notice_title" property="noticeTitle"/>	
 		<result column="notice_content" property="noticeContent"/>	
 		<result column="create_date" property="createDate"/>	
+		<result column="n_status" property="nstatus"/>
 	</resultMap>
 
 	<select id="selectListCount" resultType="_int">
@@ -72,4 +73,19 @@
 		 order 
 		    by notice_no desc
 	</select>
+	
+	<update id="updateNotice">
+		update
+			   notice
+		   set notice_title = #{noticeTitle}
+		     , notice_content = #{noticeContent}
+		 where notice_no =#{noticeNo}
+	</update>
+	
+	<update id="deleteNotice">
+		update
+			   notice
+		   set n_status = 'N'
+		 where notice_no = #{noticeNo}
+	</update>
 </mapper>

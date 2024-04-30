@@ -616,7 +616,7 @@
 				 		let day = ('0' + today.getDate()).slice(-2);
 				 		
 				 		var dateString = year + month  + day;
-				 		//console.log(dateString);
+				 		console.log(dateString);
 				 		// 결과 : 20240425
 				 		
 				 		let hours = ('0' + today.getHours()).slice(-2);
@@ -628,11 +628,11 @@
 				 		if(hoursMin>=2300 && hoursMin<=0159){
 				 			baseTime = 2300;
 				 		}else if(hoursMin>=0200 && hoursMin<=0459){
-				 			baseTime = 0200;
+				 			baseTime = '0200';
 				 		}else if(hoursMin>=0500 && hoursMin<=0759){
-				 			baseTime = 0500;
+				 			baseTime = '0500';
 				 		}else if(hoursMin>=0800 && hoursMin<=1059){
-				 			baseTime = 0800;
+				 			baseTime = '0800';
 				 		}else if(hoursMin>=1100 && hoursMin<=1359){
 				 			baseTime = 1100;
 				 		}else if(hoursMin>=1400 && hoursMin<=1659){
@@ -649,7 +649,7 @@
 			 					  baseTime:baseTime},
 			 				success:function(ondo){
 			 					
-			 					//console.log(ondo.response.body.items.item);
+			 					console.log(ondo);
 			 					let item = ondo.response.body.items.item;
 			 					//console.log(item);
 			 					let tmp ="";
@@ -671,6 +671,7 @@
 			 		})
 			 	
 			 	</script>
+			 	
 
 
 				<!-- Bootstrap core JavaScript-->

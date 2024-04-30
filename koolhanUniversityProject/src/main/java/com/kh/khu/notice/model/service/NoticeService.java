@@ -22,7 +22,7 @@ public interface NoticeService {
 	int updateNotice(Notice n);
 	
 	// 공지사항 삭제
-	int deleteNotice(Notice n);
+	int deleteNotice(int noticeNo);
 	
 	// 메인메뉴에 상위 5개 공지사항 가져오기
 	ArrayList<Notice> selectMainList();

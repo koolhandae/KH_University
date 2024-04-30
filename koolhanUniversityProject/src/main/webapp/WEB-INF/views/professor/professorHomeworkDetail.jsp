@@ -224,13 +224,26 @@
     			success:function(sp){
     				console.log(sp);
 			    	let value = "";
-			    	for(let i in sp){
-			    		value += "<tr>"
+			    	for(let i=0; i<sp.length;i++){
+			    		if(sp[i].stpStatus === 'I'  || sp[i].stpStatus === 'M'){ // 'i'는 미제출을 의미하는 값이라고 가정합니다.
+			    	        sp[i].stpStatus = '미제출'; // 상태를 '미제출'로 변경합니다.
+				    		value += "<tr>"
 			    			     + "<td>" + sp[i].studentName + "</td>"
 			    			     + "<td>" + sp[i].studentId + "</td>"
-			    			     + "<td class='status'>" + sp[i].stpStatus+ "</td>"
-			    			     + "<td><a href='" + sp[i].stpChangeName + "' download='" + sp[i].stpOriginName + "' class='btn btn-outline-primary'>다운로드</a></td>" 
+			    			     + "<td class='status' style='color:red;'>" + sp[i].stpStatus+ "</td>"
+			    			     + "<td><a href='" + sp[i].stpChangeName + "' download='" + sp[i].stpOriginName + "' class='btn btn-outline-primary'style='pointer-events: none;' >첨부파일없음</a></td>" 
 			    			     + "</tr>";
+			    	        
+			    	    }else if(sp[i].stpStatus === 'D'){
+			    	    	sp[i].stpStatus = '제출'
+					    		value += "<tr>"
+				    			     + "<td>" + sp[i].studentName + "</td>"
+				    			     + "<td>" + sp[i].studentId + "</td>"
+				    			     + "<td class='status' style='color:blue;'>" + sp[i].stpStatus+ "</td>"
+				    			     + "<td><a href='" + sp[i].stpChangeName + "' download='" + sp[i].stpOriginName + "' class='btn btn-outline-primary' >다운로드</a></td>" 
+				    			     + "</tr>";
+			    	    }
+
 			    	
 			    	}
 			    	
@@ -241,6 +254,10 @@
     			}
     			
     		})
+    		
+    		if($(".status").val()='미제출'){
+    			
+    		}
     		
 
     		
