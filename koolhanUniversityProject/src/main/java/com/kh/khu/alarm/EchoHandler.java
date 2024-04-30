@@ -140,7 +140,7 @@ public class EchoHandler extends TextWebSocketHandler {
     			userSessions.put(senderId2, session);
     		}
     		
-    		System.out.println("userSession에는 뭐가있어?" + userSessions);
+    		//System.out.println("userSession에는 뭐가있어?" + userSessions);
     		//userSession에는 접속중인 유저들의 정보가 들어감
 
     }
@@ -189,13 +189,13 @@ public class EchoHandler extends TextWebSocketHandler {
     	//protocol: cmd,댓글작성자,게시글 작성자,bno (User1의 게시글에 User2가 댓글을 달았다면,234)
     	//(ex reply,user2,user1,1234)
     	String msg = message.getPayload();
-    	System.out.println("msg핸들러ㅓㅓ"+msg);
+    	//System.out.println("msg핸들러ㅓㅓ"+msg);
     	
     	
     	
     	if(StringUtils.isNotEmpty(msg)) {	
     		String[] strs = msg.split(","); //ㅁ메세지가 없으면 클라이언트에서는 안보내줘야함 null값이 뜨니까 null처리도 해줄것
-    		System.out.println("strs: " + Arrays.toString(strs)); // 배열 값 뽑는방법
+    		//System.out.println("strs: " + Arrays.toString(strs)); // 배열 값 뽑는방법
 
     		if(strs != null && strs.length <= 4) {
     			String cmd = strs[0]; // 공백을 제거하여 프로토콜을 추출
@@ -205,18 +205,18 @@ public class EchoHandler extends TextWebSocketHandler {
     			//PJ-과제
     			//RT-댓글
     			String replyWriter = strs[1]; 
-    			System.out.println("replyWriter : " + replyWriter);
+    			//System.out.println("replyWriter : " + replyWriter);
     			String boardWriter = strs[2];
-    			System.out.println("boardWriter : " + boardWriter);
+    			//System.out.println("boardWriter : " + boardWriter);
     			String bno = strs[3];
-    			System.out.println("bno : " + bno);
+    			//System.out.println("bno : " + bno);
     			
     			//게시글 작성자가 온라인일때만!
     			WebSocketSession boardWriterSession =  userSessions.get(boardWriter);//게시글 작성자가 있으면
-    			System.out.println("sessions : "+sessions);
-    			System.out.println("userSessions :"+userSessions);
-    			System.out.println("boardWriter : "+boardWriter);
-    			System.out.println("boardWriterSession : "+boardWriterSession);
+    			//System.out.println("sessions : "+sessions);
+    			//System.out.println("userSessions :"+userSessions);
+    			//System.out.println("boardWriter : "+boardWriter);
+    			//System.out.println("boardWriterSession : "+boardWriterSession);
     			
     			
     			if("PJ".equals(cmd)) {
