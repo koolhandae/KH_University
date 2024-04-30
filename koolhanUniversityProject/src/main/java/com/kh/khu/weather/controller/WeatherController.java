@@ -60,7 +60,7 @@ public class WeatherController {
 			   url += "&base_time=" + baseTime;
 			   url += "&nx=61&ny=126"; //강남구
 			   
-//			   System.out.println(url);
+			   System.out.println(url);
 			   
 			   URL requestUrl = new URL(url);
 				HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection();

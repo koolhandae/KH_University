@@ -626,21 +626,21 @@
 				 		// 결과 : 21
 				 		// Base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 (1일 8회)
 				 		if(hoursMin>=2300 && hoursMin<=0159){
-				 			baseTime = 2300;
+				 			baseTime = "2300";
 				 		}else if(hoursMin>=0200 && hoursMin<=0459){
-				 			baseTime = 0200;
+				 			baseTime = "0200";
 				 		}else if(hoursMin>=0500 && hoursMin<=0759){
-				 			baseTime = 0500;
+				 			baseTime = "0500";
 				 		}else if(hoursMin>=0800 && hoursMin<=1059){
-				 			baseTime = 0800;
+				 			baseTime = "0800";
 				 		}else if(hoursMin>=1100 && hoursMin<=1359){
-				 			baseTime = 1100;
+				 			baseTime = "1100";
 				 		}else if(hoursMin>=1400 && hoursMin<=1659){
-				 			baseTime = 1400;
+				 			baseTime = "1400";
 				 		}else if(hoursMin>=1700 && hoursMin<=1959){
-				 			baseTime = 1700;
+				 			baseTime = "1700";
 				 		}else if(hoursMin>=2000 && hoursMin<=2259){
-				 			baseTime = 2000;
+				 			baseTime = "2000";
 				 		}
 				 		console.log(baseTime)
 			 			$.ajax({
@@ -648,7 +648,7 @@
 			 				data:{dateString:dateString,
 			 					  baseTime:baseTime},
 			 				success:function(ondo){
-			 					
+			 					console.log(ondo);
 			 					//console.log(ondo.response.body.items.item);
 			 					let item = ondo.response.body.items.item;
 			 					//console.log(item);
