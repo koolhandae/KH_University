@@ -52,10 +52,10 @@
    <div class="content">	
    	<div class="innerOuter">
    	
-   	<div class="tuitionBtn" align="center";>
+   	<div class="tuitionBtn" align="center">
    		<a class="btn btn-primary btn-lg"  href="takeOff.do" roll="button" style="background-color:rgb(48, 76, 121)">휴학 신청</a>
    		   <span style="margin-left: 40px; margin-right: 40px;"></span>
-   		<a class="btn btn-primary btn-lg"  href="returnSchool.do" roll="button" style="background-color:rgb(48, 76, 121)">복학 신청</a>  	
+   		<a class="btn btn-primary btn-lg"  href="returnSchool.do" roll="button" style="background-color:rgb(48, 76, 121)">복학 신청</a>
     </div>
       <br><br><br>
    	

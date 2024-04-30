@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class WeatherController {
 	
-	private static final String serviceKey = "1zPaDh60eN77kfbWcnnHSr2b9uAVIOoSzfBAmCYHPQrVuDAUqg2UbO%2F9nwcpJc%2FHHAg15VNWvXw4ZTdd8NEJfA%3D%3D";
+	private static final String serviceKey = "I3VL1%2Fhnf%2F8%2FEIry2%2B3t2uc%2Bpcn0G%2BCv7it6y0j%2ByoqRMMrD9KTINQQw006shNFVwYzXYOpurz9pgnMB5r1Ipw%3D%3D";
 
 	//json으로 응답하기 미세먼지 대기환경지수
 	@ResponseBody

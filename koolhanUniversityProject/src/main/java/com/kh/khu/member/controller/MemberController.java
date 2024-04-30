@@ -54,70 +54,71 @@ public class MemberController {
 		String encPwd = bcryptPasswordEncoder.encode(userPwd);
 
 		HashMap<String, Object> alertMsg = new HashMap<String, Object>();
-		
+
 		if (userId.startsWith("kh")) {
 			Student s = new Student();
 			s.setStudentId(userId);
 			s.setStudentPwd(userPwd);
 
 			Student loginStudent = sService.loginStudent(s);
-			
+
 //			//System.out.println(loginStudent);
 
-				if (loginStudent != null && !loginStudent.getStStatus().equals("Z") && !loginStudent.getStStatus().equals("N")
-						&& bcryptPasswordEncoder.matches(s.getStudentPwd(), loginStudent.getStudentPwd())) {
-					// 로그인성공
-					session.setAttribute("loginStudent", loginStudent);
-	
-					alertMsg.put("icon", "success");
-					alertMsg.put("title", "로그인 성공");
-					alertMsg.put("text", "성공적으로 로그인 됐습니다");
-					session.setAttribute("alertMsg", alertMsg);
-					session.setAttribute("now", new Date());
-					return "redirect:/mainPage.me";
-				
+			if (loginStudent != null && !loginStudent.getStStatus().equals("Z")
+					&& !loginStudent.getStStatus().equals("N")
+					&& bcryptPasswordEncoder.matches(s.getStudentPwd(), loginStudent.getStudentPwd())) {
+				// 로그인성공
+				session.setAttribute("loginStudent", loginStudent);
+
+				alertMsg.put("icon", "success");
+				alertMsg.put("title", "로그인 성공");
+				alertMsg.put("text", "성공적으로 로그인 됐습니다");
+				session.setAttribute("alertMsg", alertMsg);
+				session.setAttribute("now", new Date());
+				return "redirect:/mainPage.me";
+
 				// 재직된 학생은 로그인 못함
-				}else if(loginStudent != null && loginStudent.getStStatus().equals("Z")) {
-					alertMsg.put("icon", "error");
-					alertMsg.put("title", "로그인 실패");
-					alertMsg.put("text", "재적된 학생은 로그인 하실 수 없습니다");
-					session.setAttribute("alertMsg", alertMsg);
-					return "redirect:/";
-					
+			} else if (loginStudent != null && loginStudent.getStStatus().equals("Z")) {
+				alertMsg.put("icon", "error");
+				alertMsg.put("title", "로그인 실패");
+				alertMsg.put("text", "재적된 학생은 로그인 하실 수 없습니다");
+				session.setAttribute("alertMsg", alertMsg);
+				return "redirect:/";
+
 				// 자퇴 학생은 로그인 못함
-				}else if(loginStudent != null && loginStudent.getStStatus().equals("N")) {
-					alertMsg.put("icon", "error");
-					alertMsg.put("title", "로그인 실패");
-					alertMsg.put("text", "자퇴한 학생은 로그인 하실 수 없습니다");
-					session.setAttribute("alertMsg", alertMsg);
-					return "redirect:/";
-				}	
-			} else{
-				Member m = new Member();
-				m.setMemberId(userId);
-				m.setMemberPwd(userPwd);
-	
-				Member loginUser = mService.loginMember(m);
-	
-				if (loginUser != null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
-					// 로그인 성공
-					session.setAttribute("loginUser", loginUser);
-	
-					alertMsg.put("icon", "success");
-					alertMsg.put("title", "로그인 성공");
-					alertMsg.put("text", "성공적으로 로그인 됐습니다");
-					session.setAttribute("alertMsg", alertMsg);
-					session.setAttribute("now", new Date());
-					return "redirect:/mainPage.me";
-				}
+			} else if (loginStudent != null && loginStudent.getStStatus().equals("N")) {
+				alertMsg.put("icon", "error");
+				alertMsg.put("title", "로그인 실패");
+				alertMsg.put("text", "자퇴한 학생은 로그인 하실 수 없습니다");
+				session.setAttribute("alertMsg", alertMsg);
+				return "redirect:/";
 			}
+		} else {
+			Member m = new Member();
+			m.setMemberId(userId);
+			m.setMemberPwd(userPwd);
+
+			Member loginUser = mService.loginMember(m);
+
+			if (loginUser != null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
+				// 로그인 성공
+				session.setAttribute("loginUser", loginUser);
+
+				alertMsg.put("icon", "success");
+				alertMsg.put("title", "로그인 성공");
+				alertMsg.put("text", "성공적으로 로그인 됐습니다");
+				session.setAttribute("alertMsg", alertMsg);
+				session.setAttribute("now", new Date());
+				return "redirect:/mainPage.me";
+			}
+		}
 
 		alertMsg.put("icon", "error");
 		alertMsg.put("title", "로그인 실패");
 		alertMsg.put("text", "아이디 또는 비밀번호가 올바르지 않습니다.");
 		session.setAttribute("alertMsg", alertMsg);
 		return "redirect:/";
-		
+
 	}
 
 	@RequestMapping("logout.me")
@@ -135,7 +136,7 @@ public class MemberController {
 	public String insertMemberForm() {
 		return "admin/adminEnrollForm";
 	}
-	
+
 	@RequestMapping("insert.me")
 	public ModelAndView insertMember(Member m, HttpSession session, HttpServletRequest request, ModelAndView mv,
 			Address ad) {
@@ -227,13 +228,13 @@ public class MemberController {
 				memberListCount = mService.selectMemberListCount();
 				mpi = Pagination.getPageInfo(memberListCount, cpage, pageLimit, boardLimit);
 				mList = mService.selectAllMember(mpi);
-				//System.out.println(memberListCount);
+				// System.out.println(memberListCount);
 				break;
 			default:
 				memberListCount = mService.selectMemberListCount(me.getMeType());
 				mpi = Pagination.getPageInfo(memberListCount, cpage, pageLimit, boardLimit);
 				mList = mService.selectAllMemberType(mpi, me.getMeType());
-				//System.out.println(memberListCount);
+				// System.out.println(memberListCount);
 				break;
 			}
 		} else {
@@ -242,19 +243,19 @@ public class MemberController {
 				memberListCount = mService.selectNameSearchMemberListCount(me.getMemberName());
 				mpi = Pagination.getPageInfo(memberListCount, cpage, pageLimit, boardLimit);
 				mList = mService.selectNameSearchAllMember(mpi, me.getMemberName());
-				//System.out.println(memberListCount);
+				// System.out.println(memberListCount);
 				break;
 			default:
 				memberListCount = mService.selectNameSearchTypeMemberListCount(me);
 				mpi = Pagination.getPageInfo(memberListCount, cpage, pageLimit, boardLimit);
 				mList = mService.selectNameSearchTypeMember(mpi, me);
-				//System.out.println(memberListCount);
+				// System.out.println(memberListCount);
 				break;
 			}
 		}
 
-		//System.out.println(mList);
-		
+		// System.out.println(mList);
+
 		for (Member m : mList) {
 			if (m.getMeType().equals("A")) {
 				m.setMeType("교직원");
@@ -267,7 +268,7 @@ public class MemberController {
 				m.setMeStatus("퇴직");
 			}
 		}
-		//System.out.println(memberListCount);
+		// System.out.println(memberListCount);
 		HashMap<String, Object> response = new HashMap<>();
 		response.put("mList", mList);
 		response.put("mpi", mpi);
@@ -279,21 +280,21 @@ public class MemberController {
 	@RequestMapping("adminReturnSchool.me")
 	public String adminReturnSchool(Model model) {
 		// todo 복학 신청자 리스트를 가져와서 승인 버튼으로 승인할 수 있게 해준다
-		 List<MemberPresence> list = mService.getReturnStudent();
-		 
-		 model.addAttribute("list", list);
-		
+		List<MemberPresence> list = mService.getReturnStudent();
+
+		model.addAttribute("list", list);
+
 		return "admin/adminReturnShcoolSelect";
 	}
-	
-	@RequestMapping(value="adminReturnSchoolForm.me", produces="json/application; utf-8")
+
+	@RequestMapping(value = "adminReturnSchoolForm.me", produces = "json/application; utf-8")
 	public String adminReturnSchoolForm(Model model, String preId) {
-		// todo 복학 신청자 리스트를 가져와서 승인 버튼으로 승인할 수 있게 해준다 
-		 int result = mService.setReturnStudent(preId);
-		 List<MemberPresence> list = mService.getReturnStudent();
-			
+		// todo 복학 신청자 리스트를 가져와서 승인 버튼으로 승인할 수 있게 해준다
+		int result = mService.setReturnStudent(preId);
+		List<MemberPresence> list = mService.getReturnStudent();
+
 //		return "redirect:adminReturnSchool.me";
-		 return new Gson().toJson(list);
+		return new Gson().toJson(list);
 	}
 
 	@RequestMapping("admintakeOffSelect.me")
@@ -305,18 +306,18 @@ public class MemberController {
 
 		return "admin/adminTakeOffSelect";
 	}
-	
+
 	@ResponseBody
-	@RequestMapping(value="admintakeOffSelectForm.me", produces="json/application; utf-8")
+	@RequestMapping(value = "admintakeOffSelectForm.me", produces = "json/application; utf-8")
 	public String adminTakeOffForm(Model model, String absId) {
-		// absence 테이블 tbStatus | student 테이블 stStatus update 
+		// absence 테이블 tbStatus | student 테이블 stStatus update
 		int result = mService.setTakeOffStudent(absId);
 		List<MemberAbsence> list = mService.getTakeOffStudent();
-		//model.addAttribute("list", list);
+		// model.addAttribute("list", list);
 
 		return new Gson().toJson(list);
 	}
-	
+
 	@RequestMapping("tuitionMakeSelect.me")
 	public String adminTuitionMake(Model model, AdminTuition tuition) {
 		List<AdminTuition> list = mService.insertAdminTuition(tuition);
