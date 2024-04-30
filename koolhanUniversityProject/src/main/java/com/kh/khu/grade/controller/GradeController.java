@@ -117,6 +117,7 @@ public class GradeController {
 		ArrayList<Course> cList = gService.selectScoreYear(stuNo);
 		ArrayList<Grade> gList = gService.selectScoreStudent(stuNo);
 		
+		System.out.println(cList);
 		map.put("cList", cList);
 		map.put("gList", gList);
 		
