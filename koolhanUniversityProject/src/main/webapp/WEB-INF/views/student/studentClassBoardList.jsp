@@ -38,7 +38,7 @@
       font-weight: 600;
       color: #1c4587;
       padding-left: 20px;
-      margin-right: 1450px;
+      margin-right: 1250px;
    }
    #mid-title{
       font-size:small;
@@ -239,10 +239,10 @@
 	               	 	</tr>
 	               	 </c:when>
 	               	 <c:otherwise>
-	               	 <c:forEach var="l" items="${ list }">	               	 
+	               	 <c:forEach var="l" items="${ list }">	      	 
 	                  <tr>
-	                  	 <input type="hidden">
-	                     <td class="bno">${l.classBoardNo}</td>
+	                  	 <input type="hidden" id="classBoardNo" value=${l.classBoardNo}>
+	                     <td class="bno">${l.cbWriter}</td>
 	                     <td>${l.cbTitle}</td>
 	                     <td>${l.cbDate}</td>
 	                     <td>${l.studentName}</td>
@@ -258,8 +258,8 @@
 		    $(document).ready(function(){
 		      $("#boardList>tbody>tr>td").click(function(){  
 		    	  console.log($(this).closest("tr").find(".bno").text());
-		    	  
-		         location.href='boardDetail.co?classNum=${classNum}&bno=' + $(this).closest("tr").find(".bno").text();
+		    	  var classBoardNo =  $(this).closest("tr").find("#classBoardNo").val();
+		         location.href='boardDetail.co?classNum=${classNum}&bno=' + $(this).closest("tr").find(".bno").text() + '&classBoardNo=' + classBoardNo;
 		      });
 		    })
 	  	 </script>    

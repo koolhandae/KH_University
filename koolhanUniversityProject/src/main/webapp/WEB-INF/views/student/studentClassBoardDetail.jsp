@@ -42,7 +42,7 @@
       font-weight: 600;
       color: #1c4587;
       padding-left: 20px;
-      margin-right: 1450px;
+      margin-right: 1250px;
    }
    #mid-title{
       font-size:small;
@@ -212,6 +212,7 @@
 <body>
    <jsp:include page="../common/header_with_sidebar.jsp"/>
    <div class="content">
+   		<input type="hidden" id="bno" value="${cb.classBoardNo}">
    		<input type="hidden" id="classNum" value="${classNum}">
    		<div class="title-area">
            <div id="title" onclick="location.href='showCourse.st'">나의 수강 조회</div>
@@ -276,8 +277,8 @@
                   <div style="text-align: center;">
                   	 <button type="bitton" class="btn btn-secondary btn-sm" onclick="history.back();">뒤로가기</button>
 	                  <c:if test="${ loginStudent.studentName eq cb.studentName }">
-	                     <button type="button" class="btn btn-outline-secondary btn-sm">수정하기</button>
-	                     <button type="button" class="btn btn-secondary btn-sm">삭제하기</button>
+	                     <button type="button" class="btn btn-outline-secondary btn-sm" onclick="updateBoardForm.st">수정하기</button>
+	                     <button type="button" class="btn btn-secondary btn-sm" id="deleteBtn">삭제하기</button>
 	                  </c:if>
                   </div>
                   <br>
@@ -295,7 +296,7 @@
                            <th style="vertical-align: middle"><button class="btn btn-secondary" onclick="addReply();">등록하기</button></th>
                          </tr>
                          <tr>
-                            <td colspan="3">댓글 (<span id="rcount">3</span>) </td> 
+                            <td colspan="3">댓글 (<span id="rcount">0</span>) </td> 
                          </tr>
                      </thead>
                      <tbody>
@@ -322,6 +323,33 @@
       })
    </script>
    
+   <script>
+   $("#deleteBtn").click(function(){
+	   var bno = $("#bno").val();
+	   console.log("타냐?");
+	   console.log(bno);
+	   $.ajax({
+		   url:"deleteBoard.st",
+		   data:{bno:bno},
+		   success:function(result){
+			   console.log("akax성공");
+				if(result>0){
+					location.href="board.co";
+				}else{
+					Swal.fire({
+			            icon: 'warning',
+			            text: '게시글 삭제에 실패했습니다!' 
+			        });
+				}
+			   
+		   }, error:function(){
+			   console.log("ajax실패");
+		   }
+	   })
+   })
+   
+   </script>   
+      
       
    <script>
 	$("#board").click(function(){

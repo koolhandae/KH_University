@@ -26,5 +26,7 @@ public class ClassBoard {
 	private int cbCount;
 	private String studentName;
 	private String className;
+	private String classNum;
+	private int rNum;
 	
 }

@@ -99,6 +99,7 @@ public class StudentController {
 		
 		ArrayList<ClassNotice> list = sService.selectClassNoticeList(pi, classNum);
 		
+		System.out.println("노티스리스트" + list);
 		session.setAttribute("classNum", classNum);
 		session.setAttribute("classNo", classNo);
 		
@@ -287,8 +288,10 @@ public class StudentController {
 	
 	@RequestMapping("noticeDetail.co")
 	public String searchDetailClass(@RequestParam(value="classNum") String classNum,
-			                        @RequestParam(value="cno")String cno, Model model) {
-		int noticeCount = sService.increaseCount(classNum, cno);
+			                        @RequestParam(value="cno")String cno,
+			                        @RequestParam(value="classNoticeNo")String classNoticeNo, Model model) {
+		
+		int noticeCount = sService.increaseCount(classNum, classNoticeNo);
 		
 		//System.out.println("noticeCount" + noticeCount);
 		

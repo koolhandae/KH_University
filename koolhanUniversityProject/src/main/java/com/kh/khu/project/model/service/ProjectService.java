@@ -66,4 +66,7 @@ public interface ProjectService {
 	ArrayList<StudentProject> selectStudentNoneProject(int studentNo, String classNum);
 	
 	StudentProject projectFileView(int studentNo, String classNum, String pjno);
+	
+	// 교수용 학생과제제출확인용
+	ArrayList<StudentProject> stuPjFileDownload(int pjNo);
 }

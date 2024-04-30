@@ -42,9 +42,12 @@ public interface ClassService {
 	
 	
 	// 강의실 자유게시판 상세 조회
-	int classBoardCount(String bno, String classNum);
+	int classBoardCount(int classBoardNo, String classNum);
 	ClassBoard selectClassDetailBoard(String bno, String classNum);
 
+	// 강의실 자유게시판 등록
 	int insertClassBoard(ClassBoard cb);
 	
+	// 강의실 자유게시판 삭제
+	int deleteBoardStudent(int ClassNo, int bno);
 }

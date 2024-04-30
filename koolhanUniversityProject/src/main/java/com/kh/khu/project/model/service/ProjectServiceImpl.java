@@ -134,6 +134,11 @@ public class ProjectServiceImpl implements ProjectService{
 		return pDao.projectFileView(sqlSession, studentNo, classNum, pjno);
 	}
 
+	@Override
+	public ArrayList<StudentProject> stuPjFileDownload(int pjNo) {
+		return pDao.stuPjFileDownload(sqlSession, pjNo);
+	}
+
 
 	
 
