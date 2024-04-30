@@ -124,4 +124,8 @@ public class ProjectDao {
 		
 		return (StudentProject)sqlSession.selectOne("projectMapper.projectFileView", parameters);
 	}
+	
+	public ArrayList<StudentProject> stuPjFileDownload(SqlSessionTemplate sqlSession, int pjNo) {
+		return (ArrayList)sqlSession.selectList("projectMapper.stuPjFileDownload",pjNo);
+	}
 }

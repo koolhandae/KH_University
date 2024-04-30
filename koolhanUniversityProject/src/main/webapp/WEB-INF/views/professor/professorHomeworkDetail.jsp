@@ -129,7 +129,7 @@
     <div id="contentDiv" class="bg-white">
         <div>
             <h3>과제 현황 상세보기</h3>
-
+			<input type="hidden" id="pjNo" name="pjNo" value="${p.pjNo }">
  
                 <div class="form-group">
                     
@@ -200,27 +200,52 @@
 			
 
             <tbody>
-                <tr>
-                    <td>김뫄뫄</td>
-                    <td>132958392</td>
-                    <td>미제출</td>
-                    <td>
-                        <a href="리소스 내의 파일경로" download class="btn btn-outline-primary">다운로드</a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>차은우</td>
-                    <td>489513249</td>
-                    <td>제출완료</td>
-                    <td>
-                        <a href="리소스 내의 파일경로" download class="btn btn-outline-primary">다운로드</a>
-                    </td>
-                </tr>
             </tbody>
 
         </table>
     </div>
+    
+    <script>
+
+    
+    	$(function(){
+    		
+        	let pjNo = $("#pjNo").val();
+        	//let lectureSelect = $("#lectureSelect").text();
+        	console.log(pjNo);
+        	//console.log(lectureSelect);
+    		
+    		
+    		$.ajax({
+    			url:"professorStuPjFileDownload.do",
+    			data:{
+    				pjNo:pjNo
+    			},
+    			success:function(sp){
+    				console.log(sp);
+			    	let value = "";
+			    	for(let i in sp){
+			    		value += "<tr>"
+			    			     + "<td>" + sp[i].studentName + "</td>"
+			    			     + "<td>" + sp[i].studentId + "</td>"
+			    			     + "<td class='status'>" + sp[i].stpStatus+ "</td>"
+			    			     + "<td><a href='" + sp[i].stpChangeName + "' download='" + sp[i].stpOriginName + "' class='btn btn-outline-primary'>다운로드</a></td>" 
+			    			     + "</tr>";
+			    	
+			    	}
+			    	
+			    	$("#footerTable tbody").html(value);
+
+    			},error:function(){
+    				
+    			}
+    			
+    		})
+    		
+
+    		
+    	})
+    </script>
 
     <jsp:include page="../common/footer.jsp"/>
 </body>

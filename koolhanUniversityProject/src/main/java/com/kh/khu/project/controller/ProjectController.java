@@ -348,5 +348,15 @@ public class ProjectController {
 	    return file;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="professorStuPjFileDownload.do", produces="application/json; charset=utf-8")
+	public ArrayList<StudentProject> professorStuPjFileDownload(HttpSession session, int pjNo) {
+		System.out.println("pjNo"+pjNo);
+		ArrayList<StudentProject> sp = pService.stuPjFileDownload(pjNo);
+		System.out.println("sp"+sp);
+		
+		return sp;
+	}
+	
 
 }
