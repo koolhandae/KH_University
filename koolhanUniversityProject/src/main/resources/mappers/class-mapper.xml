@@ -189,16 +189,9 @@
 	</select>
 		
 	<select id="selectClassNoticeList" resultMap="ClassNoticeResult">
-		 select 
-             class_notice_no,
-             cn_title,
-             cn_date,
-             cn_count,
-             cn_writer,
-             class_name
-         from (
-             select 
-                 rownum as class_notice_no,
+		select 
+                 rownum as ref_class_no,
+                 class_notice_no,
                  cn_title,
                  cn_date,
                  cn_count,
@@ -225,8 +218,6 @@
                  order by 
                      class_notice_no desc
              )
-         )
-
 	</select>	
 	
 	<update id="increaseCount">
@@ -235,11 +226,12 @@
 			where class_notice_no = (
 			    select class_notice_no
 			    from (
-			        select rownum as rnum,
+			        select 
 			               class_notice_no,
 			               cn_count
 			        from (
 			            select 
+                            distinct 
 			                class_notice_no,
 			                cn_count
 			            from class_notice cn
@@ -250,9 +242,7 @@
 			            and course_status = 'Y'
 			            order by class_notice_no desc
 			        )
-			    )
-			    where rnum = #{cno}
-			)
+			)where class_notice_no = #{classNoticeNo})
 </update>
 
 
@@ -276,7 +266,8 @@
 			    select class_notice_no
 			    from (
 			        select rownum as rnum,
-			                 class_notice_no
+			                   class_notice_no
+                             , cn_writer
                              , cn_title
                              , cn_content
                              , cn_date
@@ -284,21 +275,33 @@
                              , cn_change_name
                              , cn_origin_name
                              , class_name
-			        from (
-			            select 
-			                *
-			            from class_notice cn
-			            join class c on c.class_no = cn.ref_class_no
-			            join course co on co.class_no = cn.ref_class_no
-			            where cn_status ='Y'
-			            and c.class_num = #{classNum}
-			            and course_status = 'Y'
-			            order by class_notice_no desc
-			        )
-			    )
-			    where rnum = #{cno}
-			)
-            and cn_status = 'Y'
+			       from (
+                     select distinct
+                         cn.cn_content,
+                         cn.cn_title,
+                         cn.cn_date,
+                         cn.cn_count,
+                         cn.cn_writer,
+                         c.class_name,
+                         cn.class_notice_no,
+                         cn.cn_origin_name,
+                         cn.cn_change_name
+                     from 
+                         class_notice cn
+                     join 
+                         class c ON (c.class_no = cn.ref_class_no)
+                     join 
+                         course co ON (co.class_no = cn.ref_class_no)
+                     where 
+                         cn_status ='Y'
+                         and c.class_num = #{classNum}
+                     order by 
+                         class_notice_no desc
+                        )
+                    )
+                    where rnum = #{cno}
+                )
+                and cn_status = 'Y'
 	</select>		
 		
 	<select id="selectCoursePlan" resultMap="classResult">

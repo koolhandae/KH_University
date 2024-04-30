@@ -42,7 +42,7 @@
       font-weight: 600;
       color: #1c4587;
       padding-left: 20px;
-      margin-right: 1450px;
+      margin-right: 1250px;
    }
    #mid-title{
       font-size:small;
@@ -296,7 +296,7 @@
                            <th style="vertical-align: middle"><button class="btn btn-secondary" onclick="addReply();">등록하기</button></th>
                          </tr>
                          <tr>
-                            <td colspan="3">댓글 (<span id="rcount">3</span>) </td> 
+                            <td colspan="3">댓글 (<span id="rcount">0</span>) </td> 
                          </tr>
                      </thead>
                      <tbody>

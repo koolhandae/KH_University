@@ -17,7 +17,13 @@
 <!-- fullcalendar 언어 CDN -->
 <script
 	src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'></script>
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script> -->
+
+
+
 
 <!--부트스트랩-->
 <link
@@ -286,6 +292,12 @@ body {
 .navbar, .navbar-nav {
 	display: flex !important;
 }
+#testTitle{
+	cursor:pointer;
+}
+#calendar a.fc-event {
+	color: #fff;
+}
 </style>
 </head>
 <body>
@@ -302,7 +314,11 @@ body {
 		</div>
 
 
-		<div id='calendar'></div>
+		<div id='calendar'>
+		
+		<br> <span id="testTitle">🔔 자격증일정을 확인하고 일정에 등록해보세요!</span>
+		</div>
+		<br>
 	</div>
 
 	<!-- 부트스트랩 모달 일정추가 -->
@@ -317,7 +333,7 @@ body {
 				</div>
 				<div class="modal-body">
 					<table id="modaltable">
-						<input ="hidden" id="calendarNo">
+						<input type="hidden" id="calendarNo">
 						<tr>
 							<th>일정제목 :</th>
 							<td><input type="text" id="modal_title"></td>
@@ -335,7 +351,7 @@ body {
 							<td><input type="color" id="selectColor"></td>
 						</tr>
 					</table>
-					<br> <span id="testTitle">🔔 자격증일정을 확인하고 일정에 등록해보세요!</span>
+				
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
@@ -428,13 +444,24 @@ body {
 									eventRemove : function(e) {
 										insertModalOpen(e);
 									},
+									
+									eventDidMount: function(info) {
+							            tippy(info.el, {
+							                content:  info.event._def.title,
+							                placement: 'top',
+							                offset: [0, 0],
+							                interactive: true,
+							            });
+							        },
 
 									eventSources : [
 											{
 												googleCalendarId : 'ko.south_korea#holiday@group.v.calendar.google.com',
 												color : 'white',
 												textColor : 'red'
-											}, ]
+											}, 
+									]
+							
 								});
 
 						function insertModalOpen(e) {
@@ -707,6 +734,59 @@ body {
 										}
 									});
 								});
+						
+						$("#testTitle").on("click", function(){
+							
+							$.ajax({
+								url:"openTest.st",
+								success:function(data){
+									console.log("ajax성공");
+									console.log(data.data);
+									const dataArr = data.data;
+										
+									for(let i in dataArr){
+										
+										let item = dataArr[i]
+										
+											calendar.addEvent({
+												allDay : true,
+												title : item.시험장소 + ' - 접수기간',
+												start : new Date(item.접수시작일),
+												end : new Date(item.접수마감일),
+												backgroundColor : '#518fc7',
+												borderColor : '#518fc7',
+												Color : '#ffffff'
+											});
+											
+											calendar.addEvent({
+												allDay : true,
+												title : item.시험장소 + ' - 시험일',
+												start : new Date(item.시험일),
+												end : new Date(new Date(item.시험일).getTime() + 24 * 60 * 60 * 1000),
+												backgroundColor : '#74bdf2',
+												borderColor : '#74bdf2',
+												Color : '#ffffff'
+											});
+											
+											calendar.addEvent({
+												allDay : true,
+												title : item.시험장소 + ' - 힙격발표일',
+												start : new Date(item.합격자발표일),
+												end : new Date(new Date(item.합격자발표일).getTime() + 24 * 60 * 60 * 1000),
+												backgroundColor : '#ffc107',
+												borderColor : '#ffc107',
+												Color : '#ffffff'
+											});
+											
+											
+									}
+
+								}, error:function(){
+									console.log("ajax실패");
+								}
+								
+							})
+						})
 
 						calendar.render(); // 딜력을 띄워줌
 					});

@@ -103,10 +103,10 @@ public class StudentDao {
 	}
 	
 	/* 학생 수강 강의 세부 조회 (공지사항 디테일 조회수)*/
-	public int increaseCount(SqlSessionTemplate sqlSession, String classNum, String cno) {
+	public int increaseCount(SqlSessionTemplate sqlSession, String classNum, String classNoticeNo) {
 		Map<String, String> parameters = new HashMap();
 	    parameters.put("classNum", classNum);
-	    parameters.put("cno", cno);
+	    parameters.put("classNoticeNo", classNoticeNo);
 		return sqlSession.update("classMapper.increaseCount", parameters);
 	}
 	

@@ -22,6 +22,6 @@ public class TuitionPayment {
 	private int tpNo;
 	private int ttNo;
 	private String tpDate;
-	private int TotalPrice;
+	private int totalPrice;
 	
 }

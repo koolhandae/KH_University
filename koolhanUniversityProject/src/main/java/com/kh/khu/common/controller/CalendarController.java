@@ -1,5 +1,11 @@
 package com.kh.khu.common.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -115,4 +121,34 @@ public class CalendarController {
 		return new Gson().toJson(result);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="openTest.st", produces="applicaition/json; charset=utf-8")
+	public String opentTest() throws IOException {
+		
+		String serviceKey = "aPIbC0sQgyOQr%2Blv7YNDyNTU0Cfi1XMgwTPXk3zJmU%2FOhGVQWBYFKLVou0iP9l5GRMnB09hrGD%2Bhlo2qPg6J1w%3D%3D";
+		
+		String url = "https://api.odcloud.kr/api/15062838/v1/uddi:aca01695-3ee3-4c0b-a972-f832a2154dd6";
+		url += "?page=9";
+		url += "&perPage=110";
+		url += "&returnType=JSON";
+		url += "&serviceKey=" + serviceKey;
+		
+		URL requestUrl = new URL(url);
+		HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection();
+		urlConnection.setRequestMethod("GET");
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+		
+		String responseText = "";
+		String line;
+		
+		while((line = br.readLine()) != null) {
+			responseText += line;
+		}
+		
+		br.close();
+		urlConnection.disconnect();
+				
+		return responseText;
+	}
 }

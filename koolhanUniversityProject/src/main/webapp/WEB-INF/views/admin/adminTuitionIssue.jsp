@@ -148,7 +148,6 @@
         <br><br>
         <table id="boardList" class="table" align="center" width="700px">
           <tr>
-            <th>고지서 번호</th>
             <th>학번</th>
             <th>등록금</th>
             <th>장학금</th>
@@ -156,7 +155,6 @@
 
 	 	 <c:forEach var="item" items="${list}">
 			   		  <tr align="center">
-			   		  	<td>${item.ttNo}</td>
 			   		  	<td>${item.studentId}</td>
 			   		  	<td>${item.tuition} </td>
 			   		  	<td>${item.scholarShip}</td>
