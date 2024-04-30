@@ -65,7 +65,7 @@
       background-color: white;
       margin-top: 15px;
       width: 100%;
-      height: 500px;
+	  height: auto;
    }
    .list-content{
       padding: 20px;
