@@ -246,4 +246,9 @@ public class StudentServiceImpl implements StudentService {
 		return sDao.insertProfilePicture(sqlSession, pp);
 	}
 
+	@Override
+	public ArrayList<Student> selectTranscript(Student s) {
+		return sDao.selectTranscript(sqlSession, s);
+	}
+
 }
