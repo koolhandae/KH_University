@@ -39,6 +39,7 @@
       color: #1c4587;
       padding-left: 20px;
       margin-right: 1200px;
+      cursor: pointer;
    }
    #mid-title{
       font-size:small;
