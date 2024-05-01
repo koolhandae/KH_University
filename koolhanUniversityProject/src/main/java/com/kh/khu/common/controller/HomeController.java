@@ -195,14 +195,13 @@ public class HomeController {
 
 		resultMap.put("userId", userId);
 		resultMap.put("checkNum", checkNum);
-
 		return ResponseEntity.ok().body(resultMap);
 
 	}
 
 	@RequestMapping("changePwdForm.me")
 	public ModelAndView changePwdForm(String memberId, String checkNum, ModelAndView mv, HttpSession session) {
-
+		
 		// 페이지뒤에 난수가 없을경우에는 못바꾸게 막음!
 		if (checkNum != "") {
 //			System.out.println("changePwdForm" + memberId);
@@ -395,4 +394,37 @@ public class HomeController {
 		return map;
 	}
 	
+	@ResponseBody
+	@RequestMapping("sendmail.doo")
+	public ResponseEntity<Map<String, Object>> sendmailDoo(String email, String userId, HttpSession session) {
+
+		Map<String, Object> resultMap = new HashMap();
+		Random random = new Random();
+		int checkNum = random.nextInt(888888) + 111111;
+		String url = "http://192.168.20.12:8808/khu/changePwdForm.me?checkNum=" + checkNum;
+		String setFrom = "koolhandae@gmail.com"; 
+		String toMail = email;
+		String title = "쿨한대학교 학사정보시스템 비밀번호 재설정 인증 메일 입니다.";
+		String content = "<h1 style='color:#1c4587'>임시 비밀번호 안내입니다.</h1>" + "<br>" + "<h4>안녕하세요.</h4>"
+				+ "<h4>아래 링크를 통해 비밀번호 재설정이 가능합니다.</h4>" + "<h3><a href='" + url
+				+ "' style='color:#1c4587; text-decoration:none;'>'링크확인'</a>" + "</h4>"
+				+ "<h4> ↑ 클릭 후, 비밀번호 재설정이 가능합니다.</h4><br>" + "<h5>감사합니다😀</h5><br><br>";
+		try {
+			MimeMessage message = mailSender.createMimeMessage(); 
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+
+			helper.setFrom(setFrom);
+			helper.setTo(toMail);
+			helper.setSubject(title);
+			helper.setText(content, true);
+			mailSender.send(message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		resultMap.put("userId", userId);
+		resultMap.put("checkNum", checkNum);
+		session.setAttribute("targetId", userId);
+		return ResponseEntity.ok().body(resultMap);
+
+	}
 }
