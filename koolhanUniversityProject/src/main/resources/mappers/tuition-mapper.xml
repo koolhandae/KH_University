@@ -123,7 +123,7 @@
 		     , tp_date
 		  from tuition_student
 		  join tuition_payment using (tt_no)
-		 where student_id = #{studentNo}	
+		 where student_id = #{studentId}
 	</select>
 	
 	<insert id="insertTuitionPay">

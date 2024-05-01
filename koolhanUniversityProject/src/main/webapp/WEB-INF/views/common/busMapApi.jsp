@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, 1BBg3FRZBiHjilPktaL2DqvaItpNpWJuuSiQM1qI">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, fRiqV0PozEcfRmcbuJ3j2gBZCUECcDV7W8NV9EZb">
 <title>간단한 지도 표시하기</title>
 <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=dnjen0pxzw"></script>
 </head>

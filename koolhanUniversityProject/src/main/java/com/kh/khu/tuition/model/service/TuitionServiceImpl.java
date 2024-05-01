@@ -136,8 +136,8 @@ public class TuitionServiceImpl implements TuitionService{
 
 
 	@Override
-	public ArrayList<Tuition> studentTuition(int studentNo) {
-		return tDao.studentTuition(sqlSession, studentNo);
+	public ArrayList<Tuition> studentTuition(String studentId) {
+		return tDao.studentTuition(sqlSession, studentId);
 	}
 
 

@@ -547,7 +547,7 @@
 								//이벤트핸들러 이벤트리스너~
 								//커넥션이 연결됏을때 이걸 탐
 								//그래서 보통은 onmessage랑 onclose랑 onerror는 커넥션이 된 곳으로 들어가는게 좋음 여기!
-								var ws = new WebSocket("ws://localhost:8808/khu/echo");
+								var ws = new WebSocket("ws://192.168.20.12:8808/khu/echo");
 								socket = ws;
 								ws.onopen = function (event) {
 									console.log("WebSocket 연결 성공");
@@ -651,13 +651,13 @@
 								let baseTime = "";
 								// 결과 : 21
 								// Base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 (1일 8회)
-								if (hoursMin >= 2300 && hoursMin <= 0159) {
+								if (hoursMin >= 2300 && hoursMin <= "0159") {
 									baseTime = "2300";
-								} else if (hoursMin >= 0200 && hoursMin <= 0459) {
+								} else if (hoursMin >= "0200" && hoursMin <= "0459") {
 									baseTime = "0200";
-								} else if (hoursMin >= 0500 && hoursMin <= 0759) {
+								} else if (hoursMin >= "0500" && hoursMin <= "0759") {
 									baseTime = "0500";
-								} else if (hoursMin >= 0800 && hoursMin <= 1059) {
+								} else if (hoursMin >= "0800" && hoursMin <= 1059) {
 									baseTime = "0800";
 								} else if (hoursMin >= 1100 && hoursMin <= 1359) {
 									baseTime = "1100";

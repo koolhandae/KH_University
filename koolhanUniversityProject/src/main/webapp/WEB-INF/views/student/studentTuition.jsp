@@ -130,31 +130,31 @@
                <th>납부구분</th>
                <th>납부일자</th>
             </tr>
-            <c:if test="${empty list}">
+            <%-- <c:if test="${empty list}">
             	<tr>
             		<td colspan="7" align="center"><h2>납부 내역이 없습니다</h2></td>
             	</tr>
-            </c:if>
-          <c:forEach var="st" items="${ list }">
+            </c:if> --%>
+<%--           //<c:forEach var="st" items="${ list }"> --%>
             <tr>
-               <td>${ st.tsYear }</td>
-               <td>${ st.tsSemester }</td>
-               <td>${ st.tuition }</td>
-               <td>${ st.scholarship }</td>
-               <td>${ st.tuition - st.scholarship }</td>
-               <td>
-        		 <c:choose>
-                     <c:when test="${ st.tsStatus eq 'N' }">미납</c:when>
-                     <c:when test="${ st.tsStatus eq 'Y' }">납입완료</c:when>
-                     <c:otherwise>처리중</c:otherwise>
-                 </c:choose>
-               </td>
-               <td>
-               	<fmt:parseDate value="${st.tpDate}" pattern="yyyy-MM-dd" var="tpDate" />
-               	<fmt:formatDate value="${tpDate}" pattern="yyyy-MM-dd" />
-               </td>
+               <td>2024년도</td>
+               <td>1학기</td>
+               <td>1,234,567</td>
+               <td>617,284</td>
+               <td>617,284</td>
+               <td>납부완료</td>
+               <td>2024-05-02</td>
             </tr>
-          </c:forEach>
+            <tr>
+               <td>2023년도</td>
+               <td>2학기</td>
+               <td>3,240,000</td>
+               <td>0</td>
+               <td>3,240,000</td>
+               <td>미납</td>
+               <td>-</td>
+            </tr>
+<%--           //</c:forEach> --%>
          </table>
       
       </div>

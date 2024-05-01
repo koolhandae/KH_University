@@ -60,11 +60,11 @@ public class TuitionController {
 		
 		Student student = (Student)session.getAttribute("loginStudent");
 		
-		int studentNo = student.getStudentNo();
+		String studentId = student.getStudentId();
 		
-		ArrayList<Tuition> list = tService.studentTuition(studentNo);	
+		ArrayList<Tuition> list = tService.studentTuition(studentId);	
 		
-		model.addAttribute("studentId", studentNo);
+		model.addAttribute("studentId", studentId);
 		model.addAttribute("list", list);
 		
 		
