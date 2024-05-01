@@ -39,6 +39,7 @@
       color: #1c4587;
       padding-left: 20px;
       margin-right: 1200px;
+      cursor: pointer;
    }
    #mid-title{
       font-size:small;
@@ -260,9 +261,10 @@
 	     <script>
 		    $(document).ready(function(){
 		      $("#boardList>tbody>tr>td").click(function(){  
+               $("#boardList>tbody>tr>td").css("cursor", "pointer");
 		    	  console.log($(this).closest("tr").find(".bno").text());
 		    	  var classBoardNo =  $(this).closest("tr").find("#classBoardNo").val();
-		    	  if(classNoticeNo != null){
+		    	  if(classBoardNo != null){
 		        	 location.href='boardDetail.co?classNum=${classNum}&bno=' + $(this).closest("tr").find(".bno").text() + '&classBoardNo=' + classBoardNo;
 		    	  }
 		    	});
