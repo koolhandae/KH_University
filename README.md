@@ -126,31 +126,35 @@ ERD Cloud
 
 &nbsp; **회원 관리**
    - 학생 등록
+     
     <img src="(https://github.com/leejm9/Cool-Trade/assets/151510159/ed23df07-0e96-41ac-bf85-22eb17175cb1">
     
    - 교수 등록
+     
     <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/93704986-3dff-47c3-bd06-878df9b24a97">
     
    - 교직원 등록
+     
     <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/4918f78f-b128-4a2c-be11-ab75c82e82b0">
     
    - 이메일 확인
+     
     <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/633f062b-d71b-4485-98e6-84a7be3ab7c1">
     
 &nbsp; **개인정보 변경**
    - 전화번호 변경
-   - <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/27013805-260f-4bcc-8b19-0b62cd3eaa7f">
+     <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/27013805-260f-4bcc-8b19-0b62cd3eaa7f">
 
    - 주소 변경
-   - <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/357d6f97-b5d0-49e3-b540-dd23cb61c337">
+   <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/357d6f97-b5d0-49e3-b540-dd23cb61c337">
    
    - 프로필 사진변경
-   - <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/3aa300b2-cab0-412d-a9ef-4aeebe332691">
+     <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/3aa300b2-cab0-412d-a9ef-4aeebe332691">
 
    - 비밀번호 변경
-   - <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/7034fd6d-0edf-4d35-912d-5611b8874cf5">
+     <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/7034fd6d-0edf-4d35-912d-5611b8874cf5">
    - 비밀번호 변경 확인
-   - <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/1df7b682-d594-4ca9-9c62-8552f5a13cc8">
+     <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/1df7b682-d594-4ca9-9c62-8552f5a13cc8">
 
 &nbsp; **회원 전체 조회**
     - 학생 상태별 조회
