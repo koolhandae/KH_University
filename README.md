@@ -126,84 +126,84 @@ ERD Cloud
 
 &nbsp; **회원 관리**
    - 학생 등록
-    <img src="(https://github.com/leejm9/Cool-Trade/assets/151510159/ed23df07-0e96-41ac-bf85-22eb17175cb1">
+<img src="(https://github.com/leejm9/Cool-Trade/assets/151510159/ed23df07-0e96-41ac-bf85-22eb17175cb1">
     
    - 교수 등록
-    <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/93704986-3dff-47c3-bd06-878df9b24a97">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/93704986-3dff-47c3-bd06-878df9b24a97">
     
    - 교직원 등록
-    <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/4918f78f-b128-4a2c-be11-ab75c82e82b0">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/4918f78f-b128-4a2c-be11-ab75c82e82b0">
     
    - 이메일 확인
-    <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/633f062b-d71b-4485-98e6-84a7be3ab7c1">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/633f062b-d71b-4485-98e6-84a7be3ab7c1">
     
 &nbsp; **개인정보 변경**
    - 전화번호 변경
-   - <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/27013805-260f-4bcc-8b19-0b62cd3eaa7f">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/27013805-260f-4bcc-8b19-0b62cd3eaa7f">
 
    - 주소 변경
-   - <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/357d6f97-b5d0-49e3-b540-dd23cb61c337">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/357d6f97-b5d0-49e3-b540-dd23cb61c337">
    
    - 프로필 사진변경
-   - <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/3aa300b2-cab0-412d-a9ef-4aeebe332691">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/3aa300b2-cab0-412d-a9ef-4aeebe332691">
 
    - 비밀번호 변경
-   - <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/7034fd6d-0edf-4d35-912d-5611b8874cf5">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/7034fd6d-0edf-4d35-912d-5611b8874cf5">
    - 비밀번호 변경 확인
-   - <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/1df7b682-d594-4ca9-9c62-8552f5a13cc8">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/1df7b682-d594-4ca9-9c62-8552f5a13cc8">
 
 &nbsp; **회원 전체 조회**
     - 학생 상태별 조회
-    <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/abd97ddc-8852-4d93-867c-3f4114102396">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/abd97ddc-8852-4d93-867c-3f4114102396">
 
     - 교수 상태별 조회
-    <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/f0744ad7-3e0f-4978-86c9-6093f25c4306">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/f0744ad7-3e0f-4978-86c9-6093f25c4306">
 
     - 학생 상태별 그래프 제작
-    <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/4d62bec8-2a51-4518-ae66-6c6127c0c21b">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/4d62bec8-2a51-4518-ae66-6c6127c0c21b">
 
 &nbsp; **중앙도서관 정보제공**
     - 중앙도서관 서적 검색
-    <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/789fe776-c54d-46f1-8079-b0578a5982ec">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/789fe776-c54d-46f1-8079-b0578a5982ec">
 
 &nbsp; **자유게시판**
     - 자유게시판 작성
-    <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/166f48d7-a7c6-4907-ad62-7fb48dd0dfa5">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/166f48d7-a7c6-4907-ad62-7fb48dd0dfa5">
 
     - 자유게시판 수정
-    <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/3b488a33-a1ba-4ae8-b01d-cf3326de64fb">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/3b488a33-a1ba-4ae8-b01d-cf3326de64fb">
 
     - 자유게시판 삭제
-    <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/3fb6b44f-b843-4cb1-a65f-b534f88c1920">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/3fb6b44f-b843-4cb1-a65f-b534f88c1920">
 
     - 댓글 작성
-    <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/5dcb885a-e7ba-42ce-9e3d-7b4234fa0522">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/5dcb885a-e7ba-42ce-9e3d-7b4234fa0522">
 
 &nbsp; **공지사항**
     - 공지사항 작성
-    <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/7343c22b-a988-483e-97ae-307c48496236">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/7343c22b-a988-483e-97ae-307c48496236">
 
     - 공지사항 수정
-    <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/e66a7a61-d32e-4db9-99c9-a102332502d4">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/e66a7a61-d32e-4db9-99c9-a102332502d4">
 
     - 공지사항 삭제
-    <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/f76375dc-e9ca-4085-9d89-28bc8dc02b17">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/f76375dc-e9ca-4085-9d89-28bc8dc02b17">
 
 &nbsp; **증명서 발급**
     - 성적 증명서
-    <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/5e347e40-e033-4a6f-a42d-10583fbfe4d0">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/5e347e40-e033-4a6f-a42d-10583fbfe4d0">
 
     - 재학 증명서
-    <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/be334d04-4015-4ee9-9537-3f41fc51ec30">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/be334d04-4015-4ee9-9537-3f41fc51ec30">
 
     - 등록금 납부 영수증
-    <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/6fcc8eca-5851-474e-8039-45ec1723175d">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/6fcc8eca-5851-474e-8039-45ec1723175d">
 
     - 등록금 납부 고지서
-    <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/cd8373a3-2033-4428-b6ce-f111081f6262">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/cd8373a3-2033-4428-b6ce-f111081f6262">
     
     - 졸업 증명서
-    <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/f70443dc-8821-47d5-8bd3-77e7b8cfc4ee">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/f70443dc-8821-47d5-8bd3-77e7b8cfc4ee">
 
 조연정
 
