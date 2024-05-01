@@ -9,9 +9,13 @@
 
 <br><br>
 ## 📆 개발기간
-2024.
+&nbsp; - 2024.03.27 ~ 2024.03.29 - 프로젝트 분석
 
-&nbsp; - 2024.
+&nbsp; - 2024.04.01 ~ 2024.04.05 - 화면 및 데이터 설계
+
+&nbsp; - 2024.04.08 ~ 2024.05.01 - 화면 구현, 기능 개발, 프로젝트 검수 및 테스트
+
+&nbsp; - 2024.05.02 - 프로젝트 발표
 
 <br><br>
 ## 👥 멤버 : 정동석(Project Leader), 조연정, 김도현, 어수지
@@ -125,8 +129,9 @@ ERD Cloud
 **정동석**
 
 &nbsp; **회원 관리**
-- 학생 등록
-<img src="(https://github.com/leejm9/Cool-Trade/assets/151510159/ed23df07-0e96-41ac-bf85-22eb17175cb1">
+
+-학생 등록
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/ed23df07-0e96-41ac-bf85-22eb17175cb1">
 
 -교수 등록
 <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/93704986-3dff-47c3-bd06-878df9b24a97">
