@@ -80,6 +80,7 @@ body {
 	color: #1c4587;
 	padding-left: 30px;
 	padding-top: revert-layer;
+	cursor:pointer;
 }
 
 #mid-title {
@@ -467,7 +468,7 @@ body {
 						function insertModalOpen(e) {
 							
 							console.log(e);
-							if (e.event != undefined) {
+							if (e.event != undefined || e.event != null) {
 								console.log(e.event.id);
 								console.log(e.event.endStr);
 								var calDate = e.event.endStr;

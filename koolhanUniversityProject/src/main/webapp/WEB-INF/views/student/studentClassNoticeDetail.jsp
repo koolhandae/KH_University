@@ -40,6 +40,7 @@
         color: #1c4587;
         padding-left: 20px;
         margin-right: 1200px;
+        cursor: pointer;
      }
      #mid-title{
         font-size:small;
@@ -226,6 +227,7 @@
       <div id="fin-title">나의수강조회</div>
    </div>
    <div class="lecture-area">
+   	  <input type="hidden" value="${ classNum }" id="classNum">
       <div id="lecture-main-title">${ cd.className }</div>
       <div id="lecture-mid-title">강의실</div>
    </div>
@@ -330,6 +332,10 @@
 	   	$(document).ready(function(){
    			$("#classPlan").click(function(){
   				var classNum = $(".content").find("#classNum").val();  	
+
+  				$("#notice").css({"background-color": "white","color": "#1c4587"});
+  				$("#classPlan").css({ "background-color": "#1c4587", "color": "white" });
+  		         
   				
    				console.log(classNum); 			
    			 $.ajax({
