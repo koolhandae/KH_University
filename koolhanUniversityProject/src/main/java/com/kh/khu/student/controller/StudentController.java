@@ -86,13 +86,14 @@ public class StudentController {
 		//System.out.println("CONclassNum = " + classNum);
 		
 		ArrayList<Course> c = sService.selectClassName(classNum);
-		int classNo = c.get(0).getClassNo();
-		
-		//System.out.println("classNo" + classNo);
-		//System.out.println("course" + c);
-			
-		String className = c.get(0).getClassName();
 
+		int classNo = c.get(0).getClassNo();
+		String className = c.get(0).getClassName();
+		
+		System.out.println("course" + c);
+		System.out.println("classNo" + classNo);		
+		System.out.println("className" + className);
+			
 		int listCount = sService.selectListCount(classNum);		
 		
 		 

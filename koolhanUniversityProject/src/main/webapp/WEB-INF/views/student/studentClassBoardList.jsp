@@ -259,8 +259,10 @@
 		      $("#boardList>tbody>tr>td").click(function(){  
 		    	  console.log($(this).closest("tr").find(".bno").text());
 		    	  var classBoardNo =  $(this).closest("tr").find("#classBoardNo").val();
-		         location.href='boardDetail.co?classNum=${classNum}&bno=' + $(this).closest("tr").find(".bno").text() + '&classBoardNo=' + classBoardNo;
-		      });
+		    	  if(classNoticeNo != null){
+		        	 location.href='boardDetail.co?classNum=${classNum}&bno=' + $(this).closest("tr").find(".bno").text() + '&classBoardNo=' + classBoardNo;
+		    	  }
+		    	});
 		    })
 	  	 </script>    
 	     <c:if test="${ not empty list}">    

@@ -426,7 +426,10 @@
 	<script>
 		$(document).ready(function(){
 			$("#classPlan").click(function(){
-			   var classNum = $(".content").find("#classNum").val();  	
+			   var classNum = $(".content").find("#classNum").val();  
+			   
+			   $("#project").css({"background-color": "white","color": "#1c4587"});
+ 			   $("#classPlan").css({ "background-color": "#1c4587", "color": "white" });
 			   
 				console.log(classNum); 			
 			 $.ajax({
@@ -475,7 +478,7 @@
 								"<div class='card-body' style='display:none;'>" +
 								"<div>"
 					 
-					 $("#notice-area").html(value);
+					 $(".lList-area").html(value);
 						   
 					 
 				 }, error:function(){

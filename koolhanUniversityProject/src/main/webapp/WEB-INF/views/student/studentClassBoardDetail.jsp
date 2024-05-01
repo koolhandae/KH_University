@@ -392,13 +392,16 @@
    	})
    	</script>
    
-   <!-- 강의계획서 div로 이동 -->
+      <!-- 강의계획서 div로 이동 -->
    <script>
 	   	$(document).ready(function(){
    			$("#classPlan").click(function(){
-  				var classNum = $(".content").find("#classNum").val();  	
+  				var classNum = $(".content").find("#classNum").val();  
   				
+  				$("#notice").css({"background-color": "white","color": "#1c4587"});
+  				$("#classPlan").css({ "background-color": "#1c4587", "color": "white" });
    				console.log(classNum); 			
+   				
    			 $.ajax({
    				 url:"classPlan.co",
    				 data:{classNum:classNum},
