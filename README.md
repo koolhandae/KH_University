@@ -131,7 +131,7 @@ ERD Cloud
 &nbsp; **회원 관리**
 
 -학생 등록
-<img src="(https://github.com/leejm9/Cool-Trade/assets/151510159/ed23df07-0e96-41ac-bf85-22eb17175cb1">
+<img src="https://github.com/leejm9/Cool-Trade/assets/151510159/ed23df07-0e96-41ac-bf85-22eb17175cb1">
 
 -교수 등록
 <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/93704986-3dff-47c3-bd06-878df9b24a97">
