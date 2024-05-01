@@ -49,7 +49,7 @@ thead * {
 	<br>
 	<br>
 	<br>
-   <div id="pdfDiv" class="content" style="padding:10px; background-color: white; color: black; margin:auto; padding:40px;">
+   <div id="pdfDiv" class="content" style="padding:10px; background-color: white; color: black; margin:auto; padding:40px; height:auto;">
 		<div class="innerContnent">
 			<div id="schoolName" style="text-align: center;">
 				<h1>쿨한대학교 성적 증명서</h1>
@@ -67,103 +67,49 @@ thead * {
 					<tr>
 						<td>구분</td>
 						<td>학습과목명</td>
-						<td>성적</td>
 						<td>학점</td>
+						<td>성적</td>
+						<td>평점</td>
 						<td>학기</td>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="c" items="classList">
+					<c:forEach var="g" items="${gradeList}">
 						<tr>
-							<td>교양</td>
-							<td>기초 중국어</td>
-							<td>92</td>
-							<td>3.0</td>
-							<td>2015 01</td>
-						</tr>
-						<tr>
-							<td>교양</td>
-							<td>기초 중국어</td>
-							<td>92</td>
-							<td>3.0</td>
-							<td>2015 01</td>
-						</tr>
-						<tr>
-							<td>교양</td>
-							<td>기초 중국어</td>
-							<td>92</td>
-							<td>3.0</td>
-							<td>2015 01</td>
-						</tr>
-						<tr>
-							<td>교양</td>
-							<td>기초 중국어</td>
-							<td>92</td>
-							<td>3.0</td>
-							<td>2015 01</td>
-						</tr>
-						<tr>
-							<td>교양</td>
-							<td>기초 중국어</td>
-							<td>92</td>
-							<td>3.0</td>
-							<td>2015 01</td>
-						</tr>
-						<tr>
-							<td>교양</td>
-							<td>기초 중국어</td>
-							<td>92</td>
-							<td>3.0</td>
-							<td>2015 01</td>
-						</tr>
-						<tr>
-							<td>교양</td>
-							<td>기초 중국어</td>
-							<td>92</td>
-							<td>3.0</td>
-							<td>2015 01</td>
-						</tr>
-						<tr>
-							<td>교양</td>
-							<td>기초 중국어</td>
-							<td>92</td>
-							<td>3.0</td>
-							<td>2015 01</td>
-						</tr>
-						<tr>
-							<td>교양</td>
-							<td>기초 중국어</td>
-							<td>92</td>
-							<td>3.0</td>
-							<td>2015 01</td>
-						</tr>
-						<tr>
-							<td>교양</td>
-							<td>기초 중국어</td>
-							<td>92</td>
-							<td>3.0</td>
-							<td>2015 01</td>
-						</tr>
-						<tr>
-							<td>교양</td>
-							<td>기초 중국어</td>
-							<td>92</td>
-							<td>3.0</td>
-							<td>2015 01</td>
-						</tr>
-						<tr>
-							<td>교양</td>
-							<td>기초 중국어</td>
-							<td>92</td>
-							<td>3.0</td>
-							<td>2015 01</td>
-						</tr>
-						<tr>
-							<td>교양</td>
-							<td>기초 중국어</td>
-							<td>92</td>
-							<td>3.0</td>
-							<td>2015 01</td>
+							<td>${g.classTypename}</td>
+							<td>${g.className}</td>
+							<td>${g.classScore}</td>
+							<td>${g.totalPoint}</td>
+							<c:choose>
+								<c:when test="${g.grade eq 'A+'}">
+									<td>4.5</td>
+								</c:when>
+								<c:when test="${g.grade eq 'A'}">
+									<td>4.0</td>
+								</c:when>
+								<c:when test="${g.grade eq 'B+'}">
+									<td>3.5</td>
+								</c:when>
+								<c:when test="${g.grade eq 'B'}">
+									<td>3.0</td>
+								</c:when>
+								<c:when test="${g.grade eq 'C+'}">
+									<td>2.5</td>
+								</c:when>
+								<c:when test="${g.grade eq 'C'}">
+									<td>2.0</td>
+								</c:when>
+								<c:when test="${g.grade eq 'D+'}">
+									<td>1.5</td>
+								</c:when>
+								<c:when test="${g.grade eq 'D'}">
+									<td>1.0</td>
+								</c:when>
+								<c:when test="${g.grade eq 'F'}">
+									<td>0</td>
+								</c:when>
+							</c:choose>
+							<td>${g.courseYear}년 ${g.termNo}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -179,9 +125,9 @@ thead * {
 						<td>총평점평균</td>
 					</tr>
 					<tr>
-						<td>84</td>
-						<td>84</td>
-						<td>3.5/4.0</td>
+						<td>${allCredit}</td>
+						<td>${allCredit}</td>
+						<td>${gradePoint}/4.0</td>
 					</tr>
 				</tbody>
 			</table>
@@ -218,21 +164,43 @@ thead * {
 	<br>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 	<script>
-        async function printPDF() {
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF();
-
-            const element = document.getElementById('pdfDiv');
-            const canvas = await html2canvas(element);
-            const imgData = canvas.toDataURL('image/png');
-
-            const imgProps = pdf.getImageProperties(imgData);
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-            pdf.save('${loginStudent.studentName} 성적 증명서.pdf');
-        }
-    </script>
+	    async function printPDF() {
+	        const { jsPDF } = window.jspdf;
+	        const pdf = new jsPDF({
+	            orientation: 'p',
+	            unit: 'pt',
+	            format: 'a4',
+	            putOnlyUsedFonts:true,
+	            floatPrecision: "smart" // 혹은 "smart", 기본값은 16입니다
+	        });
+	
+	        const element = document.getElementById('pdfDiv');
+	        const canvas = await html2canvas(element, {
+	            scale: 1, // 필요에 따라 조정하여 품질과 성능을 관리합니다
+	            logging: true,
+	            useCORS: true // 외부 도메인의 이미지를 사용하는 경우 중요합니다
+	        });
+	        const imgData = canvas.toDataURL('image/png');
+	
+	        const imgProps = pdf.getImageProperties(imgData);
+	        const pdfWidth = pdf.internal.pageSize.getWidth();
+	        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+	
+	        let heightLeft = pdfHeight;
+	        let position = 0;
+	
+	        while (heightLeft >= 0) {
+	            pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
+	            heightLeft -= pdf.internal.pageSize.getHeight();
+	            if (heightLeft > 0) {
+	                position = position - pdf.internal.pageSize.getHeight();
+	                pdf.addPage();
+	            }
+	        }
+	
+	        pdf.save('${loginStudent.studentName} 성적 증명서.pdf');
+	    }
+	</script>
 	
 	
 </body>

@@ -28,4 +28,14 @@ public class Student {
 	private String gradDate; 
 	private String originName;
 	private String changeName;
+	
+	private int classNo;
+	private int classNum;
+	private String className;
+	private String classTypename;
+	private int courseYear;
+	private String grade;
+	private String termNo;
+	private int totalPoint;
+	private int classScore;
 }

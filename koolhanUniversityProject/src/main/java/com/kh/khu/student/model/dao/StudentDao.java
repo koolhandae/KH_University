@@ -196,5 +196,9 @@ public class StudentDao {
 	public int insertProfilePicture(SqlSessionTemplate sqlSession, ProfilePicture pp) {
 		return sqlSession.update("studentMapper.insertProfilePicture", pp);
 	}
+	
+	public ArrayList<Student> selectTranscript(SqlSessionTemplate sqlSession, Student s) {
+		return (ArrayList)sqlSession.selectList("studentMapper.selectTranscript", s);
+	}
 
 }

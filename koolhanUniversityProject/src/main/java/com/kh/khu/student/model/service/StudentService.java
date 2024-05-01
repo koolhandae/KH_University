@@ -94,5 +94,5 @@ public interface StudentService {
 	
 	int insertProfilePicture(ProfilePicture pp);
 	
-
+	ArrayList<Student> selectTranscript(Student s);
 }
