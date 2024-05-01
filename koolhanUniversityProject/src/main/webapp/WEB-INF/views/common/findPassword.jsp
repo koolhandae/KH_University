@@ -154,15 +154,14 @@
                                             </td>
                                         </tr>
                                         <tr style="display: none;" id="alertPwd">
-                                            <td colspan=2 style="padding:10px;"></th>
+                                            <td colspan=2 style="padding:10px;"></td>
                                         </tr>
-                                        <br>
                                         <tr>
                                             <td colspan=2 style="padding:30px;">
                                                 <button type="submit" id="change-btn" class="btn btn-facebook btn-user btn-block" >
                                                 변경하기
                                                 </button>
-                                            </th>
+                                            </td>
                                         </tr>
                                     </table>
                                 </form>
