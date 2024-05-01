@@ -125,20 +125,16 @@ public class EchoHandler extends TextWebSocketHandler {
     	System.out.println("afterConnectionEstablished"+session);
     	// 커넥션이 연결됐을때 클라이언트가 접속이 성공했을때 Established-> 확립되다 수립되다
     		sessions.add(session);
-    		//session값:StandardWebSocketSession[id=99967481-d588-ffe5-8cfa-96b222bc8a71, uri=ws://localhost:8808/khu/echo]
     	// 그러면 접속하는 유저들은 여기안에 들어감
     	// key value쌍으로 하고 싶으면 map으로 하면 됨 
     		String senderId = getId(session);
-    		String senderId2 = getSTUId(session);
+    		//String senderId2 = getSTUId(session);
+    		
     		if(senderId !=null) {    			
     			System.out.println(senderId + " 연결 됨");
     			userSessions.put(senderId, session);
     		}
     		
-    		if(senderId2 != null) {
-    			System.out.println(senderId2 + " 연결 됨");
-    			userSessions.put(senderId2, session);
-    		}
     		
     		//System.out.println("userSession에는 뭐가있어?" + userSessions);
     		//userSession에는 접속중인 유저들의 정보가 들어감
@@ -167,9 +163,8 @@ public class EchoHandler extends TextWebSocketHandler {
     	  
     	  
     	String senderId = session.getId(); //이렇게 하면 웹소켓세션session의 아이디 보내는사람의 아이디
-    	String senderId2 = session.getId();
     	System.out.println("senderId : "+senderId);
-    	System.out.println("senderId2 : "+senderId2);
+
 
     	// 로그인하면 로그인한 유저의 아이디를 줄거고 로그인안했으면 소켓의 아이디를 줍시다
     	
@@ -248,7 +243,7 @@ public class EchoHandler extends TextWebSocketHandler {
     
 
     
-    
+    /*
     private String getId(WebSocketSession session) {
         // 웹 소켓 세션에서 로그인 사용자 정보를 가져옴
     	Map<String, Object> httpSession = session.getAttributes();
@@ -274,16 +269,25 @@ public class EchoHandler extends TextWebSocketHandler {
         
     
     
-}
+}*/
     
-    private String getSTUId(WebSocketSession session) {
-    	Map<String, Object> httpSession = session.getAttributes();
-    	Object loginStudentObject =httpSession.get(SessionNames.STUDENT);
-    	if(loginStudentObject != null) {
-        	Student loginStudent = (Student)loginStudentObject;
-        	return loginStudent.getStudentId();
-        }else {
-        	return session.getId();
+    private String getId(WebSocketSession session) {
+        // 웹 소켓 세션에서 로그인 사용자 정보를 가져옴
+        Map<String, Object> httpSession = session.getAttributes();
+        Object loginUserObject = httpSession.get(SessionNames.LOGIN);
+        Object loginStudentObject = httpSession.get(SessionNames.STUDENT);
+
+        if (loginUserObject != null) {
+            // 로그인한 사용자인 경우
+            Member loginUser = (Member) loginUserObject;
+            return loginUser.getMemberId(); // 사용자의 아이디를 반환
+        } else if (loginStudentObject != null) {
+            // 학생으로 로그인한 경우
+            Student loginStudent = (Student) loginStudentObject;
+            return loginStudent.getStudentId(); // 학생의 아이디를 반환
+        } else {
+            // 로그인하지 않은 경우 또는 로그인 정보가 올바르지 않은 경우
+            return session.getId(); // 웹 소켓 세션의 ID를 반환
         }
     }
     

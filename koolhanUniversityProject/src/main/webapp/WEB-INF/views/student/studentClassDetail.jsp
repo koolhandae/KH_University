@@ -39,7 +39,7 @@
       font-weight: 600;
       color: #1c4587;
       padding-left: 20px;
-      margin-right: 1250px;
+      margin-right: 1200px;
    }
    #mid-title{
       font-size:small;
@@ -264,8 +264,9 @@
 			    	 console.log($(this).closest("tr").find(".cno").text());
 			    	 var classNoticeNo =  $(this).closest("tr").find("#classNoticeNo").val();
 			    	 console.log(classNoticeNo);
-			    	 
-			         location.href='noticeDetail.co?classNum=${classNum}&cno=' + $(this).closest("tr").find(".cno").text() + '&classNoticeNo=' + classNoticeNo;
+			    	 if(classNoticeNo != null){
+				         location.href='noticeDetail.co?classNum=${classNum}&cno=' + $(this).closest("tr").find(".cno").text() + '&classNoticeNo=' + classNoticeNo;			    		 
+			    	 }
 			      });
 			    })
 		  	 </script>

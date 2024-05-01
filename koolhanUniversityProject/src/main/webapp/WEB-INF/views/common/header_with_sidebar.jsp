@@ -172,7 +172,7 @@ body {
 					<div id="collapseOne" class="collapse" aria-labelledby="headingOne"
 						data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
-							<a class="collapse-item" href="myCalender.st">나의 시간표</a> <a
+							<a class="collapse-item" href="myCalender.st">나의 캘린더</a> <a
 								class="collapse-item" href="showCourse.st">나의 수강 조회</a>
 						</div>
 					</div></li>
@@ -185,8 +185,7 @@ body {
 					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 						data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
-							<a class="collapse-item" href="update.stu">개인 정보 수정</a> <a
-								class="collapse-item" href="myCalender.do">나의 캘린더</a> <a
+							<a class="collapse-item" href="update.stu">개인 정보 수정</a><a
 								class="collapse-item" href="tuitionBill.do">등록금 납부 신청</a> <a
 								class="collapse-item" href="tuitionPay.do">등록금 납부 내역 조회</a> <a
 								class="collapse-item" href="courseScore.st">학점 / 성적 조회</a> <a

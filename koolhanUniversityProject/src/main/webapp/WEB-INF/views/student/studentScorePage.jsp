@@ -23,7 +23,7 @@
       font-weight: 600;
       color: #1c4587;
       padding-left: 20px;
-	  margin-right: 1250px;
+	  margin-right: 1200px;
    }
    #mid-title{
       font-size:small;
@@ -65,7 +65,7 @@
       background-color: white;
       margin-top: 15px;
       width: 100%;
-      height: 500px;
+	  height: auto;
    }
    .list-content{
       padding: 20px;
@@ -109,10 +109,15 @@
       <div class="lecture-area">
          <div id="lecture-year">수강년도</div>
          <select class="form-select" aria-label="Default select example">
+         <option value="2024">2024</option>
+         <option value="2023">2023</option>
+         <option value="2022">2022</option>
          </select>
          
          <div id="lecture-semester">학기</div>
          <select class="form-select-2" aria-label="Default select example">
+         <option value="1">1학기</option>
+         <option value="2">2학기</option>
          </select>
          <button type="button" id="chooseBtn" class="btn btn-primary" style="margin: 3px; background-color: #1c4587; border: none;">조회</button>
       </div>
@@ -159,24 +164,15 @@
 				let cList = result.cList;
 				let gList = result.gList;
 				
-				console.log(cList);
+				console.log("clist" + cList);
 				console.log(gList);
 				
 				console.log("ajax성공");
 			
-				let gradeYearType = "";
-				let gradeTermType = "";
 				let value = "";
 				let sum = ""; 
 				let sumScore = 0; // 총이수학점
 				let sumGrade = 0; // 총학점
-				
-				if(cList != null){
-					for(let c in cList){
-						gradeYearType += `<option value=\${cList[c].courseYear}>\${cList[c].courseYear}</option>`
-						gradeTermType += `<option value=\${cList[c].courseSemester}>\${cList[c].courseSemester}학기</option>`	
-					}
-				}
 				
 				if(gList.length == 0){
 					value += "<tr>"
@@ -255,10 +251,7 @@
 					       		
 			            	//toFixed(1):자스에서 소수점 첫째짜리 반올림
 			            	console.log(sumGrade/sumScore);     
-				}
-					
-				$(".form-select").html(gradeYearType);
-				$(".form-select-2").html(gradeTermType);
+				}	
 				$("#boardList tbody").html(value);
 				$("#calResult").show();
 				$("#calResult").html(sum);
