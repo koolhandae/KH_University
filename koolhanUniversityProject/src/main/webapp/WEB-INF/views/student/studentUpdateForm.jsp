@@ -213,12 +213,13 @@
 	                				   // 만약 Promise리턴을 받으면,
 	                				   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
 	                					   $.ajax({
-	                    	                	url:"sendmail.do",
+	                    	                	url:"sendmail.doo",
 	                    	                	data:{
 	                    	                		email : '${loginStudent.stEmail}',
 	                    	                		userId : '${loginStudent.studentId}'	
 	                    	                	},
 	                    	                	success:function(result){
+	                    	                		console.log('${loginStudent.studentId}')
 	                    	                		Swal.fire(
 	                    	                		        '이메일 발송 성공',
 	                    	                		        '비밀번호 재설정 링크를 ${loginStudent.stEmail}로 보냈습니다. 확인해주세요!',
