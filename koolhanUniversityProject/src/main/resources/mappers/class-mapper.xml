@@ -335,7 +335,7 @@
                    cb_writer
                  , class_board_no
 			     , cb_title
-			     , cb_date
+			     , TO_CHAR(TO_DATE(cb_date, 'DD/MM/YY'), 'DD-MM-YY') AS cb_date
 			     , student_name
 			     , cb_count
 			     , class_name
@@ -344,7 +344,7 @@
                    rownum as cb_writer
                  , class_board_no
                  , cb_title
-			     , cb_date
+			     , TO_CHAR(TO_DATE(cb_date, 'DD/MM/YY'), 'DD-MM-YY') AS cb_date
 			     , student_name
 			     , cb_count
 			     , class_name
@@ -352,7 +352,7 @@
 			        select 
 			               cb_title
                          , class_board_no
-					     , cb_date
+					     , TO_CHAR(TO_DATE(cb_date, 'DD/MM/YY'), 'DD-MM-YY') AS cb_date
 					     , student_name
 					     , cb_count
 					     , class_name
@@ -396,7 +396,7 @@
 		     , cb_origin_name
 		     , cb_change_name
 		     , cb_count
-		     , cb_date
+		     , TO_CHAR(TO_DATE(cb_date, 'DD/MM/YY'), 'DD-MM-YY') AS cb_date
 		  from class_board
 		  join student on(cb_writer = student_no)
 	      join class on(ref_class_no = class_no)
@@ -411,7 +411,7 @@
                          , cb_origin_name
                          , cb_change_name
                          , cb_count
-                         , cb_date
+                         , TO_CHAR(TO_DATE(cb_date, 'DD/MM/YY'), 'DD-MM-YY') AS cb_date
 			        from (
 			            select 
                                *
