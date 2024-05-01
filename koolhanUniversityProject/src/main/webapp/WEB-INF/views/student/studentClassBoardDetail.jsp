@@ -268,7 +268,7 @@
                      </c:if>
                     	 <c:if test="${not empty cb.cbChangeName}">
                      <div style="margin-left: 150px;">
-                        <a href="${cb.cbChangeName}" download="${cb.cbOriginName}" style="color: gray; margin-left: 150px;">${ cb.cbChangeName }</a>
+                        <a href="${cb.cbChangeName}" download="${cb.cbOriginName}" style="color: gray; margin-left: 150px;">${ cb.cbOriginName }</a>
                      </div>
                     	</c:if>
                         <div id="board-file-btn">+ upload files</div>

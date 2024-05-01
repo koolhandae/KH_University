@@ -299,7 +299,7 @@
                          class_notice_no desc
                         )
                     )
-                    where rnum = #{cno}
+                    where rnum = #{classNoticeNo}
                 )
                 and cn_status = 'Y'
 	</select>		

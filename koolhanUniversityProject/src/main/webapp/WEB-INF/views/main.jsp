@@ -89,7 +89,19 @@
 		</head>
 
 		<body class="bg-gradient-primary">
-
+		
+		<c:if test="${not empty alertMsg}">
+		<script>
+					$(function () {
+						Swal.fire({
+							icon: '${alertMsg.icon}',
+							title: '${alertMsg.title}',
+							text: '${alertMsg.text}',
+						})
+					});
+				</script>
+		<c:remove var="alertMsg" scope="session" />
+		</c:if>
 
 			<div class="container" style="min-width: 912px;">
 				<!-- Outer Row -->
