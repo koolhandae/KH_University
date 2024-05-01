@@ -130,4 +130,8 @@ public class MemberDao {
 	public int insertProfilePicture(SqlSessionTemplate sqlSession, ProfilePicture pp) {
 		return sqlSession.insert("memberMapper.insertProfilePicture", pp);
 	}
+	
+	public int updatePhone(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMepper.updatePhone", m);
+	}
 }

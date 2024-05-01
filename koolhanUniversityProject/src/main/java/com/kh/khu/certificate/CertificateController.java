@@ -33,15 +33,15 @@ public class CertificateController {
 	@RequestMapping("tuition.notice")
 	public ModelAndView tuitionNotice (ModelAndView mv, HttpSession session) {
 		Student s = (Student)session.getAttribute("loginStudent");
-		ArrayList<Tuition> list = tService.studentTuition(s.getStudentNo());
-		mv.addObject("list", list).setViewName("certificate/tuitionPaymentNotice");
+		Tuition t = tService.selectTuition(s.getStudentNo());
+		mv.addObject("t", t).setViewName("certificate/tuitionPaymentNotice");
 		return mv;
 	}
 	@RequestMapping("tuition.reciept")
 	public ModelAndView tuitionReciept (ModelAndView mv, HttpSession session) {
 		Student s = (Student)session.getAttribute("loginStudent");
-		ArrayList<Tuition> list = tService.studentTuition(s.getStudentNo());
-		mv.addObject("list", list).setViewName("certificate/proofOfPayment");
+		Tuition t = tService.selectTuition(s.getStudentNo());
+		mv.addObject("t", t).setViewName("certificate/proofOfPayment");
 		return mv;
 	}
 	@RequestMapping("attending.certificate")
