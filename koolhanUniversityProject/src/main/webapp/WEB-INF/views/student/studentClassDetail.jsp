@@ -264,8 +264,9 @@
 			    	 console.log($(this).closest("tr").find(".cno").text());
 			    	 var classNoticeNo =  $(this).closest("tr").find("#classNoticeNo").val();
 			    	 console.log(classNoticeNo);
-			    	 
-			         location.href='noticeDetail.co?classNum=${classNum}&cno=' + $(this).closest("tr").find(".cno").text() + '&classNoticeNo=' + classNoticeNo;
+			    	 if(classNoticeNo != null){
+				         location.href='noticeDetail.co?classNum=${classNum}&cno=' + $(this).closest("tr").find(".cno").text() + '&classNoticeNo=' + classNoticeNo;			    		 
+			    	 }
 			      });
 			    })
 		  	 </script>

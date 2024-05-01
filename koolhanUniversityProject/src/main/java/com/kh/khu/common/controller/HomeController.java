@@ -170,7 +170,7 @@ public class HomeController {
 		int checkNum = random.nextInt(888888) + 111111;
 //		System.out.println("인증번호" + checkNum);
 
-		String url = "http://localhost:8808/khu/changePwdForm.me?checkNum=" + checkNum;
+		String url = "http://192.168.20.12:8808/khu/changePwdForm.me?checkNum=" + checkNum;
 
 		// 이메일 보낼 양식
 		String setFrom = "koolhandae@gmail.com"; // 2단계 인증 x, 메일 설정에서 POP/IMAP 사용 설정에서 POP/SMTP 사용함으로 설정o
@@ -394,4 +394,5 @@ public class HomeController {
 		}
 		return map;
 	}
+	
 }
