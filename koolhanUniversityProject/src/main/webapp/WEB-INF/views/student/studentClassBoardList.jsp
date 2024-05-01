@@ -258,6 +258,7 @@
 	     <script>
 		    $(document).ready(function(){
 		      $("#boardList>tbody>tr>td").click(function(){  
+               $("#boardList>tbody>tr>td").css("cursor", "pointer");
 		    	  console.log($(this).closest("tr").find(".bno").text());
 		    	  var classBoardNo =  $(this).closest("tr").find("#classBoardNo").val();
 		    	  if(classBoardNo != null){
