@@ -17,6 +17,15 @@
 		<result column="grad_date" property="gradDate"/>
 		<result column="origin_name" property="originName"/>
 		<result column="change_name" property="changeName"/>
+		<result column="class_no" property="classNo"/>
+		<result column="class_num" property="classNum"/>
+		<result column="class_typename" property="classTypename"/>
+		<result column="course_year" property="courseYear"/>
+		<result column="grade" property="grade"/>
+		<result column="term_no" property="termNo"/>
+		<result column="class_name" property="className"/>
+		<result column="total_point" property="totalPoint"/>
+		<result column="class_score" property="classScore"/>
 	</resultMap>
 	
 	
@@ -486,6 +495,28 @@
 	where student_no = #{stuNo}
 	 group 
 	    by course_year, course_semester
+</select>
+
+<select id="selectTranscript" resultMap="studentResult">
+	SELECT 
+       S.STUDENT_NO
+     , C.CLASS_NO
+     , CLASS_NUM
+     , CLASS_SCORE
+     , CLASS_NAME
+     , CLASS_TYPENAME
+     , COURSE_YEAR
+     , GRADE
+     , TERM_NO
+     , TOTAL_POINT
+  FROM STUDENT S
+  JOIN COURSE CO ON (S.STUDENT_NO = CO.STUDENT_NO)
+  JOIN CLASS C ON(CO.CLASS_NO = C.CLASS_NO)
+  JOIN CLASS_TYPE USING(CLASS_TYPE)
+  JOIN GRADE G ON (G.CLASS_NO = C.CLASS_NO)
+ WHERE S.STUDENT_NO = #{studentNo}
+ ORDER 
+    BY CLASS_NUM,COURSE_YEAR, TERM_NO
 </select>
 	
 

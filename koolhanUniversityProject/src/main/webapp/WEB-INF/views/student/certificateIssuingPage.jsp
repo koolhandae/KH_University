@@ -34,14 +34,14 @@
                   </tr>
                 </thead>
                 <tbody>
-	                    <tr>
-	                        <td class="bno">101</td>
-	                        <td>성적 증명서</td>
-	                        <td>
-	                        	<button class="btn btn-primary"  onclick="location.href='transcript.certificate'">PDF 파일 / 인쇄</button>
-	                        </td>
-	                    </tr>
 	                    <c:if test="${loginStudent.stStatus eq 'J' }">
+		                    <tr>
+		                        <td class="bno">101</td>
+		                        <td>성적 증명서</td>
+		                        <td>
+		                        	<button class="btn btn-primary"  onclick="location.href='transcript.certificate'">PDF 파일 / 인쇄</button>
+		                        </td>
+		                    </tr>
 		                    <tr>
 		                        <td class="bno">102</td>
 		                        <td>졸업 증명서</td>
