@@ -66,4 +66,7 @@ public class TuitionDao {
 		return (ArrayList)sqlSession.selectList("tuitionMapper.topSelectStudent");
 	}
 
+	public Tuition selectTuition(SqlSessionTemplate sqlSession, int studentNo) {
+		return sqlSession.selectOne("tuitionMapper.selectTuition", studentNo);
+	}
 }

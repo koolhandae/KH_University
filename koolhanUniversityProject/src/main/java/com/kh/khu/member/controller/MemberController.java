@@ -325,5 +325,15 @@ public class MemberController {
 		model.addAttribute("list", list);
 		return "admin/adminTuitionMake";
 	}
+	
+	@ResponseBody
+	@RequestMapping("updatePhone.me")
+	public String updatePhone(Member m, HttpSession session) {
+		int result = mService.updatePhone(m);
+		session.removeAttribute("loginUser");
+		Member newMe = mService.loginMember(m);
+		session.setAttribute("loginStudent", newMe);
+		return result > 0 ? "NNNNY" : "NNNNN";
+	}
 
 }

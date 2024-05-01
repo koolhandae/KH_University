@@ -50,20 +50,26 @@
 		                        </td>
 		                    </tr>
 	                    </c:if>
-	                    <tr>
-	                        <td class="bno">103</td>
-	                        <td>등록금 납부 영수증</td>
-	                        <td>
-	                        	<button class="btn btn-primary" onclick="location.href='tuition.reciept'">PDF 파일 / 인쇄</button>
-	                        </td>
-	                    </tr>
-	                    <tr>
-	                        <td class="bno">104</td>
-	                        <td>등록금 고지서</td>
-	                        <td>
-	                        	<button class="btn btn-primary" onclick="location.href='tuition.notice'">PDF 파일 / 인쇄</button>
-	                        </td>
-	                    </tr>
+	                    <c:choose>
+	                    	<c:when test="${t.tsStatus eq 'N'}">
+		                    	<tr>
+			                        <td class="bno">104</td>
+			                        <td>등록금 고지서</td>
+			                        <td>
+			                        	<button class="btn btn-primary" onclick="location.href='tuition.notice'">PDF 파일 / 인쇄</button>
+			                        </td>
+		                    	</tr>
+	                    	</c:when>
+	                    	<c:otherwise>
+		                    	<tr>
+			                        <td class="bno">103</td>
+			                        <td>등록금 납부 영수증</td>
+			                        <td>
+			                        	<button class="btn btn-primary" onclick="location.href='tuition.reciept'">PDF 파일 / 인쇄</button>
+			                        </td>
+	                    		</tr>
+	                    	</c:otherwise>
+	                    </c:choose>
 	                    <c:if test="${loginStudent.stStatus eq 'Y' }">
 		                    <tr>
 		                        <td class="bno">105</td>

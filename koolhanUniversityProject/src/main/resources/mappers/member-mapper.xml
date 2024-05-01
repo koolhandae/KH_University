@@ -319,4 +319,9 @@
 		     )    
 	</insert>
 		
+	<update id="updatePhone">
+		update member
+		set m_phone = #{mePhone}
+		where member_id = #{memberId}
+	</update>
 </mapper>

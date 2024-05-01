@@ -422,69 +422,69 @@
    	})
    	</script>
    
-   <!-- 강의계획서 div로 이동 -->
-   <script>
-	   	$(document).ready(function(){
-   			$("#classPlan").click(function(){
-  				var classNum = $(".content").find("#classNum").val();  	
-  				
-   				console.log(classNum); 			
-   			 $.ajax({
-   				 url:"classPlan.co",
-   				 data:{classNum:classNum},
-   				 success:function(c){ 
-   					 console.log("ajax통신성공");
-					 var c = c;
-					 var value ="";
+    <!-- 강의계획서 div로 이동 -->
+	<script>
+		$(document).ready(function(){
+			$("#classPlan").click(function(){
+			   var classNum = $(".content").find("#classNum").val();  	
+			   
+				console.log(classNum); 			
+			 $.ajax({
+				 url:"classPlan.co",
+				 data:{classNum:classNum},
+				 success:function(c){ 
+					 console.log("ajax통신성공");
+				  var c = c;
+				  var value ="";
+				  
+				  var originName = c.originName;
+				  var changeName = c.changeName;
+				  
+				  
+				  value += "<div class='list-title' style='margin-bottom: 20px;'>강의계획서</div>" +
+							  "<table id='planList' class='table' align='center'>" +
+							  "<thead>" +
+							  "<tr>" +
+							  "<th>학점</th>" +
+							  "<th>강의실</th>" +
+							  "<th>강의시간</th>" +
+							  "<th>대표교수</th>" +
+							  "<th>강의계획서</th>" +
+							  "</tr>" +
+							  "</thead>" +
+							  "<tbody>" +
+							  "<tr>" +
+							  "<td>" + c.classScore + "</td>" +
+							  "<td>" + c.classRoom + "</td>" +
+							  "<td>" + c.classTime + "</td>" +
+							  "<td>" + c.memberName + "</td>";
+		 
+						  if (changeName) {
+								 value += "<td id='fileTag'>" +
+										  "<img width='30' height='30' src='https://img.icons8.com/pastel-glyph/128/737373/search--v2.png'>" +
+										  "</td>";
+							 } else {
+								 value += "<td>X</td>";
+							 }
+				 
+							 value += "</tr>" +
+									  "</tbody>" +
+									  "</table>" +
+									  "</div>" +
+								"<br>" +
+								"<div class='card-body' style='display:none;'>" +
+								"<div>"
 					 
-					 var originName = c.originName;
-					 var changeName = c.changeName;
+					 $("#notice-area").html(value);
+						   
 					 
-					 
-					 value += "<div class='list-title' style='margin-bottom: 20px;'>강의계획서</div>" +
-				                 "<table id='planList' class='table' align='center'>" +
-				                 "<thead>" +
-				                 "<tr>" +
-				                 "<th>학점</th>" +
-				                 "<th>강의실</th>" +
-				                 "<th>강의시간</th>" +
-				                 "<th>대표교수</th>" +
-				                 "<th>강의계획서</th>" +
-				                 "</tr>" +
-				                 "</thead>" +
-				                 "<tbody>" +
-				                 "<tr>" +
-				                 "<td>" + c.classScore + "</td>" +
-				                 "<td>" + c.classRoom + "</td>" +
-				                 "<td>" + c.classTime + "</td>" +
-				                 "<td>" + c.memberName + "</td>";
-			
-                             if (changeName) {
-						            value += "<td id='fileTag'>" +
-						                     "<img width='30' height='30' src='https://img.icons8.com/pastel-glyph/128/737373/search--v2.png'>" +
-						                     "</td>";
-						        } else {
-						            value += "<td>X</td>";
-						        }
-					
-						        value += "</tr>" +
-						                 "</tbody>" +
-						                 "</table>" +
-						                 "</div>" +
-                                   "<br>" +
-                                   "<div class='card-body' style='display:none;'>" +
-                                   "<div>"
-   					 
-   					 $("#notice-area").html(value);
-						      
-   					 
-   				 }, error:function(){
-   					 console.log("ajax통신실패");
-   				 }
-   			 });
-   			})
-   		})
-   </script>
+				 }, error:function(){
+					 console.log("ajax통신실패");
+				 }
+			 });
+			})
+		})
+</script>
    
    <script>
    $(document).ready(function(){

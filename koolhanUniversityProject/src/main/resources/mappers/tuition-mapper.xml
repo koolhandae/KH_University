@@ -246,4 +246,15 @@
          ) A
          WHERE ROWNUM &lt;= 3
    </select>
+   
+   <select id="selectTuition" resultMap="tuitionTuition">
+   		select
+   			   tuition_no
+   			 , tt_no
+   			 , tuition
+   			 , scholarship
+   			 , ts_status
+   		  from tuition_student
+   		 where student_no = #{studentNo}  
+   </select>
 </mapper>

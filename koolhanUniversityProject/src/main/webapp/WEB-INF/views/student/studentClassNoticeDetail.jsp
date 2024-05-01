@@ -39,7 +39,7 @@
         font-weight: 600;
         color: #1c4587;
         padding-left: 20px;
-        margin-right: 1250px;
+        margin-right: 1200px;
      }
      #mid-title{
         font-size:small;
@@ -83,7 +83,7 @@
      }
      .list-title{
         font-weight: 600;
-        font-size: larger;
+        font-size: x-large;
         color: rgb(82, 81, 81);
         text-align: center;
      }
@@ -160,6 +160,7 @@
         font-weight: 600;
         padding-left: 15px;
         padding-right: 15px;
+        text-align: center;
      }
      .table td{
         border-bottom: 1px solid #e3e6f0;
@@ -239,7 +240,7 @@
         <div id="notice-area">
             <div class="list-title" style="margin-bottom: 20px;">공지사항</div>
          <div id="line-title">
-            <img width="70" height="50" src="https://img.icons8.com/ios-filled/50/525151/horizontal-line.png" alt="horizontal-line"/>
+            <img width="100" height="50" src="https://img.icons8.com/ios-filled/50/525151/horizontal-line.png" alt="horizontal-line"/>
          </div>
             <div id="board-area">
             <div id="board-content">
