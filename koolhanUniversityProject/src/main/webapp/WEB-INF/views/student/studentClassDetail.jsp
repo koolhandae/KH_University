@@ -194,6 +194,9 @@
    #fileTag{
 	cursor:pointer;
   }
+  #boardList>tbody>tr>td{
+   cursor: pointer;
+  }
 </style>
 
 </head>

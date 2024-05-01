@@ -187,6 +187,9 @@
     background-color: #1c4587 !important;
     color: white !important;
   }
+  #boardList>tbody>tr>td{
+   cursor: pointer;
+  }
 
 </style>
 </head>
