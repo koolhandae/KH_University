@@ -176,7 +176,8 @@
 	     , tb_status
 	  from absence
 	  join student on (student_no = abs_no)
-	 where s_status = 'Y'	  
+	 where tb_status = 'Y'
+	    or s_status = 'H'
 </select>
 
 <select id="selectReturnSchool" resultMap="presenceResult">

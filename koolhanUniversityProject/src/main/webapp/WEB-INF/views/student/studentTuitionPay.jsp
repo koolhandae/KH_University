@@ -133,6 +133,8 @@
                 	Swal.fire({
        	                 icon: 'success',
        	                 text: '등록금 납부가 완료 되었습니다.'})
+       	                 
+       	                 location.href="studentTuition.do";
                     
                 } else {
                     console.log(rsp);

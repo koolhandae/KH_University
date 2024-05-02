@@ -99,7 +99,7 @@
 		 where student_id = #{studentId}
 	</select>
 	
-	<select id="tuitionBillForm" resultMap="tuitionBill">
+	<select id="tuitionBillForm" resultMap="tuitionResult">
 		select 
 		       tt_no
 		     , tuition
@@ -241,7 +241,7 @@
              FROM STUDENT S
                 JOIN GRADE G ON S.STUDENT_NO = G.STUDENT_NO
                 WHERE S_STATUS = 'Y'
-                  AND CLASS_NO = 3
+                  AND CLASS_NO = 2
              ORDER BY TOTAL_POINT DESC
          ) A
          WHERE ROWNUM &lt;= 3
