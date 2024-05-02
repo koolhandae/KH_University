@@ -1,3 +1,4 @@
+
 <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/be9fd7f4-60b5-4fe0-854f-50e854d1627c" width="300">
 
 # KH 정보교육원 Final Project
@@ -44,9 +45,19 @@
 
 &nbsp; - 
 
-⭐  (깃주소)
+⭐  어수지 (https://github.com/Suuujii)
 
-&nbsp; - 
+&nbsp; - 관리자 - 등록금 고지서 생성 및 발급
+
+&nbsp; - 학생 - 성적 장학금 선정 후 등록금 계산
+
+&nbsp; - 학생 - 휴·복학 신청 
+
+&nbsp; - 관리자 - 휴·복학 승인 및 반려
+
+&nbsp; - 학교 셔틀 버스 - 공공데이터 API & 네이버 지도 API
+
+&nbsp; - 에러 페이지
 
 <br><br>
 ## ⚙️ 개발 환경
@@ -217,6 +228,41 @@ ERD Cloud
 
 
 어수지
+
+- 관리자 등록금 고지서 생성 및 발급
+<p align="center">
+  <img src="https://github.com/koolhandae/KH_University/assets/151510158/649e2450-3708-4f00-8cfd-263a245e9483">
+</p>
+
+- 학생 등록금 납입 및 조회
+<p align="center">
+  <img src="https://github.com/koolhandae/KH_University/assets/151510158/30cd9f57-ee7e-45bb-bf29-25380cf31d27">
+</p>
+
+- 학생 휴학 신청
+<p align="center">
+  <img src="https://github.com/koolhandae/KH_University/assets/151510158/f80a7ea2-ed6f-40d6-ad1a-f2c5c21e8bc0">
+</p>
+
+- 관리자 휴학 승인
+<p align="center">
+  <img src="https://github.com/koolhandae/KH_University/assets/151510158/e34f0755-f2b8-409d-a33b-ff71f1c19627">
+</p>
+
+- 학생 복학 신청
+<p align="center">
+  <img src="https://github.com/koolhandae/KH_University/assets/151510158/7f584cd1-bedc-43c1-8cc6-d289782a5f1b">
+</p>
+
+- 관리자 복학 승인
+<p align="center">
+  <img src="https://github.com/koolhandae/KH_University/assets/151510158/ab2f53e1-168d-439d-b8ef-28fdd6983cf6">
+</p>
+
+- 버스 api (대전시 버스 공공데이터)
+<p align="center">
+  <img src="https://github.com/koolhandae/KH_University/assets/151510158/ebdb17ef-ded9-4a90-ab7d-077cbb94b9b5">
+</p>
 
 
 
