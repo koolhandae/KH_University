@@ -286,7 +286,7 @@ public class HomeController {
 
 		int listCount = jObj.get("total").getAsInt();
 
-		PageInfo pi = Pagination.getPageInfo(listCount, pageNum, 5, 20);
+		PageInfo pi = Pagination.getPageInfo(listCount, pageNum, 5, 10);
 
 		mv.addObject("list", jObj).addObject("pi", pi).addObject("keyWord", keyWord).addObject("condition", condition)
 				.setViewName("student/librarySearchList");
@@ -303,7 +303,7 @@ public class HomeController {
 	public ModelAndView selectAllUser(ModelAndView mv) {
 
 		int studentListCount = sService.selectStudentListCount();
-		PageInfo spi = Pagination.getPageInfo(studentListCount, 1, 3, 2);
+		PageInfo spi = Pagination.getPageInfo(studentListCount, 1, 5, 10);
 		ArrayList<Student> sList = sService.selectAllStudent(spi);
 		for (Student s : sList) {
 			switch (s.getStStatus()) {
@@ -326,7 +326,7 @@ public class HomeController {
 		}
 
 		int memberListCount = mService.selectMemberListCount();
-		PageInfo mpi = Pagination.getPageInfo(memberListCount, 1, 3, 2);
+		PageInfo mpi = Pagination.getPageInfo(memberListCount, 1, 5, 10);
 		ArrayList<Member> mList = mService.selectAllMember(mpi);
 		for (Member m : mList) {
 			if (m.getMeType().equals("A")) {
