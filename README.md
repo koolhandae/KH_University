@@ -1,3 +1,5 @@
+
+https://github.com/koolhandae/KH_University/assets/151510158/e61dfe22-2d32-4d28-aa09-8329ec0b73e2
 <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/be9fd7f4-60b5-4fe0-854f-50e854d1627c" width="300">
 
 # KH 정보교육원 Final Project
@@ -217,6 +219,24 @@ ERD Cloud
 
 
 어수지
+
+- 관리자 등록금 고지서 생성 및 발급
+<p align="center">
+  <img src="https://github.com/koolhandae/KH_University/assets/151510158/649e2450-3708-4f00-8cfd-263a245e9483">
+</p>
+
+- 학생 등록금 납입 및 조회
+<p align="center">
+  <img src="https://github.com/koolhandae/KH_University/assets/151510158/30cd9f57-ee7e-45bb-bf29-25380cf31d27">
+</p>
+
+- 학생 휴학 신청
+<p align="center">
+  <img src="https://github.com/koolhandae/KH_University/assets/151510158/f80a7ea2-ed6f-40d6-ad1a-f2c5c21e8bc0">
+</p>
+
+
+
 
 
 
