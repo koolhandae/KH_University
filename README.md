@@ -241,8 +241,14 @@ ERD Cloud
 </p>
 
 - 학생 복학 신청
+<p align="center">
+  <img src="https://github.com/koolhandae/KH_University/assets/151510158/7f584cd1-bedc-43c1-8cc6-d289782a5f1b">
+</p>
 
 - 관리자 복학 승인
+<p align="center">
+  <img src="">
+</p>
 
 - 버스 api (대전시 버스 공공데이터)
 <p align="center">
