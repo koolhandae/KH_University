@@ -1,5 +1,4 @@
 
-https://github.com/koolhandae/KH_University/assets/151510158/e61dfe22-2d32-4d28-aa09-8329ec0b73e2
 <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/be9fd7f4-60b5-4fe0-854f-50e854d1627c" width="300">
 
 # KH 정보교육원 Final Project
