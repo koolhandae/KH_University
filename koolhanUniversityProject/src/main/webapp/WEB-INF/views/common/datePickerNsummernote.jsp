@@ -20,7 +20,7 @@
     <script src="resources/js/summernote/summernote-lite.js"></script>
     <script src="resources/js/summernote/lang/summernote-ko-KR.js"></script>
     <link rel="stylesheet" href="resources/css/summernote/summernote-lite.css">
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <link href="https://gcore.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <!-- summernote api-->
 
 

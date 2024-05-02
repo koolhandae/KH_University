@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Chart Example</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://gcore.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body style="width:400px;">
     <canvas id="myChart" width="400" height="400"></canvas>

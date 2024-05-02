@@ -130,7 +130,7 @@
 			                        	console.debug("NTsssmsg>>", socketMsg);
 			                        	socket.send(socketMsg);
 			                        }
-			     					location.href = "adminNTenrollSuccess.do";
+			     					//location.href = "adminNTenrollSuccess.do";
 			     				}
 
 			     			},

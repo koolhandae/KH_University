@@ -9,14 +9,14 @@
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://gcore.jsdelivr.net/npm/chart.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://gcore.jsdelivr.net/npm/chart.js"></script>
 <!-- 다음 주소 -->
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -26,7 +26,7 @@
 <!-- 부트스트랩 JS CSS -->
 <!-- Popper JS -->
 <script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+	src="https://gcore.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
 	crossorigin="anonymous"></script>
 
@@ -37,14 +37,16 @@
 
 <!-- sweetalert2 -->
 <script
-	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
+	src="https://gcore.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
+<script
+	src="resources/js/sweetalert.js"></script>
 <link
-	href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css"
+	href="https://gcore.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.min.css"
 	rel="stylesheet">
 
 <!-- sockjs -->
 <script
-	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+	src="https://gcore.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <style>
 .pagination {
 	justify-content: center;
@@ -73,7 +75,7 @@ li {
 @font-face {
 	font-family: 'KIMM_Bold';
 	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KIMM_Bold.woff2')
+		url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KIMM_Bold.woff2')
 		format('woff2');
 	font-weight: 700;
 	font-style: normal;
@@ -82,7 +84,7 @@ li {
 @font-face {
 	font-family: 'Pretendard-Regular';
 	src:
-		url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+		url('https://gcore.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
 		format('woff');
 	font-weight: 400;
 	font-style: normal;
