@@ -246,7 +246,7 @@ ERD Cloud
 
 - 관리자 복학 승인
 <p align="center">
-  <img src="">
+  <img src="https://github.com/koolhandae/KH_University/assets/151510158/ab2f53e1-168d-439d-b8ef-28fdd6983cf6">
 </p>
 
 - 버스 api (대전시 버스 공공데이터)
