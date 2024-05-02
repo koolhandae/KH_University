@@ -235,8 +235,19 @@ ERD Cloud
   <img src="https://github.com/koolhandae/KH_University/assets/151510158/f80a7ea2-ed6f-40d6-ad1a-f2c5c21e8bc0">
 </p>
 
+- 관리자 휴학 승인
+<p align="center">
+  <img src="https://github.com/koolhandae/KH_University/assets/151510158/e34f0755-f2b8-409d-a33b-ff71f1c19627">
+</p>
 
+- 학생 복학 신청
 
+- 관리자 복학 승인
+
+- 버스 api
+<p align="center">
+  <img src="https://github.com/koolhandae/KH_University/assets/151510158/ebdb17ef-ded9-4a90-ab7d-077cbb94b9b5">
+</p>
 
 
 
