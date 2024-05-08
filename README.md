@@ -240,6 +240,53 @@ ERD Cloud
 
 김도현
 
+- 회원 로그인 및 아이디 저장(학생, 교직원, 교수)
+<p align="center">
+![로그인 저장](https://github.com/koolhandae/KH_University/assets/151509557/0e95fb0e-3017-4d57-8bd8-774196185c18)
+</p>
+
+- 회원 비밀번호 찾기
+<p align="center">
+![비밀번호찾기구현](https://github.com/koolhandae/KH_University/assets/151509557/786a84f4-bea7-4c4b-b513-545aacb488a4)
+![비밀번호변경완료](https://github.com/koolhandae/KH_University/assets/151509557/62556d56-059d-4d3f-be8a-4f88dfb4302a)
+</p>
+
+-  메인페이지 달력 구현(구글캘린더 공휴일)
+<p align="center">
+![메인페이지 달력구현](https://github.com/koolhandae/KH_University/assets/151509557/a527bee0-9cd5-4cca-8f0b-1fa75773848a)
+</p>
+
+-  학점 및 성적조회
+<p align="center">
+![학점 성적 조회](https://github.com/koolhandae/KH_University/assets/151509557/3fb4705d-bfcc-48e1-9a48-ac9f0ac3bdef)
+</p>
+
+-  수강 강의 조회
+<p align="center">
+![수강조회](https://github.com/koolhandae/KH_University/assets/151509557/4fce0bf6-a43a-4b93-b5ea-7150831d63cb)
+</p>
+
+-  수강 강의실 상세 (공지사항 조회)
+<p align="center">
+![강의실-공지사항조회](https://github.com/koolhandae/KH_University/assets/151509557/bfb60467-4730-452c-a322-e8ca4c1459dc)
+</p>
+
+-  수강 강의실 상세 (강의계획서 조회)
+<p align="center">
+![강의실-강의계획서조회](https://github.com/koolhandae/KH_University/assets/151509557/80420542-da04-4948-a15f-faecf236bd3a)
+</p>
+
+-  수강 강의실 상세 (자유게시판 조회, 등록, 삭제)
+<p align="center">
+ ![강의실-자유게시판 조회 및 작성](https://github.com/koolhandae/KH_University/assets/151509557/6b0871d1-b189-4576-8d86-94a42bf84ab5)
+![강의실-자유게시판 삭제](https://github.com/koolhandae/KH_University/assets/151509557/467ecc50-e1c7-4d6d-a7d0-fdd3f78f4959)
+</p>
+
+-  수강 강의실 상세 (과제게시판 조회)
+<p align="center">
+![강의실-과제게시판 조회](https://github.com/koolhandae/KH_University/assets/151509557/2de02c12-b15b-4ef4-8ac3-0050c8919f23)
+![강의실 과제게시판 제출](https://github.com/koolhandae/KH_University/assets/151509557/481be8e0-a4b3-4608-bee2-6286129365c4)
+</p>
 
 어수지
 
