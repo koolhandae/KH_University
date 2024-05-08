@@ -246,43 +246,52 @@ ERD Cloud
 
 - 회원 비밀번호 찾기
 <img src="https://github.com/koolhandae/KH_University/assets/151509557/786a84f4-bea7-4c4b-b513-545aacb488a4">
+
 - 비밀번호 재설정 확인
 <img src="https://github.com/koolhandae/KH_University/assets/151509557/62556d56-059d-4d3f-be8a-4f88dfb4302a">
 
--  메인페이지 달력 구현(구글캘린더 공휴일)
-![메인페이지 달력구현]https://github.com/koolhandae/KH_University/assets/151509557/a527bee0-9cd5-4cca-8f0b-1fa75773848a)
+&nbsp; **메인 및 학생페이지 캘린더**
+- 메인페이지 달력 구현(구글캘린더 공휴일 API)
+<img src="https://github.com/koolhandae/KH_University/assets/151509557/a527bee0-9cd5-4cca-8f0b-1fa75773848a">
 
--  학점 및 성적조회
-<p align="center">
-![학점 성적 조회](https://github.com/koolhandae/KH_University/assets/151509557/3fb4705d-bfcc-48e1-9a48-ac9f0ac3bdef)
-</p>
+- 캘린더 추가(FullCalendar API)
+<img src="https://github.com/koolhandae/KH_University/assets/151509557/1a6dc329-8959-4950-b387-9aa0e69f9c66">
+
+- 캘린더 수정
+<img src="https://github.com/koolhandae/KH_University/assets/151509557/aeb29c3c-bcbf-45b5-a7f1-b42a27df2fa0">
+
+- 캘린더 삭제
+<img src="https://github.com/koolhandae/KH_University/assets/151509557/ef46ef8f-cfe2-4ce1-8db0-d55ccb1f2997">
+
+- 자격증 정보 조회 (공공데이터 API)
+<img src="https://github.com/koolhandae/KH_University/assets/151509557/0ed4a5c2-1a07-4495-a9f5-517ca65eabd3">
+
+&nbsp; **학점 및 성적조회**
+- 학점 및 성적조회
+<img src="https://github.com/koolhandae/KH_University/assets/151509557/3fb4705d-bfcc-48e1-9a48-ac9f0ac3bdef">
+
+&nbsp; **수강 강의 조회 및 상세조회**
 
 -  수강 강의 조회
-<p align="center">
-![수강조회](https://github.com/koolhandae/KH_University/assets/151509557/4fce0bf6-a43a-4b93-b5ea-7150831d63cb)
-</p>
+<img src="https://github.com/koolhandae/KH_University/assets/151509557/4fce0bf6-a43a-4b93-b5ea-7150831d63cb">
 
--  수강 강의실 상세 (공지사항 조회)
-<p align="center">
-![강의실-공지사항조회](https://github.com/koolhandae/KH_University/assets/151509557/bfb60467-4730-452c-a322-e8ca4c1459dc)
-</p>
+- 강의실 공지사항 조회
+<img src="https://github.com/koolhandae/KH_University/assets/151509557/bfb60467-4730-452c-a322-e8ca4c1459dc">
 
--  수강 강의실 상세 (강의계획서 조회)
-<p align="center">
-![강의실-강의계획서조회](https://github.com/koolhandae/KH_University/assets/151509557/80420542-da04-4948-a15f-faecf236bd3a)
-</p>
+- 강의실 강의계획서 조회
+<img src="https://github.com/koolhandae/KH_University/assets/151509557/80420542-da04-4948-a15f-faecf236bd3a">
 
--  수강 강의실 상세 (자유게시판 조회, 등록, 삭제)
-<p align="center">
- ![강의실-자유게시판 조회 및 작성](https://github.com/koolhandae/KH_University/assets/151509557/6b0871d1-b189-4576-8d86-94a42bf84ab5)
-![강의실-자유게시판 삭제](https://github.com/koolhandae/KH_University/assets/151509557/467ecc50-e1c7-4d6d-a7d0-fdd3f78f4959)
-</p>
+- 강의실 자유게시판 등록 및 조회
+<img src="https://github.com/koolhandae/KH_University/assets/151509557/6b0871d1-b189-4576-8d86-94a42bf84ab5">
 
--  수강 강의실 상세 (과제게시판 조회)
-<p align="center">
-![강의실-과제게시판 조회](https://github.com/koolhandae/KH_University/assets/151509557/2de02c12-b15b-4ef4-8ac3-0050c8919f23)
-![강의실 과제게시판 제출](https://github.com/koolhandae/KH_University/assets/151509557/481be8e0-a4b3-4608-bee2-6286129365c4)
-</p>
+- 강의실 자유게시판 삭제
+<img src="https://github.com/koolhandae/KH_University/assets/151509557/467ecc50-e1c7-4d6d-a7d0-fdd3f78f4959">
+
+- 강의실 과제게시판 조회
+<img src="https://github.com/koolhandae/KH_University/assets/151509557/2de02c12-b15b-4ef4-8ac3-0050c8919f23">
+
+- 강의실 과제게시판 등록
+<img src="https://github.com/koolhandae/KH_University/assets/151509557/481be8e0-a4b3-4608-bee2-6286129365c4">
 
 어수지
 
