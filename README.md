@@ -55,7 +55,9 @@
 
 &nbsp; - 학생 - 수강 강의실 상세조회 - 자유게시판, 과제게시판 CRUD
 
-&nbsp; - 메인페이지, 학생 - 나의 캘린더 CRUD 및 국가자격증 ·공휴일 정보 조회(Fullcalendar API, 공공데이터 API, 구글 캘린더 API)
+&nbsp; - 메인페이지, 학생 - 나의 캘린더 CRUD (Fullcalendar API)
+
+&nbsp; - 메인페이지, 학생 - 나의 캘린더 국가자격증·공휴일 정보 조회 (공공데이터 API, 구글 캘린더 API)
 
 ⭐  어수지 (https://github.com/Suuujii)
 
