@@ -41,9 +41,21 @@
 
 &nbsp; - 
 
-⭐  (깃주소)
+⭐ 김도현 (https://github.com/KIMMEONJI)
 
-&nbsp; - 
+&nbsp; - 학생, 교직원, 교수 - 로그인 / 아이디 저장(쿠키 활용)
+
+&nbsp; - 학생, 교직원, 교수 - 비밀번호 재설정(gmail API & 구글 reCAPTCHA API)
+
+&nbsp; - 학생 - 성적 조회(이전 성적조회 및 총 이수학점, 총 평점)
+
+&nbsp; - 학생 - 수강 강의 검색 및 조회
+
+&nbsp; - 학생 - 수강 강의실 상세조회 - 공지사항, 강의계획서 조회
+
+&nbsp; - 학생 - 수강 강의실 상세조회 - 자유게시판, 과제게시판 CRUD
+
+&nbsp; - 메인페이지, 학생 - 나의 캘린더 CRUD 및 국가자격증 ·공휴일 정보 조회(Fullcalendar API, 공공데이터 API, 구글 캘린더 API)
 
 ⭐  어수지 (https://github.com/Suuujii)
 
