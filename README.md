@@ -240,21 +240,17 @@ ERD Cloud
 
 김도현
 
+&nbsp; **회원 로그인 및 비밀번호 찾기**
 - 회원 로그인 및 아이디 저장(학생, 교직원, 교수)
-<p align="center">
-![로그인 저장](https://github.com/koolhandae/KH_University/assets/151509557/0e95fb0e-3017-4d57-8bd8-774196185c18)
-</p>
+<img src="https://github.com/koolhandae/KH_University/assets/151509557/0e95fb0e-3017-4d57-8bd8-774196185c18">
 
 - 회원 비밀번호 찾기
-<p align="center">
-![비밀번호찾기구현](https://github.com/koolhandae/KH_University/assets/151509557/786a84f4-bea7-4c4b-b513-545aacb488a4)
-![비밀번호변경완료](https://github.com/koolhandae/KH_University/assets/151509557/62556d56-059d-4d3f-be8a-4f88dfb4302a)
-</p>
+<img src="https://github.com/koolhandae/KH_University/assets/151509557/786a84f4-bea7-4c4b-b513-545aacb488a4">
+- 비밀번호 재설정 확인
+<img src="https://github.com/koolhandae/KH_University/assets/151509557/62556d56-059d-4d3f-be8a-4f88dfb4302a">
 
 -  메인페이지 달력 구현(구글캘린더 공휴일)
-<p align="center">
-![메인페이지 달력구현](https://github.com/koolhandae/KH_University/assets/151509557/a527bee0-9cd5-4cca-8f0b-1fa75773848a)
-</p>
+![메인페이지 달력구현]https://github.com/koolhandae/KH_University/assets/151509557/a527bee0-9cd5-4cca-8f0b-1fa75773848a)
 
 -  학점 및 성적조회
 <p align="center">
