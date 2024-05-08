@@ -235,10 +235,10 @@ ERD Cloud
 - 졸업 증명서
 <img src="https://github.com/leejm9/Cool-Trade/assets/151510159/f70443dc-8821-47d5-8bd3-77e7b8cfc4ee">
 
-<br>
+<br><br>
 조연정
 
-<br>
+<br><br>
 김도현
 
 &nbsp; **회원 로그인 및 비밀번호 찾기**
@@ -293,7 +293,7 @@ ERD Cloud
 
 - 강의실 과제게시판 등록
 <img src="https://github.com/koolhandae/KH_University/assets/151509557/481be8e0-a4b3-4608-bee2-6286129365c4">
-<br>
+<br><br>
 
 어수지
 
