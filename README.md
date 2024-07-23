@@ -39,7 +39,19 @@
 
 ⭐ 조연정(https://github.com/you-summer)
 
-&nbsp; - 
+&nbsp; - 교수 - 강의 등록/수정/삭제 CRUD (summernote api)
+
+&nbsp; - 교수 - 과제 등록/수정/삭제 CRUD (summernote api)
+
+&nbsp; - 교수 - 성적 등록/수정/삭제 CRUD (summernote api)
+
+&nbsp; - 실시간 날씨정보 (공공데이터api)
+
+&nbsp; - 공채정보 (사람인api)
+
+&nbsp; - 웹소켓 알림 - 공지사항 등록시 전체회원
+
+&nbsp; - 웹소켓 알림 - 커뮤니티 댓글 등록시 작성회원에게 알림
 
 ⭐ 김도현 (https://github.com/KIMMEONJI)
 
