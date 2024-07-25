@@ -261,6 +261,13 @@ ERD Cloud
 - 공공데이터api를 이용한 실시간 날씨 정보
 ![실시간 날씨](https://github.com/user-attachments/assets/d1954760-5a1f-49f5-a533-2383a8f481a0)
 
+&nbsp; **강의 등록/수정/삭제**
+- 강의등록
+![강의등록1](https://github.com/user-attachments/assets/ad2b0ebd-df38-48b3-b954-18ba7bd93946)
+![강의등록2](https://github.com/user-attachments/assets/eb7afaef-a792-4f58-a11e-74b98e496aaa)
+
+
+
 
 
 <br><br>
