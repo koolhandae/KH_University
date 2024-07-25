@@ -266,6 +266,12 @@ ERD Cloud
 ![강의등록1](https://github.com/user-attachments/assets/ad2b0ebd-df38-48b3-b954-18ba7bd93946)
 ![강의등록2](https://github.com/user-attachments/assets/eb7afaef-a792-4f58-a11e-74b98e496aaa)
 
+- 첨부파일 다운로드
+![파일다운로드](https://github.com/user-attachments/assets/5faf8fa7-8879-4e50-b2b7-8ce6946e6c54)
+
+- 강의수정
+![강의수정](https://github.com/user-attachments/assets/7a88584a-bab6-4c8e-b8ed-b371b4867ec6)
+
 
 
 
