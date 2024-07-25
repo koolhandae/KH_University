@@ -280,6 +280,9 @@ ERD Cloud
 ![과제등록](https://github.com/user-attachments/assets/101bc7f5-c64a-4015-bcec-87b0dd67b518)
 
 
+&nbsp; **공채정보( 사람인 api )**
+![취업정보](https://github.com/user-attachments/assets/43bce637-650e-4e8c-8bec-08d71765f115)
+
 
 
 
