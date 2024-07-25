@@ -272,6 +272,10 @@ ERD Cloud
 - 강의수정
 ![강의수정](https://github.com/user-attachments/assets/7a88584a-bab6-4c8e-b8ed-b371b4867ec6)
 
+- 강의삭제
+![강의삭제](https://github.com/user-attachments/assets/4f9d3a04-7249-43dd-b492-c54e8cbdeec6)
+
+
 
 
 
