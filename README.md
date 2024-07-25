@@ -39,11 +39,11 @@
 
 ⭐ 조연정(https://github.com/you-summer)
 
-&nbsp; - 교수 - 강의 등록/수정/삭제 CRUD (summernote api)
+&nbsp; - 교수 - 강의 등록/수정/삭제 CRUD
 
 &nbsp; - 교수 - 과제 등록/수정/삭제 CRUD (summernote api)
 
-&nbsp; - 교수 - 성적 등록/수정/삭제 CRUD (summernote api)
+&nbsp; - 교수 - 성적 등록/수정/삭제 CRUD
 
 &nbsp; - 실시간 날씨정보 (공공데이터api)
 
