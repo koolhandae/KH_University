@@ -254,6 +254,15 @@ ERD Cloud
 - 공지사항 등록시 전체회원에게 실시간 알림
 ![공지사항작성알림](https://github.com/user-attachments/assets/7934a152-a14e-44de-ab6d-98f2fe6861ec)
 
+- 작성한 글에 댓글이 달렸을시 실시간 알림
+![댓글작성알림](https://github.com/user-attachments/assets/8c177139-164c-4a9f-a5d3-f760b9e444fe)
+
+&nbsp; **날씨정보(공공데이터api)**
+- 공공데이터api를 이용한 실시간 날씨 정보
+![실시간 날씨](https://github.com/user-attachments/assets/d1954760-5a1f-49f5-a533-2383a8f481a0)
+
+
+
 <br><br>
 김도현
 
