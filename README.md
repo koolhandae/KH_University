@@ -275,6 +275,11 @@ ERD Cloud
 - 강의삭제
 ![강의삭제](https://github.com/user-attachments/assets/4f9d3a04-7249-43dd-b492-c54e8cbdeec6)
 
+&nbsp; **과제 등록/수정/삭제(summernote api)**
+- 과제 등록
+![과제등록](https://github.com/user-attachments/assets/101bc7f5-c64a-4015-bcec-87b0dd67b518)
+
+
 
 
 
