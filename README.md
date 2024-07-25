@@ -49,9 +49,9 @@
 
 &nbsp; - 공채정보 (사람인api)
 
-&nbsp; - 웹소켓 알림 - 공지사항 등록시 전체회원
+&nbsp; - 웹소켓 실시간 알림 - 공지사항 등록시 전체회원
 
-&nbsp; - 웹소켓 알림 - 커뮤니티 댓글 등록시 작성회원에게 알림
+&nbsp; - 웹소켓 실시간 알림 - 커뮤니티 댓글 등록시 작성회원에게 알림
 
 ⭐ 김도현 (https://github.com/KIMMEONJI)
 
@@ -249,6 +249,10 @@ ERD Cloud
 
 <br><br>
 조연정
+
+&nbsp; **웹소켓 실시간 알림**
+- 공지사항 등록시 전체회원에게 실시간 알림
+![공지사항작성알림](https://github.com/user-attachments/assets/7934a152-a14e-44de-ab6d-98f2fe6861ec)
 
 <br><br>
 김도현
