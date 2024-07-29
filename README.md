@@ -279,6 +279,14 @@ ERD Cloud
 - 과제 등록
 ![과제등록](https://github.com/user-attachments/assets/101bc7f5-c64a-4015-bcec-87b0dd67b518)
 
+&nbsp; **성적 등록/수정**
+- 성적 등록
+![성적등록1](https://github.com/user-attachments/assets/4e30bbcb-d239-424b-bd91-a2522ac137d1)
+![성적등록2](https://github.com/user-attachments/assets/c8836061-705f-4258-8106-d95396bb31a3)
+
+- 성적 수정
+![성적수정](https://github.com/user-attachments/assets/95ffc695-5f82-46f9-a85c-d05ac3b9cd9c)
+
 
 &nbsp; **공채정보( 사람인 api )**
 ![취업정보](https://github.com/user-attachments/assets/43bce637-650e-4e8c-8bec-08d71765f115)
