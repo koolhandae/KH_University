@@ -278,6 +278,9 @@ ERD Cloud
 &nbsp; **과제 등록/수정/삭제(summernote api)**
 - 과제 등록
 ![과제등록](https://github.com/user-attachments/assets/101bc7f5-c64a-4015-bcec-87b0dd67b518)
+- 과제 제출현황
+![과제제출](https://github.com/user-attachments/assets/7a045975-558b-45d1-8ce3-a8a9e38a41fe)
+
 
 &nbsp; **성적 등록/수정**
 - 성적 등록
